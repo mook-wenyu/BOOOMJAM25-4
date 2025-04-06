@@ -14,6 +14,6 @@ public class TestJson : MonoBehaviour
     public void ShowWord()
     {
         Debug.Log(ConfigManager.Instance.GetConfig<WordConfig>(currentiID).desc);
-        currentiID += 1;
+        currentiID = ConfigManager.Instance.GetConfig<WordConfig>(currentiID).nextid;
     }
 }

@@ -15,6 +15,7 @@ public class EditorUtils
     [MenuItem("Tools/生成配置Json")]
     public static void GenerateConfigs()
     {
+        //EditorUtility.DisplayDialog("提示", "开始生成配置！", "OK");
         DeleteAllOldFiles();
 
         var excelPath = $"{Application.dataPath}/../Configs";
@@ -31,7 +32,9 @@ public class EditorUtils
             ReadExcel(files[i]);
         }
 
+        
         AssetDatabase.Refresh();
+        EditorApplication.delayCall += () => Debug.Log("完成导出！");
     }
 
     private class PropertyInfo 
@@ -112,7 +115,6 @@ public class EditorUtils
         sb.AppendLine("}");
 
         File.WriteAllText(filePath, sb.ToString());
-
         //AssetDatabase.Refresh();
     }
 
