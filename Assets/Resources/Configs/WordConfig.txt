@@ -1,0 +1,24 @@
+{
+  "$type": "System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib],[BaseConfig, Assembly-CSharp]], mscorlib",
+  "1001": {
+    "$type": "WordConfig, Assembly-CSharp",
+    "title": "1111",
+    "desc": "10101010",
+    "nextid": 1002,
+    "id": 1001
+  },
+  "1002": {
+    "$type": "WordConfig, Assembly-CSharp",
+    "title": "2222",
+    "desc": "20202020",
+    "nextid": 1003,
+    "id": 1002
+  },
+  "1003": {
+    "$type": "WordConfig, Assembly-CSharp",
+    "title": "333",
+    "desc": "30303030",
+    "nextid": 1004,
+    "id": 1003
+  }
+}
