@@ -1,0 +1,27 @@
+--- start
+: this is a test
+
+player：hello。
+
+jump 对话1
+
+===
+
+--- 对话1
+
+npc1：what are you doing?
+
+player：i\'m doing nothing.
+jump 对话2
+
+===
+
+--- 对话2
+
+player：i\'m doing nothing, what about you?
+
+npc2：i\'m doing nothing, too.
+
+
+===
+
