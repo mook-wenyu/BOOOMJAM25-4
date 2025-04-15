@@ -185,3 +185,39 @@ public class TypeTextComponent : MonoBehaviour
     }
 
 }
+
+public static class TypeTextComponentUtility
+{
+
+    public static void TypeText(this TextMeshProUGUI label, string text, float speed = 0.04f, Action onComplete = null)
+    {
+        if (!label.TryGetComponent<TypeTextComponent>(out var typeText))
+        {
+            typeText = label.gameObject.AddComponent<TypeTextComponent>();
+        }
+
+        typeText.SetText(text, speed);
+        typeText.SetOnComplete(onComplete);
+    }
+
+    public static bool IsSkippable(this TextMeshProUGUI label)
+    {
+        if (!label.TryGetComponent<TypeTextComponent>(out var typeText))
+        {
+            typeText = label.gameObject.AddComponent<TypeTextComponent>();
+        }
+
+        return typeText.IsSkippable();
+    }
+
+    public static void SkipTypeText(this TextMeshProUGUI label)
+    {
+        if (!label.TryGetComponent<TypeTextComponent>(out var typeText))
+        {
+            typeText = label.gameObject.AddComponent<TypeTextComponent>();
+        }
+
+        typeText.SkipTypeText();
+    }
+
+}

@@ -1,5 +1,5 @@
 --- start
-: this is a test
+'this is a test'
 
 player：hello。
 
@@ -21,7 +21,10 @@ jump 对话2
 player：i\'m doing nothing, what about you?
 
 npc2：i\'m doing nothing, too.
+    -> 选项1
 
+    -> 选项2
 
+npc3：i'm doing nothing, too.
 ===
 
