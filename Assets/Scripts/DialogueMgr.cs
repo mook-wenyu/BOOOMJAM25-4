@@ -7,7 +7,7 @@ public static class DialogueMgr
 {
     public static Runner RunMgrs { get; private set; }
 
-    public static void Init()
+    public static void Initialize()
     {
         RunMgrs = new Runner("DialogueScripts");
     }

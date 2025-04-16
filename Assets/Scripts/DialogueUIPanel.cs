@@ -29,11 +29,6 @@ public class DialogueUIPanel : MonoBehaviour
     private ObjectPool<GameObject> _choicePool;
     private List<GameObject> _activeChoices = new List<GameObject>();
 
-    public void StartDialogue()
-    {
-        DialogueMgr.RunMgrs.StartDialogue("start");
-    }
-
     void Awake()
     {
 #if UNITY_EDITOR
@@ -43,7 +38,6 @@ public class DialogueUIPanel : MonoBehaviour
             return;
         }
 #endif
-        Debug.Log("MainGame Start");
 
         // 初始化点击处理
         _clickHandler = dialogueUIPanel.GetComponent<Button>();
@@ -66,7 +60,6 @@ public class DialogueUIPanel : MonoBehaviour
             maxSize: 10
         );
 
-        DialogueMgr.RunMgrs.OnDialogueStarted += HandleDialogueStarted;
         DialogueMgr.RunMgrs.OnDialogueDisplayed += HandleDialogueDisplayed;
         DialogueMgr.RunMgrs.OnChoicesDisplayed += HandleChoicesDisplayed;
         DialogueMgr.RunMgrs.OnOptionSelected += HandleOptionSelected;
@@ -75,16 +68,40 @@ public class DialogueUIPanel : MonoBehaviour
         dialogueUIPanel.SetActive(false);
     }
 
-    // 对话开始
-    private void HandleDialogueStarted()
+    void Start()
     {
-        Debug.Log("对话开始");
+        // 恢复对话
+        if (DialogueMgr.RunMgrs.Storage.isInDialogue)
+        {
+            DialogueMgr.RunMgrs.StartDialogue(DialogueMgr.RunMgrs.Storage.initialNodeName,
+                force: true,
+                onDialogueStarted: async (nodeName) => await ShowDialogueUIPanel());
+        }
+    }
+
+    public void StartDialogue(string nodeName = "start")
+    {
+        DialogueMgr.RunMgrs.StartDialogue(nodeName,
+            onDialogueStarted: async (nodeName) => await HandleDialogueStarted(nodeName));
+    }
+
+    private async UniTask ShowDialogueUIPanel()
+    {
         dialogueUIPanel.SetActive(true);
         dialogueContent.ClearText();
         dialogueSpeaker.text = string.Empty;
+        await UniTask.CompletedTask;
+    }
+
+    // 对话开始
+    private async UniTask HandleDialogueStarted(string nodeName)
+    {
+        Debug.Log("对话开始");
 
         // 存档时机
-        _ = GameMgr.SaveGameData();
+        await GameMgr.SaveGameData();
+
+        await ShowDialogueUIPanel();
     }
 
     // 显示对话内容
@@ -182,7 +199,7 @@ public class DialogueUIPanel : MonoBehaviour
         _ = HandleOptionSelectedAsync(choice, index);
     }
 
-    public async UniTask HandleOptionSelectedAsync(ChoiceNode choice, int index)
+    private async UniTask HandleOptionSelectedAsync(ChoiceNode choice, int index)
     {
         string text = await DialogueMgr.RunMgrs.BuildChoiceText(choice);
         Debug.Log($"选择：{index + 1}. {text}");
@@ -198,7 +215,7 @@ public class DialogueUIPanel : MonoBehaviour
         _ = GameMgr.SaveGameData();
     }
 
-    void OnClickHandler()
+    private void OnClickHandler()
     {
         if (dialogueContent.IsSkippable())
         {
@@ -225,7 +242,6 @@ public class DialogueUIPanel : MonoBehaviour
         _choicePool.Clear();
         _choicePool.Dispose();
 
-        DialogueMgr.RunMgrs.OnDialogueStarted -= HandleDialogueStarted;
         DialogueMgr.RunMgrs.OnDialogueDisplayed -= HandleDialogueDisplayed;
         DialogueMgr.RunMgrs.OnChoicesDisplayed -= HandleChoicesDisplayed;
         DialogueMgr.RunMgrs.OnOptionSelected -= HandleOptionSelected;

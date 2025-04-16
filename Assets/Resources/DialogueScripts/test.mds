@@ -1,5 +1,5 @@
 --- start
-'this is a test'
+:this is a test
 
 player：hello。
 
@@ -11,16 +11,16 @@ jump 对话1
 
 npc1：what are you doing?
 
-player：i\'m doing nothing.
+player：i'm doing nothing.
 jump 对话2
 
 ===
 
 --- 对话2
 
-player：i\'m doing nothing, what about you?
+player：i'm doing nothing, what about you?
 
-npc2：i\'m doing nothing, too.
+npc2：i'm doing nothing, too.
     -> 选项1
 
     -> 选项2

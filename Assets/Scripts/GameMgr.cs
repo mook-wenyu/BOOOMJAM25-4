@@ -52,7 +52,7 @@ public static class GameMgr
     {
         string path = Utils.GetSavePath(saveName);
         currentSaveData = await IOHelper.LoadDataAsync<SaveData>(path);
-        DialogueMgr.RunMgrs.SetStorage(currentSaveData.dialogueStorage);
+        DialogueMgr.RunMgrs.SetStorage(currentSaveData.DialogueStorage);
 
 #if UNITY_EDITOR
         Debug.Log($"加载游戏数据 - {saveName}");
@@ -64,12 +64,89 @@ public static class GameMgr
     /// </summary>
     public static async UniTask SaveGameData(string saveName = "auto_save")
     {
-        currentSaveData.dialogueStorage = DialogueMgr.RunMgrs.GetCurrentStorage();
+        currentSaveData.DialogueStorage = DialogueMgr.RunMgrs.GetCurrentStorage();
         string path = Utils.GetSavePath(saveName);
         await IOHelper.SaveDataAsync(path, currentSaveData);
 
 #if UNITY_EDITOR
         Debug.Log($"保存游戏数据 - {saveName}");
 #endif
+    }
+
+    /// <summary>
+    /// 开始时间更新
+    /// </summary>
+    public static void StartTime()
+    {
+        if (_timeUpdateCts != null)
+        {
+            StopTime();
+        }
+
+        UpdateTimeChangedAsync().Forget();
+    }
+
+
+    /// <summary>
+    /// 暂停时间
+    /// </summary>
+    public static void PauseTime()
+    {
+        _isTimePaused = true;
+        OnGameTimePaused?.Invoke();
+    }
+
+    /// <summary>
+    /// 恢复时间
+    /// </summary>
+    public static void ResumeTime()
+    {
+        _isTimePaused = false;
+        OnGameTimeResumed?.Invoke();
+    }
+
+    /// <summary>
+    /// 取消时间更新
+    /// </summary>
+    public static void StopTime()
+    {
+        if (_timeUpdateCts == null) return;
+
+        _timeUpdateCts.Cancel();
+        _timeUpdateCts.Dispose();
+        _timeUpdateCts = null;
+    }
+
+    /// <summary>
+    /// 更新时间
+    /// </summary>
+    private static async UniTask UpdateTimeChangedAsync()
+    {
+        try
+        {
+            _timeUpdateCts = new CancellationTokenSource();
+
+            while (!_timeUpdateCts.Token.IsCancellationRequested)
+            {
+                if (!_isTimePaused)
+                {
+                    currentSaveData.GameTime.AddMinutes(1);
+                }
+                await UniTask.Delay(0, cancellationToken: _timeUpdateCts.Token);
+            }
+        }
+        catch (OperationCanceledException)
+        {
+            // 正常取消,不做处理
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"时间更新出错: {e}");
+        }
+        finally
+        {
+            _timeUpdateCts?.Dispose();
+            _timeUpdateCts = null;
+        }
     }
 }

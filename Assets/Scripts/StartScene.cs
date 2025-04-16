@@ -13,26 +13,17 @@ public class StartScene : MonoBehaviour
     public Button playGameBtn;
     public Button exitGameBtn;
 
-    public GameObject loadingPanel;
-
     private bool _isLoadSaveData;
     void Awake()
     {
-        PrimeTweenConfig.warnZeroDuration = false;
-        PrimeTweenConfig.warnEndValueEqualsCurrent = false;
-        PrimeTweenConfig.defaultEase = Ease.Linear;
-
-        IOHelper.CreateDirectory(Utils.GetSavePath());
-
-        GameMgr.initGame = true;
-
-        loadingPanel.SetActive(false);
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        loadingPanel.SetActive(true);
+#if UNITY_EDITOR
+        if (!GameMgr.initGame)
+        {
+            SceneManager.LoadScene("InitScene");
+            return;
+        }
+        Debug.Log("StartGame");
+#endif
 
         continueGameBtn.onClick.AddListener(OnContinueGameBtnClick);
         playGameBtn.onClick.AddListener(OnPlayGameBtnClick);
@@ -46,8 +37,6 @@ public class StartScene : MonoBehaviour
         {
             continueGameBtn.interactable = false;
         }
-
-        LoadResAsync().Forget();
     }
 
     private void OnContinueGameBtnClick()
@@ -71,23 +60,12 @@ public class StartScene : MonoBehaviour
     }
 
     /// <summary>
-    /// 加载资源
-    /// </summary>
-    private async UniTask LoadResAsync()
-    {
-        GameMgr.Init();
-        await UniTask.Yield();
-        DialogueMgr.Init();
-        await UniTask.Yield();
-        loadingPanel.SetActive(false);
-    }
-
-    /// <summary>
     /// 加载场景
     /// </summary>
     private async UniTask LoadSceneAsync()
     {
-        loadingPanel.SetActive(true);
+        // 在加载新场景之前，可以在这里处理相关操作
+        GlobalUIMgr.Instance.ShowLoadingMask(true);
 
         if (_isLoadSaveData)
         {
@@ -122,6 +100,7 @@ public class StartScene : MonoBehaviour
 
             await UniTask.Yield();
         }
+        GlobalUIMgr.Instance.ShowLoadingMask(false);
     }
 
     /// <summary>

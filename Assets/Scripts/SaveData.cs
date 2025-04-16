@@ -1,9 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using MookDialogueScript;
-using UnityEngine;
 
 public class SaveData
 {
-    public DialogueStorage dialogueStorage = new DialogueStorage();
+    /// <summary>
+    /// 当前时间
+    /// </summary>
+    public GameTime GameTime { get; set; } = new(0, 7, 0);
+
+    /// <summary>
+    /// 背包数据
+    /// </summary>
+    public InventoryData Inventory { get; set; } = new();
+
+    /// <summary>
+    /// 对话存储
+    /// </summary>
+    public DialogueStorage DialogueStorage { get; set; } = new();
 }
