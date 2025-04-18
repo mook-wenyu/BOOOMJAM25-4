@@ -1,0 +1,150 @@
+{
+  "$type": "System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[BaseConfig, Assembly-CSharp]], mscorlib",
+  "10001": {
+    "$type": "ItemConfig, Assembly-CSharp",
+    "name": "木头",
+    "desc": "就木头啊",
+    "type": 0,
+    "stacking": 5,
+    "durability": 0,
+    "healthAdjust": 0,
+    "hungerAdjust": 0,
+    "energyAdjust": 0,
+    "spiritAdjust": 0,
+    "equipmentParts": 0,
+    "getBuff": [
+      0
+    ],
+    "removeBuff": [
+      0
+    ],
+    "path": "0",
+    "id": "10001"
+  },
+  "10002": {
+    "$type": "ItemConfig, Assembly-CSharp",
+    "name": "树叶",
+    "desc": "就树叶啊",
+    "type": 0,
+    "stacking": 5,
+    "durability": 0,
+    "healthAdjust": 0,
+    "hungerAdjust": 0,
+    "energyAdjust": 0,
+    "spiritAdjust": 0,
+    "equipmentParts": 0,
+    "getBuff": [
+      0
+    ],
+    "removeBuff": [
+      0
+    ],
+    "path": "0",
+    "id": "10002"
+  },
+  "11001": {
+    "$type": "ItemConfig, Assembly-CSharp",
+    "name": "野菜",
+    "desc": "就野菜啊",
+    "type": 1,
+    "stacking": 1,
+    "durability": 72,
+    "healthAdjust": 0,
+    "hungerAdjust": 15,
+    "energyAdjust": 10,
+    "spiritAdjust": 0,
+    "equipmentParts": 0,
+    "getBuff": [
+      0
+    ],
+    "removeBuff": [
+      50002
+    ],
+    "path": "0",
+    "id": "11001"
+  },
+  "11002": {
+    "$type": "ItemConfig, Assembly-CSharp",
+    "name": "可乐",
+    "desc": "可口可乐，不是百事可乐",
+    "type": 1,
+    "stacking": 99,
+    "durability": 0,
+    "healthAdjust": 0,
+    "hungerAdjust": 0,
+    "energyAdjust": 30,
+    "spiritAdjust": 50,
+    "equipmentParts": 0,
+    "getBuff": [
+      50003
+    ],
+    "removeBuff": [
+      50001
+    ],
+    "path": "0",
+    "id": "11002"
+  },
+  "12001": {
+    "$type": "ItemConfig, Assembly-CSharp",
+    "name": "鹤嘴锄",
+    "desc": "就鹤嘴锄啊",
+    "type": 2,
+    "stacking": 1,
+    "durability": 5,
+    "healthAdjust": 0,
+    "hungerAdjust": 0,
+    "energyAdjust": 0,
+    "spiritAdjust": 0,
+    "equipmentParts": 1,
+    "getBuff": [
+      0
+    ],
+    "removeBuff": [
+      0
+    ],
+    "path": "0",
+    "id": "12001"
+  },
+  "12002": {
+    "$type": "ItemConfig, Assembly-CSharp",
+    "name": "睡衣",
+    "desc": "睡觉时失去的饱食度降低30%",
+    "type": 2,
+    "stacking": 1,
+    "durability": 0,
+    "healthAdjust": 0,
+    "hungerAdjust": 0,
+    "energyAdjust": 0,
+    "spiritAdjust": 0,
+    "equipmentParts": 2,
+    "getBuff": [
+      50004
+    ],
+    "removeBuff": [
+      0
+    ],
+    "path": "0",
+    "id": "12002"
+  },
+  "12003": {
+    "$type": "ItemConfig, Assembly-CSharp",
+    "name": "妈妈的吊坠",
+    "desc": "起床时精神恢复5点",
+    "type": 2,
+    "stacking": 1,
+    "durability": 0,
+    "healthAdjust": 0,
+    "hungerAdjust": 0,
+    "energyAdjust": 0,
+    "spiritAdjust": 0,
+    "equipmentParts": 3,
+    "getBuff": [
+      50005
+    ],
+    "removeBuff": [
+      0
+    ],
+    "path": "0",
+    "id": "12003"
+  }
+}

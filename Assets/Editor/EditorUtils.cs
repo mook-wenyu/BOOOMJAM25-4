@@ -1,25 +1,38 @@
 ﻿using System;
 using System.IO;
-using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 using UnityEditor;
 using NPOI.SS.UserModel;
 using NPOI.HSSF.UserModel;
 using NPOI.XSSF.UserModel;
-using System.Text;
 using Newtonsoft.Json;
 
 public class EditorUtils
 {
+    private class PropertyInfo
+    {
+        public string Name;
+        public string Type;
+    }
+
+    private class PendingConfig
+    {
+        public string ConfigName;
+        public List<PropertyInfo> Properties;
+        public ISheet Sheet;
+    }
+
+    private static List<PendingConfig> pendingJsonConfigs = new List<PendingConfig>();
+
     [MenuItem("Tools/生成配置Json")]
     public static void GenerateConfigs()
     {
-        //EditorUtility.DisplayDialog("提示", "开始生成配置！", "OK");
         DeleteAllOldFiles();
 
         var excelPath = $"{Application.dataPath}/../Configs";
-        if (!Directory.Exists(excelPath)) 
+        if (!Directory.Exists(excelPath))
         {
             Debug.LogError("Directory does not exist.");
             return;
@@ -32,43 +45,41 @@ public class EditorUtils
             ReadExcel(files[i]);
         }
 
-        
         AssetDatabase.Refresh();
-        EditorApplication.delayCall += () => Debug.Log("完成导出！");
+
+        // 等待类型刷新完再导出 JSON
+        EditorApplication.delayCall += () =>
+        {
+            foreach (var pending in pendingJsonConfigs)
+            {
+                GenerateConfigJson(pending.Properties, pending.ConfigName, pending.Sheet);
+            }
+
+            AssetDatabase.Refresh();
+            Debug.Log("完成导出！");
+            pendingJsonConfigs.Clear();
+        };
     }
 
-    private class PropertyInfo 
-    {
-        public string Name;
-        public string Type;
-    }
-
-    private static void ReadExcel(string filePath) 
+    private static void ReadExcel(string filePath)
     {
         IWorkbook wk = null;
         string extension = Path.GetExtension(filePath);
         string fileName = Path.GetFileNameWithoutExtension(filePath);
-        FileStream fs = File.OpenRead(filePath);
-        if (extension.Equals(".xls"))
+
+        using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
         {
-            //把xls文件中的数据写入wk中
-            wk = new HSSFWorkbook(fs);
-        }
-        else
-        {
-            //把xlsx文件中的数据写入wk中
-            wk = new XSSFWorkbook(fs);
+            if (extension.Equals(".xls"))
+                wk = new HSSFWorkbook(fs);
+            else
+                wk = new XSSFWorkbook(fs);
         }
 
-        fs.Close();
-
-        //只读第一个Sheet，其他Sheet忽略
         ISheet sheet = wk.GetSheetAt(0);
-
-        IRow row = sheet.GetRow(1); // 第一行是字段名称
-        IRow rowType = sheet.GetRow(2); // 第二行是字段类型
+        IRow row = sheet.GetRow(1); // 字段名称
+        IRow rowType = sheet.GetRow(2); // 字段类型
         var firstCell = row.GetCell(0);
-        if (firstCell.ToString() != "id") 
+        if (firstCell.ToString() != "id")
         {
             Debug.LogError($"导出Configs错误！{fileName}表中第一列不是id！");
             return;
@@ -79,124 +90,109 @@ public class EditorUtils
         {
             var cell = row.GetCell(i);
             var name = cell.ToString();
-            if (string.IsNullOrEmpty(name)) 
-            {
-                // 不允许中间有空列的，遇到空列认为后边就没数据了
+            if (string.IsNullOrEmpty(name))
                 break;
-            }
 
             var cellType = rowType.GetCell(i);
             configProperties.Add(new PropertyInfo() { Name = name, Type = cellType.ToString() });
         }
 
         GenrateConfigClass(configProperties, fileName);
-        GenerateConfigJson(configProperties, fileName, sheet);
+        pendingJsonConfigs.Add(new PendingConfig
+        {
+            ConfigName = fileName,
+            Properties = configProperties,
+            Sheet = sheet
+        });
     }
 
-    private static void GenrateConfigClass(List<PropertyInfo> propertyInfos, string configName) 
+    private static void GenrateConfigClass(List<PropertyInfo> propertyInfos, string configName)
     {
         var filePath = $"{Application.dataPath}/Scripts/Configs/{configName}Config.cs";
         var fileDir = Path.GetDirectoryName(filePath);
-        if (!Directory.Exists(fileDir)) 
-        {
+        if (!Directory.Exists(fileDir))
             Directory.CreateDirectory(fileDir);
-        }
 
         var sb = new StringBuilder();
-
         sb.AppendLine($"public class {configName}Config : BaseConfig");
         sb.AppendLine("{");
 
-        for (int i = 0; i < propertyInfos.Count; i++)
+        foreach (var prop in propertyInfos)
         {
-            sb.AppendLine($"    public {propertyInfos[i].Type} {propertyInfos[i].Name};");
+            sb.AppendLine($"    public {prop.Type} {prop.Name};");
         }
 
         sb.AppendLine("}");
 
         File.WriteAllText(filePath, sb.ToString());
-        //AssetDatabase.Refresh();
     }
 
-    private static void GenerateConfigJson(List<PropertyInfo> propertyInfos, string configName, ISheet sheet) 
+    private static void GenerateConfigJson(List<PropertyInfo> propertyInfos, string configName, ISheet sheet)
     {
         var filePath = $"{Application.dataPath}/Resources/Configs/{configName}Config.txt";
-
         var fileDir = Path.GetDirectoryName(filePath);
         if (!Directory.Exists(fileDir))
-        {
             Directory.CreateDirectory(fileDir);
-        }
 
         propertyInfos.Insert(0, new PropertyInfo() { Name = "id", Type = "string" });
+
         Dictionary<string, BaseConfig> rawDataDic = new Dictionary<string, BaseConfig>();
 
         for (int i = 3; i <= sheet.LastRowNum; i++)
         {
             var row = sheet.GetRow(i);
-
-            if (row == null) 
-            {
-                break;
-            }
+            if (row == null) break;
 
             StringBuilder sb = new StringBuilder();
             sb.Append("{");
-            for (int j = 0; j <= row.LastCellNum; j++)
+
+            for (int j = 0; j <= row.LastCellNum && j < propertyInfos.Count; j++)
             {
                 var cell = row.GetCell(j);
                 if (cell == null) continue;
+
                 string value;
                 if (cell.CellType == CellType.Formula)
                 {
-                    if (cell.CachedFormulaResultType == CellType.Numeric)
-                    {
-                        value = cell.NumericCellValue.ToString();
-                    }
-                    else 
-                    {
-                        value = cell.StringCellValue.ToString();
-                        value = value.Replace(@"\", @"\\");
-                    }
+                    value = cell.CachedFormulaResultType == CellType.Numeric
+                        ? cell.NumericCellValue.ToString()
+                        : cell.StringCellValue.ToString().Replace(@"\", @"\\");
                 }
                 else
                 {
-                    // 直接读取值
                     value = cell.ToString().Replace(@"\", @"\\");
                 }
+
+                //if (string.IsNullOrEmpty(value)) break;
+
                 if (string.IsNullOrEmpty(value))
                 {
-                    // 不允许中间有空列的，遇到空列认为后边就没数据了
+                    Debug.LogWarning($"空值出现在第 {i + 1} 行，第 {j + 1} 列（字段名：{propertyInfos[j].Name}）");
                     break;
                 }
 
                 if (propertyInfos[j].Type.Contains("[]"))
-                {
                     value = "[" + value + "]";
-                }
-                else 
-                {
+                else
                     value = "\"" + value + "\"";
-                }
 
                 sb.Append($"\"{propertyInfos[j].Name}\":{value}");
-                if (j < row.LastCellNum - 1) 
-                {
-                    sb.Append(",");
-                }
+                if (j < row.LastCellNum - 1) sb.Append(",");
             }
+
             sb.Append("}");
 
             var type = Type.GetType($"{configName}Config, Assembly-CSharp");
-
-            var config = JsonConvert.DeserializeObject(sb.ToString(), type) as BaseConfig;
-
-            // 为0说明这一行的数据有问题，直接跳过
-            if (string.IsNullOrEmpty(config.id) || config.id == "0")
+            if (type == null)
             {
+                Debug.LogError($"找不到类型: {configName}Config，可能没有编译完成");
                 continue;
             }
 
+            var config = JsonConvert.DeserializeObject(sb.ToString(), type) as BaseConfig;
+            //if (config == null || config.id == "0") continue;
+
+            if (config == null || string.IsNullOrEmpty(config.id)) continue;
             rawDataDic.Add(config.id, config);
         }
 
@@ -209,21 +205,15 @@ public class EditorUtils
         File.WriteAllText(filePath, json);
     }
 
-    private static void DeleteAllOldFiles() 
+    private static void DeleteAllOldFiles()
     {
         var csDir = $"{Application.dataPath}/Scripts/Configs";
         var jsonDir = $"{Application.dataPath}/Resources/Configs";
 
-        if (Directory.Exists(csDir)) 
-        {
-            Directory.Delete(csDir, true);
-        }
+        if (Directory.Exists(csDir)) Directory.Delete(csDir, true);
         Directory.CreateDirectory(csDir);
 
-        if (Directory.Exists(jsonDir)) 
-        {
-            Directory.Delete(jsonDir, true);
-        }
+        if (Directory.Exists(jsonDir)) Directory.Delete(jsonDir, true);
         Directory.CreateDirectory(jsonDir);
 
         AssetDatabase.Refresh();

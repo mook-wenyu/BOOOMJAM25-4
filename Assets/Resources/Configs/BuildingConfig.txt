@@ -1,0 +1,137 @@
+{
+  "$type": "System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[BaseConfig, Assembly-CSharp]], mscorlib",
+  "20001": {
+    "$type": "BuildingConfig, Assembly-CSharp",
+    "name": "木箱",
+    "desc": "可以放一点东西",
+    "type": 0,
+    "grid": 2,
+    "materialIDGroup": [
+      10001,
+      10002
+    ],
+    "materialAmountGroup": [
+      2,
+      2
+    ],
+    "time": 1,
+    "recipes": [
+      0
+    ],
+    "light": 0,
+    "path": "0",
+    "id": "20001"
+  },
+  "20002": {
+    "$type": "BuildingConfig, Assembly-CSharp",
+    "name": "冰箱",
+    "desc": "食物放进去不会失去耐久度",
+    "type": 0,
+    "grid": 3,
+    "materialIDGroup": [
+      10001,
+      10002
+    ],
+    "materialAmountGroup": [
+      2,
+      2
+    ],
+    "time": 1,
+    "recipes": [
+      0
+    ],
+    "light": 0,
+    "path": "0",
+    "id": "20002"
+  },
+  "20003": {
+    "$type": "BuildingConfig, Assembly-CSharp",
+    "name": "灶台",
+    "desc": "可以搞各类炒菜的地方",
+    "type": 1,
+    "grid": 3,
+    "materialIDGroup": [
+      10001,
+      10002
+    ],
+    "materialAmountGroup": [
+      2,
+      2
+    ],
+    "time": 3,
+    "recipes": [
+      2000301,
+      2000302
+    ],
+    "light": 0,
+    "path": "0",
+    "id": "20003"
+  },
+  "20004": {
+    "$type": "BuildingConfig, Assembly-CSharp",
+    "name": "工具台",
+    "desc": "可以生产工具的地方",
+    "type": 1,
+    "grid": 4,
+    "materialIDGroup": [
+      10001,
+      10002
+    ],
+    "materialAmountGroup": [
+      2,
+      2
+    ],
+    "time": 3,
+    "recipes": [
+      2000401,
+      2000402
+    ],
+    "light": 0,
+    "path": "0",
+    "id": "20004"
+  },
+  "20005": {
+    "$type": "BuildingConfig, Assembly-CSharp",
+    "name": "蜡烛台",
+    "desc": "点亮周围3格",
+    "type": 2,
+    "grid": 1,
+    "materialIDGroup": [
+      10001,
+      10002
+    ],
+    "materialAmountGroup": [
+      2,
+      2
+    ],
+    "time": 1,
+    "recipes": [
+      0
+    ],
+    "light": 3,
+    "path": "0",
+    "id": "20005"
+  },
+  "20006": {
+    "$type": "BuildingConfig, Assembly-CSharp",
+    "name": "超级大电灯",
+    "desc": "点亮周围20格",
+    "type": 2,
+    "grid": 3,
+    "materialIDGroup": [
+      10001,
+      10002
+    ],
+    "materialAmountGroup": [
+      2,
+      2
+    ],
+    "time": 10,
+    "recipes": [
+      0
+    ],
+    "light": 20,
+    "path": "0",
+    "id": "20006"
+  }
+}

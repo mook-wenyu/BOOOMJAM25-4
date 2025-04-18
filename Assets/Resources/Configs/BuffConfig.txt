@@ -1,0 +1,43 @@
+{
+  "$type": "System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[BaseConfig, Assembly-CSharp]], mscorlib",
+  "50001": {
+    "$type": "BuffConfig, Assembly-CSharp",
+    "name": "昏昏欲睡",
+    "desc": "活力增长速度降低50%",
+    "defaultTime": 48,
+    "path": "0",
+    "id": "50001"
+  },
+  "50002": {
+    "$type": "BuffConfig, Assembly-CSharp",
+    "name": "骨折",
+    "desc": "移动速度降低50%",
+    "defaultTime": 0,
+    "path": "0",
+    "id": "50002"
+  },
+  "50003": {
+    "$type": "BuffConfig, Assembly-CSharp",
+    "name": "精神饱满",
+    "desc": "移动速度加快50%",
+    "defaultTime": 6,
+    "path": "0",
+    "id": "50003"
+  },
+  "50004": {
+    "$type": "BuffConfig, Assembly-CSharp",
+    "name": "睡神",
+    "desc": "睡觉时失去的饱食度降低30%",
+    "defaultTime": 0,
+    "path": "0",
+    "id": "50004"
+  },
+  "50005": {
+    "$type": "BuffConfig, Assembly-CSharp",
+    "name": "麻麻的爱",
+    "desc": "起床时精神恢复5点",
+    "defaultTime": 0,
+    "path": "0",
+    "id": "50005"
+  }
+}
