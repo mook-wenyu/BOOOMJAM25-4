@@ -15,6 +15,11 @@ public class SaveData
     public InventoryData Inventory { get; set; } = new();
 
     /// <summary>
+    /// 角色数据
+    /// </summary>
+    public Dictionary<string, CharacterData> CharacterDatas { get; set; } = new();
+
+    /// <summary>
     /// 对话存储
     /// </summary>
     public DialogueStorage DialogueStorage { get; set; } = new();

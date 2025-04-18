@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class TestJson : MonoBehaviour
 {
-    public int currentiID;
+    public string currentiID;
     
 
     private void Awake()
     {
-        currentiID = 1001;
+        currentiID = "1001";
     }
     public void ShowWord()
     {

@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class BaseConfig
 {
-    public int id;
+    public string id;
 }

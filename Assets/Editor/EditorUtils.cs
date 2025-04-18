@@ -129,7 +129,7 @@ public class EditorUtils
         }
 
         propertyInfos.Insert(0, new PropertyInfo() { Name = "id", Type = "string" });
-        Dictionary<int, BaseConfig> rawDataDic = new Dictionary<int, BaseConfig>();
+        Dictionary<string, BaseConfig> rawDataDic = new Dictionary<string, BaseConfig>();
 
         for (int i = 3; i <= sheet.LastRowNum; i++)
         {
@@ -192,7 +192,7 @@ public class EditorUtils
             var config = JsonConvert.DeserializeObject(sb.ToString(), type) as BaseConfig;
 
             // 为0说明这一行的数据有问题，直接跳过
-            if (config.id == 0)
+            if (string.IsNullOrEmpty(config.id) || config.id == "0")
             {
                 continue;
             }

@@ -12,11 +12,41 @@ IDragHandler,
 IEndDragHandler,
     IPointerEnterHandler,
     IPointerExitHandler,
-    IPointerClickHandler
+    IPointerClickHandler,
+    IDropHandler
 {
     public Image background;
     public Image itemIcon;
     public TextMeshProUGUI countText;
+
+    // 新增物品类型相关UI
+    [SerializeField] private Image typeIndicator; // 物品类型指示器
+    [SerializeField] private GameObject durabilityBar; // 耐久度条
+    [SerializeField] private Image durabilityFill; // 耐久度填充
+
+    // 不同物品类型的颜色
+    [SerializeField] private Color materialColor = new Color(0.5f, 0.8f, 0.5f);
+    [SerializeField] private Color consumableColor = new Color(0.8f, 0.5f, 0.5f);
+    [SerializeField] private Color equipmentColor = new Color(0.5f, 0.5f, 0.8f);
+    [SerializeField] private Color questColor = new Color(0.8f, 0.8f, 0.5f);
+    [SerializeField] private Color currencyColor = new Color(0.8f, 0.7f, 0.2f);
+    [SerializeField] private Color otherColor = new Color(0.7f, 0.7f, 0.7f);
+
+    // 稀有度边框颜色
+    [SerializeField]
+    private Color[] rarityColors = new Color[]
+    {
+        new Color(0.7f, 0.7f, 0.7f), // 普通
+        new Color(0.3f, 0.8f, 0.3f), // 优秀
+        new Color(0.3f, 0.3f, 0.8f), // 精良
+        new Color(0.8f, 0.3f, 0.8f), // 史诗
+        new Color(1.0f, 0.6f, 0.0f)  // 传说
+    };
+
+    // 耐久度条颜色
+    [SerializeField] private Color durabilityGoodColor = Color.green;
+    [SerializeField] private Color durabilityMediumColor = Color.yellow;
+    [SerializeField] private Color durabilityLowColor = Color.red;
 
     public InventoryItem CurrentItem { get; private set; }
     public bool IsPointerOver { get; private set; }
@@ -37,6 +67,12 @@ IEndDragHandler,
 
     public void Setup(InventoryItem newItem)
     {
+        // 移除旧物品的事件订阅
+        if (CurrentItem != null)
+        {
+            UnsubscribeItemEvents();
+        }
+
         CurrentItem = newItem;
 
         if (CurrentItem != null)
@@ -56,11 +92,148 @@ IEndDragHandler,
 
             // 确保图标可见
             itemIcon.gameObject.SetActive(true);
+
+            // 设置物品类型指示器
+            UpdateTypeIndicator(itemData);
+
+            // 设置稀有度边框
+            UpdateRarityBorder(itemData);
+
+            // 设置耐久度条（如果是装备）
+            UpdateDurabilityBar();
+
+            // 订阅物品事件
+            SubscribeItemEvents();
+        }
+        else
+        {
+            // 清空槽位
+            Clear();
+        }
+    }
+
+    private void SubscribeItemEvents()
+    {
+        if (CurrentItem == null) return;
+
+        // 如果是装备类型，订阅耐久度变化事件
+        if (CurrentItem.GetItemType() == ItemType.Equipment)
+        {
+            CurrentItem.OnDurabilityChanged += HandleDurabilityChanged;
+            CurrentItem.OnBroken += HandleItemBroken;
+        }
+    }
+
+    private void UnsubscribeItemEvents()
+    {
+        if (CurrentItem == null) return;
+
+        // 取消装备类型事件订阅
+        if (CurrentItem.GetItemType() == ItemType.Equipment)
+        {
+            CurrentItem.OnDurabilityChanged -= HandleDurabilityChanged;
+            CurrentItem.OnBroken -= HandleItemBroken;
+        }
+    }
+
+    // 更新物品类型指示器
+    private void UpdateTypeIndicator(ItemData itemData)
+    {
+        if (typeIndicator == null) return;
+
+        typeIndicator.gameObject.SetActive(true);
+
+        switch (itemData.itemType)
+        {
+            case ItemType.Material:
+                typeIndicator.color = materialColor;
+                break;
+            case ItemType.Consumable:
+                typeIndicator.color = consumableColor;
+                break;
+            case ItemType.Equipment:
+                typeIndicator.color = equipmentColor;
+                break;
+            case ItemType.Quest:
+                typeIndicator.color = questColor;
+                break;
+            case ItemType.Currency:
+                typeIndicator.color = currencyColor;
+                break;
+            case ItemType.Other:
+                typeIndicator.color = otherColor;
+                break;
+        }
+    }
+
+    // 更新稀有度边框
+    private void UpdateRarityBorder(ItemData itemData)
+    {
+        if (background == null) return;
+
+        int rarityIndex = Mathf.Clamp(itemData.rarity, 0, rarityColors.Length - 1);
+        background.color = rarityColors[rarityIndex];
+    }
+
+    // 更新耐久度条
+    private void UpdateDurabilityBar()
+    {
+        if (CurrentItem == null || durabilityBar == null || durabilityFill == null) return;
+
+        var itemData = CurrentItem.GetItemData();
+        if (itemData == null || itemData.itemType != ItemType.Equipment || itemData.durability <= 0)
+        {
+            durabilityBar.SetActive(false);
+            return;
+        }
+
+        durabilityBar.SetActive(true);
+
+        float durabilityPercent = (float)CurrentItem.CurrentDurability / itemData.durability;
+        durabilityFill.fillAmount = durabilityPercent;
+
+        // 根据耐久度百分比设置颜色
+        if (durabilityPercent > 0.6f)
+        {
+            durabilityFill.color = durabilityGoodColor;
+        }
+        else if (durabilityPercent > 0.3f)
+        {
+            durabilityFill.color = durabilityMediumColor;
+        }
+        else
+        {
+            durabilityFill.color = durabilityLowColor;
+        }
+    }
+
+    // 处理耐久度变化
+    private void HandleDurabilityChanged(InventoryItem item)
+    {
+        if (item == CurrentItem)
+        {
+            UpdateDurabilityBar();
+        }
+    }
+
+    // 处理物品破损
+    private void HandleItemBroken(InventoryItem item)
+    {
+        if (item == CurrentItem)
+        {
+            // 物品破损效果
+            itemIcon.color = new Color(0.5f, 0.5f, 0.5f, 0.7f);
         }
     }
 
     public void UpdateCount()
     {
+        if (CurrentItem == null)
+        {
+            countText.text = string.Empty;
+            return;
+        }
+
         countText.text = CurrentItem.Count > 1 ? CurrentItem.Count.ToString() : string.Empty;
     }
 
@@ -74,7 +247,17 @@ IEndDragHandler,
 
     public void SetSelected(bool selected)
     {
-        background.color = selected ? new Color(0.8f, 0.8f, 0.8f, 1) : Color.white;
+        if (background != null)
+        {
+            // 保存原始边框颜色
+            Color originalColor = background.color;
+            // 设置选中时的颜色（保留色调，增加亮度）
+            background.color = selected ? new Color(
+                Mathf.Min(originalColor.r * 1.2f, 1f),
+                Mathf.Min(originalColor.g * 1.2f, 1f),
+                Mathf.Min(originalColor.b * 1.2f, 1f)
+            ) : originalColor;
+        }
     }
 
     /// <summary>
@@ -198,7 +381,7 @@ IEndDragHandler,
         // 即使没有物品也要设置指针状态，因为这关系到提示框的显示逻辑
         IsPointerOver = true;
 
-        // 只有在有物品时才显示提示
+        // 如果有物品，则显示提示
         if (CurrentItem != null)
         {
             UpdateTips(CurrentItem);
@@ -208,56 +391,84 @@ IEndDragHandler,
     public void OnPointerExit(PointerEventData eventData)
     {
         IsPointerOver = false;
-        var itemTipsUI = GlobalUIMgr.Instance.Get<ItemTipsUI>();
 
-        if (!IsPointerOver && itemTipsUI != null && itemTipsUI.gameObject.activeSelf)
-        {
-            GlobalUIMgr.Instance.Hide<ItemTipsUI>();
-        }
+        // 隐藏提示
+        GlobalUIMgr.Instance.Hide<ItemTipsUI>();
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        // 确保物品存在
+        // 处理点击事件
         if (CurrentItem != null)
         {
             if (eventData.button == PointerEventData.InputButton.Left)
             {
-                // 左键点击
                 OnSlotClicked?.Invoke(CurrentItem);
             }
             else if (eventData.button == PointerEventData.InputButton.Right)
             {
-                // 右键点击
                 OnSlotRightClicked?.Invoke(CurrentItem);
+
+                // 右键使用物品
+                if (CurrentItem.GetItemType() == ItemType.Consumable ||
+                    CurrentItem.GetItemType() == ItemType.Equipment)
+                {
+                    InventoryMgr.UseItem(CurrentItem.instanceId);
+                }
             }
         }
-
-        // 阻止事件继续传播
-        eventData.Use();
     }
 
     public void Clear()
     {
+        // 取消事件订阅
+        UnsubscribeItemEvents();
+
         CurrentItem = null;
         itemIcon.sprite = null;
         itemIcon.gameObject.SetActive(false);
-        countText.text = "";
-        SetSelected(false);
+        countText.text = string.Empty;
+
+        // 重置类型指示器
+        if (typeIndicator != null)
+        {
+            typeIndicator.gameObject.SetActive(false);
+        }
+
+        // 重置耐久度条
+        if (durabilityBar != null)
+        {
+            durabilityBar.SetActive(false);
+        }
     }
 
     void OnDestroy()
     {
+        // 确保取消所有事件订阅
+        UnsubscribeItemEvents();
+
+        // 清理拖拽副本
         if (_dragItemClone != null)
         {
             Destroy(_dragItemClone);
-            _dragItemClone.transform.SetParent(null);
         }
-        _dragRectTransform = null;
-        _dragCanvasGroup = null;
-
-        GlobalUIMgr.Instance.Hide<ItemTipsUI>();
     }
 
+    public void OnDrop(PointerEventData eventData)
+    {
+        GameObject dropped = eventData.pointerDrag;
+        ItemSlot droppedSlot = dropped.GetComponent<ItemSlot>();
 
+        if (droppedSlot != null)
+        {
+            // 实现物品交换逻辑
+            InventoryItem tempItem = CurrentItem;
+            CurrentItem = droppedSlot.CurrentItem;
+            droppedSlot.CurrentItem = tempItem;
+
+            // 更新槽位显示
+            Setup(CurrentItem);
+            droppedSlot.Setup(droppedSlot.CurrentItem);
+        }
+    }
 }

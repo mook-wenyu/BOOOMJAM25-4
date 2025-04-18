@@ -7,18 +7,18 @@ using UnityEngine.Scripting;
 
 public class ConfigManager : SingleMono<ConfigManager>
 {
-    private Dictionary<string, Dictionary<int, BaseConfig>> ConfigDatas;
+    private Dictionary<string, Dictionary<string, BaseConfig>> ConfigDatas;
 
     public delegate bool ConfigFilter<T>(T config) where T : BaseConfig;
     public override void Init()
     {
-        ConfigDatas = new Dictionary<string, Dictionary<int, BaseConfig>>();
+        ConfigDatas = new Dictionary<string, Dictionary<string, BaseConfig>>();
 
         var textAssets = Resources.LoadAll<TextAsset>("Configs");
         for (int i = 0; i < textAssets?.Length; i++)
         {
             var textAsset = textAssets[i];
-            var data = JsonConvert.DeserializeObject<Dictionary<int, BaseConfig>>(textAsset.text, new JsonSerializerSettings
+            var data = JsonConvert.DeserializeObject<Dictionary<string, BaseConfig>>(textAsset.text, new JsonSerializerSettings
             {
                 TypeNameHandling = TypeNameHandling.Auto
             });
@@ -27,7 +27,7 @@ public class ConfigManager : SingleMono<ConfigManager>
     }
 
     [Preserve]
-    public T GetConfig<T>(int id) where T : BaseConfig
+    public T GetConfig<T>(string id) where T : BaseConfig
     {
         var configName = typeof(T).Name;
         if (ConfigDatas.ContainsKey(configName)) 
