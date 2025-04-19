@@ -36,12 +36,12 @@ public class ItemActionPopup : PopupBase
         SetupItemInfo(item, actionName);
 
         // 只有当物品数量大于1时才显示数量选择器
-        bool showCountSelector = item.Count > 1;
+        bool showCountSelector = item.GetCount() > 1;
         countSelector.SetActive(showCountSelector);
 
         if (showCountSelector)
         {
-            SetupCountSelector(item.Count);
+            SetupCountSelector(item.GetCount());
         }
 
         RegisterEvents();
@@ -50,7 +50,7 @@ public class ItemActionPopup : PopupBase
     private void SetupItemInfo(InventoryItem item, string actionName)
     {
         var itemData = item.GetItemData();
-        titleText.text = itemData.itemName;
+        titleText.text = itemData.name;
         contentText.text = "是否要" + actionName + "？";
         _confirmButtonText.text = actionName;
     }
@@ -103,7 +103,7 @@ public class ItemActionPopup : PopupBase
     private void OnConfirmClicked()
     {
         // 如果物品数量为1，直接使用1，否则使用滑动条的值
-        int count = _currentItem.Count > 1 ? Mathf.RoundToInt(countSlider.value) : 1;
+        int count = _currentItem.GetCount() > 1 ? Mathf.RoundToInt(countSlider.value) : 1;
         _onConfirm?.Invoke(count);
         Hide();
     }

@@ -3,10 +3,52 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+/// <summary>
+/// 物品类型
+/// </summary>
+public enum ItemType
+{
+    /// <summary>
+    /// 材料
+    /// </summary>
+    Material,
+    /// <summary>
+    /// 消耗品
+    /// </summary>
+    Consumable,
+    /// <summary>
+    /// 装备
+    /// </summary>
+    Equipment,
+}
+
+/// <summary>
+/// 装备类型
+/// </summary>
+public enum EquipmentType
+{
+    /// <summary>
+    /// 无
+    /// </summary>
+    None,
+    /// <summary>
+    /// 手持
+    /// </summary>
+    Handheld,
+    /// <summary>
+    /// 衣服
+    /// </summary>
+    Clothes,
+    /// <summary>
+    /// 饰品
+    /// </summary>
+    Accessory,
+}
+
 [Serializable]
 public class InventoryData
 {
-    private int _currentSlotCount;
+    private int _currentSlotCount = InventoryMgr.SLOT_COUNT_DEFAULT;
     public int CurrentSlotCount
     {
         get => _currentSlotCount;
@@ -22,16 +64,19 @@ public class InventoryData
 
     public Dictionary<string, InventoryItem> Items { get; private set; } = new();
 
+    /// <summary>
+    /// 背包物品变化事件
+    /// </summary>
     public event Action OnInventoryChanged;
+    /// <summary>
+    /// 背包容量变化事件
+    /// </summary>
     public event Action OnSlotCountChanged;
 
-    // 新增物品类型筛选事件
-    public event Action<ItemType> OnFilterByType;
-    
     // 当前装备的物品
     private Dictionary<EquipmentType, InventoryItem> _equippedItems = new();
     public IReadOnlyDictionary<EquipmentType, InventoryItem> EquippedItems => _equippedItems;
-    
+
     // 新增装备变化事件
     public event Action<EquipmentType, InventoryItem> OnEquipmentChanged;
 
@@ -68,7 +113,7 @@ public class InventoryData
     }
 
     /// <summary>
-    /// 添加物品到玩家背包
+    /// 添加物品到背包
     /// </summary>
     public bool AddInventoryItem(string itemId, int amount = 1)
     {
@@ -78,11 +123,11 @@ public class InventoryData
             return false;
         }
 
-        ItemData itemData = InventoryMgr.GetItemData(itemId);
+        ItemConfig itemData = InventoryMgr.GetItemData(itemId);
         int remainingAmount = amount;
-        
+
         // 如果是装备类型且不可堆叠，直接创建新物品
-        if (itemData.itemType == ItemType.Equipment)
+        if (itemData.type == (int)ItemType.Equipment)
         {
             while (remainingAmount > 0 && HasAvailableSlot())
             {
@@ -90,10 +135,10 @@ public class InventoryData
                 Items.Add(newItem.instanceId, newItem);
                 OnInventoryChanged?.Invoke();
                 remainingAmount--;
-                
+
                 if (remainingAmount <= 0) break;
             }
-            
+
             return remainingAmount < amount;
         }
 
@@ -102,7 +147,7 @@ public class InventoryData
         {
             if (item.itemId == itemId && item.CanAddMore())
             {
-                int canAdd = Math.Min(remainingAmount, itemData.maxStack - item.Count);
+                int canAdd = Math.Min(remainingAmount, itemData.stacking - item.GetCount());
                 if (canAdd > 0)
                 {
                     item.AddCount(canAdd);
@@ -117,7 +162,7 @@ public class InventoryData
         // 创建新堆叠
         while (remainingAmount > 0 && HasAvailableSlot())
         {
-            int stackAmount = Math.Min(remainingAmount, itemData.maxStack);
+            int stackAmount = Math.Min(remainingAmount, itemData.stacking);
             if (stackAmount <= 0) break;
 
             var newItem = new InventoryItem(itemId, stackAmount);
@@ -130,7 +175,7 @@ public class InventoryData
 
         return remainingAmount < amount;
     }
-    
+
     /// <summary>
     /// 增加指定实例ID物品的数量
     /// </summary>
@@ -142,13 +187,13 @@ public class InventoryData
         if (amount <= 0 || !Items.TryGetValue(instanceId, out var item))
             return false;
 
-        ItemData itemData = InventoryMgr.GetItemData(item.itemId);
+        ItemConfig itemData = InventoryMgr.GetItemData(item.itemId);
         int remainingAmount = amount;
 
         // 先尝试在原有堆叠上增加
         if (item.CanAddMore())
         {
-            int canAdd = Math.Min(remainingAmount, itemData.maxStack - item.Count);
+            int canAdd = Math.Min(remainingAmount, itemData.stacking - item.GetCount());
             item.AddCount(canAdd);
             remainingAmount -= canAdd;
 
@@ -159,7 +204,7 @@ public class InventoryData
         // 如果还有剩余数量，创建新的堆叠
         while (remainingAmount > 0 && HasAvailableSlot())
         {
-            int stackAmount = Math.Min(remainingAmount, itemData.maxStack);
+            int stackAmount = Math.Min(remainingAmount, itemData.stacking);
             if (stackAmount <= 0) break;
 
             var newItem = new InventoryItem(item.itemId, stackAmount);
@@ -174,7 +219,7 @@ public class InventoryData
     }
 
     /// <summary>
-    /// 从玩家背包移除指定物品
+    /// 从背包移除指定物品
     /// </summary>
     public bool RemoveInventoryItem(string itemId, int amount = 1)
     {
@@ -187,11 +232,11 @@ public class InventoryData
         {
             if (pair.Value.itemId == itemId)
             {
-                int canRemove = Math.Min(remainingToRemove, pair.Value.Count);
+                int canRemove = Math.Min(remainingToRemove, pair.Value.GetCount());
                 pair.Value.RemoveCount(canRemove);
                 remainingToRemove -= canRemove;
 
-                if (pair.Value.Count <= 0)
+                if (pair.Value.GetCount() <= 0)
                 {
                     itemsToRemove.Add(pair.Key);
                 }
@@ -221,12 +266,12 @@ public class InventoryData
         if (amount <= 0 || !Items.TryGetValue(instanceId, out var item))
             return false;
 
-        if (amount > item.Count)
+        if (amount > item.GetCount())
             return false;
 
         item.RemoveCount(amount);
 
-        if (item.Count <= 0)
+        if (item.GetCount() <= 0)
         {
             Items.Remove(instanceId);
             OnInventoryChanged?.Invoke();
@@ -235,23 +280,30 @@ public class InventoryData
         return true;
     }
 
-    /// <summary>
-    /// 获取指定类型的物品
-    /// </summary>
-    /// <param name="itemType">物品类型</param>
-    /// <returns>物品列表</returns>
-    public List<InventoryItem> GetItemsByType(ItemType itemType)
+    public bool Use(string instanceId, int count)
     {
-        OnFilterByType?.Invoke(itemType);
-        
-        return Items.Values
-            .Where(item => {
-                var itemData = item.GetItemData();
-                return itemData != null && itemData.itemType == itemType;
-            })
-            .ToList();
+        if (!Items.TryGetValue(instanceId, out var item))
+            return false;
+
+        var itemData = item.GetItemData();
+        if (itemData == null || itemData.type != (int)ItemType.Consumable)
+            return false;
+
+        // 检查物品是否已损坏
+        if (item.IsBroken())
+        {
+            Debug.Log("无法使用已损坏的物品");
+            return false;
+        }
+
+        item.RemoveCount(count);
+
+        // TODO: 应用物品效果
+        Debug.Log($"使用物品: {item.itemId} -> {itemData.name} x {count}");
+
+        return true;
     }
-    
+
     /// <summary>
     /// 装备物品
     /// </summary>
@@ -261,31 +313,36 @@ public class InventoryData
     {
         if (!Items.TryGetValue(instanceId, out var item))
             return false;
-            
+
         var itemData = item.GetItemData();
-        if (itemData == null || itemData.itemType != ItemType.Equipment)
+        if (itemData == null || itemData.type != (int)ItemType.Equipment)
             return false;
-            
+
         // 检查物品是否已损坏
         if (item.IsBroken())
         {
             Debug.Log("无法装备已损坏的物品");
             return false;
         }
-        
+
         // 如果该装备槽已有装备，则先卸下
-        if (_equippedItems.TryGetValue(itemData.equipmentType, out var equippedItem))
+        if (_equippedItems.TryGetValue((EquipmentType)itemData.equipmentParts, out var equippedItem))
         {
             UnequipItem(equippedItem.instanceId);
         }
-        
+
         // 装备新物品
-        _equippedItems[itemData.equipmentType] = item;
-        OnEquipmentChanged?.Invoke(itemData.equipmentType, item);
-        
+        _equippedItems[(EquipmentType)itemData.equipmentParts] = item;
+        item.isEquipped = true;
+
+        // TODO: 应用装备效果
+        Debug.Log($"装备物品: {item.itemId} -> {itemData.name}");
+
+        OnEquipmentChanged?.Invoke((EquipmentType)itemData.equipmentParts, item);
+
         return true;
     }
-    
+
     /// <summary>
     /// 卸下装备
     /// </summary>
@@ -295,25 +352,30 @@ public class InventoryData
     {
         if (!Items.TryGetValue(instanceId, out var item))
             return false;
-            
+
         var itemData = item.GetItemData();
-        if (itemData == null || itemData.itemType != ItemType.Equipment)
+        if (itemData == null || itemData.type != (int)ItemType.Equipment)
             return false;
-            
+
         // 确保该物品确实被装备了
-        if (!_equippedItems.TryGetValue(itemData.equipmentType, out var equippedItem) 
+        if (!_equippedItems.TryGetValue((EquipmentType)itemData.equipmentParts, out var equippedItem)
             || equippedItem.instanceId != instanceId)
         {
             return false;
         }
-        
+
         // 卸下装备
-        _equippedItems.Remove(itemData.equipmentType);
-        OnEquipmentChanged?.Invoke(itemData.equipmentType, null);
-        
+        _equippedItems.Remove((EquipmentType)itemData.equipmentParts);
+        item.isEquipped = false;
+
+        // TODO: 移除装备效果
+        Debug.Log($"卸下物品: {item.itemId} -> {itemData.name}");
+
+        OnEquipmentChanged?.Invoke((EquipmentType)itemData.equipmentParts, null);
+
         return true;
     }
-    
+
     /// <summary>
     /// 获取已装备的物品
     /// </summary>
@@ -324,65 +386,54 @@ public class InventoryData
         _equippedItems.TryGetValue(equipType, out var item);
         return item;
     }
-    
+
     /// <summary>
     /// 使用物品
     /// </summary>
     /// <param name="instanceId">物品实例ID</param>
+    /// <param name="count">使用数量</param>
     /// <returns>是否使用成功</returns>
-    public bool UseItem(string instanceId)
+    public bool UseItem(string instanceId, int count = 1)
     {
         if (!Items.TryGetValue(instanceId, out var item))
             return false;
-            
+
         var itemData = item.GetItemData();
         if (itemData == null)
             return false;
-            
+
         bool success = false;
-        
-        switch (itemData.itemType)
+
+        switch ((ItemType)itemData.type)
         {
             case ItemType.Consumable:
-                success = item.Use();
+                success = Use(instanceId, count);
                 break;
-                
+
             case ItemType.Equipment:
-                success = EquipItem(instanceId);
+                if (item.isEquipped)
+                {
+                    success = UnequipItem(instanceId);
+                }
+                else
+                {
+                    success = EquipItem(instanceId);
+                }
                 break;
-                
+
             case ItemType.Material:
-            case ItemType.Quest:
-            case ItemType.Currency:
-            case ItemType.Other:
                 // 这些类型的物品不能直接使用
-                Debug.Log($"该类型物品无法直接使用: {itemData.itemType}");
                 return false;
         }
-        
+
         // 如果物品数量变为0，则从背包移除
-        if (item.Count <= 0)
+        if (item.GetCount() <= 0)
         {
             Items.Remove(instanceId);
             OnInventoryChanged?.Invoke();
         }
-        
+
         return success;
-    }
-    
-    /// <summary>
-    /// 获取背包中特定稀有度的物品
-    /// </summary>
-    /// <param name="rarity">稀有度</param>
-    /// <returns>物品列表</returns>
-    public List<InventoryItem> GetItemsByRarity(int rarity)
-    {
-        return Items.Values
-            .Where(item => {
-                var itemData = item.GetItemData();
-                return itemData != null && itemData.rarity == rarity;
-            })
-            .ToList();
     }
 
     /// <summary>
@@ -413,7 +464,7 @@ public class InventoryData
         {
             if (item.itemId == itemId)
             {
-                totalCount += item.Count;
+                totalCount += item.GetCount();
                 if (totalCount >= amount)
                     return true;
             }
@@ -431,7 +482,7 @@ public class InventoryData
         {
             if (item.itemId == itemId)
             {
-                totalCount += item.Count;
+                totalCount += item.GetCount();
             }
         }
         return totalCount;

@@ -46,6 +46,10 @@ public class InitScene : MonoBehaviour
 
     private async UniTask InitGameData()
     {
+        
+        ConfigManager.Instance.Init();
+        await UniTask.Yield();
+
         // 初始化
         GameMgr.Init();
         await UniTask.Yield();
@@ -57,10 +61,6 @@ public class InitScene : MonoBehaviour
         // 初始化音频
         //AudioMgr.Initialize();
         //await UniTask.Yield();
-
-        // 初始化背包
-        InventoryMgr.Initialize();
-        await UniTask.Yield();
 
         // 初始化对话
         DialogueMgr.Initialize();

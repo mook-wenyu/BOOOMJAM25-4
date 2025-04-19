@@ -134,7 +134,9 @@ public class StartScene : MonoBehaviour
     private void NewSaveData()
     {
         GameMgr.currentSaveData = new SaveData();
-
+        Debug.Log($"添加新物品：{InventoryMgr.AddInventoryItem("10001")}");
+        Debug.Log($"添加新物品：{InventoryMgr.AddInventoryItem("10002")}");
+        Debug.Log($"添加新物品：{InventoryMgr.AddInventoryItem("12001")}");
     }
 
 }

@@ -28,12 +28,13 @@ public class InventoryUIPanel : MonoBehaviour
         UpdateInventoryUI();
 
         Hide();
+        Show();
     }
-    
+
     // 创建固定数量的物品槽
     private void CreateItemSlots()
     {
-        int targetCount = InventoryMgr.SLOT_COUNT;
+        int targetCount = InventoryMgr.SLOT_COUNT_DEFAULT;
         int currentCount = _activeSlots.Count;
 
         if (currentCount > targetCount)
@@ -79,7 +80,7 @@ public class InventoryUIPanel : MonoBehaviour
         var items = InventoryMgr.GetInventoryData().Items;
 
         // 确保有足够的槽位
-        int currentSlotCount = InventoryMgr.SLOT_COUNT;
+        int currentSlotCount = InventoryMgr.GetInventoryData().CurrentSlotCount;
         if (_activeSlots.Count != currentSlotCount)
         {
             CreateItemSlots();
@@ -133,7 +134,7 @@ public class InventoryUIPanel : MonoBehaviour
 
             // TODO: 显示物品详情或其他操作
 #if UNITY_EDITOR
-            Debug.Log($"左键点击物品: {item.instanceId} -> {item.itemId} -> {item.Count} -> {item.GetItemData().itemName}");
+            Debug.Log($"左键点击物品: {item.instanceId} -> {item.itemId} -> {item.GetCount()} -> {item.GetItemData().name}");
 #endif
         }
     }
@@ -155,13 +156,15 @@ public class InventoryUIPanel : MonoBehaviour
 
             // TODO: 在这里添加右键菜单或其他操作
             // 例如：使用物品、丢弃物品等
-            GlobalUIMgr.Instance.ShowItemActionPopup(item, "使用", (count) =>
+            /*GlobalUIMgr.Instance.ShowItemActionPopup(item, "使用", (count) =>
             {
-                Debug.Log($"使用物品: {item.instanceId} -> {item.itemId} -> {item.GetItemData().itemName} x {count}");
+                Debug.Log($"使用物品: {item.instanceId} -> {item.itemId} -> {item.GetItemData().name} x {count}");
 
                 // 使用物品
                 InventoryMgr.GetInventoryData().RemoveInventoryItem(item.itemId, count);
-            });
+            });*/
+
+            InventoryMgr.GetInventoryData().UseItem(item.instanceId);
         }
     }
 
@@ -173,7 +176,7 @@ public class InventoryUIPanel : MonoBehaviour
         if (slot != null)
         {
             // 如果物品数量为0，清空槽位
-            if (item.Count <= 0)
+            if (item.GetCount() <= 0)
             {
                 slot.OnSlotClicked -= OnItemSlotClicked;
                 slot.OnSlotRightClicked -= OnItemSlotRightClicked;
@@ -183,7 +186,7 @@ public class InventoryUIPanel : MonoBehaviour
             else
             {
                 // 更新槽位显示
-                slot.UpdateCount(item.Count);
+                slot.UpdateCount(item.GetCount());
             }
         }
     }

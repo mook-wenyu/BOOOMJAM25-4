@@ -18,24 +18,20 @@ public class ItemTipsUI : TipsUIBase
     public TextMeshProUGUI itemTypeText;        // 物品类型
     public TextMeshProUGUI itemCostText;        // 物品价格
 
-    private ItemSlot _currentItemSlot;
-
     protected override void Awake()
     {
         base.Awake();
     }
 
-    public void SetItemInfo(InventoryItem itemInfo, ItemSlot itemSlot)
+    public void SetItemInfo(InventoryItem itemInfo)
     {
-        _currentItemSlot = itemSlot;
-
         var itemData = InventoryMgr.GetItemData(itemInfo.itemId);
 
         // 设置基础信息
-        itemNameText.text = itemData.itemName;
-        itemDescText.text = itemData.description;
+        itemNameText.text = itemData.name;
+        itemDescText.text = itemData.desc;
 
-        itemCountText.text = itemInfo.Count.ToString();
+        itemCountText.text = itemInfo.GetCount().ToString();
 
         // itemIconImage.sprite = itemInfo.icon;
 
@@ -45,8 +41,6 @@ public class ItemTipsUI : TipsUIBase
 
     public override void Hide()
     {
-        _currentItemSlot = null;
-
         base.Hide();
     }
 }

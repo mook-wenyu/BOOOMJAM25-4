@@ -1,12 +1,12 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ItemSlot : MonoBehaviour,
+public class EquipmentSlot : MonoBehaviour,
 IBeginDragHandler,
 IDragHandler,
 IEndDragHandler,
@@ -14,9 +14,9 @@ IEndDragHandler,
     IPointerExitHandler,
     IPointerClickHandler
 {
+    [SerializeField] private EquipmentType equipmentType;
     [SerializeField] private Image background;
     [SerializeField] private Image itemIcon;
-    [SerializeField] private TextMeshProUGUI countText;
 
     [SerializeField] private GameObject durabilityBar; // 耐久度条
     [SerializeField] private Image durabilityFill; // 耐久度填充
@@ -27,18 +27,17 @@ IEndDragHandler,
 
     private RectTransform _rectTransform;  // 添加缓存的RectTransform
 
-    public event Action<InventoryItem> OnSlotClicked;
-    public event Action<InventoryItem> OnSlotRightClicked;
+    public event Action<InventoryItem> OnEquipmentSlotRightClicked;
 
 
     public InventoryItem CurrentItem { get; private set; }
     public bool IsPointerOver { get; private set; }
 
-
     private void Awake()
     {
         _rectTransform = GetComponent<RectTransform>();
     }
+
 
     public void Setup(InventoryItem newItem)
     {
@@ -62,13 +61,10 @@ IEndDragHandler,
                 itemIcon.sprite = Resources.Load<Sprite>(Path.Combine("Icon", "icon_item_unknown"));
             }
 
-            // 更新数量显示
-            UpdateCount();
-
             // 确保图标可见
             itemIcon.gameObject.SetActive(true);
 
-            // 设置耐久度条（如果是装备）
+            // 设置耐久度条
             UpdateDurabilityBar();
 
             // 订阅物品事件
@@ -80,6 +76,7 @@ IEndDragHandler,
             Clear();
         }
     }
+
 
     private void SubscribeItemEvents()
     {
@@ -153,26 +150,6 @@ IEndDragHandler,
         {
             // 物品破损效果
             itemIcon.color = new Color(0.5f, 0.5f, 0.5f, 0.7f);
-        }
-    }
-
-    // 更新数量显示
-    public void UpdateCount()
-    {
-        if (CurrentItem == null)
-        {
-            countText.text = string.Empty;
-            return;
-        }
-
-        countText.text = CurrentItem.GetCount() > 1 ? CurrentItem.GetCount().ToString() : string.Empty;
-    }
-
-    public void UpdateCount(int newCount)
-    {
-        if (countText != null)
-        {
-            countText.text = newCount > 1 ? newCount.ToString() : string.Empty;
         }
     }
 
@@ -256,18 +233,10 @@ IEndDragHandler,
         EventSystem.current.RaycastAll(eventData, results);
 
         bool handled = false;
-        bool isInInventory = false;
         bool isInEquipment = false;
 
         foreach (var result in results)
         {
-            // 检查是否在背包面板内
-            if (result.gameObject.name == "InventoryBG")
-            {
-                isInInventory = true;
-                break;
-            }
-
             // 检查是否在装备面板内
             if (result.gameObject.name == "EquipmentBG")
             {
@@ -276,8 +245,8 @@ IEndDragHandler,
             }
         }
 
-        // 如果不在背包面板内,则丢弃物品
-        if (!isInInventory && !isInEquipment)
+        // 如果不在装备面板内,则卸下装备
+        if (!isInEquipment)
         {
             // 显示确认对话框
             /*GlobalUIMgr.Instance.ShowItemActionPopup(CurrentItem, "丢弃",
@@ -297,18 +266,8 @@ IEndDragHandler,
                     }
                 }
             );*/
-            int count = 1;
-            string itemName = CurrentItem.GetItemData().name;
-            bool result = InventoryMgr.GetInventoryData().RemoveItemCountByInstanceId(CurrentItem.instanceId, count);
-            if (result)
-            {
-                handled = true;
-                Debug.Log($"丢弃 {itemName} x {count}");
-            }
-            else
-            {
-                Debug.Log($"丢弃失败");
-            }
+
+            InventoryMgr.GetInventoryData().UnequipItem(CurrentItem.instanceId);
         }
 
         // 如果没有处理过，添加一个无效放置的动画效果
@@ -316,13 +275,6 @@ IEndDragHandler,
         {
             var rectTransform = GetComponent<RectTransform>();
             // Tween.UIAnchoredPosition(rectTransform, rectTransform.anchoredPosition, 0.2f, Ease.OutBounce);
-        }
-
-        if (isInEquipment && CurrentItem.GetItemType() == ItemType.Equipment
-            && !CurrentItem.IsBroken() && !CurrentItem.isEquipped)
-        {
-            // 装备物品
-            InventoryMgr.GetInventoryData().EquipItem(CurrentItem.instanceId);
         }
 
         // 销毁拖动副本
@@ -363,16 +315,13 @@ IEndDragHandler,
         // 处理点击事件
         if (CurrentItem != null)
         {
-            if (eventData.button == PointerEventData.InputButton.Left)
+            if (eventData.button == PointerEventData.InputButton.Right)
             {
-                OnSlotClicked?.Invoke(CurrentItem);
-            }
-            else if (eventData.button == PointerEventData.InputButton.Right)
-            {
-                OnSlotRightClicked?.Invoke(CurrentItem);
+                OnEquipmentSlotRightClicked?.Invoke(CurrentItem);
             }
         }
     }
+
 
     public void Clear()
     {
@@ -382,7 +331,6 @@ IEndDragHandler,
         CurrentItem = null;
         itemIcon.sprite = null;
         itemIcon.gameObject.SetActive(false);
-        countText.text = string.Empty;
         SetSelected(false);
 
         // 重置耐久度条
@@ -408,5 +356,4 @@ IEndDragHandler,
 
         GlobalUIMgr.Instance.Hide<ItemTipsUI>();
     }
-
 }

@@ -5,12 +5,12 @@ using UnityEngine;
 using Newtonsoft.Json;
 using UnityEngine.Scripting;
 
-public class ConfigManager : SingleMono<ConfigManager>
+public class ConfigManager : MonoSingleton<ConfigManager>
 {
     private Dictionary<string, Dictionary<string, BaseConfig>> ConfigDatas;
 
     public delegate bool ConfigFilter<T>(T config) where T : BaseConfig;
-    public override void Init()
+    public void Init()
     {
         ConfigDatas = new Dictionary<string, Dictionary<string, BaseConfig>>();
 
