@@ -164,7 +164,7 @@ public class InventoryUIPanel : MonoBehaviour
                 InventoryMgr.GetInventoryData().RemoveInventoryItem(item.itemId, count);
             });*/
 
-            InventoryMgr.GetInventoryData().UseItem(item.instanceId);
+            InventoryMgr.GetInventoryData().UseItem(CharacterMgr.Player(),item.instanceId);
         }
     }
 

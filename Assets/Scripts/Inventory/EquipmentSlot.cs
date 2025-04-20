@@ -267,7 +267,7 @@ IEndDragHandler,
                 }
             );*/
 
-            InventoryMgr.GetInventoryData().UnequipItem(CurrentItem.instanceId);
+            InventoryMgr.GetInventoryData().UnequipItem(CharacterMgr.Player(), CurrentItem.instanceId);
         }
 
         // 如果没有处理过，添加一个无效放置的动画效果

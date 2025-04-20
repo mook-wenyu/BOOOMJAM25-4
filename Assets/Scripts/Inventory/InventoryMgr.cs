@@ -26,41 +26,9 @@ public static class InventoryMgr
     /// 获取背包数据
     /// </summary>
     /// <returns></returns>
-    public static InventoryData GetInventoryData()
+    public static InventoryData GetInventoryData(string characterId = "player")
     {
-        return GameMgr.currentSaveData.Inventory;
-    }
-
-    /// <summary>
-    /// 添加物品到背包
-    /// </summary>
-    public static bool AddInventoryItem(string itemId, int amount = 1)
-    {
-        return GetInventoryData().AddInventoryItem(itemId, amount);
-    }
-
-    /// <summary>
-    /// 增加指定实例ID物品的数量
-    /// </summary>
-    public static bool AddItemCountByInstanceId(string instanceId, int amount)
-    {
-        return GetInventoryData().AddItemCountByInstanceId(instanceId, amount);
-    }
-
-    /// <summary>
-    /// 从背包移除指定物品
-    /// </summary>
-    public static bool RemoveInventoryItem(string itemId, int amount = 1)
-    {
-        return GetInventoryData().RemoveInventoryItem(itemId, amount);
-    }
-
-    /// <summary>
-    /// 减少指定实例ID物品的数量
-    /// </summary>
-    public static bool RemoveItemCountByInstanceId(string instanceId, int amount)
-    {
-        return GetInventoryData().RemoveItemCountByInstanceId(instanceId, amount);
+        return GameMgr.currentSaveData.characters[characterId].GetInventory();
     }
 
     /// <summary>

@@ -62,7 +62,15 @@ public class InventoryData
         }
     }
 
+    /// <summary>
+    /// 背包物品
+    /// </summary>
     public Dictionary<string, InventoryItem> Items { get; private set; } = new();
+
+    /// <summary>
+    /// 当前装备的物品
+    /// </summary>
+    public Dictionary<EquipmentType, InventoryItem> equippedItems = new();
 
     /// <summary>
     /// 背包物品变化事件
@@ -72,10 +80,6 @@ public class InventoryData
     /// 背包容量变化事件
     /// </summary>
     public event Action OnSlotCountChanged;
-
-    // 当前装备的物品
-    private Dictionary<EquipmentType, InventoryItem> _equippedItems = new();
-    public IReadOnlyDictionary<EquipmentType, InventoryItem> EquippedItems => _equippedItems;
 
     // 新增装备变化事件
     public event Action<EquipmentType, InventoryItem> OnEquipmentChanged;
@@ -280,7 +284,7 @@ public class InventoryData
         return true;
     }
 
-    public bool Use(string instanceId, int count)
+    public bool Use(CharacterData character, string instanceId, int count)
     {
         if (!Items.TryGetValue(instanceId, out var item))
             return false;
@@ -296,12 +300,56 @@ public class InventoryData
             return false;
         }
 
+        ApplyConsumable(character, itemData, count);
+
         item.RemoveCount(count);
 
-        // TODO: 应用物品效果
-        Debug.Log($"使用物品: {item.itemId} -> {itemData.name} x {count}");
-
         return true;
+    }
+
+    private void ApplyConsumable(CharacterData character, ItemConfig item, int count)
+    {
+        // TODO: 应用物品效果
+        Debug.Log($"使用物品: {item.id} -> {item.name} x {count}");
+
+        if (item.healthAdjust != 0)
+        {
+            character.SetHealth(character.health + item.healthAdjust * count);
+        }
+        if (item.hungerAdjust != 0)
+        {
+            character.SetHunger(character.hunger + item.hungerAdjust * count);
+        }
+        if (item.energyAdjust != 0)
+        {
+            character.SetEnergy(character.energy + item.energyAdjust * count);
+        }
+        if (item.spiritAdjust != 0)
+        {
+            character.SetSpirit(character.spirit + item.spiritAdjust * count);
+        }
+
+        if (item.getBuff != null && item.getBuff.Length > 0)
+        {
+            foreach (var buffId in item.getBuff)
+            {
+                if (buffId > 0 && BuffMgr.GetBuffData(buffId.ToString()) != null)
+                {
+                    character.AddBuff(buffId.ToString());
+                }
+            }
+        }
+
+        if (item.removeBuff != null && item.removeBuff.Length > 0)
+        {
+            foreach (var buffId in item.removeBuff)
+            {
+                if (buffId > 0 && BuffMgr.GetBuffData(buffId.ToString()) != null)
+                {
+                    character.RemoveBuff(buffId.ToString());
+                }
+            }
+        }
     }
 
     /// <summary>
@@ -309,7 +357,7 @@ public class InventoryData
     /// </summary>
     /// <param name="instanceId">物品实例ID</param>
     /// <returns>是否装备成功</returns>
-    public bool EquipItem(string instanceId)
+    public bool EquipItem(CharacterData character, string instanceId)
     {
         if (!Items.TryGetValue(instanceId, out var item))
             return false;
@@ -326,17 +374,16 @@ public class InventoryData
         }
 
         // 如果该装备槽已有装备，则先卸下
-        if (_equippedItems.TryGetValue((EquipmentType)itemData.equipmentParts, out var equippedItem))
+        if (equippedItems.TryGetValue((EquipmentType)itemData.equipmentParts, out var equippedItem))
         {
-            UnequipItem(equippedItem.instanceId);
+            UnequipItem(character, equippedItem.instanceId);
         }
 
         // 装备新物品
-        _equippedItems[(EquipmentType)itemData.equipmentParts] = item;
+        equippedItems[(EquipmentType)itemData.equipmentParts] = item;
         item.isEquipped = true;
 
-        // TODO: 应用装备效果
-        Debug.Log($"装备物品: {item.itemId} -> {itemData.name}");
+        ApplyEquipment(character, itemData);
 
         OnEquipmentChanged?.Invoke((EquipmentType)itemData.equipmentParts, item);
 
@@ -348,7 +395,7 @@ public class InventoryData
     /// </summary>
     /// <param name="instanceId">物品实例ID</param>
     /// <returns>是否卸下成功</returns>
-    public bool UnequipItem(string instanceId)
+    public bool UnequipItem(CharacterData character, string instanceId)
     {
         if (!Items.TryGetValue(instanceId, out var item))
             return false;
@@ -358,22 +405,61 @@ public class InventoryData
             return false;
 
         // 确保该物品确实被装备了
-        if (!_equippedItems.TryGetValue((EquipmentType)itemData.equipmentParts, out var equippedItem)
+        if (!equippedItems.TryGetValue((EquipmentType)itemData.equipmentParts, out var equippedItem)
             || equippedItem.instanceId != instanceId)
         {
             return false;
         }
 
         // 卸下装备
-        _equippedItems.Remove((EquipmentType)itemData.equipmentParts);
+        equippedItems.Remove((EquipmentType)itemData.equipmentParts);
         item.isEquipped = false;
 
-        // TODO: 移除装备效果
-        Debug.Log($"卸下物品: {item.itemId} -> {itemData.name}");
+        RemoveEquipment(character, itemData);
 
         OnEquipmentChanged?.Invoke((EquipmentType)itemData.equipmentParts, null);
 
         return true;
+    }
+
+    /// <summary>
+    /// 应用装备效果
+    /// </summary>
+    private void ApplyEquipment(CharacterData character, ItemConfig item)
+    {
+        // 应用装备效果
+        Debug.Log($"装备物品: {item.id} -> {item.name}");
+
+        if (item.getBuff != null && item.getBuff.Length > 0)
+        {
+            foreach (var buffId in item.getBuff)
+            {
+                if (buffId > 0 && BuffMgr.GetBuffData(buffId.ToString()) != null)
+                {
+                    character.AddBuff(buffId.ToString());
+                }
+            }
+        }
+    }
+
+    /// <summary>
+    /// 移除装备效果
+    /// </summary>
+    private void RemoveEquipment(CharacterData character, ItemConfig item)
+    {
+        // 移除装备效果
+        Debug.Log($"卸下物品: {item.id} -> {item.name}");
+
+        if (item.getBuff != null && item.getBuff.Length > 0)
+        {
+            foreach (var buffId in item.getBuff)
+            {
+                if (buffId > 0 && BuffMgr.GetBuffData(buffId.ToString()) != null)
+                {
+                    character.RemoveBuff(buffId.ToString());
+                }
+            }
+        }
     }
 
     /// <summary>
@@ -383,7 +469,7 @@ public class InventoryData
     /// <returns>已装备物品</returns>
     public InventoryItem GetEquippedItem(EquipmentType equipType)
     {
-        _equippedItems.TryGetValue(equipType, out var item);
+        equippedItems.TryGetValue(equipType, out var item);
         return item;
     }
 
@@ -393,7 +479,7 @@ public class InventoryData
     /// <param name="instanceId">物品实例ID</param>
     /// <param name="count">使用数量</param>
     /// <returns>是否使用成功</returns>
-    public bool UseItem(string instanceId, int count = 1)
+    public bool UseItem(CharacterData character, string instanceId, int count = 1)
     {
         if (!Items.TryGetValue(instanceId, out var item))
             return false;
@@ -407,17 +493,17 @@ public class InventoryData
         switch ((ItemType)itemData.type)
         {
             case ItemType.Consumable:
-                success = Use(instanceId, count);
+                success = Use(character, instanceId, count);
                 break;
 
             case ItemType.Equipment:
                 if (item.isEquipped)
                 {
-                    success = UnequipItem(instanceId);
+                    success = UnequipItem(character, instanceId);
                 }
                 else
                 {
-                    success = EquipItem(instanceId);
+                    success = EquipItem(character, instanceId);
                 }
                 break;
 

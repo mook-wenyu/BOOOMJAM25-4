@@ -322,7 +322,7 @@ IEndDragHandler,
             && !CurrentItem.IsBroken() && !CurrentItem.isEquipped)
         {
             // 装备物品
-            InventoryMgr.GetInventoryData().EquipItem(CurrentItem.instanceId);
+            InventoryMgr.GetInventoryData().EquipItem(CharacterMgr.Player(), CurrentItem.instanceId);
         }
 
         // 销毁拖动副本
@@ -370,6 +370,8 @@ IEndDragHandler,
             else if (eventData.button == PointerEventData.InputButton.Right)
             {
                 OnSlotRightClicked?.Invoke(CurrentItem);
+                // 重新显示tips
+                UpdateTips(CurrentItem);
             }
         }
     }

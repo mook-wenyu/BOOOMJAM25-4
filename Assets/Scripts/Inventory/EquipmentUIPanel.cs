@@ -39,7 +39,7 @@ public class EquipmentUIPanel : MonoBehaviour
             if (item.isEquipped)
             {
                 // 卸下装备
-                InventoryMgr.GetInventoryData().UnequipItem(item.instanceId);
+                InventoryMgr.GetInventoryData().UnequipItem(CharacterMgr.Player(), item.instanceId);
             }
         }
     }
@@ -51,7 +51,7 @@ public class EquipmentUIPanel : MonoBehaviour
             if (item.isEquipped)
             {
                 // 卸下装备
-                InventoryMgr.GetInventoryData().UnequipItem(item.instanceId);
+                InventoryMgr.GetInventoryData().UnequipItem(CharacterMgr.Player(), item.instanceId);
             }
         }
     }
@@ -63,7 +63,7 @@ public class EquipmentUIPanel : MonoBehaviour
             if (item.isEquipped)
             {
                 // 卸下装备
-                InventoryMgr.GetInventoryData().UnequipItem(item.instanceId);
+                InventoryMgr.GetInventoryData().UnequipItem(CharacterMgr.Player(), item.instanceId);
             }
         }
     }

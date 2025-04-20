@@ -7,20 +7,35 @@ public class SaveData
     /// <summary>
     /// 当前时间
     /// </summary>
-    public GameTime GameTime { get; set; } = new(0, 7, 0);
+    public GameTime gameTime = new(0, 7, 0);
 
     /// <summary>
-    /// 背包数据
+    /// 玩家ID
     /// </summary>
-    public InventoryData Inventory { get; set; } = new();
+    public string playerId = "player";
 
     /// <summary>
     /// 角色数据
     /// </summary>
-    public Dictionary<string, CharacterData> CharacterDatas { get; set; } = new();
+    public Dictionary<string, CharacterData> characters = new();
+
+    /// <summary>
+    /// 正在建造中的建筑
+    /// </summary>
+    public List<BuildingData> buildingProgress = new();
+
+    /// <summary>
+    /// 正在生产中的配方
+    /// </summary>
+    public List<RecipeData> recipeProgress = new();
+
+    /// <summary>
+    /// 已建造的建筑数据
+    /// </summary>
+    public Dictionary<string, BuildingData> buildings = new();
 
     /// <summary>
     /// 对话存储
     /// </summary>
-    public DialogueStorage DialogueStorage { get; set; } = new();
+    public DialogueStorage dialogueStorage = new();
 }

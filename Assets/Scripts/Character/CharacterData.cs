@@ -17,70 +17,31 @@ public class CharacterData
     /// <summary>
     /// 生命值
     /// </summary>
-    private int _hp;
-    public int Hp
-    {
-        get
-        {
-            return _hp;
-        }
-        set
-        {
-            _hp = value;
-            OnHpChanged?.Invoke(this, value);
-        }
-    }
-
-    /// <summary>
-    /// 体力
-    /// </summary>
-    private int _stamina;
-    public int Stamina
-    {
-        get
-        {
-            return _stamina;
-        }
-        set
-        {
-            _stamina = value;
-            OnStaminaChanged?.Invoke(this, value);
-        }
-    }
-
-    /// <summary>
-    /// 精神
-    /// </summary>
-    private int _spirit;
-    public int Spirit
-    {
-        get
-        {
-            return _spirit;
-        }
-        set
-        {
-            _spirit = value;
-            OnSpiritChanged?.Invoke(this, value);
-        }
-    }
+    public int health;
+    public int healthMax;
 
     /// <summary>
     /// 饱食度
     /// </summary>
-    private int _satiety;
-    public int Satiety
-    {
-        get
-        {
-            return _satiety;
-        }
-        set
-        {
-            _satiety = value;
-            OnSatietyChanged?.Invoke(this, value);
-        }
-    }
+    public int hunger;
+    public int hungerMax;
+
+    /// <summary>
+    /// 活力
+    /// </summary>
+    public int energy;
+    public int energyMax;
+
+    /// <summary>
+    /// 精神
+    /// </summary>
+    public int spirit;
+    public int spiritMax;
+
+    /// <summary>
+    /// 背包数据
+    /// </summary>
+    public InventoryData Inventory { get; set; } = new();
 
     /// <summary>
     /// 活动的增益和减益效果
@@ -99,29 +60,131 @@ public class CharacterData
     public event Action<CharacterData, ActiveBuff> OnBuffRemoved;
 
     /// <summary>
-    /// Buff更新事件
-    /// </summary>
-    public event Action<CharacterData, ActiveBuff> OnBuffUpdated;
-
-    /// <summary>
     /// 生命值变化事件
     /// </summary>
     public event Action<CharacterData, int> OnHpChanged;
+    public event Action<CharacterData, int> OnHpMaxChanged;
 
     /// <summary>
     /// 体力变化事件
     /// </summary>
     public event Action<CharacterData, int> OnStaminaChanged;
+    public event Action<CharacterData, int> OnStaminaMaxChanged;
 
     /// <summary>
     /// 精神变化事件
     /// </summary>
     public event Action<CharacterData, int> OnSpiritChanged;
+    public event Action<CharacterData, int> OnSpiritMaxChanged;
 
     /// <summary>
     /// 饱食度变化事件
     /// </summary>
     public event Action<CharacterData, int> OnSatietyChanged;
+    public event Action<CharacterData, int> OnSatietyMaxChanged;
+
+    public CharacterData() { }
+
+    /// <summary>
+    /// 设置生命值
+    /// </summary>
+    public void SetHealth(int newHealth)
+    {
+        health = newHealth;
+        OnHpChanged?.Invoke(this, health);
+    }
+
+    /// <summary>
+    /// 设置最大生命值
+    /// </summary>
+    public void SetHealthMax(int newHealthMax)
+    {
+        healthMax = newHealthMax;
+        OnHpMaxChanged?.Invoke(this, healthMax);
+    }
+
+    /// <summary>
+    /// 设置饱食度
+    /// </summary>
+    public void SetHunger(int newHunger)
+    {
+        hunger = newHunger;
+        OnSatietyChanged?.Invoke(this, hunger);
+    }
+    public void SetHungerMax(int newHungerMax)
+    {
+        hungerMax = newHungerMax;
+        OnSatietyMaxChanged?.Invoke(this, hungerMax);
+    }
+
+    /// <summary>
+    /// 设置活力
+    /// </summary>
+    public void SetEnergy(int newEnergy)
+    {
+        energy = newEnergy;
+        OnStaminaChanged?.Invoke(this, energy);
+    }
+    public void SetEnergyMax(int newEnergyMax)
+    {
+        energyMax = newEnergyMax;
+        OnStaminaMaxChanged?.Invoke(this, energyMax);
+    }
+
+    /// <summary>
+    /// 设置精神
+    /// </summary>
+    public void SetSpirit(int newSpirit)
+    {
+        spirit = newSpirit;
+        OnSpiritChanged?.Invoke(this, spirit);
+    }
+    public void SetSpiritMax(int newSpiritMax)
+    {
+        spiritMax = newSpiritMax;
+        OnSpiritMaxChanged?.Invoke(this, spiritMax);
+    }
+
+    /// <summary>
+    /// 获取背包数据
+    /// </summary>
+    public InventoryData GetInventory()
+    {
+        return Inventory;
+    }
+
+    /// <summary>
+    /// 添加物品到背包
+    /// </summary>
+    public bool AddInventoryItem(string itemId, int amount = 1)
+    {
+        return Inventory.AddInventoryItem(itemId, amount);
+    }
+
+    /// <summary>
+    /// 增加指定实例ID物品的数量
+    /// </summary>
+    public bool AddItemCountByInstanceId(string instanceId, int amount)
+    {
+        return Inventory.AddItemCountByInstanceId(instanceId, amount);
+    }
+
+    /// <summary>
+    /// 从背包移除指定物品
+    /// </summary>
+    public bool RemoveInventoryItem(string itemId, int amount = 1)
+    {
+        return Inventory.RemoveInventoryItem(itemId, amount);
+    }
+
+    /// <summary>
+    /// 减少指定实例ID物品的数量
+    /// </summary>
+    public bool RemoveItemCountByInstanceId(string instanceId, int amount)
+    {
+        return Inventory.RemoveItemCountByInstanceId(instanceId, amount);
+    }
+
 
     /// <summary>
     /// 添加激活的Buff
@@ -131,42 +194,37 @@ public class CharacterData
     public ActiveBuff AddBuff(string buffDataId)
     {
         // 获取Buff数据
-        BuffData buffData = ConfigManager.Instance.GetConfig<BuffData>(buffDataId);
+        BuffConfig buffData = BuffMgr.GetBuffData(buffDataId);
         if (buffData == null)
         {
             Debug.LogWarning($"尝试添加不存在的Buff: {buffDataId}");
             return null;
         }
-        
+
         // 检查是否已存在相同ID的Buff
         ActiveBuff existingBuff = activeBuffs.FirstOrDefault(b => b.buffDataId == buffDataId);
-        
+
         if (existingBuff != null)
         {
-            // 如果已存在，刷新持续时间并增加层数
+            // 如果已存在，刷新
             existingBuff.Refresh();
-            existingBuff.AddStacks();
-            OnBuffUpdated?.Invoke(this, existingBuff);
             return existingBuff;
         }
         else
         {
             // 创建新的激活Buff
             ActiveBuff newBuff = new ActiveBuff(buffDataId, this.id);
-            
+
             // 添加到列表
             activeBuffs.Add(newBuff);
-            
-            // 应用效果
-            newBuff.Apply();
-            
+
             // 触发事件
             OnBuffAdded?.Invoke(this, newBuff);
-            
+
             return newBuff;
         }
     }
-    
+
     /// <summary>
     /// 直接添加ActiveBuff实例
     /// </summary>
@@ -175,25 +233,20 @@ public class CharacterData
     {
         // 确保设置了正确的角色ID
         activeBuff.characterId = this.id;
-        
+
         // 检查是否已存在相同ID的Buff
         ActiveBuff existingBuff = activeBuffs.FirstOrDefault(b => b.buffDataId == activeBuff.buffDataId);
-        
+
         if (existingBuff != null)
         {
-            // 如果已存在，刷新持续时间并增加层数
+            // 如果已存在，刷新
             existingBuff.Refresh();
-            existingBuff.AddStacks();
-            OnBuffUpdated?.Invoke(this, existingBuff);
         }
         else
         {
             // 添加到列表
             activeBuffs.Add(activeBuff);
-            
-            // 应用效果
-            activeBuff.Apply();
-            
+
             // 触发事件
             OnBuffAdded?.Invoke(this, activeBuff);
         }
@@ -214,14 +267,13 @@ public class CharacterData
         }
         return false;
     }
-    
+
     /// <summary>
     /// 移除指定的ActiveBuff
     /// </summary>
     /// <param name="activeBuff">要移除的ActiveBuff</param>
     public void RemoveBuff(ActiveBuff activeBuff)
     {
-        activeBuff.Remove();
         activeBuffs.Remove(activeBuff);
         OnBuffRemoved?.Invoke(this, activeBuff);
     }
@@ -230,11 +282,11 @@ public class CharacterData
     /// 更新所有Buff状态
     /// </summary>
     /// <param name="deltaTime">时间间隔</param>
-    public void UpdateBuffs(float deltaTime)
+    public void UpdateBuffs(float deltaTime = 1f)
     {
         // 创建临时列表以存储需要移除的Buff
         List<ActiveBuff> expiredBuffs = new List<ActiveBuff>();
-        
+
         // 更新所有Buff
         foreach (var buff in activeBuffs)
         {
@@ -243,7 +295,7 @@ public class CharacterData
                 expiredBuffs.Add(buff);
             }
         }
-        
+
         // 移除过期的Buff
         foreach (var buff in expiredBuffs)
         {
@@ -260,7 +312,7 @@ public class CharacterData
     {
         return activeBuffs.FirstOrDefault(b => b.buffDataId == buffDataId);
     }
-    
+
     /// <summary>
     /// 获取指定实例ID的激活Buff
     /// </summary>
@@ -270,55 +322,18 @@ public class CharacterData
     {
         return activeBuffs.FirstOrDefault(b => b.instanceId == instanceId);
     }
-    
-    /// <summary>
-    /// 减少Buff的堆叠层数
-    /// </summary>
-    /// <param name="buffDataId">Buff数据ID</param>
-    /// <param name="amount">减少的层数</param>
-    /// <returns>是否成功减少</returns>
-    public bool ReduceBuffStacks(string buffDataId, int amount = 1)
-    {
-        ActiveBuff buff = GetActiveBuff(buffDataId);
-        if (buff != null)
-        {
-            if (buff.ReduceStacks(amount))
-            {
-                RemoveBuff(buff);
-            }
-            else
-            {
-                OnBuffUpdated?.Invoke(this, buff);
-            }
-            return true;
-        }
-        return false;
-    }
 
     /// <summary>
     /// 清除所有Buff
     /// </summary>
-    /// <param name="includePositive">是否包括正面Buff</param>
-    /// <param name="includeNegative">是否包括负面Buff</param>
-    public void ClearBuffs(bool includePositive = true, bool includeNegative = true)
+    public void ClearBuffs()
     {
-        List<ActiveBuff> buffsToRemove = new List<ActiveBuff>();
-        
         foreach (var buff in activeBuffs)
-        {
-            bool isDebuff = buff.BuffData != null && buff.BuffData.isDebuff;
-            if ((isDebuff && includeNegative) || (!isDebuff && includePositive))
-            {
-                buffsToRemove.Add(buff);
-            }
-        }
-        
-        foreach (var buff in buffsToRemove)
         {
             RemoveBuff(buff);
         }
     }
-    
+
     /// <summary>
     /// 判断是否拥有指定ID的Buff
     /// </summary>
