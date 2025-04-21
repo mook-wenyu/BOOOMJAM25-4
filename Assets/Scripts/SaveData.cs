@@ -7,7 +7,7 @@ public class SaveData
     /// <summary>
     /// 当前时间
     /// </summary>
-    public GameTime gameTime = new(0, 7, 0);
+    public GameTime gameTime = new(1, 7, 0);
 
     /// <summary>
     /// 玩家ID
@@ -18,6 +18,11 @@ public class SaveData
     /// 角色数据
     /// </summary>
     public Dictionary<string, CharacterData> characters = new();
+
+    /// <summary>
+    /// 库存数据
+    /// </summary>
+    public Dictionary<string, BaseInventoryData> inventories = new();
 
     /// <summary>
     /// 正在建造中的建筑

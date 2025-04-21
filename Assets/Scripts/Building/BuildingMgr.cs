@@ -25,6 +25,14 @@ public static class BuildingMgr
     }
 
     /// <summary>
+    /// 获取建造完成的建筑数据
+    /// </summary>
+    public static T GetBuildingData<T>(string instanceId) where T : BuildingData
+    {
+        return GameMgr.currentSaveData.buildings[instanceId] as T;
+    }
+
+    /// <summary>
     /// 开始建造
     /// </summary>
     /// <param name="buildingId"></param>
@@ -36,7 +44,7 @@ public static class BuildingMgr
         {
             return null;
         }
-        InventoryData playerInventory = CharacterMgr.Player().Inventory;
+        InventoryData playerInventory = InventoryMgr.GetPlayerInventoryData();
         bool hasEnoughMaterials = true;
         // 检查材料是否足够
         for (int i = 0; i < buildingData.GetBuilding().materialIDGroup.Length; i++)
@@ -59,6 +67,14 @@ public static class BuildingMgr
         // 添加到正在建造的建筑列表
         GameMgr.currentSaveData.buildingProgress.Add(buildingData);
         return buildingData;
+    }
+
+    /// <summary>
+    /// 添加已完成的建筑数据到列表中
+    /// </summary>
+    public static void AddBuildingData(BuildingData buildingData)
+    {
+        GameMgr.currentSaveData.buildings.Add(buildingData.instanceId, buildingData);
     }
 
 }

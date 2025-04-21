@@ -6,14 +6,14 @@ public static class RecipeMgr
         return ConfigManager.Instance.GetConfig<RecipesConfig>(recipesId);
     }
 
-    public static RecipeData StartRecipe(string recipeId)
+    public static RecipeData StartRecipe(string recipeId, string buildingInstanceId)
     {
-        var recipeData = new RecipeData(recipeId);
+        var recipeData = new RecipeData(recipeId, buildingInstanceId);
         if (recipeData == null)
         {
             return null;
         }
-        InventoryData playerInventory = CharacterMgr.Player().Inventory;
+        InventoryData playerInventory = InventoryMgr.GetPlayerInventoryData();
         bool hasEnoughMaterials = true;
         // 检查材料是否足够
         for (int i = 0; i < recipeData.GetRecipe().materialIDGroup.Length; i++)

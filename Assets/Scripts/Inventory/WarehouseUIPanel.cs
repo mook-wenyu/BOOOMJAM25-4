@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InventoryUIPanel : MonoBehaviour
+public class WarehouseUIPanel : MonoSingleton<WarehouseUIPanel>
 {
-    public GameObject inventoryPanel;
+    public GameObject warehousePanel;
 
     public ScrollRect itemSlotContainer;
     public GameObject itemSlotPrefab;
@@ -13,36 +13,30 @@ public class InventoryUIPanel : MonoBehaviour
     private List<ItemSlot> _activeSlots;
     private ItemSlot _selectedSlot;
 
-    void Awake()
+    private string _buildingInstanceId;
+    private WarehouseBuildingData _warehouseData;
+
+    public override void OnSingletonInit()
     {
         // 清除所有物品槽
         itemSlotContainer.content.DestroyAllChildren();
         _activeSlots = new List<ItemSlot>();
 
-        // 注册事件
-        InventoryMgr.GetPlayerInventoryData().OnInventoryChanged += UpdateInventoryUI;
-        InventoryMgr.GetPlayerInventoryData().OnSlotCountChanged += CreateItemSlots;
-
-        // 初始显示
-        CreateItemSlots();
-        UpdateInventoryUI();
-
         Hide();
-        Show();
     }
 
     // 创建固定数量的物品槽
     private void CreateItemSlots()
     {
         int currentCount = _activeSlots.Count;
-        int targetCount = InventoryMgr.GetPlayerInventoryData().capacity;
+        int targetCount = _warehouseData.GetWarehouseData().capacity;
 
         // 创建新的物品槽
         for (int i = currentCount; i < targetCount; i++)
         {
             var newSlot = Instantiate(itemSlotPrefab, itemSlotContainer.content).GetComponent<ItemSlot>();
             newSlot.Clear();
-            newSlot.InventoryId = InventoryMgr.GetPlayerInventoryData().inventoryId;
+            newSlot.InventoryId = _warehouseData.inventoryId;
             newSlot.SlotIndex = i;
             newSlot.OnSlotClicked += OnItemSlotClicked;
             newSlot.OnSlotRightClicked += OnItemSlotRightClicked;
@@ -54,11 +48,11 @@ public class InventoryUIPanel : MonoBehaviour
         }
     }
 
-    // 更新背包显示
-    private void UpdateInventoryUI()
+    // 更新仓库显示
+    private void UpdateUI()
     {
         // 确保有足够的插槽
-        int currentSlotCount = InventoryMgr.GetPlayerInventoryData().capacity;
+        int currentSlotCount = _warehouseData.GetWarehouseData().capacity;
         if (_activeSlots.Count != currentSlotCount)
         {
             CreateItemSlots();
@@ -78,7 +72,7 @@ public class InventoryUIPanel : MonoBehaviour
     {
         for (int i = 0; i < _activeSlots.Count; i++)
         {
-            var item = InventoryMgr.GetPlayerInventoryData().GetItemAtSlot(i);
+            var item = _warehouseData.GetWarehouseData().GetItemAtSlot(i);
             var slot = _activeSlots[i];
 
             if (item != null)
@@ -126,10 +120,9 @@ public class InventoryUIPanel : MonoBehaviour
             toSlot.UpdateTips(toSlot.CurrentItem);
         }
 
-        // 通知背包管理器更新物品位置
-        var inventory = InventoryMgr.GetPlayerInventoryData();
-        inventory.SetSlot(fromSlot.SlotIndex, toTempItem);
-        inventory.SetSlot(toSlot.SlotIndex, fromTempItem);
+        // 通知管理器更新物品位置
+        _warehouseData.GetWarehouseData().SetSlot(fromSlot.SlotIndex, toTempItem);
+        _warehouseData.GetWarehouseData().SetSlot(toSlot.SlotIndex, fromTempItem);
     }
 
     private void MoveItemToEmptySlot(ItemSlot fromSlot, ItemSlot toSlot)
@@ -147,10 +140,9 @@ public class InventoryUIPanel : MonoBehaviour
         // 清空源槽位
         fromSlot.Clear();
 
-        // 通知背包管理器更新物品位置
-        var inventory = InventoryMgr.GetPlayerInventoryData();
-        inventory.SetSlot(fromSlot.SlotIndex, null);
-        inventory.SetSlot(toSlot.SlotIndex, tempItem);
+        // 通知仓库管理器更新物品位置
+        _warehouseData.GetWarehouseData().SetSlot(fromSlot.SlotIndex, null);
+        _warehouseData.GetWarehouseData().SetSlot(toSlot.SlotIndex, tempItem);
     }
 
     // 处理跨容器物品交换
@@ -167,15 +159,17 @@ public class InventoryUIPanel : MonoBehaviour
             return;
         }
 
-        // 检查是否为装备栏
-        //if (fromInventory is InventoryData fromPlayerInv && toInventory is InventoryData toPlayerInv)
-        //{
-        //    // 如果涉及装备栏，需要特殊处理
-        //    HandleEquipmentSwap(fromSlot, toSlot, fromPlayerInv, toPlayerInv);
-        //    return;
-        //}
+        // 检查仓库类型限制
+        if (toInventory is WarehouseData toWarehouse)
+        {
+            if (!CheckWarehouseTypeRestriction(toWarehouse, fromSlot.CurrentItem))
+            {
+                Debug.Log("该物品不能存放在此类型的仓库中");
+                return;
+            }
+        }
 
-        // 处理普通容器间的物品交换
+        // 处理物品交换
         if (toSlot.CurrentItem == null)
         {
             // 保存当前物品的引用
@@ -200,11 +194,21 @@ public class InventoryUIPanel : MonoBehaviour
 
                 // 更新UI
                 fromSlot.Clear();
-                UpdateInventoryUI();
+                UpdateUI();
             }
         }
         else
         {
+            // 如果是交换，还需要检查源仓库的类型限制
+            if (fromInventory is WarehouseData fromWarehouse)
+            {
+                if (!CheckWarehouseTypeRestriction(fromWarehouse, toSlot.CurrentItem))
+                {
+                    Debug.Log("该物品不能存放在源仓库中");
+                    return;
+                }
+            }
+
             // 保存当前物品的引用
             var fromTempItem = fromSlot.CurrentItem;
             var toTempItem = toSlot.CurrentItem;
@@ -227,8 +231,28 @@ public class InventoryUIPanel : MonoBehaviour
                 }
 
                 // 更新UI
-                UpdateInventoryUI();
+                UpdateUI();
             }
+        }
+    }
+
+    // 检查仓库类型限制
+    private bool CheckWarehouseTypeRestriction(WarehouseData warehouse, InventoryItem item)
+    {
+        if (item == null) return true;
+
+        var itemConfig = InventoryMgr.GetItemConfig(item.itemId);
+        if (itemConfig == null) return false;
+
+        // 根据仓库类型检查物品是否可以存放
+        switch (warehouse.warehouseType)
+        {
+            case WarehouseType.Box:
+                return true; // 通用仓库可以存放所有物品
+            case WarehouseType.IceBox:
+                return itemConfig.type != (int)ItemType.Equipment;
+            default:
+                return false;
         }
     }
 
@@ -276,46 +300,28 @@ public class InventoryUIPanel : MonoBehaviour
                 Debug.Log($"使用物品: {item.instanceId} -> {item.itemId} -> {item.GetItemData().name} x {count}");
 
                 // 使用物品
-                InventoryMgr.GetPlayerInventoryData().RemoveInventoryItem(item.itemId, count);
+                InventoryMgr.GetInventoryData().RemoveInventoryItem(item.itemId, count);
             });*/
 
-            InventoryMgr.GetPlayerInventoryData().UseItem(CharacterMgr.Player(), item.instanceId);
+            // InventoryMgr.GetInventoryData().UseItem(CharacterMgr.Player(), item.instanceId);
         }
     }
 
-    // 显示背包UI
-    public void Show()
+    public void Show(string buildingInstanceId)
     {
-        inventoryPanel.SetActive(true);
-        UpdateInventoryUI();
+        this._buildingInstanceId = buildingInstanceId;
+        this._warehouseData = BuildingMgr.GetBuildingData<WarehouseBuildingData>(buildingInstanceId);
+
+        warehousePanel.SetActive(true);
+        // 创建物品槽
+        CreateItemSlots();
+        // 初始显示
+        UpdateUI();
     }
 
-    // 隐藏背包UI
     public void Hide()
     {
-        inventoryPanel.SetActive(false);
-        // 取消选中状态
-        if (_selectedSlot != null)
-        {
-            _selectedSlot.SetSelected(false);
-            _selectedSlot = null;
-        }
-    }
-
-    private void OnDestroy()
-    {
-        // 取消注册事件
-        InventoryMgr.GetPlayerInventoryData().OnInventoryChanged -= UpdateInventoryUI;
-        InventoryMgr.GetPlayerInventoryData().OnSlotCountChanged -= CreateItemSlots;
-
-        // 清理所有物品的事件监听
-        foreach (var slot in _activeSlots)
-        {
-            if (slot != null)
-            {
-                slot.OnSwapItems -= HandleItemSwap;
-            }
-        }
+        warehousePanel.SetActive(false);
     }
 
 }

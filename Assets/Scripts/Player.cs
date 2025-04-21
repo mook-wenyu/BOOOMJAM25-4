@@ -30,19 +30,11 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
-            _rigidbody2D.MovePosition(transform.position + new Vector3(-(Time.deltaTime * 2f), 0, 0));
+            _rigidbody2D.MovePosition(transform.position + new Vector3(-(Time.deltaTime * 10f), 0, 0));
         }
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
-            _rigidbody2D.MovePosition(transform.position + new Vector3((Time.deltaTime * 2f), 0, 0));
-        }
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
-        {
-            // transform.Translate(new Vector3(0, (Time.deltaTime * 2f), 0));
-        }
-        if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
-        {
-            // transform.Translate(new Vector3(0, -(Time.deltaTime * 2f), 0));
+            _rigidbody2D.MovePosition(transform.position + new Vector3((Time.deltaTime * 10f), 0, 0));
         }
     }
 }

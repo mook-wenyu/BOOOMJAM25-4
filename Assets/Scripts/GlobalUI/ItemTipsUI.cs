@@ -25,7 +25,7 @@ public class ItemTipsUI : TipsUIBase
 
     public void SetItemInfo(InventoryItem itemInfo)
     {
-        var itemData = InventoryMgr.GetItemData(itemInfo.itemId);
+        var itemData = InventoryMgr.GetItemConfig(itemInfo.itemId);
 
         // 设置基础信息
         itemNameText.text = itemData.name;

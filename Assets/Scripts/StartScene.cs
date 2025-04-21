@@ -134,19 +134,21 @@ public class StartScene : MonoBehaviour
     private void NewSaveData()
     {
         GameMgr.currentSaveData = new SaveData();
-        GameMgr.currentSaveData.gameTime = new GameTime(0, 7, 0);
+        GameMgr.currentSaveData.gameTime = new GameTime(1, 7, 0);
 
         CharacterData characterData = new CharacterData();
         characterData.id = "player";
         characterData.fullName = "玩家";
         GameMgr.currentSaveData.characters.Add(characterData.id, characterData);
 
-        Debug.Log($"添加新物品：{CharacterMgr.Player().Inventory.AddInventoryItem("10001")}");
-        Debug.Log($"添加新物品：{CharacterMgr.Player().Inventory.AddInventoryItem("11001")}");
-        Debug.Log($"添加新物品：{CharacterMgr.Player().Inventory.AddInventoryItem("11002")}");
-        Debug.Log($"添加新物品：{CharacterMgr.Player().Inventory.AddInventoryItem("12001")}");
-        Debug.Log($"添加新物品：{CharacterMgr.Player().Inventory.AddInventoryItem("12002")}");
-        Debug.Log($"添加新物品：{CharacterMgr.Player().Inventory.AddInventoryItem("12003")}");
+        Debug.Log($"添加新物品：{InventoryMgr.GetPlayerInventoryData().AddItem("10001")}");
+        Debug.Log($"添加新物品：{InventoryMgr.GetPlayerInventoryData().AddItem("11001")}");
+        Debug.Log($"添加新物品：{InventoryMgr.GetPlayerInventoryData().AddItem("11002")}");
+        Debug.Log($"添加新物品：{InventoryMgr.GetPlayerInventoryData().AddItem("12001")}");
+        Debug.Log($"添加新物品：{InventoryMgr.GetPlayerInventoryData().AddItem("12002")}");
+        Debug.Log($"添加新物品：{InventoryMgr.GetPlayerInventoryData().AddItem("12003")}");
+
+        BuildingMgr.AddBuildingData(new WarehouseBuildingData("20001", WarehouseType.Box, 9));
     }
 
 }

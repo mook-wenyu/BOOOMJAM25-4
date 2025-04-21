@@ -3,9 +3,9 @@ using System;
 [Serializable]
 public class GameTime
 {
-    public int Day { get; set; } = 0;
-    public int Hour { get; set; } = 0;
-    public int Minute { get; set; } = 0;
+    public int day = 0;
+    public int hour = 0;
+    public int minute = 0;
 
     public event Action<GameTime> OnTimeChanged;
 
@@ -38,7 +38,7 @@ public class GameTime
     /// <returns>时间字符串</returns>
     public string GetTimeString()
     {
-        return $"第{Day}天 {Hour:D2}:{Minute:D2}";
+        return $"第{day}天 {hour:D2}:{minute:D2}";
     }
 
     /// <summary>
@@ -56,9 +56,9 @@ public class GameTime
         if (minute >= 60)
             throw new System.ArgumentException("分钟必须在0-59之间");
 
-        this.Day = day;
-        this.Hour = hour;
-        this.Minute = minute;
+        this.day = day;
+        this.hour = hour;
+        this.minute = minute;
     }
 
     /// <summary>
@@ -99,21 +99,21 @@ public class GameTime
         if (day < 0 || hour < 0 || minute < 0)
             throw new System.ArgumentException("时间增量不能为负数");
 
-        this.Minute += minute;
-        if (this.Minute >= 60)
+        this.minute += minute;
+        if (this.minute >= 60)
         {
-            this.Hour += this.Minute / 60;
-            this.Minute = this.Minute % 60;
+            this.hour += this.minute / 60;
+            this.minute = this.minute % 60;
         }
 
-        this.Hour += hour;
-        if (this.Hour >= 24)
+        this.hour += hour;
+        if (this.hour >= 24)
         {
-            this.Day += this.Hour / 24;
-            this.Hour = this.Hour % 24;
+            this.day += this.hour / 24;
+            this.hour = this.hour % 24;
         }
 
-        this.Day += day;
+        this.day += day;
 
         OnTimeChanged?.Invoke(this);
     }
@@ -124,7 +124,7 @@ public class GameTime
     /// <returns>从游戏开始到现在的总分钟数</returns>
     public int GetTimeStamp()
     {
-        return Day * 24 * 60 + Hour * 60 + Minute;
+        return day * 24 * 60 + hour * 60 + minute;
     }
 
     /// <summary>
@@ -143,7 +143,7 @@ public class GameTime
     /// <returns>如果当前时间是整点则返回true，否则返回false</returns>
     public bool IsFullHour()
     {
-        return Minute == 0;
+        return minute == 0;
     }
 
     /// <summary>
@@ -156,6 +156,6 @@ public class GameTime
         if (specificHour < 0 || specificHour >= 24)
             throw new System.ArgumentException("小时必须在0-23之间");
 
-        return Hour == specificHour && Minute == 0;
+        return hour == specificHour && minute == 0;
     }
 }

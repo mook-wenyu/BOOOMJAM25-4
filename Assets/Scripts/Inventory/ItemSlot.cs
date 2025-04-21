@@ -14,6 +14,7 @@ IEndDragHandler,
     IPointerExitHandler,
     IPointerClickHandler
 {
+
     [SerializeField] private Image background;
     [SerializeField] private Image itemIcon;
     [SerializeField] private TextMeshProUGUI countText;
@@ -29,11 +30,17 @@ IEndDragHandler,
 
     public event Action<InventoryItem> OnSlotClicked;
     public event Action<InventoryItem> OnSlotRightClicked;
+    // 交换事件委托
+    public event Action<ItemSlot, ItemSlot> OnSwapItems;
+    // 用于跨容器交换的事件
+    public event Action<ItemSlot, ItemSlot, string, string> OnCrossContainerSwap;
 
-
+    // 容器ID属性
+    public string InventoryId { get; set; }
+    // 槽位索引属性
+    public int SlotIndex { get; set; }
     public InventoryItem CurrentItem { get; private set; }
     public bool IsPointerOver { get; private set; }
-
 
     private void Awake()
     {
@@ -52,7 +59,7 @@ IEndDragHandler,
 
         if (CurrentItem != null)
         {
-            var itemData = InventoryMgr.GetItemData(CurrentItem.itemId);
+            var itemData = InventoryMgr.GetItemConfig(CurrentItem.itemId);
             if (!string.IsNullOrEmpty(itemData.path) && itemData.path != "0")
             {
                 itemIcon.sprite = Resources.Load<Sprite>(Path.Combine("Icon", itemData.path));
@@ -85,6 +92,9 @@ IEndDragHandler,
     {
         if (CurrentItem == null) return;
 
+        // 订阅物品数量变化事件
+        CurrentItem.OnCountChanged += HandleItemCountChanged;
+
         // 如果是装备类型，订阅耐久度变化事件
         if (CurrentItem.GetItemType() == ItemType.Equipment)
         {
@@ -96,6 +106,9 @@ IEndDragHandler,
     private void UnsubscribeItemEvents()
     {
         if (CurrentItem == null) return;
+
+        // 取消订阅物品数量变化事件
+        CurrentItem.OnCountChanged -= HandleItemCountChanged;
 
         // 取消装备类型事件订阅
         if (CurrentItem.GetItemType() == ItemType.Equipment)
@@ -153,6 +166,23 @@ IEndDragHandler,
         {
             // 物品破损效果
             itemIcon.color = new Color(0.5f, 0.5f, 0.5f, 0.7f);
+        }
+    }
+
+    // 处理物品数量变化
+    private void HandleItemCountChanged(InventoryItem item)
+    {
+        if (item != CurrentItem) return;
+
+        // 如果物品数量为0，清空槽位
+        if (item.GetCount() <= 0)
+        {
+            Clear();
+        }
+        else
+        {
+            // 更新数量显示
+            UpdateCount(item.GetCount());
         }
     }
 
@@ -256,15 +286,42 @@ IEndDragHandler,
         EventSystem.current.RaycastAll(eventData, results);
 
         bool handled = false;
-        bool isInInventory = false;
+        bool isInValidArea = false;
         bool isInEquipment = false;
 
         foreach (var result in results)
         {
+            // 检查是否拖到了另一个ItemSlot上
+            var targetSlot = result.gameObject.GetComponent<ItemSlot>();
+            if (targetSlot != null && targetSlot != this)
+            {
+                // 检查是否是跨容器操作
+                if (InventoryId != targetSlot.InventoryId)
+                {
+                    // 触发跨容器交换事件
+                    OnCrossContainerSwap?.Invoke(this, targetSlot, InventoryId, targetSlot.InventoryId);
+                }
+                else
+                {
+                    // 同容器内交换
+                    OnSwapItems?.Invoke(this, targetSlot);
+                }
+                isInValidArea = true;
+                handled = true;
+                break;
+            }
+
             // 检查是否在背包面板内
             if (result.gameObject.name == "InventoryBG")
             {
-                isInInventory = true;
+                isInValidArea = true;
+                break;
+            }
+
+            // 检查是否在仓库面板内
+            if (result.gameObject.name == "WarehouseBG")
+            {
+                isInValidArea = true;
                 break;
             }
 
@@ -277,7 +334,7 @@ IEndDragHandler,
         }
 
         // 如果不在背包面板内,则丢弃物品
-        if (!isInInventory && !isInEquipment)
+        if (!isInValidArea && !isInEquipment)
         {
             // 显示确认对话框
             /*GlobalUIMgr.Instance.ShowItemActionPopup(CurrentItem, "丢弃",
@@ -299,7 +356,7 @@ IEndDragHandler,
             );*/
             int count = 1;
             string itemName = CurrentItem.GetItemData().name;
-            bool result = InventoryMgr.GetInventoryData().RemoveItemCountByInstanceId(CurrentItem.instanceId, count);
+            bool result = InventoryMgr.GetPlayerInventoryData().RemoveItemCountByInstanceId(CurrentItem.instanceId, count);
             if (result)
             {
                 handled = true;
@@ -322,7 +379,7 @@ IEndDragHandler,
             && !CurrentItem.IsBroken() && !CurrentItem.isEquipped)
         {
             // 装备物品
-            InventoryMgr.GetInventoryData().EquipItem(CharacterMgr.Player(), CurrentItem.instanceId);
+            InventoryMgr.GetPlayerInventoryData().EquipItem(CharacterMgr.Player(), CurrentItem.instanceId);
         }
 
         // 销毁拖动副本
@@ -370,24 +427,33 @@ IEndDragHandler,
             else if (eventData.button == PointerEventData.InputButton.Right)
             {
                 OnSlotRightClicked?.Invoke(CurrentItem);
-                // 重新显示tips
-                UpdateTips(CurrentItem);
+                if (CurrentItem != null)
+                {
+                    // 重新显示tips
+                    UpdateTips(CurrentItem);
+                }
+                else
+                {
+                    GlobalUIMgr.Instance.Hide<ItemTipsUI>();
+                }
             }
         }
     }
 
     public void Clear()
     {
-        // 取消事件订阅
+        // 取消订阅事件
         UnsubscribeItemEvents();
 
+        // 清空物品引用
         CurrentItem = null;
+
+        // 重置UI显示
         itemIcon.sprite = null;
         itemIcon.gameObject.SetActive(false);
         countText.text = string.Empty;
-        SetSelected(false);
 
-        // 重置耐久度条
+        // 隐藏耐久度条
         if (durabilityBar != null)
         {
             durabilityBar.SetActive(false);
@@ -410,5 +476,6 @@ IEndDragHandler,
 
         GlobalUIMgr.Instance.Hide<ItemTipsUI>();
     }
+
 
 }

@@ -7,7 +7,7 @@ using System.Linq;
 public static class InventoryMgr
 {
     public const int SLOT_COUNT_DEFAULT = 10;    // 当前背包容量
-    public const int SLOT_COUNT_MAX = 20;  // 背包最大容量
+    public const int SLOT_COUNT_MAX = 10;  // 背包最大容量
 
     // 耐久度条颜色
     public static Color DurabilityGoodColor { get; private set; } = Color.green;
@@ -17,18 +17,24 @@ public static class InventoryMgr
     /// <summary>
     /// 获取物品数据
     /// </summary>
-    public static ItemConfig GetItemData(string itemId)
+    public static ItemConfig GetItemConfig(string itemId)
     {
         return ConfigManager.Instance.GetConfig<ItemConfig>(itemId);
     }
 
-    /// <summary>
-    /// 获取背包数据
-    /// </summary>
-    /// <returns></returns>
-    public static InventoryData GetInventoryData(string characterId = "player")
+    public static T GetInventoryData<T>(string inventoryId) where T : BaseInventoryData
     {
-        return GameMgr.currentSaveData.characters[characterId].GetInventory();
+        return GameMgr.currentSaveData.inventories[inventoryId] as T;
+    }
+
+    public static BaseInventoryData GetInventoryData(string inventoryId)
+    {
+        return GameMgr.currentSaveData.inventories[inventoryId];
+    }
+
+    public static InventoryData GetPlayerInventoryData()
+    {
+        return GetInventoryData<InventoryData>(CharacterMgr.Player().inventoryId);
     }
 
     /// <summary>
@@ -62,10 +68,10 @@ public static class InventoryMgr
     /// <returns>物品列表</returns>
     public static List<InventoryItem> GetPlayerItemsByType(ItemType itemType)
     {
-        var inventory = GetInventoryData();
+        var inventory = GetPlayerInventoryData();
         if (inventory == null) return new List<InventoryItem>();
 
-        return inventory.Items.Values
+        return inventory.items.Values
             .Where(item =>
             {
                 var itemData = item.GetItemData();
@@ -81,10 +87,10 @@ public static class InventoryMgr
     /// <returns>物品列表</returns>
     public static List<InventoryItem> GetPlayerItemsByEquipmentType(EquipmentType equipType)
     {
-        var inventory = GetInventoryData();
+        var inventory = GetPlayerInventoryData();
         if (inventory == null) return new List<InventoryItem>();
 
-        return inventory.Items.Values
+        return inventory.items.Values
             .Where(item =>
             {
                 var itemData = item.GetItemData();
@@ -102,7 +108,7 @@ public static class InventoryMgr
     /// <returns>是否可堆叠</returns>
     public static bool IsItemStackable(string itemId)
     {
-        var itemData = GetItemData(itemId);
+        var itemData = GetItemConfig(itemId);
         if (itemData == null) return false;
 
         // 装备类型物品不可堆叠

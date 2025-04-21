@@ -222,7 +222,7 @@ public static class GameMgr
                 // 从生产中列表移除
                 currentSaveData.recipeProgress.Remove(recipe);
                 // 添加产品到背包
-                CharacterMgr.Player().Inventory.AddInventoryItem(recipe.GetRecipe().productID.ToString(), recipe.GetRecipe().productAmount);
+                InventoryMgr.GetPlayerInventoryData().AddItem(recipe.GetRecipe().productID.ToString(), recipe.GetRecipe().productAmount);
             }
         }
     }

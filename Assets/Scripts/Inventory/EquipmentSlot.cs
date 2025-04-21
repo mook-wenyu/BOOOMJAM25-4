@@ -51,7 +51,7 @@ IEndDragHandler,
 
         if (CurrentItem != null)
         {
-            var itemData = InventoryMgr.GetItemData(CurrentItem.itemId);
+            var itemData = InventoryMgr.GetItemConfig(CurrentItem.itemId);
             if (!string.IsNullOrEmpty(itemData.path) && itemData.path != "0")
             {
                 itemIcon.sprite = Resources.Load<Sprite>(Path.Combine("Icon", itemData.path));
@@ -267,7 +267,7 @@ IEndDragHandler,
                 }
             );*/
 
-            InventoryMgr.GetInventoryData().UnequipItem(CharacterMgr.Player(), CurrentItem.instanceId);
+            InventoryMgr.GetPlayerInventoryData().UnequipItem(CharacterMgr.Player(), CurrentItem.instanceId);
         }
 
         // 如果没有处理过，添加一个无效放置的动画效果

@@ -41,7 +41,7 @@ public class CharacterData
     /// <summary>
     /// 背包数据
     /// </summary>
-    public InventoryData Inventory { get; set; } = new();
+    public string inventoryId;
 
     /// <summary>
     /// 活动的增益和减益效果
@@ -83,7 +83,12 @@ public class CharacterData
     public event Action<CharacterData, int> OnSatietyChanged;
     public event Action<CharacterData, int> OnSatietyMaxChanged;
 
-    public CharacterData() { }
+    public CharacterData()
+    {
+        var inventory = new InventoryData();
+        inventoryId = inventory.inventoryId;
+        GameMgr.currentSaveData.inventories[inventoryId] = inventory;
+    }
 
     /// <summary>
     /// 设置生命值
@@ -143,46 +148,6 @@ public class CharacterData
     {
         spiritMax = newSpiritMax;
         OnSpiritMaxChanged?.Invoke(this, spiritMax);
-    }
-
-    /// <summary>
-    /// 获取背包数据
-    /// </summary>
-    public InventoryData GetInventory()
-    {
-        return Inventory;
-    }
-
-    /// <summary>
-    /// 添加物品到背包
-    /// </summary>
-    public bool AddInventoryItem(string itemId, int amount = 1)
-    {
-        return Inventory.AddInventoryItem(itemId, amount);
-    }
-
-    /// <summary>
-    /// 增加指定实例ID物品的数量
-    /// </summary>
-    public bool AddItemCountByInstanceId(string instanceId, int amount)
-    {
-        return Inventory.AddItemCountByInstanceId(instanceId, amount);
-    }
-
-    /// <summary>
-    /// 从背包移除指定物品
-    /// </summary>
-    public bool RemoveInventoryItem(string itemId, int amount = 1)
-    {
-        return Inventory.RemoveInventoryItem(itemId, amount);
-    }
-
-    /// <summary>
-    /// 减少指定实例ID物品的数量
-    /// </summary>
-    public bool RemoveItemCountByInstanceId(string instanceId, int amount)
-    {
-        return Inventory.RemoveItemCountByInstanceId(instanceId, amount);
     }
 
 

@@ -6,6 +6,9 @@ public class RecipeData
     public string instanceId;   // 实例ID
     public string recipeId;     // 配方ID
 
+    // 所属建筑实例id
+    public string buildingInstanceId;
+
     public int remainingTime;    // 剩余时间
 
     [NonSerialized]
@@ -16,10 +19,11 @@ public class RecipeData
 
     public RecipeData() { }
 
-    public RecipeData(string recipeId)
+    public RecipeData(string recipeId, string buildingInstanceId)
     {
         this.instanceId = System.Guid.NewGuid().ToString("N");
         this.recipeId = recipeId;
+        this.buildingInstanceId = buildingInstanceId;
 
         _recipe = RecipeMgr.GetRecipesConfig(recipeId);
         if (_recipe != null)

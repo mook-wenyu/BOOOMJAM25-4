@@ -10,7 +10,7 @@ public class EquipmentUIPanel : MonoBehaviour
 
     void Awake()
     {
-        InventoryMgr.GetInventoryData().OnEquipmentChanged += UpdateEquipmentUI;
+        InventoryMgr.GetPlayerInventoryData().OnEquipmentChanged += UpdateEquipmentUI;
         handheld.OnEquipmentSlotRightClicked += UpdateHandheldSlotRightClicked;
         clothes.OnEquipmentSlotRightClicked += UpdateClothesRightClicked;
         accessory.OnEquipmentSlotRightClicked += UpdateAccessoryRightClicked;
@@ -39,7 +39,7 @@ public class EquipmentUIPanel : MonoBehaviour
             if (item.isEquipped)
             {
                 // 卸下装备
-                InventoryMgr.GetInventoryData().UnequipItem(CharacterMgr.Player(), item.instanceId);
+                InventoryMgr.GetPlayerInventoryData().UnequipItem(CharacterMgr.Player(), item.instanceId);
             }
         }
     }
@@ -51,7 +51,7 @@ public class EquipmentUIPanel : MonoBehaviour
             if (item.isEquipped)
             {
                 // 卸下装备
-                InventoryMgr.GetInventoryData().UnequipItem(CharacterMgr.Player(), item.instanceId);
+                InventoryMgr.GetPlayerInventoryData().UnequipItem(CharacterMgr.Player(), item.instanceId);
             }
         }
     }
@@ -63,14 +63,14 @@ public class EquipmentUIPanel : MonoBehaviour
             if (item.isEquipped)
             {
                 // 卸下装备
-                InventoryMgr.GetInventoryData().UnequipItem(CharacterMgr.Player(), item.instanceId);
+                InventoryMgr.GetPlayerInventoryData().UnequipItem(CharacterMgr.Player(), item.instanceId);
             }
         }
     }
 
     private void OnDestroy()
     {
-        InventoryMgr.GetInventoryData().OnEquipmentChanged -= UpdateEquipmentUI;
+        InventoryMgr.GetPlayerInventoryData().OnEquipmentChanged -= UpdateEquipmentUI;
         handheld.OnEquipmentSlotRightClicked -= UpdateHandheldSlotRightClicked;
         clothes.OnEquipmentSlotRightClicked -= UpdateClothesRightClicked;
         accessory.OnEquipmentSlotRightClicked -= UpdateAccessoryRightClicked;

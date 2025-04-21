@@ -46,27 +46,8 @@ public enum EquipmentType
 }
 
 [Serializable]
-public class InventoryData
+public class InventoryData : BaseInventoryData
 {
-    private int _currentSlotCount = InventoryMgr.SLOT_COUNT_DEFAULT;
-    public int CurrentSlotCount
-    {
-        get => _currentSlotCount;
-        set
-        {
-            if (_currentSlotCount != value)
-            {
-                _currentSlotCount = value;
-                OnSlotCountChanged?.Invoke();
-            }
-        }
-    }
-
-    /// <summary>
-    /// 背包物品
-    /// </summary>
-    public Dictionary<string, InventoryItem> Items { get; private set; } = new();
-
     /// <summary>
     /// 当前装备的物品
     /// </summary>
@@ -81,9 +62,28 @@ public class InventoryData
     /// </summary>
     public event Action OnSlotCountChanged;
 
-    // 新增装备变化事件
+    // 装备变化事件
     public event Action<EquipmentType, InventoryItem> OnEquipmentChanged;
 
+    public InventoryData() : base(InventoryType.Inventory, InventoryMgr.SLOT_COUNT_DEFAULT)
+    {
+    }
+
+    public override void SwapItems(int slotIndex1, int slotIndex2)
+    {
+        base.SwapItems(slotIndex1, slotIndex2);
+        OnInventoryChanged?.Invoke();
+    }
+
+    public override bool MoveItemInstance(InventoryItem item)
+    {
+        bool success = base.MoveItemInstance(item);
+        if (success)
+        {
+            OnInventoryChanged?.Invoke();
+        }
+        return success;
+    }
 
     /// <summary>
     /// 设置背包容量
@@ -95,7 +95,8 @@ public class InventoryData
         if (count < 0 || count > InventoryMgr.SLOT_COUNT_MAX)
             return false;
 
-        CurrentSlotCount = count;
+        capacity = count;
+        OnSlotCountChanged?.Invoke();
         return true;
     }
 
@@ -106,28 +107,21 @@ public class InventoryData
     /// <returns>是否增加成功</returns>
     public bool AddSlotCount(int amount)
     {
-        if (amount <= 0) return false;
-
-        int newCount = CurrentSlotCount + amount;
-        if (newCount > InventoryMgr.SLOT_COUNT_MAX)
-            return false;
-
-        CurrentSlotCount = newCount;
-        return true;
+        return SetSlotCount(capacity + amount);
     }
 
     /// <summary>
     /// 添加物品到背包
     /// </summary>
-    public bool AddInventoryItem(string itemId, int amount = 1)
+    public override bool AddItem(string itemId, int amount = 1)
     {
-        if (InventoryMgr.GetItemData(itemId) == null || amount <= 0)
+        if (InventoryMgr.GetItemConfig(itemId) == null || amount <= 0)
         {
             Debug.LogError($"物品数据不存在: {itemId}");
             return false;
         }
 
-        ItemConfig itemData = InventoryMgr.GetItemData(itemId);
+        ItemConfig itemData = InventoryMgr.GetItemConfig(itemId);
         int remainingAmount = amount;
 
         // 如果是装备类型且不可堆叠，直接创建新物品
@@ -136,7 +130,12 @@ public class InventoryData
             while (remainingAmount > 0 && HasAvailableSlot())
             {
                 var newItem = new InventoryItem(itemId, 1);
-                Items.Add(newItem.instanceId, newItem);
+                items.Add(newItem.instanceId, newItem);
+
+                // 找到第一个可用的插槽索引
+                int slotIndex = FindFirstAvailableSlot();
+                _itemOrder[slotIndex] = newItem.instanceId;
+
                 OnInventoryChanged?.Invoke();
                 remainingAmount--;
 
@@ -147,7 +146,7 @@ public class InventoryData
         }
 
         // 尝试堆叠到现有物品上（对于非装备物品）
-        foreach (var item in Items.Values)
+        foreach (var item in items.Values)
         {
             if (item.itemId == itemId && item.CanAddMore())
             {
@@ -170,8 +169,13 @@ public class InventoryData
             if (stackAmount <= 0) break;
 
             var newItem = new InventoryItem(itemId, stackAmount);
-            Items.Add(newItem.instanceId, newItem);
-            OnInventoryChanged?.Invoke(); // 只在添加新物品时触发
+            items.Add(newItem.instanceId, newItem);
+
+            // 找到第一个可用的插槽索引
+            int slotIndex = FindFirstAvailableSlot();
+            _itemOrder[slotIndex] = newItem.instanceId;
+
+            OnInventoryChanged?.Invoke();
             remainingAmount -= stackAmount;
 
             if (remainingAmount <= 0) break;
@@ -188,10 +192,10 @@ public class InventoryData
     /// <returns>是否增加成功</returns>
     public bool AddItemCountByInstanceId(string instanceId, int amount)
     {
-        if (amount <= 0 || !Items.TryGetValue(instanceId, out var item))
+        if (amount <= 0 || !items.TryGetValue(instanceId, out var item))
             return false;
 
-        ItemConfig itemData = InventoryMgr.GetItemData(item.itemId);
+        ItemConfig itemData = InventoryMgr.GetItemConfig(item.itemId);
         int remainingAmount = amount;
 
         // 先尝试在原有堆叠上增加
@@ -212,7 +216,7 @@ public class InventoryData
             if (stackAmount <= 0) break;
 
             var newItem = new InventoryItem(item.itemId, stackAmount);
-            Items.Add(newItem.instanceId, newItem);
+            items.Add(newItem.instanceId, newItem);
             OnInventoryChanged?.Invoke();
             remainingAmount -= stackAmount;
 
@@ -232,7 +236,7 @@ public class InventoryData
         int remainingToRemove = amount;
         var itemsToRemove = new List<string>();
 
-        foreach (var pair in Items)
+        foreach (var pair in items)
         {
             if (pair.Value.itemId == itemId)
             {
@@ -252,8 +256,11 @@ public class InventoryData
 
         foreach (var key in itemsToRemove)
         {
-            Items.Remove(key);
-            OnInventoryChanged?.Invoke(); // 只在移除物品时触发
+            items.Remove(key);
+            // 找到并移除对应的插槽索引
+            var slotIndex = _itemOrder.FirstOrDefault(x => x.Value == key).Key;
+            _itemOrder.Remove(slotIndex);
+            OnInventoryChanged?.Invoke();
         }
 
         return remainingToRemove == 0;
@@ -265,9 +272,9 @@ public class InventoryData
     /// <param name="instanceId">物品实例ID</param>
     /// <param name="amount">要减少的数量</param>
     /// <returns>是否减少成功</returns>
-    public bool RemoveItemCountByInstanceId(string instanceId, int amount)
+    public override bool RemoveItemCountByInstanceId(string instanceId, int amount)
     {
-        if (amount <= 0 || !Items.TryGetValue(instanceId, out var item))
+        if (amount <= 0 || !items.TryGetValue(instanceId, out var item))
             return false;
 
         if (amount > item.GetCount())
@@ -277,7 +284,7 @@ public class InventoryData
 
         if (item.GetCount() <= 0)
         {
-            Items.Remove(instanceId);
+            items.Remove(instanceId);
             OnInventoryChanged?.Invoke();
         }
 
@@ -286,7 +293,7 @@ public class InventoryData
 
     public bool Use(CharacterData character, string instanceId, int count)
     {
-        if (!Items.TryGetValue(instanceId, out var item))
+        if (!items.TryGetValue(instanceId, out var item))
             return false;
 
         var itemData = item.GetItemData();
@@ -359,7 +366,7 @@ public class InventoryData
     /// <returns>是否装备成功</returns>
     public bool EquipItem(CharacterData character, string instanceId)
     {
-        if (!Items.TryGetValue(instanceId, out var item))
+        if (!items.TryGetValue(instanceId, out var item))
             return false;
 
         var itemData = item.GetItemData();
@@ -397,7 +404,7 @@ public class InventoryData
     /// <returns>是否卸下成功</returns>
     public bool UnequipItem(CharacterData character, string instanceId)
     {
-        if (!Items.TryGetValue(instanceId, out var item))
+        if (!items.TryGetValue(instanceId, out var item))
             return false;
 
         var itemData = item.GetItemData();
@@ -481,7 +488,7 @@ public class InventoryData
     /// <returns>是否使用成功</returns>
     public bool UseItem(CharacterData character, string instanceId, int count = 1)
     {
-        if (!Items.TryGetValue(instanceId, out var item))
+        if (!items.TryGetValue(instanceId, out var item))
             return false;
 
         var itemData = item.GetItemData();
@@ -515,7 +522,7 @@ public class InventoryData
         // 如果物品数量变为0，则从背包移除
         if (item.GetCount() <= 0)
         {
-            Items.Remove(instanceId);
+            items.Remove(instanceId);
             OnInventoryChanged?.Invoke();
         }
 
@@ -523,19 +530,11 @@ public class InventoryData
     }
 
     /// <summary>
-    /// 检查是否有可用背包容量
-    /// </summary>
-    public bool HasAvailableSlot()
-    {
-        return Items.Count < CurrentSlotCount;
-    }
-
-    /// <summary>
     /// 获取剩余背包容量
     /// </summary>
     public int GetRemainingSlots()
     {
-        return CurrentSlotCount - Items.Count;
+        return capacity - items.Count;
     }
 
     /// <summary>
@@ -546,7 +545,7 @@ public class InventoryData
         if (amount <= 0) return true;
 
         int totalCount = 0;
-        foreach (var item in Items.Values)
+        foreach (var item in items.Values)
         {
             if (item.itemId == itemId)
             {
@@ -564,7 +563,7 @@ public class InventoryData
     public int GetInventoryItemCount(string itemId)
     {
         int totalCount = 0;
-        foreach (var item in Items.Values)
+        foreach (var item in items.Values)
         {
             if (item.itemId == itemId)
             {
@@ -573,4 +572,5 @@ public class InventoryData
         }
         return totalCount;
     }
+
 }

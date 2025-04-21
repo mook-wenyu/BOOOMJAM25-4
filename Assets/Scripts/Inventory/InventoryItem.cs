@@ -28,7 +28,7 @@ public class InventoryItem
         this.instanceId = System.Guid.NewGuid().ToString("N");
         this.itemId = itemId;
 
-        _cachedItemData = InventoryMgr.GetItemData(itemId);
+        _cachedItemData = InventoryMgr.GetItemConfig(itemId);
 
         this.count = Mathf.Min(count, _cachedItemData.stacking);
         // 初始化耐久度
@@ -43,7 +43,7 @@ public class InventoryItem
     /// </summary>
     public bool CanAddMore(int amount = 1)
     {
-        _cachedItemData ??= InventoryMgr.GetItemData(itemId);
+        _cachedItemData ??= InventoryMgr.GetItemConfig(itemId);
 
         return count + amount <= _cachedItemData.stacking;
     }
@@ -58,7 +58,7 @@ public class InventoryItem
 
     public void SetCount(int newCount)
     {
-        _cachedItemData ??= InventoryMgr.GetItemData(itemId);
+        _cachedItemData ??= InventoryMgr.GetItemConfig(itemId);
 
         if (_cachedItemData != null)
         {
@@ -92,7 +92,7 @@ public class InventoryItem
     /// </summary>
     public ItemConfig GetItemData()
     {
-        _cachedItemData ??= InventoryMgr.GetItemData(itemId);
+        _cachedItemData ??= InventoryMgr.GetItemConfig(itemId);
         return _cachedItemData;
     }
 
@@ -109,14 +109,14 @@ public class InventoryItem
     /// </summary>
     public bool IsBroken()
     {
-        _cachedItemData ??= InventoryMgr.GetItemData(itemId);
+        _cachedItemData ??= InventoryMgr.GetItemConfig(itemId);
         return _cachedItemData != null
             && _cachedItemData.durability > 0 && currentDurability <= 0;
     }
 
     public void SetDurability(int newDurability)
     {
-        _cachedItemData ??= InventoryMgr.GetItemData(itemId);
+        _cachedItemData ??= InventoryMgr.GetItemConfig(itemId);
 
         if (_cachedItemData == null || _cachedItemData.durability <= 0)
             return;
@@ -166,7 +166,7 @@ public class InventoryItem
     /// </summary>
     public ItemType GetItemType()
     {
-        _cachedItemData ??= InventoryMgr.GetItemData(itemId);
+        _cachedItemData ??= InventoryMgr.GetItemConfig(itemId);
         return _cachedItemData != null ? (ItemType)_cachedItemData.type : ItemType.Material;
     }
 
@@ -175,7 +175,7 @@ public class InventoryItem
     /// </summary>
     public EquipmentType GetEquipmentType()
     {
-        _cachedItemData ??= InventoryMgr.GetItemData(itemId);
+        _cachedItemData ??= InventoryMgr.GetItemConfig(itemId);
         return _cachedItemData != null && _cachedItemData.type == (int)ItemType.Equipment
             ? (EquipmentType)_cachedItemData.equipmentParts
             : EquipmentType.None;
