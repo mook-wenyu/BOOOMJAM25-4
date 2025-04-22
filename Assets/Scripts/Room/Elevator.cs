@@ -1,45 +1,63 @@
-using System.Collections;
-using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
-
-/// <summary>
-/// 电梯方向
-/// </summary>
-public enum ElevatorDirection
-{
-    /// <summary>
-    /// 上
-    /// </summary>
-    Up,
-    /// <summary>
-    /// 下
-    /// </summary>
-    Down
-}
 
 public class Elevator : MonoBehaviour
 {
-    public BoxCollider2D endCollider;
-    public ElevatorDirection direction;
-
-    void OnTriggerStay2D(Collider2D collision)
+    public BoxCollider2D upCollider;
+    public BoxCollider2D downCollider;
+    
+    private bool _isEnabled = false;
+    private Collider2D _collider;
+    
+    void Update()
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (_isEnabled)
         {
-            if (direction == ElevatorDirection.Up)
+            if (upCollider)
             {
                 if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
                 {
-                    collision.gameObject.transform.position = endCollider.transform.position;
+                    upCollider.enabled = false;
+                    _collider.gameObject.transform.position = upCollider.transform.position;
+                    EnabledCollider(upCollider).Forget();
                 }
             }
-            if (direction == ElevatorDirection.Down)
+            if (downCollider)
             {
                 if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
                 {
-                    collision.gameObject.transform.position = endCollider.transform.position;
+                    downCollider.enabled = false;
+                    _collider.gameObject.transform.position = downCollider.transform.position;
+                    EnabledCollider(downCollider).Forget();
                 }
             }
+        }
+    }
+    
+    private async UniTask EnabledCollider(BoxCollider2D colliders)
+    {
+        await UniTask.Delay(200);
+        await UniTask.Yield();
+        colliders.enabled = true;
+    }
+    
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            _collider = collision;
+            _isEnabled = true;
+            Debug.Log($"进入{name}");
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            _collider = null;
+            _isEnabled = false;
+            Debug.Log($"离开{name}");
         }
     }
 
