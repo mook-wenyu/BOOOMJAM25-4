@@ -120,6 +120,11 @@ public static class IOHelper
         return await reader.ReadToEndAsync();
     }
 
+    private static readonly JsonSerializerSettings _settings = new JsonSerializerSettings
+    {
+        TypeNameHandling = TypeNameHandling.Auto
+    };
+
     /// <summary>
     /// 从文件加载数据
     /// </summary>
@@ -128,7 +133,7 @@ public static class IOHelper
     public static T LoadData<T>(string fileName)
     {
         string data = ReadTextFileStream(fileName);
-        return JsonConvert.DeserializeObject<T>(data);
+        return JsonConvert.DeserializeObject<T>(data, _settings);
     }
 
     /// <summary>
@@ -138,7 +143,7 @@ public static class IOHelper
     /// <param name="data">要保存的数据</param>
     public static void SaveData<T>(string fileName, T data)
     {
-        string json = JsonConvert.SerializeObject(data);
+        string json = JsonConvert.SerializeObject(data, _settings);
         CreateTextFileStream(fileName, json);
     }
 
@@ -150,7 +155,7 @@ public static class IOHelper
     public static async Task<T> LoadDataAsync<T>(string fileName)
     {
         string data = await ReadTextFileStreamAsync(fileName);
-        return JsonConvert.DeserializeObject<T>(data);
+        return JsonConvert.DeserializeObject<T>(data, _settings);
     }
 
     /// <summary>
@@ -160,7 +165,7 @@ public static class IOHelper
     /// <param name="data">要保存的数据</param>
     public static async Task SaveDataAsync<T>(string fileName, T data)
     {
-        string json = JsonConvert.SerializeObject(data);
+        string json = JsonConvert.SerializeObject(data, _settings);
         await CreateTextFileStreamAsync(fileName, json);
     }
 }

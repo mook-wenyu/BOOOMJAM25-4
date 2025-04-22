@@ -25,14 +25,14 @@ public class SaveData
     public Dictionary<string, BaseInventoryData> inventories = new();
 
     /// <summary>
-    /// 正在建造中的建筑
+    /// 建造平台
     /// </summary>
-    public List<BuildingData> buildingProgress = new();
+    public Dictionary<string, BuildPlatformData> buildPlatforms = new();
 
     /// <summary>
-    /// 正在生产中的配方
+    /// 生产平台
     /// </summary>
-    public List<RecipeData> recipeProgress = new();
+    public Dictionary<string, ProductionPlatformData> productionPlatforms = new();
 
     /// <summary>
     /// 已建造的建筑数据

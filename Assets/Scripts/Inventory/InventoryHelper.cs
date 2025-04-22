@@ -41,6 +41,14 @@ public static class InventoryHelper
         fromInventory.SetSlot(fromSlotIndex, null);  // 清空原始槽位
         toInventory.SetSlot(toSlotIndex, item);      // 设置新槽位
 
+        // 更新UI显示
+        toSlot.Setup(item);
+        if (toSlot.CurrentItem != null)
+        {
+            toSlot.UpdateTips(toSlot.CurrentItem);
+        }
+        fromSlot.Clear();
+
         return true;
     }
 
@@ -69,12 +77,12 @@ public static class InventoryHelper
             if (fromItem != null)
             {
                 fromInventory.MoveItemInstance(fromItem);
-                fromInventory.SetSlot(fromSlotIndex, fromItem);  // 恢复原始槽位
+                fromInventory.SetSlot(fromSlotIndex, fromItem);
             }
             if (toItem != null)
             {
                 toInventory.MoveItemInstance(toItem);
-                toInventory.SetSlot(toSlotIndex, toItem);  // 恢复原始槽位
+                toInventory.SetSlot(toSlotIndex, toItem);
             }
             return false;
         }
@@ -91,9 +99,9 @@ public static class InventoryHelper
                 toInventory.RemoveItemInstance(fromItem.instanceId);
             }
             fromInventory.MoveItemInstance(fromItem);
-            fromInventory.SetSlot(fromSlotIndex, fromItem);  // 恢复原始槽位
+            fromInventory.SetSlot(fromSlotIndex, fromItem);
             toInventory.MoveItemInstance(toItem);
-            toInventory.SetSlot(toSlotIndex, toItem);  // 恢复原始槽位
+            toInventory.SetSlot(toSlotIndex, toItem);
             Debug.Log("物品交换失败");
             return false;
         }
@@ -102,7 +110,66 @@ public static class InventoryHelper
         fromInventory.SetSlot(fromSlotIndex, toItem);
         toInventory.SetSlot(toSlotIndex, fromItem);
 
+        // 更新UI显示
+        fromSlot.Setup(toItem);
+        toSlot.Setup(fromItem);
+        if (toSlot.CurrentItem != null)
+        {
+            toSlot.UpdateTips(toSlot.CurrentItem);
+        }
+
         return true;
     }
 
+    /// <summary>
+    /// 在同一容器内交换物品
+    /// </summary>
+    public static void SwapItems(ItemSlot fromSlot, ItemSlot toSlot, BaseInventoryData inventory)
+    {
+        if (fromSlot == null || toSlot == null || inventory == null) return;
+
+        // 保存当前物品的引用
+        var fromTempItem = fromSlot.CurrentItem;
+        var toTempItem = toSlot.CurrentItem;
+
+        // 设置源槽位的物品为目标槽位的物品
+        fromSlot.Setup(toTempItem);
+
+        // 设置目标槽位的物品为源槽位的物品
+        toSlot.Setup(fromTempItem);
+        // 重新注册事件
+        if (toSlot.CurrentItem != null)
+        {
+            toSlot.UpdateTips(toSlot.CurrentItem);
+        }
+
+        // 通知容器管理器更新物品位置
+        inventory.SetSlot(fromSlot.SlotIndex, toTempItem);
+        inventory.SetSlot(toSlot.SlotIndex, fromTempItem);
+    }
+
+    /// <summary>
+    /// 在同一容器内移动物品到空槽位
+    /// </summary>
+    public static void MoveItemToEmptySlot(ItemSlot fromSlot, ItemSlot toSlot, BaseInventoryData inventory)
+    {
+        if (fromSlot == null || toSlot == null || inventory == null) return;
+
+        var tempItem = fromSlot.CurrentItem;
+
+        // 设置目标槽位的物品
+        toSlot.Setup(tempItem);
+        // 重新注册事件
+        if (toSlot.CurrentItem != null)
+        {
+            toSlot.UpdateTips(toSlot.CurrentItem);
+        }
+
+        // 清空源槽位
+        fromSlot.Clear();
+
+        // 通知容器管理器更新物品位置
+        inventory.SetSlot(fromSlot.SlotIndex, null);
+        inventory.SetSlot(toSlot.SlotIndex, tempItem);
+    }
 }

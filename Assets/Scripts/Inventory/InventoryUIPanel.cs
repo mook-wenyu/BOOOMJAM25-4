@@ -97,60 +97,18 @@ public class InventoryUIPanel : MonoBehaviour
     {
         if (fromSlot == null || toSlot == null) return;
 
+        var inventory = InventoryMgr.GetPlayerInventoryData();
+        
         if (toSlot.CurrentItem == null)
         {
             // 移动到空槽位
-            MoveItemToEmptySlot(fromSlot, toSlot);
+            InventoryHelper.MoveItemToEmptySlot(fromSlot, toSlot, inventory);
         }
         else
         {
             // 交换物品
-            SwapItems(fromSlot, toSlot);
+            InventoryHelper.SwapItems(fromSlot, toSlot, inventory);
         }
-    }
-
-    private void SwapItems(ItemSlot fromSlot, ItemSlot toSlot)
-    {
-        // 保存当前物品的引用
-        var fromTempItem = fromSlot.CurrentItem;
-        var toTempItem = toSlot.CurrentItem;
-
-        // 设置源槽位的物品为目标槽位的物品
-        fromSlot.Setup(toTempItem);
-
-        // 设置目标槽位的物品为源槽位的物品
-        toSlot.Setup(fromTempItem);
-        // 重新注册事件
-        if (toSlot.CurrentItem != null)
-        {
-            toSlot.UpdateTips(toSlot.CurrentItem);
-        }
-
-        // 通知背包管理器更新物品位置
-        var inventory = InventoryMgr.GetPlayerInventoryData();
-        inventory.SetSlot(fromSlot.SlotIndex, toTempItem);
-        inventory.SetSlot(toSlot.SlotIndex, fromTempItem);
-    }
-
-    private void MoveItemToEmptySlot(ItemSlot fromSlot, ItemSlot toSlot)
-    {
-        var tempItem = fromSlot.CurrentItem;
-
-        // 设置目标槽位的物品
-        toSlot.Setup(tempItem);
-        // 重新注册事件
-        if (toSlot.CurrentItem != null)
-        {
-            toSlot.UpdateTips(toSlot.CurrentItem);
-        }
-
-        // 清空源槽位
-        fromSlot.Clear();
-
-        // 通知背包管理器更新物品位置
-        var inventory = InventoryMgr.GetPlayerInventoryData();
-        inventory.SetSlot(fromSlot.SlotIndex, null);
-        inventory.SetSlot(toSlot.SlotIndex, tempItem);
     }
 
     // 处理跨容器物品交换
@@ -167,68 +125,71 @@ public class InventoryUIPanel : MonoBehaviour
             return;
         }
 
-        // 检查是否为装备栏
-        //if (fromInventory is InventoryData fromPlayerInv && toInventory is InventoryData toPlayerInv)
-        //{
-        //    // 如果涉及装备栏，需要特殊处理
-        //    HandleEquipmentSwap(fromSlot, toSlot, fromPlayerInv, toPlayerInv);
-        //    return;
-        //}
+        // 如果目标是仓库，检查仓库类型限制
+        if (toInventory.GetInventoryType() == InventoryType.Warehouse && toInventory is WarehouseData toWarehouse)
+        {
+            if (!CheckWarehouseTypeRestriction(toWarehouse, fromSlot.CurrentItem))
+            {
+                Debug.Log("该物品不能存放在此类型的仓库中");
+                return;
+            }
+        }
 
-        // 处理普通容器间的物品交换
+        // 如果是交换，且源是仓库，还需要检查源仓库的类型限制
+        if (toSlot.CurrentItem != null && 
+            fromInventory.GetInventoryType() == InventoryType.Warehouse && 
+            fromInventory is WarehouseData fromWarehouse)
+        {
+            if (!CheckWarehouseTypeRestriction(fromWarehouse, toSlot.CurrentItem))
+            {
+                Debug.Log("该物品不能存放在源仓库中");
+                return;
+            }
+        }
+
+        bool success;
         if (toSlot.CurrentItem == null)
         {
-            // 保存当前物品的引用
-            var tempItem = fromSlot.CurrentItem;
-
-            // 移动到空槽位
-            bool success = InventoryHelper.MoveCrossContainerItem(
+            success = InventoryHelper.MoveCrossContainerItem(
                 fromInventory, toInventory,
                 fromSlot, toSlot,
                 fromSlot.SlotIndex,
                 toSlot.SlotIndex
             );
-
-            if (success)
-            {
-                toSlot.Setup(tempItem);
-                // 重新注册事件
-                if (toSlot.CurrentItem != null)
-                {
-                    toSlot.UpdateTips(toSlot.CurrentItem);
-                }
-
-                // 更新UI
-                fromSlot.Clear();
-                UpdateInventoryUI();
-            }
         }
         else
         {
-            // 保存当前物品的引用
-            var fromTempItem = fromSlot.CurrentItem;
-            var toTempItem = toSlot.CurrentItem;
-
-            // 交换物品
-            bool success = InventoryHelper.SwapCrossContainerItems(
+            success = InventoryHelper.SwapCrossContainerItems(
                 fromInventory, toInventory,
                 fromSlot, toSlot,
                 fromSlot.SlotIndex,
                 toSlot.SlotIndex
             );
+        }
 
-            if (success)
-            {
-                fromSlot.Setup(toTempItem);
-                toSlot.Setup(fromTempItem);
-                if (toSlot.CurrentItem != null)
-                {
-                    toSlot.UpdateTips(toSlot.CurrentItem);
-                }
+        if (success)
+        {
+            UpdateInventoryUI();
+        }
+    }
 
-                // 更新UI
-                UpdateInventoryUI();
-            }
+    // 检查仓库类型限制
+    private bool CheckWarehouseTypeRestriction(WarehouseData warehouse, InventoryItem item)
+    {
+        if (item == null) return true;
+
+        var itemConfig = InventoryMgr.GetItemConfig(item.itemId);
+        if (itemConfig == null) return false;
+
+        // 根据仓库类型检查物品是否可以存放
+        switch (warehouse.warehouseType)
+        {
+            case WarehouseType.Box:
+                return true; // 通用仓库可以存放所有物品
+            case WarehouseType.IceBox:
+                return itemConfig.type != (int)ItemType.Equipment;
+            default:
+                return false;
         }
     }
 
@@ -276,7 +237,7 @@ public class InventoryUIPanel : MonoBehaviour
                 Debug.Log($"使用物品: {item.instanceId} -> {item.itemId} -> {item.GetItemData().name} x {count}");
 
                 // 使用物品
-                InventoryMgr.GetPlayerInventoryData().RemoveInventoryItem(item.itemId, count);
+                InventoryMgr.GetPlayerInventoryData().RemoveItem(item.itemId, count);
             });*/
 
             InventoryMgr.GetPlayerInventoryData().UseItem(CharacterMgr.Player(), item.instanceId);

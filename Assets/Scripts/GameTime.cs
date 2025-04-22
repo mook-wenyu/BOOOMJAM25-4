@@ -1,4 +1,6 @@
 using System;
+using System.Linq;
+using Cysharp.Threading.Tasks;
 
 [Serializable]
 public class GameTime
@@ -7,7 +9,8 @@ public class GameTime
     public int hour = 0;
     public int minute = 0;
 
-    public event Action<GameTime> OnTimeChanged;
+    public event Func<GameTime, UniTask> OnTimeChanged;
+    public event Func<GameTime, UniTask> OnHourChanged; // 整点事件
 
     public GameTime(int day = 0, int hour = 0, int minute = 0)
     {
@@ -20,16 +23,16 @@ public class GameTime
         if (parts.Length != 2)
             throw new ArgumentException("时间格式错误,应为: 天/小时:分钟");
 
-        int day = int.Parse(parts[0]);
+        int days = int.Parse(parts[0]);
 
         var timeParts = parts[1].Split(':');
         if (timeParts.Length != 2)
             throw new ArgumentException("时间格式错误,应为: 天/小时:分钟");
 
-        int hour = int.Parse(timeParts[0]);
-        int minute = int.Parse(timeParts[1]);
+        int hours = int.Parse(timeParts[0]);
+        int minutes = int.Parse(timeParts[1]);
 
-        SetTime(day, hour, minute);
+        SetTime(days, hours, minutes);
     }
 
     /// <summary>
@@ -44,78 +47,102 @@ public class GameTime
     /// <summary>
     /// 设置时间
     /// </summary>
-    /// <param name="day">天数</param>
-    /// <param name="hour">小时数</param>
-    /// <param name="minute">分钟数</param>
-    public void SetTime(int day, int hour, int minute)
+    /// <param name="days">天数</param>
+    /// <param name="hours">小时数</param>
+    /// <param name="minutes">分钟数</param>
+    public void SetTime(int days, int hours, int minutes)
     {
-        if (day < 0 || hour < 0 || minute < 0)
+        if (days < 0 || hours < 0 || minutes < 0)
             throw new System.ArgumentException("时间值不能为负数");
-        if (hour >= 24)
+        if (hours >= 24)
             throw new System.ArgumentException("小时必须在0-23之间");
-        if (minute >= 60)
+        if (minutes >= 60)
             throw new System.ArgumentException("分钟必须在0-59之间");
 
-        this.day = day;
-        this.hour = hour;
-        this.minute = minute;
+        this.day = days;
+        this.hour = hours;
+        this.minute = minutes;
     }
 
     /// <summary>
-    /// 增加分钟
+    /// 增加1分钟
     /// </summary>
-    /// <param name="minutes">分钟数</param>
-    public void AddMinutes(int minutes)
+    public async UniTask AddMinutes()
     {
-        AddTime(0, 0, minutes);
+        await AddTime(1);
     }
 
     /// <summary>
-    /// 增加小时
+    /// 增加小时，通过逐分钟增加实现
     /// </summary>
-    /// <param name="hours">小时数</param>
-    public void AddHours(int hours)
+    /// <param name="hours">要增加的小时数</param>
+    public async UniTask AddHours(int hours)
     {
-        AddTime(0, hours, 0);
-    }
-
-    /// <summary>
-    /// 增加天数
-    /// </summary>
-    /// <param name="days">天数</param>
-    public void AddDays(int days)
-    {
-        AddTime(days, 0, 0);
-    }
-
-    /// <summary>
-    /// 增加时间
-    /// </summary>
-    /// <param name="day">天数</param>
-    /// <param name="hour">小时数</param>
-    /// <param name="minute">分钟数</param>
-    public void AddTime(int day, int hour, int minute)
-    {
-        if (day < 0 || hour < 0 || minute < 0)
+        if (hours < 0)
             throw new System.ArgumentException("时间增量不能为负数");
 
-        this.minute += minute;
+        for (int i = 0; i < hours * 60; i++)
+        {
+            await AddMinutes();
+        }
+    }
+
+    /// <summary>
+    /// 增加天数，通过逐分钟增加实现
+    /// </summary>
+    /// <param name="days">要增加的天数</param>
+    public async UniTask AddDays(int days)
+    {
+        if (days < 0)
+            throw new System.ArgumentException("时间增量不能为负数");
+
+        for (int i = 0; i < days * 24 * 60; i++)
+        {
+            await AddMinutes();
+        }
+    }
+
+    /// <summary>
+    /// 增加时间（只能增加分钟）
+    /// </summary>
+    /// <param name="minutes">要增加的分钟数</param>
+    private async UniTask AddTime(int minutes = 1)
+    {
+        if (minutes < 0)
+            throw new System.ArgumentException("时间增量不能为负数");
+
+        int oldHour = this.hour; // 记录原小时值
+
+        this.minute += minutes;
         if (this.minute >= 60)
         {
             this.hour += this.minute / 60;
             this.minute = this.minute % 60;
         }
 
-        this.hour += hour;
         if (this.hour >= 24)
         {
             this.day += this.hour / 24;
             this.hour = this.hour % 24;
         }
 
-        this.day += day;
+        // 使用 UniTask.WhenAll 等待所有订阅者完成
+        if (OnTimeChanged != null)
+        {
+            await UniTask.WhenAll(OnTimeChanged.GetInvocationList()
+                .Cast<Func<GameTime, UniTask>>()
+                .Select(handler => handler(this)));
+        }
 
-        OnTimeChanged?.Invoke(this);
+        // 如果小时发生变化且当前是整点，触发整点事件
+        if (oldHour != this.hour && this.minute == 0 && OnHourChanged != null)
+        {
+            await UniTask.WhenAll(OnHourChanged.GetInvocationList()
+                .Cast<Func<GameTime, UniTask>>()
+                .Select(handler => handler(this)));
+        }
+
+        await UniTask.Yield();
     }
 
     /// <summary>

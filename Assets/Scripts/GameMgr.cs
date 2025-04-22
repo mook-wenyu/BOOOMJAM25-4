@@ -83,10 +83,10 @@ public static class GameMgr
         {
             StopTime();
         }
-
+        
+        currentSaveData.gameTime.OnHourChanged += HandleHourChanged;  // 订阅整点事件
         UpdateTimeChangedAsync().Forget();
     }
-
 
     /// <summary>
     /// 暂停时间
@@ -112,11 +112,14 @@ public static class GameMgr
     public static void StopTime()
     {
         if (_timeUpdateCts == null) return;
-
+        
+        currentSaveData.gameTime.OnHourChanged -= HandleHourChanged;
         _timeUpdateCts.Cancel();
         _timeUpdateCts.Dispose();
         _timeUpdateCts = null;
     }
+
+    private const int BATCH_SIZE = 50;
 
     /// <summary>
     /// 更新时间
@@ -126,58 +129,12 @@ public static class GameMgr
         try
         {
             _timeUpdateCts = new CancellationTokenSource();
-            const int BATCH_SIZE = 50;
-
+            
             while (!_timeUpdateCts.Token.IsCancellationRequested)
             {
                 if (!_isTimePaused)
                 {
-                    currentSaveData.gameTime.AddMinutes(1);
-
-                    // 检查是否到达整点
-                    bool isFullHour = currentSaveData.gameTime.IsFullHour();
-                    if (isFullHour)
-                    {
-                        // 更新角色
-                        var characters = currentSaveData.characters.Values.ToList();
-                        for (int i = 0; i < characters.Count; i += BATCH_SIZE)
-                        {
-                            int count = Math.Min(BATCH_SIZE, characters.Count - i);
-                            UpdateCharacterBatch(characters, i, count);
-
-                            if (i + BATCH_SIZE < characters.Count)
-                            {
-                                await UniTask.Yield();
-                            }
-                        }
-
-                        // 更新配方
-                        var recipes = currentSaveData.recipeProgress;
-                        for (int i = 0; i < recipes.Count; i += BATCH_SIZE)
-                        {
-                            int count = Math.Min(BATCH_SIZE, recipes.Count - i);
-                            UpdateRecipeBatch(recipes, i, count);
-
-                            if (i + BATCH_SIZE < recipes.Count)
-                            {
-                                await UniTask.Yield();
-                            }
-                        }
-
-                        // 更新建筑
-                        var buildings = currentSaveData.buildingProgress;
-                        for (int i = 0; i < buildings.Count; i += BATCH_SIZE)
-                        {
-                            int count = Math.Min(BATCH_SIZE, buildings.Count - i);
-                            UpdateBuildingBatch(buildings, i, count);
-
-                            if (i + BATCH_SIZE < buildings.Count)
-                            {
-                                await UniTask.Yield();
-                            }
-                        }
-
-                    }
+                    await currentSaveData.gameTime.AddMinutes();
                 }
                 await UniTask.Delay(0, cancellationToken: _timeUpdateCts.Token);
             }
@@ -196,6 +153,53 @@ public static class GameMgr
             _timeUpdateCts = null;
         }
     }
+    
+    private static async UniTask HandleHourChanged(GameTime gameTime)
+    {
+        await UpdateHourlyTasksAsync(BATCH_SIZE);
+    }
+
+    private static async UniTask UpdateHourlyTasksAsync(int batchSize)
+    {
+        // 更新角色
+        var characters = currentSaveData.characters.Values.ToList();
+        for (int i = 0; i < characters.Count; i += batchSize)
+        {
+            int count = Math.Min(batchSize, characters.Count - i);
+            UpdateCharacterBatch(characters, i, count);
+
+            if (i + batchSize < characters.Count)
+            {
+                await UniTask.Yield();
+            }
+        }
+
+        // 更新配方 - 遍历所有生产平台
+        var platforms = currentSaveData.productionPlatforms.Values.ToList();
+        for (int i = 0; i < platforms.Count; i += batchSize)
+        {
+            int count = Math.Min(batchSize, platforms.Count - i);
+            UpdateProductionPlatformBatch(platforms, i, count);
+
+            if (i + batchSize < platforms.Count)
+            {
+                await UniTask.Yield();
+            }
+        }
+
+        // 更新建筑 - 遍历所有建造平台
+        var buildPlatforms = currentSaveData.buildPlatforms.Values.ToList();
+        for (int i = 0; i < buildPlatforms.Count; i += batchSize)
+        {
+            int count = Math.Min(batchSize, buildPlatforms.Count - i);
+            UpdateBuildPlatformBatch(buildPlatforms, i, count);
+
+            if (i + batchSize < buildPlatforms.Count)
+            {
+                await UniTask.Yield();
+            }
+        }
+    }
 
     /// <summary>
     /// 批量更新角色属性
@@ -210,43 +214,66 @@ public static class GameMgr
         }
     }
 
-    private static void UpdateRecipeBatch(List<RecipeData> recipes, int startIndex, int count)
+    /// <summary>
+    /// 批量更新建造平台
+    /// </summary>
+    private static void UpdateBuildPlatformBatch(List<BuildPlatformData> platforms, int startIndex, int count)
     {
-        for (int i = startIndex; i < startIndex + count && i < recipes.Count; i++)
+        for (int i = startIndex; i < startIndex + count && i < platforms.Count; i++)
         {
-            var recipe = recipes[i];
-            recipe.ReduceTime();
+            var platform = platforms[i];
+            var completedBuildings = new List<BuildingData>();
 
-            if (recipe.IsComplete())
+            // 更新平台中的所有建筑
+            foreach (var building in platform.buildingProgress)
             {
-                // 从生产中列表移除
-                currentSaveData.recipeProgress.Remove(recipe);
-                // 添加产品到背包
-                InventoryMgr.GetPlayerInventoryData().AddItem(recipe.GetRecipe().productID.ToString(), recipe.GetRecipe().productAmount);
+                building.ReduceTime();
+
+                if (building.IsComplete())
+                {
+                    completedBuildings.Add(building);
+                    // 将建筑添加到建筑列表中
+                    currentSaveData.buildings.Add(building.instanceId, building);
+                }
+            }
+
+            // 移除已完成的建筑
+            foreach (var building in completedBuildings)
+            {
+                platform.buildingProgress.Remove(building);
             }
         }
     }
 
     /// <summary>
-    /// 批量更新建筑
+    /// 批量更新生产平台
     /// </summary>
-    private static void UpdateBuildingBatch(List<BuildingData> buildings, int startIndex, int count)
+    private static void UpdateProductionPlatformBatch(List<ProductionPlatformData> platforms, int startIndex, int count)
     {
-        for (int i = startIndex; i < startIndex + count && i < buildings.Count; i++)
+        for (int i = startIndex; i < startIndex + count && i < platforms.Count; i++)
         {
-            var building = buildings[i];
-            building.ReduceTime();
+            var platform = platforms[i];
+            var completedRecipes = new List<ProductionData>();
 
-            if (building.IsComplete())
+            // 更新平台中的所有配方
+            foreach (var recipe in platform.productionProgress)
             {
-                // 从建造中列表移除
-                currentSaveData.buildingProgress.Remove(building);
-                // 添加到已完成建筑列表
-                currentSaveData.buildings.Add(building.instanceId, building);
+                recipe.ReduceTime();
+
+                if (recipe.IsComplete())
+                {
+                    completedRecipes.Add(recipe);
+                    // 添加产品到背包
+                    InventoryMgr.GetPlayerInventoryData().AddItem(recipe.GetRecipe().productID.ToString(), recipe.GetRecipe().productAmount);
+                }
             }
-#if UNITY_EDITOR
-            Debug.Log($"整点更新: {currentSaveData.gameTime.GetTimeString()} - 更新建筑数量: {buildings.Count}");
-#endif
+
+            // 移除已完成的配方
+            foreach (var recipe in completedRecipes)
+            {
+                platform.productionProgress.Remove(recipe);
+            }
         }
     }
+    
 }

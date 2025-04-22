@@ -20,12 +20,12 @@ public class BuildingEntity : MonoBehaviour
             {
                 // 打开建筑界面
                 Debug.Log("打开建筑界面");
-                if (WarehouseUIPanel.Instance.warehousePanel.activeSelf)
+                if (BuildPlatformUIPanel.Instance.uiPanel.activeSelf)
                 {
-                    WarehouseUIPanel.Instance.Hide();
+                    BuildPlatformUIPanel.Instance.Hide();
                     return;
                 }
-                WarehouseUIPanel.Instance.Show(GameMgr.currentSaveData.buildings.Values.ToList()[0].instanceId);
+                BuildPlatformUIPanel.Instance.Show(GameMgr.currentSaveData.buildings.Values.ToList()[0].instanceId);
             }
         }
     }

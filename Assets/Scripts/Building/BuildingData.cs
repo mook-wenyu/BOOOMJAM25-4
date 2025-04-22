@@ -26,7 +26,7 @@ public class BuildingData
 {
     public string instanceId;   // 实例ID
     public string buildingId;   // 建筑ID
-
+    
     public int remainingTime;   // 剩余时间
 
     [NonSerialized]
@@ -54,6 +54,12 @@ public class BuildingData
     {
         _building ??= BuildingMgr.GetBuildingConfig(buildingId);
         return _building;
+    }
+    
+    public BuildingType GetBuildingType()
+    {
+        _building ??= BuildingMgr.GetBuildingConfig(buildingId);
+        return (BuildingType)_building.type;
     }
 
     /// <summary>

@@ -311,15 +311,8 @@ IEndDragHandler,
                 break;
             }
 
-            // 检查是否在背包面板内
-            if (result.gameObject.name == "InventoryBG")
-            {
-                isInValidArea = true;
-                break;
-            }
-
-            // 检查是否在仓库面板内
-            if (result.gameObject.name == "WarehouseBG")
+            // 检查是否
+            if (result.gameObject.name is "InventoryBG" or "WarehouseBG")
             {
                 isInValidArea = true;
                 break;
@@ -356,7 +349,7 @@ IEndDragHandler,
             );*/
             int count = 1;
             string itemName = CurrentItem.GetItemData().name;
-            bool result = InventoryMgr.GetPlayerInventoryData().RemoveItemCountByInstanceId(CurrentItem.instanceId, count);
+            bool result = InventoryMgr.GetInventoryData(InventoryId).RemoveItemCountByInstanceId(CurrentItem.instanceId, count);
             if (result)
             {
                 handled = true;
@@ -364,7 +357,7 @@ IEndDragHandler,
             }
             else
             {
-                Debug.Log($"丢弃失败");
+                Debug.Log("丢弃失败");
             }
         }
 
@@ -378,8 +371,11 @@ IEndDragHandler,
         if (isInEquipment && CurrentItem.GetItemType() == ItemType.Equipment
             && !CurrentItem.IsBroken() && !CurrentItem.isEquipped)
         {
-            // 装备物品
-            InventoryMgr.GetPlayerInventoryData().EquipItem(CharacterMgr.Player(), CurrentItem.instanceId);
+            if (InventoryId == InventoryMgr.GetPlayerInventoryData().inventoryId)
+            {
+                // 装备物品
+                InventoryMgr.GetPlayerInventoryData().EquipItem(CharacterMgr.Player(), CurrentItem.instanceId);
+            }
         }
 
         // 销毁拖动副本

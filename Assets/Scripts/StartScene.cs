@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -147,8 +148,10 @@ public class StartScene : MonoBehaviour
         Debug.Log($"添加新物品：{InventoryMgr.GetPlayerInventoryData().AddItem("12001")}");
         Debug.Log($"添加新物品：{InventoryMgr.GetPlayerInventoryData().AddItem("12002")}");
         Debug.Log($"添加新物品：{InventoryMgr.GetPlayerInventoryData().AddItem("12003")}");
-
-        BuildingMgr.AddBuildingData(new WarehouseBuildingData("20001", WarehouseType.Box, 9));
+        
+        BuildingMgr.AddBuildingData(new BuildBuildingData(string.Empty));
+        //BuildingMgr.AddBuildingData(new WarehouseBuildingData("20001", WarehouseType.Box, 9));
+        //BuildingMgr.AddBuildingData(new WarehouseBuildingData("20002", WarehouseType.IceBox, 9));
     }
 
 }
