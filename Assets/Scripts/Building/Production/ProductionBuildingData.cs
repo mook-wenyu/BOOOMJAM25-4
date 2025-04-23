@@ -28,6 +28,25 @@ public class ProductionBuildingData : BuildingData
         GameMgr.currentSaveData.productionPlatforms[productionPlatformInstanceId] = productionPlatformData;
     }
 
+    public ProductionBuildingData(string buildingId, string instanceId)
+        : base(buildingId, instanceId)
+    {
+        var config = BuildingMgr.GetBuildingConfig(buildingId);
+        if (config == null)
+        {
+            return;
+        }
+        var recipeIds = new List<string>();
+        foreach (int recipeId in config.recipes)
+        {
+            recipeIds.Add(recipeId.ToString());
+        }
+        // 创建生产数据
+        ProductionPlatformData productionPlatformData = new(instanceId, recipeIds);
+        productionPlatformInstanceId = productionPlatformData.instanceId;
+        GameMgr.currentSaveData.productionPlatforms[productionPlatformInstanceId] = productionPlatformData;
+    }
+
     /// <summary>
     /// 获取生产平台数据
     /// </summary>

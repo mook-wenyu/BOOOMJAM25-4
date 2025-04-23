@@ -4,6 +4,33 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+/// <summary>
+/// 角色状态
+/// </summary>
+public enum CharacterStatus
+{
+    /// <summary>
+    /// 空闲
+    /// </summary>
+    Idle,
+    /// <summary>
+    /// 移动
+    /// </summary>
+    Move,
+    /// <summary>
+    /// 建造
+    /// </summary>
+    Build,
+    /// <summary>
+    /// 进食
+    /// </summary>
+    Eat,
+    /// <summary>
+    /// 死亡
+    /// </summary>
+    Dead
+}
+
 [Serializable]
 public class CharacterData
 {
@@ -15,28 +42,42 @@ public class CharacterData
     public string fullName;
 
     /// <summary>
+    /// 当前状态
+    /// </summary>
+    public CharacterStatus status = CharacterStatus.Idle;
+
+    public bool direction = true;
+
+    public Pos pos = null;
+
+    /// <summary>
     /// 生命值
     /// </summary>
-    public int health;
-    public int healthMax;
+    public int health = 100;
+    public int healthMax = 100;
 
     /// <summary>
     /// 饱食度
     /// </summary>
-    public int hunger;
-    public int hungerMax;
+    public int hunger = 100;
+    public int hungerMax = 100;
 
     /// <summary>
     /// 活力
     /// </summary>
-    public int energy;
-    public int energyMax;
+    public int energy = 100;
+    public int energyMax = 100;
 
     /// <summary>
     /// 精神
     /// </summary>
-    public int spirit;
-    public int spiritMax;
+    public int spirit = 100;
+    public int spiritMax = 100;
+
+    /// <summary>
+    /// 移动速度
+    /// </summary>
+    public float moveSpeed = 10;
 
     /// <summary>
     /// 背包数据
@@ -66,10 +107,16 @@ public class CharacterData
     public event Action<CharacterData, int> OnHpMaxChanged;
 
     /// <summary>
+    /// 饱食度变化事件
+    /// </summary>
+    public event Action<CharacterData, int> OnHungerChanged;
+    public event Action<CharacterData, int> OnHungerMaxChanged;
+
+    /// <summary>
     /// 体力变化事件
     /// </summary>
-    public event Action<CharacterData, int> OnStaminaChanged;
-    public event Action<CharacterData, int> OnStaminaMaxChanged;
+    public event Action<CharacterData, int> OnEnergyChanged;
+    public event Action<CharacterData, int> OnEnergyMaxChanged;
 
     /// <summary>
     /// 精神变化事件
@@ -77,17 +124,14 @@ public class CharacterData
     public event Action<CharacterData, int> OnSpiritChanged;
     public event Action<CharacterData, int> OnSpiritMaxChanged;
 
-    /// <summary>
-    /// 饱食度变化事件
-    /// </summary>
-    public event Action<CharacterData, int> OnSatietyChanged;
-    public event Action<CharacterData, int> OnSatietyMaxChanged;
-
     public CharacterData()
     {
         var inventory = new InventoryData();
         inventoryId = inventory.inventoryId;
-        GameMgr.currentSaveData.inventories[inventoryId] = inventory;
+        if (GameMgr.currentSaveData != null)
+        {
+            GameMgr.currentSaveData.inventories[inventoryId] = inventory;
+        }
     }
 
     /// <summary>
@@ -114,12 +158,12 @@ public class CharacterData
     public void SetHunger(int newHunger)
     {
         hunger = newHunger;
-        OnSatietyChanged?.Invoke(this, hunger);
+        OnHungerChanged?.Invoke(this, hunger);
     }
     public void SetHungerMax(int newHungerMax)
     {
         hungerMax = newHungerMax;
-        OnSatietyMaxChanged?.Invoke(this, hungerMax);
+        OnHungerMaxChanged?.Invoke(this, hungerMax);
     }
 
     /// <summary>
@@ -128,12 +172,12 @@ public class CharacterData
     public void SetEnergy(int newEnergy)
     {
         energy = newEnergy;
-        OnStaminaChanged?.Invoke(this, energy);
+        OnEnergyChanged?.Invoke(this, energy);
     }
     public void SetEnergyMax(int newEnergyMax)
     {
         energyMax = newEnergyMax;
-        OnStaminaMaxChanged?.Invoke(this, energyMax);
+        OnEnergyMaxChanged?.Invoke(this, energyMax);
     }
 
     /// <summary>
@@ -149,7 +193,6 @@ public class CharacterData
         spiritMax = newSpiritMax;
         OnSpiritMaxChanged?.Invoke(this, spiritMax);
     }
-
 
     /// <summary>
     /// 添加激活的Buff

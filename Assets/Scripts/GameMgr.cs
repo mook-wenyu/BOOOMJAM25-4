@@ -83,7 +83,7 @@ public static class GameMgr
         {
             StopTime();
         }
-        
+
         currentSaveData.gameTime.OnHourChanged += HandleHourChanged;  // 订阅整点事件
         UpdateTimeChangedAsync().Forget();
     }
@@ -112,7 +112,7 @@ public static class GameMgr
     public static void StopTime()
     {
         if (_timeUpdateCts == null) return;
-        
+
         currentSaveData.gameTime.OnHourChanged -= HandleHourChanged;
         _timeUpdateCts.Cancel();
         _timeUpdateCts.Dispose();
@@ -129,14 +129,14 @@ public static class GameMgr
         try
         {
             _timeUpdateCts = new CancellationTokenSource();
-            
+
             while (!_timeUpdateCts.Token.IsCancellationRequested)
             {
                 if (!_isTimePaused)
                 {
                     await currentSaveData.gameTime.AddMinutes();
                 }
-                await UniTask.Delay(0, cancellationToken: _timeUpdateCts.Token);
+                await UniTask.Delay(100, cancellationToken: _timeUpdateCts.Token);
             }
         }
         catch (OperationCanceledException)
@@ -153,7 +153,7 @@ public static class GameMgr
             _timeUpdateCts = null;
         }
     }
-    
+
     private static async UniTask HandleHourChanged(GameTime gameTime)
     {
         await UpdateHourlyTasksAsync(BATCH_SIZE);
@@ -210,6 +210,7 @@ public static class GameMgr
         {
             var character = characters[i];
             character.UpdateBuffs();
+            character.SetHunger(character.hunger - 1);
             // 其他属性更新...
         }
     }
@@ -234,6 +235,12 @@ public static class GameMgr
                     completedBuildings.Add(building);
                     // 将建筑添加到建筑列表中
                     currentSaveData.buildings.Add(building.instanceId, building);
+                    // 停止建造动画
+                    CharacterEntityMgr.Instance.GetPlayer().GetCharacterData().status = CharacterStatus.Idle;
+                    CharacterEntityMgr.Instance.GetPlayer().GetAnimator().SetBool("IsBuild", false);
+#if UNITY_EDITOR
+                    Debug.Log($"建筑完成: {building.buildingId} - {building.instanceId} - {building.GetBuilding().name}");
+#endif
                 }
             }
 
@@ -253,27 +260,16 @@ public static class GameMgr
         for (int i = startIndex; i < startIndex + count && i < platforms.Count; i++)
         {
             var platform = platforms[i];
-            var completedRecipes = new List<ProductionData>();
 
             // 更新平台中的所有配方
             foreach (var recipe in platform.productionProgress)
             {
-                recipe.ReduceTime();
-
-                if (recipe.IsComplete())
+                if (!recipe.IsComplete())
                 {
-                    completedRecipes.Add(recipe);
-                    // 添加产品到背包
-                    InventoryMgr.GetPlayerInventoryData().AddItem(recipe.GetRecipe().productID.ToString(), recipe.GetRecipe().productAmount);
+                    recipe.ReduceTime();
                 }
-            }
-
-            // 移除已完成的配方
-            foreach (var recipe in completedRecipes)
-            {
-                platform.productionProgress.Remove(recipe);
             }
         }
     }
-    
+
 }

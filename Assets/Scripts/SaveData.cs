@@ -40,6 +40,16 @@ public class SaveData
     public Dictionary<string, BuildingData> buildings = new();
 
     /// <summary>
+    /// 障碍物清除进度
+    /// </summary>
+    public List<BuildingData> obstacleProgress = new();
+
+    /// <summary>
+    /// 房间楼层数据 用于网格系统
+    /// </summary>
+    public Dictionary<string, RoomFloor> floors = new();
+
+    /// <summary>
     /// 对话存储
     /// </summary>
     public DialogueStorage dialogueStorage = new();

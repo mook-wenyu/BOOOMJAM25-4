@@ -1,4 +1,3 @@
-
 using System;
 
 /// <summary>
@@ -26,7 +25,7 @@ public class BuildingData
 {
     public string instanceId;   // 实例ID
     public string buildingId;   // 建筑ID
-    
+
     public int remainingTime;   // 剩余时间
 
     [NonSerialized]
@@ -50,12 +49,24 @@ public class BuildingData
         }
     }
 
+    public BuildingData(string buildingId, string instanceId)
+    {
+        this.buildingId = buildingId;
+        this.instanceId = instanceId;
+
+        _building = BuildingMgr.GetBuildingConfig(buildingId);
+        if (_building != null)
+        {
+            remainingTime = _building.time;
+        }
+    }
+
     public BuildingConfig GetBuilding()
     {
         _building ??= BuildingMgr.GetBuildingConfig(buildingId);
         return _building;
     }
-    
+
     public BuildingType GetBuildingType()
     {
         _building ??= BuildingMgr.GetBuildingConfig(buildingId);

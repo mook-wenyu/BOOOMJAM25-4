@@ -35,7 +35,8 @@ public abstract class GlobalUIBase : MonoBehaviour
 
     public virtual void Hide()
     {
-        gameObject.SetActive(false);
+        if (gameObject)
+            gameObject.SetActive(false);
     }
 
     protected virtual void OnDestroy()

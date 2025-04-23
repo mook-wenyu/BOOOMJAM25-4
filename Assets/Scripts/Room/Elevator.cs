@@ -5,10 +5,10 @@ public class Elevator : MonoBehaviour
 {
     public BoxCollider2D upCollider;
     public BoxCollider2D downCollider;
-    
+
     private bool _isEnabled = false;
     private Collider2D _collider;
-    
+
     void Update()
     {
         if (_isEnabled)
@@ -19,6 +19,8 @@ public class Elevator : MonoBehaviour
                 {
                     upCollider.enabled = false;
                     _collider.gameObject.transform.position = upCollider.transform.position;
+                    CharacterEntityMgr.Instance.GetPlayer().GetCharacterData().pos.x = upCollider.transform.position.x;
+                    CharacterEntityMgr.Instance.GetPlayer().GetCharacterData().pos.y = upCollider.transform.position.y;
                     EnabledCollider(upCollider).Forget();
                 }
             }
@@ -28,19 +30,21 @@ public class Elevator : MonoBehaviour
                 {
                     downCollider.enabled = false;
                     _collider.gameObject.transform.position = downCollider.transform.position;
+                    CharacterEntityMgr.Instance.GetPlayer().GetCharacterData().pos.x = downCollider.transform.position.x;
+                    CharacterEntityMgr.Instance.GetPlayer().GetCharacterData().pos.y = downCollider.transform.position.y;
                     EnabledCollider(downCollider).Forget();
                 }
             }
         }
     }
-    
+
     private async UniTask EnabledCollider(BoxCollider2D colliders)
     {
         await UniTask.Delay(200);
         await UniTask.Yield();
         colliders.enabled = true;
     }
-    
+
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))

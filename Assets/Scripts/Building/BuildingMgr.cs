@@ -8,7 +8,7 @@ public static class BuildingMgr
     {
         return ConfigManager.Instance.GetConfig<BuildingConfig>(buildingId);
     }
-    
+
     public static IList<BuildingConfig> GetAllBuildingConfigs()
     {
         return ConfigManager.Instance.GetConfigList<BuildingConfig>();
@@ -19,7 +19,7 @@ public static class BuildingMgr
     /// </summary>
     public static BuildingData GetBuildingData(string instanceId)
     {
-        return GameMgr.currentSaveData.buildings[instanceId];
+        return GameMgr.currentSaveData.buildings.GetValueOrDefault(instanceId, null);
     }
 
     /// <summary>
@@ -27,7 +27,7 @@ public static class BuildingMgr
     /// </summary>
     public static T GetBuildingData<T>(string instanceId) where T : BuildingData
     {
-        return GameMgr.currentSaveData.buildings[instanceId] as T;
+        return GameMgr.currentSaveData.buildings.GetValueOrDefault(instanceId, null) as T;
     }
 
     /// <summary>

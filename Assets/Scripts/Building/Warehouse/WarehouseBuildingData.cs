@@ -15,6 +15,15 @@ public class WarehouseBuildingData : BuildingData
         inventoryId = warehouseData.inventoryId;
         GameMgr.currentSaveData.inventories[inventoryId] = warehouseData;
     }
+
+    public WarehouseBuildingData(string buildingId, string instanceId, WarehouseType warehouseType, int capacity)
+        : base(buildingId, instanceId)
+    {
+        // 创建仓库数据
+        WarehouseData warehouseData = new(instanceId, warehouseType, capacity);
+        inventoryId = warehouseData.inventoryId;
+        GameMgr.currentSaveData.inventories[inventoryId] = warehouseData;
+    }
     
     /// <summary>
     /// 获取仓库数据
