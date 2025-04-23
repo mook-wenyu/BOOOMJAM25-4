@@ -1,0 +1,40 @@
+{
+  "$type": "System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[BaseConfig, Assembly-CSharp]], mscorlib",
+  "71001": {
+    "$type": "Map1Config, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "isOnMap": false,
+    "mapLocation": [
+      0
+    ],
+    "isStartPoint": false,
+    "unlocksMidNodes": [
+      "0"
+    ],
+    "unlocksPostNodes": [
+      "0"
+    ],
+    "nodeAfterComplete": "0",
+    "rewardIdGroup": [
+      "0"
+    ],
+    "rewardAmountGroup": [
+      0
+    ],
+    "requiredMaterialIdGroup": [
+      "0"
+    ],
+    "requiredMaterialAmountGroup": [
+      0
+    ],
+    "submitTime": 0.0,
+    "recipeIdGroup": [
+      "0"
+    ],
+    "storyId": "0",
+    "path": "0",
+    "id": "71001"
+  }
+}

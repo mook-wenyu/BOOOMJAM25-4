@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Cysharp.Threading.Tasks;
+using UnityEngine.SceneManagement;
 
 public class TopLevelUIPanel : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class TopLevelUIPanel : MonoBehaviour
 
     public Slider health, hunger, energy, spirit;
     // public TextMeshProUGUI healthText, hungerText, energyText, spiritText;
+
+    public Button goOut;
 
     private CharacterData player;
 
@@ -37,6 +40,7 @@ public class TopLevelUIPanel : MonoBehaviour
         player.OnSpiritChanged += HandleSpiritChanged;
         player.OnSpiritMaxChanged += HandleSpiritMaxChanged;
 
+        goOut.onClick.AddListener(OnGoOutBtnClicked);
     }
 
     void Start()
@@ -124,6 +128,12 @@ public class TopLevelUIPanel : MonoBehaviour
         //spiritText.text = $"{player.spirit} / {spiritMax}";
     }
 
+    public void OnGoOutBtnClicked()
+    {
+        GlobalUIMgr.Instance.ShowLoadingMask(true);
+        GameMgr.PauseTime();
+        SceneMgr.Instance.LoadScene("ExploreScene", LoadSceneMode.Additive);
+    }
 
 
     private void OnDestroy()

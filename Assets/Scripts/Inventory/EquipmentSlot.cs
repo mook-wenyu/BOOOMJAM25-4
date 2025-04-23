@@ -54,7 +54,7 @@ IEndDragHandler,
             var itemData = InventoryMgr.GetItemConfig(CurrentItem.itemId);
             if (!string.IsNullOrEmpty(itemData.path) && itemData.path != "0")
             {
-                itemIcon.sprite = Resources.Load<Sprite>(Path.Combine("Icon", itemData.path));
+                itemIcon.sprite = Resources.Load<Sprite>(itemData.path);
             }
             else
             {
@@ -116,7 +116,7 @@ IEndDragHandler,
 
         durabilityBar.SetActive(true);
 
-        float durabilityPercent = (float)CurrentItem.GetDurability() / itemData.durability;
+        float durabilityPercent = (float)(CurrentItem.GetDurability() / itemData.durability);
         durabilityFill.fillAmount = durabilityPercent;
 
         // 根据耐久度百分比设置颜色

@@ -39,10 +39,10 @@ public class ProductSlot : MonoBehaviour,
 
         if (CurrentItem != null)
         {
-            CurrentItemConfig = InventoryMgr.GetItemConfig(CurrentItem.GetRecipe().productID.ToString());
+            CurrentItemConfig = InventoryMgr.GetItemConfig(CurrentItem.GetRecipe().productID[0]);
             if (!string.IsNullOrEmpty(CurrentItemConfig.path) && CurrentItemConfig.path != "0")
             {
-                itemIcon.sprite = Resources.Load<Sprite>(Path.Combine("Icon", CurrentItemConfig.path));
+                itemIcon.sprite = Resources.Load<Sprite>(CurrentItemConfig.path);
             }
             else
             {

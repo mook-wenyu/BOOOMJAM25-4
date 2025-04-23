@@ -195,9 +195,9 @@ public class InventoryData : BaseInventoryData
         {
             foreach (var buffId in item.getBuff)
             {
-                if (buffId > 0 && BuffMgr.GetBuffData(buffId.ToString()) != null)
+                if (BuffMgr.GetBuffData(buffId) != null)
                 {
-                    character.AddBuff(buffId.ToString());
+                    character.AddBuff(buffId);
                 }
             }
         }
@@ -206,9 +206,9 @@ public class InventoryData : BaseInventoryData
         {
             foreach (var buffId in item.removeBuff)
             {
-                if (buffId > 0 && BuffMgr.GetBuffData(buffId.ToString()) != null)
+                if (BuffMgr.GetBuffData(buffId) != null)
                 {
-                    character.RemoveBuff(buffId.ToString());
+                    character.RemoveBuff(buffId);
                 }
             }
         }
@@ -298,9 +298,9 @@ public class InventoryData : BaseInventoryData
         {
             foreach (var buffId in item.getBuff)
             {
-                if (buffId > 0 && BuffMgr.GetBuffData(buffId.ToString()) != null)
+                if (BuffMgr.GetBuffData(buffId) != null)
                 {
-                    character.AddBuff(buffId.ToString());
+                    character.AddBuff(buffId);
                 }
             }
         }
@@ -318,9 +318,9 @@ public class InventoryData : BaseInventoryData
         {
             foreach (var buffId in item.getBuff)
             {
-                if (buffId > 0 && BuffMgr.GetBuffData(buffId.ToString()) != null)
+                if (BuffMgr.GetBuffData(buffId) != null)
                 {
-                    character.RemoveBuff(buffId.ToString());
+                    character.RemoveBuff(buffId);
                 }
             }
         }

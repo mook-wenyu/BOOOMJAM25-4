@@ -18,9 +18,9 @@ public class ProductionBuildingData : BuildingData
             return;
         }
         var recipeIds = new List<string>();
-        foreach (int recipeId in config.recipes)
+        foreach (string recipeId in config.recipes)
         {
-            recipeIds.Add(recipeId.ToString());
+            recipeIds.Add(recipeId);
         }
         // 创建生产数据
         ProductionPlatformData productionPlatformData = new(instanceId, recipeIds);
@@ -37,9 +37,9 @@ public class ProductionBuildingData : BuildingData
             return;
         }
         var recipeIds = new List<string>();
-        foreach (int recipeId in config.recipes)
+        foreach (string recipeId in config.recipes)
         {
-            recipeIds.Add(recipeId.ToString());
+            recipeIds.Add(recipeId);
         }
         // 创建生产数据
         ProductionPlatformData productionPlatformData = new(instanceId, recipeIds);

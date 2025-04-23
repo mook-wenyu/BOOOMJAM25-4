@@ -109,7 +109,7 @@ public static class GameMgr
     /// <summary>
     /// 取消时间更新
     /// </summary>
-    public static void StopTime()
+    private static void StopTime()
     {
         if (_timeUpdateCts == null) return;
 
@@ -136,7 +136,7 @@ public static class GameMgr
                 {
                     await currentSaveData.gameTime.AddMinutes();
                 }
-                await UniTask.Delay(100, cancellationToken: _timeUpdateCts.Token);
+                await UniTask.Delay(0, cancellationToken: _timeUpdateCts.Token);
             }
         }
         catch (OperationCanceledException)

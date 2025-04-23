@@ -9,7 +9,7 @@ public class InventoryItem
 
     public int count;              // 当前数量
     public bool isEquipped = false;    // 是否已装备
-    public int currentDurability = 0;    // 当前耐久度
+    public double currentDurability = 0;    // 当前耐久度
 
     [NonSerialized]
     private ItemConfig _cachedItemData;     // 缓存的物品数据
@@ -99,7 +99,7 @@ public class InventoryItem
     /// <summary>
     /// 获取当前耐久度
     /// </summary>
-    public int GetDurability()
+    public double GetDurability()
     {
         return currentDurability;
     }
@@ -114,14 +114,14 @@ public class InventoryItem
             && _cachedItemData.durability > 0 && currentDurability <= 0;
     }
 
-    public void SetDurability(int newDurability)
+    public void SetDurability(double newDurability)
     {
         _cachedItemData ??= InventoryMgr.GetItemConfig(itemId);
 
         if (_cachedItemData == null || _cachedItemData.durability <= 0)
             return;
 
-        currentDurability = Mathf.Min(newDurability, _cachedItemData.durability);
+        currentDurability = Mathf.Min((float)newDurability, (float)_cachedItemData.durability);
         OnDurabilityChanged?.Invoke(this);
         if (IsBroken())
         {

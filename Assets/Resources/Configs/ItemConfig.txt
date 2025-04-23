@@ -3,148 +3,778 @@
   "10001": {
     "$type": "ItemConfig, Assembly-CSharp",
     "name": "木头",
-    "desc": "就木头啊",
+    "desc": "就石头",
     "type": 0,
     "stacking": 5,
-    "durability": 0,
+    "durability": 0.0,
     "healthAdjust": 0,
     "hungerAdjust": 0,
     "energyAdjust": 0,
     "spiritAdjust": 0,
     "equipmentParts": 0,
     "getBuff": [
-      0
+      "0"
     ],
     "removeBuff": [
-      0
+      "0"
     ],
-    "path": "0",
+    "path": "Icon\\Item\\10001",
     "id": "10001"
   },
   "10002": {
     "$type": "ItemConfig, Assembly-CSharp",
-    "name": "树叶",
-    "desc": "就树叶啊",
+    "name": "石头",
+    "desc": "就木头",
     "type": 0,
     "stacking": 5,
-    "durability": 0,
+    "durability": 0.0,
     "healthAdjust": 0,
     "hungerAdjust": 0,
     "energyAdjust": 0,
     "spiritAdjust": 0,
     "equipmentParts": 0,
     "getBuff": [
-      0
+      "0"
     ],
     "removeBuff": [
-      0
+      "0"
     ],
-    "path": "0",
+    "path": "Icon\\Item\\10002",
     "id": "10002"
   },
-  "11001": {
+  "10003": {
     "$type": "ItemConfig, Assembly-CSharp",
-    "name": "野菜",
-    "desc": "就野菜啊",
-    "type": 1,
-    "stacking": 1,
-    "durability": 72,
+    "name": "草",
+    "desc": "就草",
+    "type": 0,
+    "stacking": 5,
+    "durability": 0.0,
     "healthAdjust": 0,
-    "hungerAdjust": 15,
-    "energyAdjust": 10,
+    "hungerAdjust": 0,
+    "energyAdjust": 0,
     "spiritAdjust": 0,
     "equipmentParts": 0,
     "getBuff": [
-      0
+      "0"
     ],
     "removeBuff": [
-      50002
+      "0"
     ],
-    "path": "0",
-    "id": "11001"
+    "path": "Icon\\Item\\10003",
+    "id": "10003"
   },
-  "11002": {
+  "10004": {
     "$type": "ItemConfig, Assembly-CSharp",
-    "name": "可乐",
-    "desc": "可口可乐，不是百事可乐",
-    "type": 1,
-    "stacking": 99,
-    "durability": 0,
+    "name": "废铁",
+    "desc": "生锈铁片",
+    "type": 0,
+    "stacking": 5,
+    "durability": 0.0,
     "healthAdjust": 0,
     "hungerAdjust": 0,
-    "energyAdjust": 30,
-    "spiritAdjust": 50,
+    "energyAdjust": 0,
+    "spiritAdjust": 0,
     "equipmentParts": 0,
     "getBuff": [
-      50003
+      "0"
     ],
     "removeBuff": [
-      50001
+      "0"
     ],
-    "path": "0",
-    "id": "11002"
+    "path": "Icon\\Item\\10004",
+    "id": "10004"
   },
-  "12001": {
+  "10005": {
     "$type": "ItemConfig, Assembly-CSharp",
-    "name": "鹤嘴锄",
-    "desc": "就鹤嘴锄啊",
+    "name": "烛芯",
+    "desc": "用草手搓成的烛芯",
+    "type": 0,
+    "stacking": 5,
+    "durability": 0.0,
+    "healthAdjust": 0,
+    "hungerAdjust": 0,
+    "energyAdjust": 0,
+    "spiritAdjust": 0,
+    "equipmentParts": 0,
+    "getBuff": [
+      "0"
+    ],
+    "removeBuff": [
+      "0"
+    ],
+    "path": "Icon\\Item\\10005",
+    "id": "10005"
+  },
+  "10006": {
+    "$type": "ItemConfig, Assembly-CSharp",
+    "name": "木炭",
+    "desc": "就木炭",
+    "type": 0,
+    "stacking": 5,
+    "durability": 0.0,
+    "healthAdjust": 0,
+    "hungerAdjust": 0,
+    "energyAdjust": 0,
+    "spiritAdjust": 0,
+    "equipmentParts": 0,
+    "getBuff": [
+      "0"
+    ],
+    "removeBuff": [
+      "0"
+    ],
+    "path": "Icon\\Item\\10006",
+    "id": "10006"
+  },
+  "10007": {
+    "$type": "ItemConfig, Assembly-CSharp",
+    "name": "耐火砖",
+    "desc": "很耐火",
+    "type": 0,
+    "stacking": 5,
+    "durability": 0.0,
+    "healthAdjust": 0,
+    "hungerAdjust": 0,
+    "energyAdjust": 0,
+    "spiritAdjust": 0,
+    "equipmentParts": 0,
+    "getBuff": [
+      "0"
+    ],
+    "removeBuff": [
+      "0"
+    ],
+    "path": "Icon\\Item\\10007",
+    "id": "10007"
+  },
+  "10008": {
+    "$type": "ItemConfig, Assembly-CSharp",
+    "name": "铁锭",
+    "desc": "就铁锭",
+    "type": 0,
+    "stacking": 5,
+    "durability": 0.0,
+    "healthAdjust": 0,
+    "hungerAdjust": 0,
+    "energyAdjust": 0,
+    "spiritAdjust": 0,
+    "equipmentParts": 0,
+    "getBuff": [
+      "0"
+    ],
+    "removeBuff": [
+      "0"
+    ],
+    "path": "Icon\\Item\\10008",
+    "id": "10008"
+  },
+  "10009": {
+    "$type": "ItemConfig, Assembly-CSharp",
+    "name": "电子零件",
+    "desc": "电路板",
+    "type": 0,
+    "stacking": 5,
+    "durability": 0.0,
+    "healthAdjust": 0,
+    "hungerAdjust": 0,
+    "energyAdjust": 0,
+    "spiritAdjust": 0,
+    "equipmentParts": 0,
+    "getBuff": [
+      "0"
+    ],
+    "removeBuff": [
+      "0"
+    ],
+    "path": "Icon\\Item\\10009",
+    "id": "10009"
+  },
+  "10010": {
+    "$type": "ItemConfig, Assembly-CSharp",
+    "name": "万能核心",
+    "desc": "很电子很科技",
+    "type": 0,
+    "stacking": 5,
+    "durability": 0.0,
+    "healthAdjust": 0,
+    "hungerAdjust": 0,
+    "energyAdjust": 0,
+    "spiritAdjust": 0,
+    "equipmentParts": 0,
+    "getBuff": [
+      "0"
+    ],
+    "removeBuff": [
+      "0"
+    ],
+    "path": "Icon\\Item\\10010",
+    "id": "10010"
+  },
+  "10011": {
+    "$type": "ItemConfig, Assembly-CSharp",
+    "name": "木板",
+    "desc": "就木板，板正",
+    "type": 0,
+    "stacking": 5,
+    "durability": 0.0,
+    "healthAdjust": 0,
+    "hungerAdjust": 0,
+    "energyAdjust": 0,
+    "spiritAdjust": 0,
+    "equipmentParts": 0,
+    "getBuff": [
+      "0"
+    ],
+    "removeBuff": [
+      "0"
+    ],
+    "path": "Icon\\Item\\10011",
+    "id": "10011"
+  },
+  "10012": {
+    "$type": "ItemConfig, Assembly-CSharp",
+    "name": "齿轮",
+    "desc": "就齿轮",
+    "type": 0,
+    "stacking": 5,
+    "durability": 0.0,
+    "healthAdjust": 0,
+    "hungerAdjust": 0,
+    "energyAdjust": 0,
+    "spiritAdjust": 0,
+    "equipmentParts": 0,
+    "getBuff": [
+      "0"
+    ],
+    "removeBuff": [
+      "0"
+    ],
+    "path": "Icon\\Item\\10012",
+    "id": "10012"
+  },
+  "10013": {
+    "$type": "ItemConfig, Assembly-CSharp",
+    "name": "水泥",
+    "desc": "桶装水泥",
+    "type": 0,
+    "stacking": 5,
+    "durability": 0.0,
+    "healthAdjust": 0,
+    "hungerAdjust": 0,
+    "energyAdjust": 0,
+    "spiritAdjust": 0,
+    "equipmentParts": 0,
+    "getBuff": [
+      "0"
+    ],
+    "removeBuff": [
+      "0"
+    ],
+    "path": "Icon\\Item\\10013",
+    "id": "10013"
+  },
+  "10014": {
+    "$type": "ItemConfig, Assembly-CSharp",
+    "name": "瓶子",
+    "desc": "塑料瓶玻璃瓶都行",
+    "type": 0,
+    "stacking": 5,
+    "durability": 0.0,
+    "healthAdjust": 0,
+    "hungerAdjust": 0,
+    "energyAdjust": 0,
+    "spiritAdjust": 0,
+    "equipmentParts": 0,
+    "getBuff": [
+      "0"
+    ],
+    "removeBuff": [
+      "0"
+    ],
+    "path": "Icon\\Item\\10014",
+    "id": "10014"
+  },
+  "10015": {
+    "$type": "ItemConfig, Assembly-CSharp",
+    "name": "一瓶水",
+    "desc": "装满水的瓶子",
+    "type": 0,
+    "stacking": 5,
+    "durability": 0.0,
+    "healthAdjust": 0,
+    "hungerAdjust": 0,
+    "energyAdjust": 0,
+    "spiritAdjust": 0,
+    "equipmentParts": 0,
+    "getBuff": [
+      "0"
+    ],
+    "removeBuff": [
+      "0"
+    ],
+    "path": "Icon\\Item\\10015",
+    "id": "10015"
+  },
+  "10016": {
+    "$type": "ItemConfig, Assembly-CSharp",
+    "name": "一瓶油",
+    "desc": "装满油的瓶子",
+    "type": 0,
+    "stacking": 5,
+    "durability": 0.0,
+    "healthAdjust": 0,
+    "hungerAdjust": 0,
+    "energyAdjust": 0,
+    "spiritAdjust": 0,
+    "equipmentParts": 0,
+    "getBuff": [
+      "0"
+    ],
+    "removeBuff": [
+      "0"
+    ],
+    "path": "Icon\\Item\\10016",
+    "id": "10016"
+  },
+  "10017": {
+    "$type": "ItemConfig, Assembly-CSharp",
+    "name": "布料",
+    "desc": "残破的布料",
+    "type": 0,
+    "stacking": 5,
+    "durability": 0.0,
+    "healthAdjust": 0,
+    "hungerAdjust": 0,
+    "energyAdjust": 0,
+    "spiritAdjust": 0,
+    "equipmentParts": 0,
+    "getBuff": [
+      "0"
+    ],
+    "removeBuff": [
+      "0"
+    ],
+    "path": "Icon\\Item\\10017",
+    "id": "10017"
+  },
+  "10018": {
+    "$type": "ItemConfig, Assembly-CSharp",
+    "name": "冰",
+    "desc": "冰块",
+    "type": 0,
+    "stacking": 5,
+    "durability": 0.0,
+    "healthAdjust": 0,
+    "hungerAdjust": 0,
+    "energyAdjust": 0,
+    "spiritAdjust": 0,
+    "equipmentParts": 0,
+    "getBuff": [
+      "0"
+    ],
+    "removeBuff": [
+      "0"
+    ],
+    "path": "Icon\\Item\\10018",
+    "id": "10018"
+  },
+  "10019": {
+    "$type": "ItemConfig, Assembly-CSharp",
+    "name": "盐",
+    "desc": "小盐堆",
+    "type": 0,
+    "stacking": 5,
+    "durability": 0.0,
+    "healthAdjust": 0,
+    "hungerAdjust": 0,
+    "energyAdjust": 0,
+    "spiritAdjust": 0,
+    "equipmentParts": 0,
+    "getBuff": [
+      "0"
+    ],
+    "removeBuff": [
+      "0"
+    ],
+    "path": "Icon\\Item\\10019",
+    "id": "10019"
+  },
+  "10020": {
+    "$type": "ItemConfig, Assembly-CSharp",
+    "name": "斧头",
+    "desc": "小斧头",
     "type": 2,
     "stacking": 1,
-    "durability": 5,
+    "durability": 0.0,
     "healthAdjust": 0,
     "hungerAdjust": 0,
     "energyAdjust": 0,
     "spiritAdjust": 0,
     "equipmentParts": 1,
     "getBuff": [
-      0
+      "0"
     ],
     "removeBuff": [
-      0
+      "0"
     ],
-    "path": "0",
-    "id": "12001"
+    "path": "Icon\\Item\\10020",
+    "id": "10020"
   },
-  "12002": {
+  "10021": {
     "$type": "ItemConfig, Assembly-CSharp",
-    "name": "睡衣",
-    "desc": "睡觉时失去的饱食度降低30%",
+    "name": "锤子",
+    "desc": "在木头末端绑着石头",
     "type": 2,
     "stacking": 1,
-    "durability": 0,
+    "durability": 0.0,
+    "healthAdjust": 0,
+    "hungerAdjust": 0,
+    "energyAdjust": 0,
+    "spiritAdjust": 0,
+    "equipmentParts": 1,
+    "getBuff": [
+      "0"
+    ],
+    "removeBuff": [
+      "0"
+    ],
+    "path": "Icon\\Item\\10021",
+    "id": "10021"
+  },
+  "10022": {
+    "$type": "ItemConfig, Assembly-CSharp",
+    "name": "小刀",
+    "desc": "就小刀",
+    "type": 2,
+    "stacking": 1,
+    "durability": 0.0,
+    "healthAdjust": 0,
+    "hungerAdjust": 0,
+    "energyAdjust": 0,
+    "spiritAdjust": 0,
+    "equipmentParts": 1,
+    "getBuff": [
+      "0"
+    ],
+    "removeBuff": [
+      "0"
+    ],
+    "path": "Icon\\Item\\10022",
+    "id": "10022"
+  },
+  "10023": {
+    "$type": "ItemConfig, Assembly-CSharp",
+    "name": "鹤嘴锄",
+    "desc": "一端很尖的锄头",
+    "type": 2,
+    "stacking": 1,
+    "durability": 0.0,
+    "healthAdjust": 0,
+    "hungerAdjust": 0,
+    "energyAdjust": 0,
+    "spiritAdjust": 0,
+    "equipmentParts": 1,
+    "getBuff": [
+      "0"
+    ],
+    "removeBuff": [
+      "0"
+    ],
+    "path": "Icon\\Item\\10023",
+    "id": "10023"
+  },
+  "10024": {
+    "$type": "ItemConfig, Assembly-CSharp",
+    "name": "剪钳",
+    "desc": "就剪钳",
+    "type": 2,
+    "stacking": 1,
+    "durability": 0.0,
+    "healthAdjust": 0,
+    "hungerAdjust": 0,
+    "energyAdjust": 0,
+    "spiritAdjust": 0,
+    "equipmentParts": 1,
+    "getBuff": [
+      "0"
+    ],
+    "removeBuff": [
+      "0"
+    ],
+    "path": "Icon\\Item\\10024",
+    "id": "10024"
+  },
+  "10025": {
+    "$type": "ItemConfig, Assembly-CSharp",
+    "name": "睡衣",
+    "desc": "就睡衣",
+    "type": 2,
+    "stacking": 1,
+    "durability": 0.0,
     "healthAdjust": 0,
     "hungerAdjust": 0,
     "energyAdjust": 0,
     "spiritAdjust": 0,
     "equipmentParts": 2,
     "getBuff": [
-      50004
+      "0"
     ],
     "removeBuff": [
-      0
+      "0"
     ],
-    "path": "0",
-    "id": "12002"
+    "path": "Icon\\Item\\10025",
+    "id": "10025"
   },
-  "12003": {
+  "10026": {
     "$type": "ItemConfig, Assembly-CSharp",
-    "name": "妈妈的吊坠",
-    "desc": "起床时精神恢复5点",
+    "name": "辐射服",
+    "desc": "就辐射服",
     "type": 2,
     "stacking": 1,
-    "durability": 0,
+    "durability": 0.0,
+    "healthAdjust": 0,
+    "hungerAdjust": 0,
+    "energyAdjust": 0,
+    "spiritAdjust": 0,
+    "equipmentParts": 2,
+    "getBuff": [
+      "0"
+    ],
+    "removeBuff": [
+      "0"
+    ],
+    "path": "Icon\\Item\\10026",
+    "id": "10026"
+  },
+  "10027": {
+    "$type": "ItemConfig, Assembly-CSharp",
+    "name": "布鞋",
+    "desc": "布鞋",
+    "type": 2,
+    "stacking": 1,
+    "durability": 0.0,
+    "healthAdjust": 0,
+    "hungerAdjust": 0,
+    "energyAdjust": 0,
+    "spiritAdjust": 0,
+    "equipmentParts": 2,
+    "getBuff": [
+      "0"
+    ],
+    "removeBuff": [
+      "0"
+    ],
+    "path": "Icon\\Item\\10027",
+    "id": "10027"
+  },
+  "10028": {
+    "$type": "ItemConfig, Assembly-CSharp",
+    "name": "妈妈的项坠",
+    "desc": "有麻麻照片的项链",
+    "type": 2,
+    "stacking": 1,
+    "durability": 0.0,
     "healthAdjust": 0,
     "hungerAdjust": 0,
     "energyAdjust": 0,
     "spiritAdjust": 0,
     "equipmentParts": 3,
     "getBuff": [
-      50005
+      "0"
     ],
     "removeBuff": [
-      0
+      "0"
     ],
-    "path": "0",
-    "id": "12003"
+    "path": "Icon\\Item\\10028",
+    "id": "10028"
+  },
+  "10029": {
+    "$type": "ItemConfig, Assembly-CSharp",
+    "name": "简易手里剑",
+    "desc": "就手里剑",
+    "type": 2,
+    "stacking": 1,
+    "durability": 0.0,
+    "healthAdjust": 0,
+    "hungerAdjust": 0,
+    "energyAdjust": 0,
+    "spiritAdjust": 0,
+    "equipmentParts": 3,
+    "getBuff": [
+      "0"
+    ],
+    "removeBuff": [
+      "0"
+    ],
+    "path": "Icon\\Item\\10029",
+    "id": "10029"
+  },
+  "10030": {
+    "$type": "ItemConfig, Assembly-CSharp",
+    "name": "备用燃烧瓶",
+    "desc": "就燃烧瓶",
+    "type": 2,
+    "stacking": 1,
+    "durability": 0.0,
+    "healthAdjust": 0,
+    "hungerAdjust": 0,
+    "energyAdjust": 0,
+    "spiritAdjust": 0,
+    "equipmentParts": 3,
+    "getBuff": [
+      "0"
+    ],
+    "removeBuff": [
+      "0"
+    ],
+    "path": "Icon\\Item\\10030",
+    "id": "10030"
+  },
+  "10031": {
+    "$type": "ItemConfig, Assembly-CSharp",
+    "name": "压缩干粮",
+    "desc": "拆开的压缩饼干",
+    "type": 1,
+    "stacking": 5,
+    "durability": 0.0,
+    "healthAdjust": 0,
+    "hungerAdjust": 0,
+    "energyAdjust": 0,
+    "spiritAdjust": 0,
+    "equipmentParts": 0,
+    "getBuff": [
+      "0"
+    ],
+    "removeBuff": [
+      "0"
+    ],
+    "path": "Icon\\Item\\10031",
+    "id": "10031"
+  },
+  "10032": {
+    "$type": "ItemConfig, Assembly-CSharp",
+    "name": "野菜",
+    "desc": "就野菜",
+    "type": 1,
+    "stacking": 5,
+    "durability": 24.0,
+    "healthAdjust": 0,
+    "hungerAdjust": 10,
+    "energyAdjust": 0,
+    "spiritAdjust": 0,
+    "equipmentParts": 0,
+    "getBuff": [
+      "0"
+    ],
+    "removeBuff": [
+      "0"
+    ],
+    "path": "Icon\\Item\\10032",
+    "id": "10032"
+  },
+  "10033": {
+    "$type": "ItemConfig, Assembly-CSharp",
+    "name": "浆果",
+    "desc": "就浆果",
+    "type": 1,
+    "stacking": 5,
+    "durability": 24.0,
+    "healthAdjust": 0,
+    "hungerAdjust": 20,
+    "energyAdjust": 0,
+    "spiritAdjust": 0,
+    "equipmentParts": 0,
+    "getBuff": [
+      "0"
+    ],
+    "removeBuff": [
+      "0"
+    ],
+    "path": "Icon\\Item\\10033",
+    "id": "10033"
+  },
+  "10034": {
+    "$type": "ItemConfig, Assembly-CSharp",
+    "name": "碎肉",
+    "desc": "能看出来是肉",
+    "type": 1,
+    "stacking": 5,
+    "durability": 24.0,
+    "healthAdjust": 0,
+    "hungerAdjust": 30,
+    "energyAdjust": 0,
+    "spiritAdjust": 0,
+    "equipmentParts": 0,
+    "getBuff": [
+      "0"
+    ],
+    "removeBuff": [
+      "0"
+    ],
+    "path": "Icon\\Item\\10034",
+    "id": "10034"
+  },
+  "10035": {
+    "$type": "ItemConfig, Assembly-CSharp",
+    "name": "烤野菜",
+    "desc": "野菜被烤了",
+    "type": 1,
+    "stacking": 5,
+    "durability": 5.0,
+    "healthAdjust": 5,
+    "hungerAdjust": 20,
+    "energyAdjust": 5,
+    "spiritAdjust": 5,
+    "equipmentParts": 0,
+    "getBuff": [
+      "0"
+    ],
+    "removeBuff": [
+      "0"
+    ],
+    "path": "Icon\\Item\\10035",
+    "id": "10035"
+  },
+  "10036": {
+    "$type": "ItemConfig, Assembly-CSharp",
+    "name": "烤浆果",
+    "desc": "浆果被烤了",
+    "type": 1,
+    "stacking": 5,
+    "durability": 6.0,
+    "healthAdjust": 5,
+    "hungerAdjust": 40,
+    "energyAdjust": 5,
+    "spiritAdjust": 5,
+    "equipmentParts": 0,
+    "getBuff": [
+      "0"
+    ],
+    "removeBuff": [
+      "0"
+    ],
+    "path": "Icon\\Item\\10036",
+    "id": "10036"
+  },
+  "10037": {
+    "$type": "ItemConfig, Assembly-CSharp",
+    "name": "烤肉",
+    "desc": "肉被烤了",
+    "type": 1,
+    "stacking": 5,
+    "durability": 6.5,
+    "healthAdjust": 5,
+    "hungerAdjust": 60,
+    "energyAdjust": 5,
+    "spiritAdjust": 5,
+    "equipmentParts": 0,
+    "getBuff": [
+      "0"
+    ],
+    "removeBuff": [
+      "0"
+    ],
+    "path": "Icon\\Item\\10037",
+    "id": "10037"
   }
 }

@@ -52,7 +52,7 @@ public class BuildingEntity : MonoBehaviour
     {
         if (_isEnabled)
         {
-            if (Input.GetKeyUp(KeyCode.F))
+            if (Input.GetKeyUp(KeyCode.F) && CharacterMgr.Player().status == CharacterStatus.Idle)
             {
                 // 打开设计台界面
                 if (_instanceId == "design_platform")
@@ -91,7 +91,7 @@ public class BuildingEntity : MonoBehaviour
 
         if (_isObstacleEnabled)
         {
-            if (Input.GetKeyUp(KeyCode.F))
+            if (Input.GetKeyUp(KeyCode.F) && CharacterMgr.Player().status == CharacterStatus.Idle)
             {
                 // 清障
                 Debug.Log("清障");

@@ -26,6 +26,10 @@ public enum CharacterStatus
     /// </summary>
     Eat,
     /// <summary>
+    /// 探索
+    /// </summary>
+    Explore,
+    /// <summary>
     /// 死亡
     /// </summary>
     Dead

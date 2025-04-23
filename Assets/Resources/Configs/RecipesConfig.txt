@@ -2,11 +2,20 @@
   "$type": "System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[BaseConfig, Assembly-CSharp]], mscorlib",
   "2000301": {
     "$type": "RecipesConfig, Assembly-CSharp",
-    "productID": 11001,
-    "productAmount": 3,
+    "productName": "无",
+    "productID": [
+      "11001"
+    ],
+    "productAmount": [
+      3
+    ],
+    "ramdomAdjust": [
+      0
+    ],
+    "productTypeNum": 1,
     "materialIDGroup": [
-      10001,
-      10002
+      "10001",
+      "10002"
     ],
     "materialAmountGroup": [
       2,
@@ -17,11 +26,20 @@
   },
   "2000302": {
     "$type": "RecipesConfig, Assembly-CSharp",
-    "productID": 11002,
-    "productAmount": 3,
+    "productName": "无",
+    "productID": [
+      "11002"
+    ],
+    "productAmount": [
+      3
+    ],
+    "ramdomAdjust": [
+      0
+    ],
+    "productTypeNum": 1,
     "materialIDGroup": [
-      10001,
-      10002
+      "10001",
+      "10002"
     ],
     "materialAmountGroup": [
       2,
@@ -32,11 +50,20 @@
   },
   "2000401": {
     "$type": "RecipesConfig, Assembly-CSharp",
-    "productID": 12001,
-    "productAmount": 1,
+    "productName": "无",
+    "productID": [
+      "12001"
+    ],
+    "productAmount": [
+      1
+    ],
+    "ramdomAdjust": [
+      0
+    ],
+    "productTypeNum": 1,
     "materialIDGroup": [
-      10001,
-      10002
+      "10001",
+      "10002"
     ],
     "materialAmountGroup": [
       2,
@@ -47,11 +74,20 @@
   },
   "2000402": {
     "$type": "RecipesConfig, Assembly-CSharp",
-    "productID": 12003,
-    "productAmount": 1,
+    "productName": "无",
+    "productID": [
+      "12003"
+    ],
+    "productAmount": [
+      1
+    ],
+    "ramdomAdjust": [
+      0
+    ],
+    "productTypeNum": 1,
     "materialIDGroup": [
-      10001,
-      10002
+      "10001",
+      "10002"
     ],
     "materialAmountGroup": [
       2,

@@ -59,7 +59,7 @@ public class ProductionPlatformUIPanel : MonoSingleton<ProductionPlatformUIPanel
             item.GetComponent<Button>().onClick.AddListener(() =>
             {
                 var recipeConfig = RecipeMgr.GetRecipesConfig(recipeId);
-                var itemConfig = InventoryMgr.GetItemConfig(recipeConfig.productID.ToString());
+                var itemConfig = InventoryMgr.GetItemConfig(recipeConfig.productID[0]);
                 itemName.text = itemConfig.name;
                 itemDesc.text = itemConfig.desc;
                 required.text = "";

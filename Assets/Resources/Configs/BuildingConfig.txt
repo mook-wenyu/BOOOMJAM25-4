@@ -7,16 +7,20 @@
     "type": 0,
     "grid": 2,
     "materialIDGroup": [
-      10001,
-      10002
+      "10001",
+      "10002"
     ],
     "materialAmountGroup": [
       2,
       2
     ],
     "time": 1,
+    "capacity": [
+      3,
+      3
+    ],
     "recipes": [
-      0
+      "0"
     ],
     "light": 0,
     "path": "0",
@@ -29,16 +33,20 @@
     "type": 0,
     "grid": 3,
     "materialIDGroup": [
-      10001,
-      10002
+      "10001",
+      "10002"
     ],
     "materialAmountGroup": [
       2,
       2
     ],
     "time": 1,
+    "capacity": [
+      4,
+      2
+    ],
     "recipes": [
-      0
+      "0"
     ],
     "light": 0,
     "path": "0",
@@ -51,17 +59,20 @@
     "type": 1,
     "grid": 3,
     "materialIDGroup": [
-      10001,
-      10002
+      "10001",
+      "10002"
     ],
     "materialAmountGroup": [
       2,
       2
     ],
     "time": 3,
+    "capacity": [
+      0
+    ],
     "recipes": [
-      2000301,
-      2000302
+      "2000301",
+      "2000302"
     ],
     "light": 0,
     "path": "0",
@@ -74,17 +85,20 @@
     "type": 1,
     "grid": 4,
     "materialIDGroup": [
-      10001,
-      10002
+      "10001",
+      "10002"
     ],
     "materialAmountGroup": [
       2,
       2
     ],
     "time": 3,
+    "capacity": [
+      0
+    ],
     "recipes": [
-      2000401,
-      2000402
+      "2000401",
+      "2000402"
     ],
     "light": 0,
     "path": "0",
@@ -97,16 +111,19 @@
     "type": 2,
     "grid": 1,
     "materialIDGroup": [
-      10001,
-      10002
+      "10001",
+      "10002"
     ],
     "materialAmountGroup": [
       2,
       2
     ],
     "time": 1,
-    "recipes": [
+    "capacity": [
       0
+    ],
+    "recipes": [
+      "0"
     ],
     "light": 3,
     "path": "0",
@@ -119,16 +136,19 @@
     "type": 2,
     "grid": 3,
     "materialIDGroup": [
-      10001,
-      10002
+      "10001",
+      "10002"
     ],
     "materialAmountGroup": [
       2,
       2
     ],
     "time": 10,
-    "recipes": [
+    "capacity": [
       0
+    ],
+    "recipes": [
+      "0"
     ],
     "light": 20,
     "path": "0",

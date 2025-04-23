@@ -4,10 +4,11 @@ public class BuildingConfig : BaseConfig
     public string desc;
     public int type;
     public int grid;
-    public int[] materialIDGroup;
+    public string[] materialIDGroup;
     public int[] materialAmountGroup;
     public int time;
-    public int[] recipes;
+    public int[] capacity;
+    public string[] recipes;
     public int light;
     public string path;
 }

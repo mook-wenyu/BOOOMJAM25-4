@@ -1,8 +1,11 @@
 public class RecipesConfig : BaseConfig
 {
-    public int productID;
-    public int productAmount;
-    public int[] materialIDGroup;
+    public string productName;
+    public string[] productID;
+    public int[] productAmount;
+    public int[] ramdomAdjust;
+    public int productTypeNum;
+    public string[] materialIDGroup;
     public int[] materialAmountGroup;
     public int time;
 }
