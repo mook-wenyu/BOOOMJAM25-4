@@ -17,7 +17,7 @@ public class TopLevelUIPanel : MonoBehaviour
     public Slider health, hunger, energy, spirit;
     // public TextMeshProUGUI healthText, hungerText, energyText, spiritText;
 
-    public Button goOut;
+    public Button goOut, comeBack;
 
     private CharacterData player;
 
@@ -41,6 +41,8 @@ public class TopLevelUIPanel : MonoBehaviour
         player.OnSpiritMaxChanged += HandleSpiritMaxChanged;
 
         goOut.onClick.AddListener(OnGoOutBtnClicked);
+        comeBack.onClick.AddListener(OnComeBackBtnClicked);
+        comeBack.gameObject.SetActive(false);
     }
 
     void Start()
@@ -130,11 +132,23 @@ public class TopLevelUIPanel : MonoBehaviour
 
     public void OnGoOutBtnClicked()
     {
+        CharacterMgr.Player().status = CharacterStatus.Explore;
         GlobalUIMgr.Instance.ShowLoadingMask(true);
         GameMgr.PauseTime();
+        goOut.gameObject.SetActive(false);
+        comeBack.gameObject.SetActive(true);
         SceneMgr.Instance.LoadScene("ExploreScene", LoadSceneMode.Additive);
     }
 
+    public void OnComeBackBtnClicked()
+    {
+        GlobalUIMgr.Instance.ShowLoadingMask(true);
+        comeBack.gameObject.SetActive(false);
+        goOut.gameObject.SetActive(true);
+        SceneMgr.Instance.UnloadScene("ExploreScene");
+        CharacterMgr.Player().status = CharacterStatus.Idle;
+        GameMgr.ResumeTime();
+    }
 
     private void OnDestroy()
     {

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 public static class BuildingMgr
 {
+
     /// <summary>
     /// 获取原始建筑数据
     /// </summary>
@@ -36,6 +37,14 @@ public static class BuildingMgr
     public static void AddBuildingData(BuildingData buildingData)
     {
         GameMgr.currentSaveData.buildings.Add(buildingData.instanceId, buildingData);
+    }
+
+    /// <summary>
+    /// 判断是否存在建筑数据
+    /// </summary>
+    public static bool HasBuildingData(string instanceId)
+    {
+        return GameMgr.currentSaveData.buildings.ContainsKey(instanceId);
     }
 
 }

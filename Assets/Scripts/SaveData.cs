@@ -53,4 +53,9 @@ public class SaveData
     /// 对话存储
     /// </summary>
     public DialogueStorage dialogueStorage = new();
+
+    /// <summary>
+    /// 探索地图数据
+    /// </summary>
+    public Dictionary<string, ExploreMapData> exploreMaps = new();
 }

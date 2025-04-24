@@ -47,6 +47,15 @@ public class ProductionBuildingData : BuildingData
         GameMgr.currentSaveData.productionPlatforms[productionPlatformInstanceId] = productionPlatformData;
     }
 
+    public ProductionBuildingData(string buildingId, string instanceId, List<string> recipeIds)
+        : base(buildingId, instanceId)
+    {
+        // 创建生产数据
+        ProductionPlatformData productionPlatformData = new(instanceId, recipeIds);
+        productionPlatformInstanceId = productionPlatformData.instanceId;
+        GameMgr.currentSaveData.productionPlatforms[productionPlatformInstanceId] = productionPlatformData;
+    }
+
     /// <summary>
     /// 获取生产平台数据
     /// </summary>

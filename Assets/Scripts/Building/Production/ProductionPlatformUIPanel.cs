@@ -171,10 +171,12 @@ public class ProductionPlatformUIPanel : MonoSingleton<ProductionPlatformUIPanel
     {
         this._buildingInstanceId = buildingInstanceId;
         this._productionBuildingData = BuildingMgr.GetBuildingData<ProductionBuildingData>(buildingInstanceId);
+
         if (this._productionBuildingData != null)
         {
             productionPlatformName.text = this._productionBuildingData.GetBuilding().name;
         }
+
         this._productionPlatformData = this._productionBuildingData.GetProductionPlatformData();
 
         // 显示仓库UI

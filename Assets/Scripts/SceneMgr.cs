@@ -21,6 +21,7 @@ public class SceneMgr : MonoSingleton<SceneMgr>
     {
         foreach (GameObject obj in _mainSceneObjs)
         {
+            if (obj == null) continue;
             if (obj.name != "Main Camera" && obj.name != "Virtual Camera" && obj.name != "World") continue;
             obj.SetActive(true);
         }
@@ -123,5 +124,6 @@ public class SceneMgr : MonoSingleton<SceneMgr>
 
         SceneManager.SetActiveScene(SceneManager.GetSceneByName("MainScene"));
         ShowMainSceneObjects();
+        GlobalUIMgr.Instance.ShowLoadingMask(false);
     }
 }

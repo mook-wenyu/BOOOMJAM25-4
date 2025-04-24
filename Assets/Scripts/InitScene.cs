@@ -17,7 +17,7 @@ public class InitScene : MonoBehaviour
 
         GameMgr.initGame = true;
     }
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -46,8 +46,11 @@ public class InitScene : MonoBehaviour
 
     private async UniTask InitGameData()
     {
-        
+
         ConfigManager.Instance.Init();
+        await UniTask.Yield();
+
+        ExploreNodeMgr.Init();
         await UniTask.Yield();
 
         // 初始化

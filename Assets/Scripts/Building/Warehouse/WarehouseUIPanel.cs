@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class WarehouseUIPanel : MonoSingleton<WarehouseUIPanel>
 {
     public GameObject warehousePanel;
-    
+
     public TextMeshProUGUI warehouseName;
 
     public ScrollRect itemSlotContainer;
@@ -246,7 +246,7 @@ public class WarehouseUIPanel : MonoSingleton<WarehouseUIPanel>
             this._warehouseData.GetWarehouseData().OnInventoryChanged += UpdateUI;
             warehouseName.text = this._warehouseData.GetBuilding().name;
         }
-        
+
         // 显示仓库UI
         warehousePanel.SetActive(true);
         // 创建物品槽

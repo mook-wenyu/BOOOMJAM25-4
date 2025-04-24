@@ -10,7 +10,7 @@ using UnityEngine.Pool;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class DialogueUIPanel : MonoBehaviour
+public class DialogueUIPanel : MonoSingleton<DialogueUIPanel>
 {
     public GameObject dialogueUIPanel;
     public GameObject dialogueContentBG;
@@ -98,8 +98,11 @@ public class DialogueUIPanel : MonoBehaviour
     {
         Debug.Log("对话开始");
 
-        // 存档时机
-        await GameMgr.SaveGameData();
+        if (CharacterMgr.Player().status != CharacterStatus.Explore)
+        {
+            // 存档时机
+            await GameMgr.SaveGameData();
+        }
 
         await ShowDialogueUIPanel();
     }
@@ -211,8 +214,12 @@ public class DialogueUIPanel : MonoBehaviour
 
         dialogueUIPanel.SetActive(false);
 
-        // 存档时机
-        _ = GameMgr.SaveGameData();
+        if (CharacterMgr.Player().status != CharacterStatus.Explore)
+        {
+            // 存档时机
+            _ = GameMgr.SaveGameData();
+        }
+
     }
 
     private void OnClickHandler()
@@ -237,7 +244,7 @@ public class DialogueUIPanel : MonoBehaviour
         _activeChoices.Clear();
     }
 
-    void OnDestroy()
+    protected override void OnDestroy()
     {
         _choicePool.Clear();
         _choicePool.Dispose();
@@ -246,6 +253,8 @@ public class DialogueUIPanel : MonoBehaviour
         DialogueMgr.RunMgrs.OnChoicesDisplayed -= HandleChoicesDisplayed;
         DialogueMgr.RunMgrs.OnOptionSelected -= HandleOptionSelected;
         DialogueMgr.RunMgrs.OnDialogueCompleted -= HandleDialogueCompleted;
+
+        base.OnDestroy();
     }
 
 

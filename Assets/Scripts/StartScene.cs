@@ -137,6 +137,11 @@ public class StartScene : MonoBehaviour
         GameMgr.currentSaveData = new SaveData();
         GameMgr.currentSaveData.gameTime = new GameTime(1, 7, 0);
 
+        foreach (var map in ExploreNodeMgr.tempExploreMaps)
+        {
+            GameMgr.currentSaveData.exploreMaps.Add(map.Key, map.Value);
+        }
+
         CharacterData characterData = new CharacterData();
         characterData.id = "player";
         characterData.fullName = "玩家";
@@ -149,7 +154,7 @@ public class StartScene : MonoBehaviour
         Debug.Log($"添加新物品：{InventoryMgr.GetPlayerInventoryData().AddItem("12001")}");
         Debug.Log($"添加新物品：{InventoryMgr.GetPlayerInventoryData().AddItem("12002")}");
         Debug.Log($"添加新物品：{InventoryMgr.GetPlayerInventoryData().AddItem("12003")}");
-        
+
         BuildingMgr.AddBuildingData(new BuildBuildingData(string.Empty, "design_platform"));
         //BuildingMgr.AddBuildingData(new WarehouseBuildingData("20001", WarehouseType.Box, 9));
         //BuildingMgr.AddBuildingData(new WarehouseBuildingData("20002", WarehouseType.IceBox, 9));
