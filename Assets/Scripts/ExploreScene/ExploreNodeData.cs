@@ -43,6 +43,8 @@ public class ExploreNodeData
 
     public bool isCompleted;
 
+    public event Action<ExploreNodeData> OnNodeCompleted;
+
     public ExploreNodeData()
     {
     }
@@ -59,9 +61,16 @@ public class ExploreNodeData
         this.changedId = changedId;
     }
 
-    public void SetCompleted(bool isCompleted)
+    public void SetInitCompleted()
     {
-        this.isCompleted = isCompleted;
+        this.isCompleted = true;
+    }
+
+    public void SetCompleted()
+    {
+        if (isCompleted) return;
+        this.isCompleted = true;
+        OnNodeCompleted?.Invoke(this);
     }
 
     /// <summary>

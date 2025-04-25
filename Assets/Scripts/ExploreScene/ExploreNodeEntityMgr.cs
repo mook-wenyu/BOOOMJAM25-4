@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using UnityEngine;
 
 public class ExploreNodeEntityMgr : MonoSingleton<ExploreNodeEntityMgr>
@@ -10,12 +11,9 @@ public class ExploreNodeEntityMgr : MonoSingleton<ExploreNodeEntityMgr>
     public Transform nodeRoot;
     public GameObject nodePrefab;
 
-    private static Dictionary<string, ExploreNodeData> _nodeDict = new();
-
     void Awake()
     {
         nodeRoot.DestroyAllChildren();
-        _nodeDict.Clear();
     }
 
     // Start is called before the first frame update
@@ -23,6 +21,7 @@ public class ExploreNodeEntityMgr : MonoSingleton<ExploreNodeEntityMgr>
     {
         GenerateMap();
         playerUnit.Init();
+        playerUnit.OnNodeChanged += HandleNodeChanged;
     }
 
     /// <summary>
@@ -33,10 +32,14 @@ public class ExploreNodeEntityMgr : MonoSingleton<ExploreNodeEntityMgr>
         var nodes = ExploreNodeMgr.GetExploreMapData(ExploreNodeMgr.currentMapId).nodes.Values;
         foreach (var node in nodes)
         {
+            var config = node.GetConfig();
+            if (!config.isOnMap)
+                continue;
+
+            node.OnNodeCompleted += HandleNodeCompleted;
             var nodeObj = Instantiate(nodePrefab, nodeRoot);
             nodeObj.name = node.id;
-            var config = node.GetConfig();
-            nodeObj.transform.position = new Vector3(config.mapLocation[0], config.mapLocation[1], nodeRoot.position.z);
+            nodeObj.transform.position = new Vector3(node.pos.x, node.pos.y, nodeRoot.position.z);
             ExploreNodeEntity nodeEntity = nodeObj.GetComponent<ExploreNodeEntity>();
             nodeEntity.Setup(node);
             nodeEntity.OnClick += HandleNodeClicked;
@@ -63,81 +66,264 @@ public class ExploreNodeEntityMgr : MonoSingleton<ExploreNodeEntityMgr>
 
             }
             */
-            _nodeDict[node.id] = node;
+
+            nodeEntity.gameObject.SetActive(false);
         }
 
         // 重新生成路径
-        RoadPathMgr.Instance.GenerateAllRoadPaths(_nodeDict.Values.ToList());
+        RoadPathMgr.Instance.GenerateAllRoadPaths(nodes.ToList());
+
+        // 初始化地图显示
+        foreach (var node in nodes)
+        {
+            if (node.isCompleted)
+            {
+                var nodeConfig = node.GetConfig();
+                // 显示节点
+                nodeRoot.Find(node.id).gameObject.SetActive(true);
+                // 默认解锁
+                foreach (var nodeId in nodeConfig.unlocksMidNodes)
+                {
+                    UnlockNode(nodeId);
+                    ActivePath(node.id, nodeId);
+                }
+                // 完成后解锁
+                foreach (var nodeId in nodeConfig.unlocksPostNodes)
+                {
+                    UnlockNode(nodeId);
+                    ActivePath(node.id, nodeId);
+                }
+            }
+        }
     }
 
+    // 解锁节点
+    private void UnlockNode(string nodeId)
+    {
+        if (string.IsNullOrEmpty(nodeId) || nodeId == "0") return;
+        nodeRoot.Find(nodeId).gameObject.SetActive(true);
+    }
+
+    // 激活路径
+    private void ActivePath(string nodeId, string targetNodeId)
+    {
+        var lineId = RoadPathMgr.Instance.GetPathPairId(nodeId, targetNodeId);
+        if (RoadPathMgr.Instance.GetPathRenderers().TryGetValue(lineId, out var lineRenderer))
+            lineRenderer.gameObject.SetActive(true);
+    }
+
+    // 处理节点改变事件
+    private void HandleNodeChanged(string nodeId)
+    {
+        var targetNode = ExploreNodeMgr.GetExploreNodeData(nodeId);
+        var targetConfig = targetNode.GetConfig();
+
+        // 默认解锁
+        foreach (var unlockNodeId in targetConfig.unlocksMidNodes)
+        {
+            UnlockNode(unlockNodeId);
+            ActivePath(targetNode.id, unlockNodeId);
+        }
+        HandleNodeInteraction(targetNode, targetConfig);
+        Debug.Log($"节点改变: {nodeId}");
+    }
+
+    // 处理节点完成事件
+    private void HandleNodeCompleted(ExploreNodeData node)
+    {
+        var nodeConfig = node.GetConfig();
+        if (!string.IsNullOrEmpty(nodeConfig.nodeAfterComplete) && nodeConfig.nodeAfterComplete != "0")
+        {
+            HideAllUIPanels();
+
+            node.SetChangedId(nodeConfig.nodeAfterComplete);
+
+            if (node.isCompleted)
+            {
+                // 完成后解锁
+                foreach (var nodeId in nodeConfig.unlocksPostNodes)
+                {
+                    UnlockNode(nodeId);
+                    ActivePath(node.id, nodeId);
+                }
+            }
+        }
+
+    }
+
+    // 处理节点点击事件
     private void HandleNodeClicked(ExploreNodeData targetNode)
     {
-        var currentNode = _nodeDict.GetValueOrDefault(playerUnit.CurrentNodeId, null);
-        var currentConfig = currentNode.GetConfig();
+        if (playerUnit.IsMoving) return;
+
+        var currentNode = ExploreNodeMgr.GetExploreNodeData(playerUnit.CurrentNodeId);
         var targetConfig = targetNode.GetConfig();
+
         if (currentNode.id == targetNode.id)
         {
-            Debug.Log($"点击当前节点: {currentNode.id}");
+            HandleNodeInteraction(targetNode, targetConfig);
             return;
         }
+
+        if (!CanMoveToNode(currentNode, targetNode, targetConfig))
+        {
+            return;
+        }
+
+        HideAllUIPanels();
+
+        MovePlayerToNode(targetNode);
+
+        Debug.Log($"点击节点: {targetNode.id}");
+    }
+
+    // 处理节点点击事件
+    /*private void HandleNodeClicked(ExploreNodeData targetNode)
+    {
+        var currentNode = ExploreNodeMgr.GetExploreNodeData(playerUnit.CurrentNodeId);
+        var targetConfig = targetNode.GetConfig();
+
+        if (currentNode.id == targetNode.id)
+        {
+            HandleNodeInteraction(targetNode, targetConfig);
+            return;
+        }
+
+        if (!CanMoveToNode(currentNode, targetNode, targetConfig))
+        {
+            return;
+        }
+
+        MovePlayerToNode(targetNode);
+        HideAllUIPanels();
+        // 默认解锁
+        foreach (var nodeId in targetConfig.unlocksMidNodes)
+        {
+            UnlockNode(nodeId);
+            ActivePath(targetNode.id, nodeId);
+        }
+        HandleNodeInteraction(targetNode, targetConfig);
+        Debug.Log($"点击节点: {targetNode.id}");
+    }*/
+
+    // 检查是否可以移动到目标节点
+    private bool CanMoveToNode(ExploreNodeData currentNode, ExploreNodeData targetNode, ExploreNodeConfig targetConfig)
+    {
         if (!currentNode.isCompleted && !targetNode.isCompleted)
         {
-            Debug.Log($"当前节点未完成，无法到达节点: {targetNode.id}，当前节点: {currentNode.id}");
-            return;
+            Debug.Log($"当前节点未完成，无法到达新节点: {targetNode.id}，当前节点: {currentNode.id}");
+            return false;
         }
 
         if (!targetNode.neighborNodes.Contains(currentNode.id) && targetConfig.type != (int)ExploreNodeType.Functional)
         {
             Debug.Log($"无法到达节点: {targetNode.id}，当前节点: {currentNode.id}");
-            return;
+            return false;
         }
 
+        return true;
+    }
 
-        playerUnit.CurrentNodeId = targetNode.id;
-        playerUnit.transform.position = new Vector3(targetNode.pos.x, targetNode.pos.y, playerUnit.transform.position.z);
+    // 移动玩家到目标节点
+    private void MovePlayerToNode(ExploreNodeData targetNode)
+    {
+        playerUnit.MoveToNode(targetNode.id);
+        //playerUnit.CurrentNodeId = targetNode.id;
+        //playerUnit.transform.position = new Vector3(targetNode.pos.x, targetNode.pos.y, playerUnit.transform.position.z);
+    }
 
-        switch (targetConfig.type)
+    // 隐藏所有UI面板
+    private void HideAllUIPanels()
+    {
+        WarehouseUIPanel.Instance.Hide();
+        ProductionPlatformUIPanel.Instance.Hide();
+        SubmitUIPanel.Instance.Hide();
+    }
+
+    // 处理节点交互
+    private void HandleNodeInteraction(ExploreNodeData node, ExploreNodeConfig config)
+    {
+        switch ((ExploreNodeType)config.type)
         {
-            case (int)ExploreNodeType.Empty:
-                targetNode.SetCompleted(true);
+            case ExploreNodeType.Empty:
+            case ExploreNodeType.Functional:
+                node.SetCompleted();
+                break;
 
+            case ExploreNodeType.Reward:
+                HandleRewardNode(node);
                 break;
-            case (int)ExploreNodeType.Functional:
-                // 触发功能
-                targetNode.SetCompleted(true);
-                break;
-            case (int)ExploreNodeType.Reward:
-                // 触发奖励
-                targetNode.SetCompleted(true);
-                if (!BuildingMgr.HasBuildingData(targetNode.id))
-                {
-                    Debug.Log("创建仓库");
-                    BuildingMgr.AddBuildingData(new WarehouseBuildingData("20001", targetNode.id, WarehouseType.Box, 9));
-                }
 
-                WarehouseUIPanel.Instance.Show(targetNode.id);
+            case ExploreNodeType.Submit:
+                HandleSubmitNode(node);
                 break;
-            case (int)ExploreNodeType.Submit:
-                // 触发提交
-                SubmitUIPanel.Instance.Show();
-                break;
-            case (int)ExploreNodeType.Production:
-                // 触发生产
-                targetNode.SetCompleted(true);
-                if (!BuildingMgr.HasBuildingData(targetNode.id))
-                {
-                    Debug.Log("创建工具台");
-                    BuildingMgr.AddBuildingData(new ProductionBuildingData("20004", targetNode.id, targetConfig.recipeIdGroup.ToList()));
-                }
 
-                ProductionPlatformUIPanel.Instance.Show(targetNode.id);
+            case ExploreNodeType.Production:
+                HandleProductionNode(node, config);
                 break;
-            case (int)ExploreNodeType.Story:
-                // 触发剧情
-                DialogueUIPanel.Instance.StartDialogue(targetConfig.storyId);
+
+            case ExploreNodeType.Story:
+                HandleStoryNode(node, config);
                 break;
         }
-        Debug.Log($"点击节点: {targetNode.id}");
+    }
+
+    // 奖励节点
+    private void HandleRewardNode(ExploreNodeData node)
+    {
+        node.SetCompleted();
+        if (!BuildingMgr.HasBuildingData(node.id))
+        {
+            BuildingMgr.AddBuildingData(new WarehouseBuildingData("20001", node.id, WarehouseType.Box, 9));
+        }
+        if (!WarehouseUIPanel.Instance.uiPanel.activeSelf)
+            WarehouseUIPanel.Instance.Show(node.id);
+        else
+            WarehouseUIPanel.Instance.Hide();
+    }
+
+    // 提交节点
+    private void HandleSubmitNode(ExploreNodeData node)
+    {
+        if (!node.isCompleted)
+        {
+            if (!SubmitUIPanel.Instance.uiPanel.activeSelf)
+                SubmitUIPanel.Instance.Show();
+            else
+                SubmitUIPanel.Instance.Hide();
+        }
+    }
+
+    // 生产节点
+    private void HandleProductionNode(ExploreNodeData node, ExploreNodeConfig config)
+    {
+        node.SetCompleted();
+        if (!BuildingMgr.HasBuildingData(node.id))
+        {
+            BuildingMgr.AddBuildingData(new ProductionBuildingData("20004", node.id, config.recipeIdGroup.ToList()));
+        }
+        if (!ProductionPlatformUIPanel.Instance.uiPanel.activeSelf)
+            ProductionPlatformUIPanel.Instance.Show(node.id);
+        else
+            ProductionPlatformUIPanel.Instance.Hide();
+    }
+
+    // 剧情节点
+    private void HandleStoryNode(ExploreNodeData node, ExploreNodeConfig config)
+    {
+        if (!node.isCompleted)
+        {
+            DialogueUIPanel.Instance.StartDialogue(config.storyId);
+        }
+    }
+
+    public void Clear()
+    {
+        foreach (var node in ExploreNodeMgr.GetExploreMapData(ExploreNodeMgr.currentMapId).nodes.Values)
+        {
+            node.OnNodeCompleted -= HandleNodeCompleted;
+        }
+        nodeRoot.DestroyAllChildren();
     }
 
 }

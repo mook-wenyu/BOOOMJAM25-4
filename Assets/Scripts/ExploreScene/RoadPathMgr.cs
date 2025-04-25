@@ -108,10 +108,29 @@ public class RoadPathMgr : MonoSingleton<RoadPathMgr>
             lineRenderer.SetPosition(i, new Vector3(pathPoints[i].x, pathPoints[i].y, z));
         }
 
+        lineRenderer.gameObject.SetActive(false);
+
         pathRenderers[pathId] = lineRenderer;
     }
 
-
+    /// <summary>
+    /// 获取路径渲染器字典
+    /// </summary>
+    public Dictionary<string, LineRenderer> GetPathRenderers()
+    {
+        return pathRenderers;
+    }
+    
+    /// <summary>
+    /// 生成路径对的唯一标识符
+    /// </summary>
+    public string GetPathPairId(string id1, string id2)
+    {
+        // 确保相同的两个节点无论顺序如何都会生成相同的ID
+        var orderedIds = new[] { id1, id2 };
+        Array.Sort(orderedIds);
+        return $"{orderedIds[0]}_{orderedIds[1]}";
+    }
 
 
     /// <summary>
@@ -132,14 +151,4 @@ public class RoadPathMgr : MonoSingleton<RoadPathMgr>
 
 
 
-    /// <summary>
-    /// 生成路径对的唯一标识符
-    /// </summary>
-    public string GetPathPairId(string id1, string id2)
-    {
-        // 确保相同的两个节点无论顺序如何都会生成相同的ID
-        var orderedIds = new[] { id1, id2 };
-        Array.Sort(orderedIds);
-        return $"{orderedIds[0]}_{orderedIds[1]}";
-    }
 }

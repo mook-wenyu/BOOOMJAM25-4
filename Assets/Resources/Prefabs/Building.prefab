@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1827954408403465154}
   - component: {fileID: 1615522679618843080}
   - component: {fileID: 4459840455022218334}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Building
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,6 +99,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _instanceId: 
+  _buildingId: 
+  _isObstacle: 0
 --- !u!61 &4459840455022218334
 BoxCollider2D:
   m_ObjectHideFlags: 0

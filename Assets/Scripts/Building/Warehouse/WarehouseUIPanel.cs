@@ -6,9 +6,9 @@ using UnityEngine.UI;
 
 public class WarehouseUIPanel : MonoSingleton<WarehouseUIPanel>
 {
-    public GameObject warehousePanel;
+    public GameObject uiPanel;
 
-    public TextMeshProUGUI warehouseName;
+    public TextMeshProUGUI titleName;
 
     public ScrollRect itemSlotContainer;
     public GameObject itemSlotPrefab;
@@ -244,11 +244,11 @@ public class WarehouseUIPanel : MonoSingleton<WarehouseUIPanel>
         if (this._warehouseData != null)
         {
             this._warehouseData.GetWarehouseData().OnInventoryChanged += UpdateUI;
-            warehouseName.text = this._warehouseData.GetBuilding().name;
+            titleName.text = this._warehouseData.GetBuilding().name;
         }
 
         // 显示仓库UI
-        warehousePanel.SetActive(true);
+        uiPanel.SetActive(true);
         // 创建物品槽
         CreateItemSlots();
         // 初始显示
@@ -261,7 +261,7 @@ public class WarehouseUIPanel : MonoSingleton<WarehouseUIPanel>
         {
             this._warehouseData.GetWarehouseData().OnInventoryChanged -= UpdateUI;
         }
-        warehousePanel.SetActive(false);
+        uiPanel.SetActive(false);
     }
 
 }

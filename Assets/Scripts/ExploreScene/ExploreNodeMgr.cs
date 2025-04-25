@@ -24,7 +24,7 @@ public static class ExploreNodeMgr
             if (config.isStartPoint)
             {
                 tempExploreMaps[config.ownMap].SetStartNodeId(config.id);
-                node.SetCompleted(true);
+                node.SetInitCompleted();
             }
             tempExploreMaps[config.ownMap].Add(node);
         }

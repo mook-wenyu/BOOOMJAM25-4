@@ -134,7 +134,7 @@ public static class GameMgr
             {
                 if (!_isTimePaused)
                 {
-                    await currentSaveData.gameTime.AddMinutes();
+                    await currentSaveData.gameTime.AddMinutes(1);
                 }
                 await UniTask.Delay(0, cancellationToken: _timeUpdateCts.Token);
             }

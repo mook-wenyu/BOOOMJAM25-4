@@ -6,7 +6,7 @@
     "desc": "无",
     "type": 0,
     "ownMap": "0",
-    "isOnMap": false,
+    "isOnMap": true,
     "mapLocation": [
       0,
       0
@@ -19,7 +19,7 @@
       "0"
     ],
     "unlocksPostNodes": [
-      "0"
+      "71002"
     ],
     "nodeAfterComplete": "0",
     "rewardIdGroup": [
@@ -48,7 +48,7 @@
     "desc": "无",
     "type": 0,
     "ownMap": "0",
-    "isOnMap": false,
+    "isOnMap": true,
     "mapLocation": [
       1,
       1
@@ -59,7 +59,7 @@
       "71003"
     ],
     "unlocksMidNodes": [
-      "0"
+      "71003"
     ],
     "unlocksPostNodes": [
       "0"
@@ -91,7 +91,7 @@
     "desc": "无",
     "type": 0,
     "ownMap": "0",
-    "isOnMap": false,
+    "isOnMap": true,
     "mapLocation": [
       0,
       2

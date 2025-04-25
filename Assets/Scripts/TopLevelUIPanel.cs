@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using Cysharp.Threading.Tasks;
 using UnityEngine.SceneManagement;
 
-public class TopLevelUIPanel : MonoBehaviour
+public class TopLevelUIPanel : MonoSingleton<TopLevelUIPanel>
 {
     public GameObject timeInfo;
     public TextMeshProUGUI dataText;
@@ -132,12 +132,7 @@ public class TopLevelUIPanel : MonoBehaviour
 
     public void OnGoOutBtnClicked()
     {
-        CharacterMgr.Player().status = CharacterStatus.Explore;
-        GlobalUIMgr.Instance.ShowLoadingMask(true);
-        GameMgr.PauseTime();
-        goOut.gameObject.SetActive(false);
-        comeBack.gameObject.SetActive(true);
-        SceneMgr.Instance.LoadScene("ExploreScene", LoadSceneMode.Additive);
+        ExploreMapUIPanel.Instance.Show();
     }
 
     public void OnComeBackBtnClicked()
@@ -150,11 +145,13 @@ public class TopLevelUIPanel : MonoBehaviour
         GameMgr.ResumeTime();
     }
 
-    private void OnDestroy()
+    protected override void OnDestroy()
     {
         GameMgr.OnGameTimePaused -= HandleGameTimePaused;
         GameMgr.OnGameTimeResumed -= HandleGameTimeResumed;
         GameMgr.currentSaveData.gameTime.OnTimeChanged -= HandleTimeChanged;
+
+        base.OnDestroy();
     }
 
 }

@@ -6,9 +6,9 @@ using UnityEngine.UI;
 
 public class ProductionPlatformUIPanel : MonoSingleton<ProductionPlatformUIPanel>
 {
-    public GameObject productionPlatformPanel;
+    public GameObject uiPanel;
 
-    public TextMeshProUGUI productionPlatformName;
+    public TextMeshProUGUI titleName;
 
     public ScrollRect itemContainer;
     public GameObject itemPrefab;
@@ -38,7 +38,6 @@ public class ProductionPlatformUIPanel : MonoSingleton<ProductionPlatformUIPanel
     void CreateItem()
     {
         itemContainer.content.DestroyAllChildren();
-        productSlotContainer.content.DestroyAllChildren();
         foreach (var slot in _activeSlots)
         {
             slot.Clear();
@@ -174,13 +173,13 @@ public class ProductionPlatformUIPanel : MonoSingleton<ProductionPlatformUIPanel
 
         if (this._productionBuildingData != null)
         {
-            productionPlatformName.text = this._productionBuildingData.GetBuilding().name;
+            titleName.text = this._productionBuildingData.GetBuilding().name;
         }
 
         this._productionPlatformData = this._productionBuildingData.GetProductionPlatformData();
 
         // 显示仓库UI
-        productionPlatformPanel.SetActive(true);
+        uiPanel.SetActive(true);
         // 创建物品
         CreateItem();
         CreateItemSlots();
@@ -188,6 +187,6 @@ public class ProductionPlatformUIPanel : MonoSingleton<ProductionPlatformUIPanel
 
     public void Hide()
     {
-        productionPlatformPanel.SetActive(false);
+        uiPanel.SetActive(false);
     }
 }

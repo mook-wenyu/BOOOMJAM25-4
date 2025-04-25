@@ -41,10 +41,10 @@ public class RoomBuildingSystem : MonoSingleton<RoomBuildingSystem>
                 endX = building.transform.position.x + building.GetComponent<BoxCollider2D>().size.x,
                 floorId = floor.id,
                 building = building.gameObject,
-                buildingInstanceId = be.GetId(),
+                buildingInstanceId = be.GetIsObstacle() ? "obstacle_" + be.GetId() : be.GetId(),
                 buildingId = be.GetBuildingId()
             };
-            floor.placedBuildings[be.GetId()] = slot;
+            floor.placedBuildings[slot.buildingInstanceId] = slot;
         }
 
         buildingContainer.DestroyAllChildren();
@@ -56,7 +56,7 @@ public class RoomBuildingSystem : MonoSingleton<RoomBuildingSystem>
                 var building = Instantiate(buildingPrefab, buildingContainer);
                 building.transform.position = new Vector2(slot.startX, floor.yPosition);
                 building.GetComponent<BuildingEntity>().Setup(slot.buildingId, slot.buildingInstanceId);
-                building.GetComponent<BuildingEntity>().SetIsObstacle(slot.buildingInstanceId == "obstacle");
+                building.GetComponent<BuildingEntity>().SetIsObstacle(slot.buildingInstanceId.Split('_')[0] == "obstacle");
             }
         }
     }
@@ -120,7 +120,7 @@ public class RoomBuildingSystem : MonoSingleton<RoomBuildingSystem>
         // 1. 根据角色位置找到对应房间的楼层
         targetFloor = null;
         float minDistance = float.MaxValue;
-        
+
         foreach (var floor in GameMgr.currentSaveData.floors.Values)
         {
             // 检查水平位置是否在房间范围内

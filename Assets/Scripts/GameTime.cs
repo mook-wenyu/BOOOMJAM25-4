@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 
 [Serializable]
 public class GameTime
@@ -65,55 +66,51 @@ public class GameTime
     }
 
     /// <summary>
-    /// 增加1分钟
+    /// 增加分钟
     /// </summary>
-    public async UniTask AddMinutes()
+    public async UniTask AddMinutes(int minutes)
     {
-        await AddTime(1);
+        while (minutes > 0)
+        {
+            await AddTime();
+            minutes--;
+        }
     }
 
     /// <summary>
-    /// 增加小时，通过逐分钟增加实现
+    /// 增加小时，支持小数
     /// </summary>
     /// <param name="hours">要增加的小时数</param>
-    public async UniTask AddHours(int hours)
+    public async UniTask AddHours(float hours)
     {
         if (hours < 0)
             throw new System.ArgumentException("时间增量不能为负数");
 
-        for (int i = 0; i < hours * 60; i++)
-        {
-            await AddMinutes();
-        }
+        int totalMinutes = Mathf.RoundToInt(hours * 60); // 将小时转换为分钟并四舍五入
+        await AddMinutes(totalMinutes);
     }
 
     /// <summary>
-    /// 增加天数，通过逐分钟增加实现
+    /// 增加天数，支持小数
     /// </summary>
     /// <param name="days">要增加的天数</param>
-    public async UniTask AddDays(int days)
+    public async UniTask AddDays(float days)
     {
         if (days < 0)
             throw new System.ArgumentException("时间增量不能为负数");
 
-        for (int i = 0; i < days * 24 * 60; i++)
-        {
-            await AddMinutes();
-        }
+        int totalMinutes = Mathf.RoundToInt(days * 24 * 60); // 将天数转换为分钟并四舍五入
+        await AddMinutes(totalMinutes);
     }
 
     /// <summary>
-    /// 增加时间（只能增加分钟）
+    /// 增加1分钟时间
     /// </summary>
-    /// <param name="minutes">要增加的分钟数</param>
-    private async UniTask AddTime(int minutes = 1)
+    private async UniTask AddTime()
     {
-        if (minutes < 0)
-            throw new System.ArgumentException("时间增量不能为负数");
-
         int oldHour = this.hour; // 记录原小时值
 
-        this.minute += minutes;
+        this.minute += 1;
         if (this.minute >= 60)
         {
             this.hour += this.minute / 60;
@@ -141,8 +138,6 @@ public class GameTime
                 .Cast<Func<GameTime, UniTask>>()
                 .Select(handler => handler(this)));
         }
-
-        await UniTask.Yield();
     }
 
     /// <summary>

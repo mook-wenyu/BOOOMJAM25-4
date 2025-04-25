@@ -70,7 +70,7 @@ public class BuildingEntity : MonoBehaviour
                 switch (_buildingData.GetBuildingType())
                 {
                     case BuildingType.Warehouse:
-                        if (WarehouseUIPanel.Instance.warehousePanel.activeSelf)
+                        if (WarehouseUIPanel.Instance.uiPanel.activeSelf)
                         {
                             WarehouseUIPanel.Instance.Hide();
                             return;
@@ -78,7 +78,7 @@ public class BuildingEntity : MonoBehaviour
                         WarehouseUIPanel.Instance.Show(_instanceId);
                         break;
                     case BuildingType.Production:
-                        if (ProductionPlatformUIPanel.Instance.productionPlatformPanel.activeSelf)
+                        if (ProductionPlatformUIPanel.Instance.uiPanel.activeSelf)
                         {
                             ProductionPlatformUIPanel.Instance.Hide();
                             return;
