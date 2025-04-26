@@ -161,6 +161,17 @@ public static class GameMgr
 
     private static async UniTask UpdateHourlyTasksAsync(int batchSize)
     {
+        // 当前是上午7点，开启全局光源
+        if (currentSaveData.gameTime.IsSpecificFullHour(7))
+        {
+            WorldMgr.Instance.globalLight.intensity = 0.9f;
+        }
+        // 当前是下午午18点，关闭全局光源
+        if (currentSaveData.gameTime.IsSpecificFullHour(18))
+        {
+            WorldMgr.Instance.globalLight.intensity = 0.1f;
+        }
+
         // 更新角色
         var characters = currentSaveData.characters.Values.ToList();
         for (int i = 0; i < characters.Count; i += batchSize)

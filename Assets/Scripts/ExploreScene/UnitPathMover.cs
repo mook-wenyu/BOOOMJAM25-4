@@ -57,6 +57,7 @@ public class UnitPathMover : MonoBehaviour
                 {
                     PreviousNodeIds.RemoveAt(0);
                 }
+                _ = GameMgr.currentSaveData.gameTime.AddMinutes(1);
                 CurrentNodeId = _targetNode.id;
                 OnNodeChanged?.Invoke(CurrentNodeId);
             }

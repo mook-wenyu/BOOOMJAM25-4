@@ -13,7 +13,10 @@ public class BuildPlatformUIPanel : MonoSingleton<BuildPlatformUIPanel>
     public ScrollRect itemContainer;
     public GameObject itemPrefab;
 
-    public TextMeshProUGUI itemName, itemDesc, required, itemTime;
+    public TextMeshProUGUI itemName, itemDesc, itemTime;
+    public Transform requiredContainer;
+    public GameObject requiredItemPrefab;
+
     public Button startBuildBtn;
 
     private string _buildingInstanceId;
@@ -31,7 +34,6 @@ public class BuildPlatformUIPanel : MonoSingleton<BuildPlatformUIPanel>
         itemContainer.content.DestroyAllChildren();
         itemName.text = "";
         itemDesc.text = "";
-        required.text = "";
         itemTime.text = "";
         startBuildBtn.interactable = false;
         startBuildBtn.onClick.RemoveAllListeners();
@@ -45,12 +47,13 @@ public class BuildPlatformUIPanel : MonoSingleton<BuildPlatformUIPanel>
             {
                 itemName.text = building.name;
                 itemDesc.text = building.desc;
-                required.text = "";
+                requiredContainer.DestroyAllChildren();
                 for (int i = 0; i < building.materialIDGroup.Length; i++)
                 {
-                    required.text += InventoryMgr.GetItemConfig(building.materialIDGroup[i].ToString()).name + " x " + building.materialAmountGroup[i] + "\n";
+                    var requiredItem = Instantiate(requiredItemPrefab, requiredContainer).GetComponent<RequiredItemSlot>();
+                    requiredItem.Setup(building.materialIDGroup[i].ToString(), building.materialAmountGroup[i]);
                 }
-                itemTime.text = building.time.ToString() + "秒";
+                itemTime.text = building.time.ToString() + "小时";
 
                 startBuildBtn.interactable = true;
                 startBuildBtn.onClick.RemoveAllListeners();

@@ -10,7 +10,9 @@ public class SubmitUIPanel : MonoSingleton<SubmitUIPanel>
 
     public TextMeshProUGUI titleName;
 
-    public TextMeshProUGUI desc, required, time;
+    public TextMeshProUGUI desc, time;
+    public Transform requiredContainer;
+    public GameObject requiredItemPrefab;
     public Button startBtn;
 
     void Awake()

@@ -135,6 +135,13 @@ public class InventoryUIPanel : MonoBehaviour
             }
         }
 
+        // 如果处于探索，则不能将物品放入仓库
+        if (CharacterMgr.Player().status == CharacterStatus.Explore && toInventory.GetInventoryType() == InventoryType.Warehouse)
+        {
+            Debug.Log("探索中不能将物品放入仓库");
+            return;
+        }
+
         // 如果是交换，且源是仓库，还需要检查源仓库的类型限制
         if (toSlot.CurrentItem != null && 
             fromInventory.GetInventoryType() == InventoryType.Warehouse && 

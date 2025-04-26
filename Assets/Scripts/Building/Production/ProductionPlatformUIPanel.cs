@@ -13,7 +13,9 @@ public class ProductionPlatformUIPanel : MonoSingleton<ProductionPlatformUIPanel
     public ScrollRect itemContainer;
     public GameObject itemPrefab;
 
-    public TextMeshProUGUI itemName, itemDesc, required, itemTime;
+    public TextMeshProUGUI itemName, itemDesc, itemTime;
+    public Transform requiredContainer;
+    public GameObject requiredItemPrefab;
     public Button startProductionBtn;
 
     public ScrollRect productSlotContainer;
@@ -45,7 +47,6 @@ public class ProductionPlatformUIPanel : MonoSingleton<ProductionPlatformUIPanel
 
         itemName.text = "";
         itemDesc.text = "";
-        required.text = "";
         itemTime.text = "";
         startProductionBtn.interactable = false;
         startProductionBtn.onClick.RemoveAllListeners();
@@ -61,12 +62,13 @@ public class ProductionPlatformUIPanel : MonoSingleton<ProductionPlatformUIPanel
                 var itemConfig = InventoryMgr.GetItemConfig(recipeConfig.productID[0]);
                 itemName.text = itemConfig.name;
                 itemDesc.text = itemConfig.desc;
-                required.text = "";
+                requiredContainer.DestroyAllChildren();
                 for (int i = 0; i < recipeConfig.materialIDGroup.Length; i++)
                 {
-                    required.text += InventoryMgr.GetItemConfig(recipeConfig.materialIDGroup[i].ToString()).name + " x " + recipeConfig.materialAmountGroup[i] + "\n";
+                    var requiredItem = Instantiate(requiredItemPrefab, requiredContainer).GetComponent<RequiredItemSlot>();
+                    requiredItem.Setup(recipeConfig.materialIDGroup[i].ToString(), recipeConfig.materialAmountGroup[i]);
                 }
-                itemTime.text = recipeConfig.time.ToString() + "秒";
+                itemTime.text = recipeConfig.time.ToString() + "小时";
 
                 startProductionBtn.interactable = true;
                 startProductionBtn.onClick.RemoveAllListeners();
