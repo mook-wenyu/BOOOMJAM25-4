@@ -11,6 +11,8 @@ public class ProductionData
 
     public int remainingTime;    // 剩余时间
 
+    private int totalTime;  // 总时间
+
     [NonSerialized]
     private RecipesConfig _recipe;    // 配方数据缓存
 
@@ -28,7 +30,8 @@ public class ProductionData
         _recipe = RecipeMgr.GetRecipesConfig(recipeId);
         if (_recipe != null)
         {
-            remainingTime = _recipe.time;
+            totalTime = GameTime.HourToMinute(_recipe.time);
+            remainingTime = totalTime;
         }
     }
 
@@ -44,7 +47,7 @@ public class ProductionData
         if (_recipe == null || _recipe.time <= 0)
             return;
 
-        remainingTime = Math.Min(time, _recipe.time);
+        remainingTime = Math.Min(time, totalTime);
         OnRecipeTimeChanged?.Invoke(this);
 
         if (IsComplete())
@@ -60,8 +63,6 @@ public class ProductionData
 
     public bool IsComplete()
     {
-        _recipe ??= RecipeMgr.GetRecipesConfig(recipeId);
-
-        return _recipe != null && _recipe.time > 0 && remainingTime <= 0;
+        return totalTime > 0 && remainingTime <= 0;
     }
 }

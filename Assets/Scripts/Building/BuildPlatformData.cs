@@ -8,11 +8,11 @@ public class BuildPlatformData
     public string instanceId = System.Guid.NewGuid().ToString("N");   // 实例ID
 
     public List<string> buildings = new();    // 建筑列表
-    
+
     public List<BuildingData> buildingProgress = new(); // 正在生产中的建筑
-    
+
     public BuildPlatformData() { }
-    
+
     /// <summary>
     /// 开始建造
     /// </summary>
@@ -45,27 +45,27 @@ public class BuildPlatformData
         {
             playerInventory.RemoveItem(buildingConfig.materialIDGroup[i].ToString(), buildingConfig.materialAmountGroup[i]);
         }
-        
+
         // 设置角色状态为建造中
         CharacterEntityMgr.Instance.GetPlayer().GetCharacterData().status = CharacterStatus.Build;
         CharacterEntityMgr.Instance.GetPlayer().GetAnimator().SetBool("IsBuild", true);
-        switch ((BuildingType) buildingConfig.type)
+        switch ((BuildingType)buildingConfig.type)
         {
             case BuildingType.Warehouse:
-                if(buildingConfig.id == "20001")
+                if (buildingConfig.id == "20012")
                 {
-                    buildingProgress.Add(new WarehouseBuildingData(buildingId, buildingInstanceId, WarehouseType.Box, 9));
+                    buildingProgress.Add(new WarehouseBuildingData(buildingId, buildingInstanceId, WarehouseType.IceBox, buildingConfig.capacity[0] * buildingConfig.capacity[1]));
                 }
-                if(buildingConfig.id == "20002")
+                else
                 {
-                    buildingProgress.Add(new WarehouseBuildingData(buildingId, buildingInstanceId, WarehouseType.IceBox, 9));
+                    buildingProgress.Add(new WarehouseBuildingData(buildingId, buildingInstanceId, WarehouseType.Box, buildingConfig.capacity[0] * buildingConfig.capacity[1]));
                 }
                 break;
             case BuildingType.Production:
-                buildingProgress.Add(new ProductionBuildingData(buildingId, buildingInstanceId));                
+                buildingProgress.Add(new ProductionBuildingData(buildingId, buildingInstanceId));
                 break;
         }
         Debug.Log("开始建造");
     }
-    
+
 }

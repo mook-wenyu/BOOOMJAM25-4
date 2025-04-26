@@ -51,14 +51,13 @@ public class ProductionPlatformUIPanel : MonoSingleton<ProductionPlatformUIPanel
         startProductionBtn.interactable = false;
         startProductionBtn.onClick.RemoveAllListeners();
 
-        foreach (string recipe in _productionPlatformData.recipes)
+        foreach (string recipeId in _productionPlatformData.recipes)
         {
             var item = Instantiate(itemPrefab, itemContainer.content).GetComponent<ProductionPlatformItem>();
-            string recipeId = recipe;
-            item.Setup(recipeId);
+            var recipeConfig = RecipeMgr.GetRecipesConfig(recipeId);
+            item.Setup(recipeConfig);
             item.GetComponent<Button>().onClick.AddListener(() =>
             {
-                var recipeConfig = RecipeMgr.GetRecipesConfig(recipeId);
                 var itemConfig = InventoryMgr.GetItemConfig(recipeConfig.productID[0]);
                 itemName.text = itemConfig.name;
                 itemDesc.text = itemConfig.desc;
@@ -74,7 +73,6 @@ public class ProductionPlatformUIPanel : MonoSingleton<ProductionPlatformUIPanel
                 startProductionBtn.onClick.RemoveAllListeners();
                 startProductionBtn.onClick.AddListener(() =>
                 {
-                    var recipeConfig = RecipeMgr.GetRecipesConfig(recipeId);
                     if (recipeConfig == null)
                     {
                         Debug.Log("配方不存在");
@@ -162,7 +160,7 @@ public class ProductionPlatformUIPanel : MonoSingleton<ProductionPlatformUIPanel
         if (item.IsComplete())
         {
             var recipeConfig = RecipeMgr.GetRecipesConfig(item.recipeId);
-            InventoryMgr.GetPlayerInventoryData().AddItem(recipeConfig.productID.ToString(), 1);
+            InventoryMgr.GetPlayerInventoryData().AddItem(recipeConfig.productID[0], 1);
             _productionPlatformData.productionProgress.Remove(item);
             CreateItemSlots();
         }
@@ -175,7 +173,7 @@ public class ProductionPlatformUIPanel : MonoSingleton<ProductionPlatformUIPanel
 
         if (this._productionBuildingData != null)
         {
-            titleName.text = this._productionBuildingData.GetBuilding().name;
+            titleName.text = this._productionBuildingData.GetBuildingConfig().name;
         }
 
         this._productionPlatformData = this._productionBuildingData.GetProductionPlatformData();

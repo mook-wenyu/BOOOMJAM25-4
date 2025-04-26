@@ -2,45 +2,316 @@
   "$type": "System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[BaseConfig, Assembly-CSharp]], mscorlib",
   "20001": {
     "$type": "BuildingConfig, Assembly-CSharp",
-    "name": "木箱",
-    "desc": "可以放一点东西",
-    "type": 0,
+    "name": "火堆",
+    "desc": "用石头和木头堆成的火堆",
+    "type": 1,
     "grid": 2,
     "materialIDGroup": [
+      "10002",
+      "10003",
+      "10001"
+    ],
+    "materialAmountGroup": [
+      1,
+      1,
+      1
+    ],
+    "time": 1.0,
+    "capacity": [
+      0
+    ],
+    "recipes": [
+      "2000101",
+      "2000102",
+      "2000103",
+      "2000104",
+      "2000105"
+    ],
+    "light": 1,
+    "path": "Building\\20001",
+    "id": "20001"
+  },
+  "20002": {
+    "$type": "BuildingConfig, Assembly-CSharp",
+    "name": "工具台",
+    "desc": "用木板和锋利铁片简单搭成的制作台",
+    "type": 1,
+    "grid": 3,
+    "materialIDGroup": [
+      "10004",
       "10001",
       "10002"
     ],
     "materialAmountGroup": [
-      2,
+      1,
+      1,
+      1
+    ],
+    "time": 1.0,
+    "capacity": [
+      0
+    ],
+    "recipes": [
+      "2000201",
+      "2000202",
+      "2000203"
+    ],
+    "light": 0,
+    "path": "Building\\20002",
+    "id": "20002"
+  },
+  "20003": {
+    "$type": "BuildingConfig, Assembly-CSharp",
+    "name": "木箱",
+    "desc": "就木箱",
+    "type": 0,
+    "grid": 1,
+    "materialIDGroup": [
+      "10001"
+    ],
+    "materialAmountGroup": [
       2
     ],
-    "time": 1,
+    "time": 1.0,
     "capacity": [
-      3,
+      2,
       3
     ],
     "recipes": [
       "0"
     ],
     "light": 0,
-    "path": "0",
-    "id": "20001"
+    "path": "Building\\20003",
+    "id": "20003"
   },
-  "20002": {
+  "20004": {
     "$type": "BuildingConfig, Assembly-CSharp",
-    "name": "冰箱",
-    "desc": "食物放进去不会失去耐久度",
-    "type": 0,
+    "name": "简易炉灶",
+    "desc": "用石头简单搭起来的加热食物的地方",
+    "type": 1,
+    "grid": 2,
+    "materialIDGroup": [
+      "10002",
+      "10006"
+    ],
+    "materialAmountGroup": [
+      1,
+      2
+    ],
+    "time": 1.0,
+    "capacity": [
+      0
+    ],
+    "recipes": [
+      "0"
+    ],
+    "light": 0,
+    "path": "Building\\20004",
+    "id": "20004"
+  },
+  "20005": {
+    "$type": "BuildingConfig, Assembly-CSharp",
+    "name": "烛台",
+    "desc": "手搓的小蜡烛，有小范围照明能力",
+    "type": 2,
+    "grid": 1,
+    "materialIDGroup": [
+      "10003",
+      "10005"
+    ],
+    "materialAmountGroup": [
+      1,
+      2
+    ],
+    "time": 1.0,
+    "capacity": [
+      0
+    ],
+    "recipes": [
+      "0"
+    ],
+    "light": 3,
+    "path": "Building\\20005",
+    "id": "20005"
+  },
+  "20006": {
+    "$type": "BuildingConfig, Assembly-CSharp",
+    "name": "熔炉",
+    "desc": "将废铁炼化成铁锭的熔炉",
+    "type": 1,
     "grid": 3,
     "materialIDGroup": [
-      "10001",
-      "10002"
+      "10007",
+      "10004",
+      "10006"
     ],
     "materialAmountGroup": [
       2,
+      2,
       2
     ],
-    "time": 1,
+    "time": 1.0,
+    "capacity": [
+      0
+    ],
+    "recipes": [
+      "2000601"
+    ],
+    "light": 0,
+    "path": "Building\\20006",
+    "id": "20006"
+  },
+  "20007": {
+    "$type": "BuildingConfig, Assembly-CSharp",
+    "name": "铁砧",
+    "desc": "能够利用铁锭进行锻造的铁砧",
+    "type": 1,
+    "grid": 3,
+    "materialIDGroup": [
+      "10007",
+      "10008",
+      "10006"
+    ],
+    "materialAmountGroup": [
+      1,
+      1,
+      1
+    ],
+    "time": 1.0,
+    "capacity": [
+      0
+    ],
+    "recipes": [
+      "2000701",
+      "2000702"
+    ],
+    "light": 0,
+    "path": "Building\\20007",
+    "id": "20007"
+  },
+  "20008": {
+    "$type": "BuildingConfig, Assembly-CSharp",
+    "name": "炖煮锅",
+    "desc": "有明显锅具形状的，能够进行长时间炖煮的器具",
+    "type": 1,
+    "grid": 2,
+    "materialIDGroup": [
+      "10008",
+      "10006"
+    ],
+    "materialAmountGroup": [
+      1,
+      1
+    ],
+    "time": 1.0,
+    "capacity": [
+      0
+    ],
+    "recipes": [
+      "0"
+    ],
+    "light": 0,
+    "path": "Building\\20008",
+    "id": "20008"
+  },
+  "20009": {
+    "$type": "BuildingConfig, Assembly-CSharp",
+    "name": "缝纫机",
+    "desc": "就缝纫机",
+    "type": 1,
+    "grid": 2,
+    "materialIDGroup": [
+      "10008",
+      "10017",
+      "10003"
+    ],
+    "materialAmountGroup": [
+      1,
+      1,
+      2
+    ],
+    "time": 1.0,
+    "capacity": [
+      0
+    ],
+    "recipes": [
+      "2000901",
+      "2000902",
+      "2000903"
+    ],
+    "light": 0,
+    "path": "Building\\20009",
+    "id": "20009"
+  },
+  "20010": {
+    "$type": "BuildingConfig, Assembly-CSharp",
+    "name": "油灯",
+    "desc": "用一瓶油和烛芯做成的简单油灯，有中等照明范围",
+    "type": 2,
+    "grid": 1,
+    "materialIDGroup": [
+      "10016",
+      "10005"
+    ],
+    "materialAmountGroup": [
+      1,
+      1
+    ],
+    "time": 1.0,
+    "capacity": [
+      0
+    ],
+    "recipes": [
+      "0"
+    ],
+    "light": 5,
+    "path": "Building\\20010",
+    "id": "20010"
+  },
+  "20011": {
+    "$type": "BuildingConfig, Assembly-CSharp",
+    "name": "加工台",
+    "desc": "利用电能进行切割/拼接的更高等级的工具台，能看到电路和大型工具的元素",
+    "type": 1,
+    "grid": 3,
+    "materialIDGroup": [
+      "10010",
+      "10009",
+      "10008"
+    ],
+    "materialAmountGroup": [
+      1,
+      1,
+      1
+    ],
+    "time": 1.0,
+    "capacity": [
+      0
+    ],
+    "recipes": [
+      "2001101",
+      "2001102",
+      "20011003"
+    ],
+    "light": 0,
+    "path": "Building\\20011",
+    "id": "20011"
+  },
+  "20012": {
+    "$type": "BuildingConfig, Assembly-CSharp",
+    "name": "冰箱",
+    "desc": "小型冰箱",
+    "type": 0,
+    "grid": 1,
+    "materialIDGroup": [
+      "10009",
+      "10018"
+    ],
+    "materialAmountGroup": [
+      1,
+      1
+    ],
+    "time": 1.0,
     "capacity": [
       4,
       2
@@ -49,109 +320,56 @@
       "0"
     ],
     "light": 0,
-    "path": "0",
-    "id": "20002"
+    "path": "Building\\20012",
+    "id": "20012"
   },
-  "20003": {
+  "20013": {
     "$type": "BuildingConfig, Assembly-CSharp",
-    "name": "灶台",
-    "desc": "可以搞各类炒菜的地方",
-    "type": 1,
-    "grid": 3,
+    "name": "坚固木箱",
+    "desc": "比木箱更坚固更大的箱子（能看到钉子之类的）",
+    "type": 0,
+    "grid": 1,
     "materialIDGroup": [
-      "10001",
-      "10002"
+      "10011"
     ],
     "materialAmountGroup": [
-      2,
-      2
+      1
     ],
-    "time": 3,
+    "time": 1.0,
     "capacity": [
-      0
+      3,
+      4
     ],
     "recipes": [
-      "2000301",
-      "2000302"
+      "0"
     ],
     "light": 0,
-    "path": "0",
-    "id": "20003"
+    "path": "Building\\20013",
+    "id": "20013"
   },
-  "20004": {
+  "20014": {
     "$type": "BuildingConfig, Assembly-CSharp",
-    "name": "工具台",
-    "desc": "可以生产工具的地方",
-    "type": 1,
-    "grid": 4,
-    "materialIDGroup": [
-      "10001",
-      "10002"
-    ],
-    "materialAmountGroup": [
-      2,
-      2
-    ],
-    "time": 3,
-    "capacity": [
-      0
-    ],
-    "recipes": [
-      "2000401",
-      "2000402"
-    ],
-    "light": 0,
-    "path": "0",
-    "id": "20004"
-  },
-  "20005": {
-    "$type": "BuildingConfig, Assembly-CSharp",
-    "name": "蜡烛台",
-    "desc": "点亮周围3格",
+    "name": "电灯",
+    "desc": "用电的照明设备，有最大的照明范围",
     "type": 2,
     "grid": 1,
     "materialIDGroup": [
-      "10001",
-      "10002"
+      "10009",
+      "10005"
     ],
     "materialAmountGroup": [
-      2,
-      2
+      1,
+      1
     ],
-    "time": 1,
+    "time": 1.0,
     "capacity": [
       0
     ],
     "recipes": [
       "0"
     ],
-    "light": 3,
-    "path": "0",
-    "id": "20005"
-  },
-  "20006": {
-    "$type": "BuildingConfig, Assembly-CSharp",
-    "name": "超级大电灯",
-    "desc": "点亮周围20格",
-    "type": 2,
-    "grid": 3,
-    "materialIDGroup": [
-      "10001",
-      "10002"
-    ],
-    "materialAmountGroup": [
-      2,
-      2
-    ],
-    "time": 10,
-    "capacity": [
-      0
-    ],
-    "recipes": [
-      "0"
-    ],
-    "light": 20,
-    "path": "0",
-    "id": "20006"
+    "light": 8,
+    "path": "Building\\20014",
+    "id": "20014"
   }
 }

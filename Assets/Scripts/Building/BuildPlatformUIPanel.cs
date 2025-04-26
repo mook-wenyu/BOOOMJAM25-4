@@ -40,9 +40,8 @@ public class BuildPlatformUIPanel : MonoSingleton<BuildPlatformUIPanel>
 
         foreach (var building in BuildingMgr.GetAllBuildingConfigs())
         {
-            var item = Instantiate(itemPrefab, itemContainer.content).GetComponent<ProductionPlatformItem>();
-            string buildingId = building.id;
-            item.Setup(buildingId);
+            var item = Instantiate(itemPrefab, itemContainer.content).GetComponent<BuildPlatformItem>();
+            item.Setup(building);
             item.GetComponent<Button>().onClick.AddListener(() =>
             {
                 itemName.text = building.name;
@@ -76,7 +75,7 @@ public class BuildPlatformUIPanel : MonoSingleton<BuildPlatformUIPanel>
                         return;
                     }
                     Hide();
-                    RoomBuildingSystem.Instance.StartPlacingBuilding(_buildingInstanceId, buildingId);
+                    RoomBuildingSystem.Instance.StartPlacingBuilding(_buildingInstanceId, building.id);
                 });
             });
         }

@@ -8,6 +8,8 @@ public class BuildingEntity : MonoBehaviour
     [SerializeField] private string _instanceId;   // 实例ID
     [SerializeField] private string _buildingId;   // 建筑ID
     [SerializeField] private bool _isObstacle = false;   // 是否障碍物
+    private SpriteRenderer _spriteRenderer;
+    private BoxCollider2D _boxCollider;
 
     private BuildingData _buildingData;   // 建筑数据
 
@@ -18,6 +20,8 @@ public class BuildingEntity : MonoBehaviour
 
     void Awake()
     {
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _boxCollider = GetComponent<BoxCollider2D>();
         GetComponent<Collider2D>().isTrigger = !_isObstacle;
     }
 
@@ -25,6 +29,17 @@ public class BuildingEntity : MonoBehaviour
     {
         _instanceId = instanceId;
         _buildingId = buildingId;
+
+        var config = BuildingMgr.GetBuildingConfig(buildingId);
+        if (config != null)
+        {
+            if (!string.IsNullOrEmpty(config.path) && config.path != "0")
+            {
+                _spriteRenderer.sprite = Resources.Load<Sprite>(config.path);
+                _boxCollider.size = _spriteRenderer.sprite.bounds.size;
+                _boxCollider.offset = _spriteRenderer.sprite.bounds.center;
+            }
+        }
     }
 
     public string GetId()

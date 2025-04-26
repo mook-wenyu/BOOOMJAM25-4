@@ -28,6 +28,8 @@ public class BuildingData
 
     public int remainingTime;   // 剩余时间
 
+    private int totalTime;  // 总时间
+
     [NonSerialized]
     private BuildingConfig _building;    // 建筑数据缓存
 
@@ -45,7 +47,8 @@ public class BuildingData
         _building = BuildingMgr.GetBuildingConfig(buildingId);
         if (_building != null)
         {
-            remainingTime = _building.time;
+            totalTime = GameTime.HourToMinute(_building.time);
+            remainingTime = totalTime;
         }
     }
 
@@ -57,11 +60,12 @@ public class BuildingData
         _building = BuildingMgr.GetBuildingConfig(buildingId);
         if (_building != null)
         {
-            remainingTime = _building.time;
+            totalTime = GameTime.HourToMinute(_building.time);
+            remainingTime = totalTime;
         }
     }
 
-    public BuildingConfig GetBuilding()
+    public BuildingConfig GetBuildingConfig()
     {
         _building ??= BuildingMgr.GetBuildingConfig(buildingId);
         return _building;
@@ -82,7 +86,7 @@ public class BuildingData
         if (_building == null || _building.time <= 0)
             return;
 
-        remainingTime = Math.Min(time, _building.time);
+        remainingTime = Math.Min(time, totalTime);
         OnBuildingTimeChanged?.Invoke(this);
 
         if (IsComplete())
@@ -104,8 +108,6 @@ public class BuildingData
     /// </summary>
     public bool IsComplete()
     {
-        _building ??= BuildingMgr.GetBuildingConfig(buildingId);
-
-        return _building != null && _building.time > 0 && remainingTime <= 0;
+        return totalTime > 0 && remainingTime <= 0;
     }
 }

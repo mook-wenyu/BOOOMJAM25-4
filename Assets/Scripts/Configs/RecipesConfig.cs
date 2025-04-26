@@ -7,5 +7,5 @@ public class RecipesConfig : BaseConfig
     public int productTypeNum;
     public string[] materialIDGroup;
     public int[] materialAmountGroup;
-    public int time;
+    public double time;
 }

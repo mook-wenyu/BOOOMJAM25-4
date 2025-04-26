@@ -6,7 +6,7 @@ public class BuildingConfig : BaseConfig
     public int grid;
     public string[] materialIDGroup;
     public int[] materialAmountGroup;
-    public int time;
+    public double time;
     public int[] capacity;
     public string[] recipes;
     public int light;

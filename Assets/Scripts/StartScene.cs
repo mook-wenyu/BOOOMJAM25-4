@@ -149,15 +149,10 @@ public class StartScene : MonoBehaviour
 
         Debug.Log($"添加新物品：{InventoryMgr.GetPlayerInventoryData().AddItem("10001", 10)}");
         Debug.Log($"添加新物品：{InventoryMgr.GetPlayerInventoryData().AddItem("10002", 10)}");
-        Debug.Log($"添加新物品：{InventoryMgr.GetPlayerInventoryData().AddItem("11001")}");
-        Debug.Log($"添加新物品：{InventoryMgr.GetPlayerInventoryData().AddItem("11002")}");
-        Debug.Log($"添加新物品：{InventoryMgr.GetPlayerInventoryData().AddItem("12001")}");
-        Debug.Log($"添加新物品：{InventoryMgr.GetPlayerInventoryData().AddItem("12002")}");
-        Debug.Log($"添加新物品：{InventoryMgr.GetPlayerInventoryData().AddItem("12003")}");
+        Debug.Log($"添加新物品：{InventoryMgr.GetPlayerInventoryData().AddItem("10003", 10)}");
+        Debug.Log($"添加新物品：{InventoryMgr.GetPlayerInventoryData().AddItem("10004", 10)}");
 
         BuildingMgr.AddBuildingData(new BuildBuildingData(string.Empty, "design_platform"));
-        //BuildingMgr.AddBuildingData(new WarehouseBuildingData("20001", WarehouseType.Box, 9));
-        //BuildingMgr.AddBuildingData(new WarehouseBuildingData("20002", WarehouseType.IceBox, 9));
     }
 
 }

@@ -6,16 +6,16 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ProductionPlatformItem : MonoBehaviour, IPointerClickHandler
+public class BuildPlatformItem : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] private Image background;
     [SerializeField] private Image itemIcon;
 
     private RectTransform _rectTransform;  // 添加缓存的RectTransform
 
-    public event Action<RecipesConfig> OnItemClicked;
+    public event Action<BuildingConfig> OnItemClicked;
 
-    public RecipesConfig CurrentRecipeConfig { get; private set; }
+    public BuildingConfig CurrentItemConfig { get; private set; }
 
     public bool IsPointerOver { get; private set; }
 
@@ -24,15 +24,15 @@ public class ProductionPlatformItem : MonoBehaviour, IPointerClickHandler
         _rectTransform = GetComponent<RectTransform>();
     }
 
-    public void Setup(RecipesConfig Recipe)
+    public void Setup(BuildingConfig buildingConfig)
     {
-        this.CurrentRecipeConfig = Recipe;
-        
-        if (this.CurrentRecipeConfig != null)
+        this.CurrentItemConfig = buildingConfig;
+
+        if (this.CurrentItemConfig != null)
         {
-            if (!string.IsNullOrEmpty(Recipe.productID[0]) && Recipe.productID[0] != "0")
+            if (!string.IsNullOrEmpty(CurrentItemConfig.path) && CurrentItemConfig.path != "0")
             {
-                itemIcon.sprite = Resources.Load<Sprite>(InventoryMgr.GetItemConfig(Recipe.productID[0]).path);
+                itemIcon.sprite = Resources.Load<Sprite>(CurrentItemConfig.path);
             }
             else
             {
@@ -50,17 +50,17 @@ public class ProductionPlatformItem : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         // 处理点击事件
-        if (CurrentRecipeConfig == null) return;
+        if (CurrentItemConfig == null) return;
 
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            OnItemClicked?.Invoke(CurrentRecipeConfig);
+            OnItemClicked?.Invoke(CurrentItemConfig);
         }
     }
 
     public void Clear()
     {
-        CurrentRecipeConfig = null;
+        CurrentItemConfig = null;
 
         // 重置UI显示
         itemIcon.sprite = null;

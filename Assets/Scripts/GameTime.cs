@@ -81,12 +81,12 @@ public class GameTime
     /// 增加小时，支持小数
     /// </summary>
     /// <param name="hours">要增加的小时数</param>
-    public async UniTask AddHours(float hours)
+    public async UniTask AddHours(double hours)
     {
         if (hours < 0)
             throw new System.ArgumentException("时间增量不能为负数");
 
-        int totalMinutes = Mathf.RoundToInt(hours * 60); // 将小时转换为分钟并四舍五入
+        int totalMinutes = HourToMinute(hours); // 将小时转换为分钟并四舍五入
         await AddMinutes(totalMinutes);
     }
 
@@ -94,12 +94,12 @@ public class GameTime
     /// 增加天数，支持小数
     /// </summary>
     /// <param name="days">要增加的天数</param>
-    public async UniTask AddDays(float days)
+    public async UniTask AddDays(double days)
     {
         if (days < 0)
             throw new System.ArgumentException("时间增量不能为负数");
 
-        int totalMinutes = Mathf.RoundToInt(days * 24 * 60); // 将天数转换为分钟并四舍五入
+        int totalMinutes = DayToMinute(days); // 将天数转换为分钟并四舍五入
         await AddMinutes(totalMinutes);
     }
 
@@ -175,9 +175,23 @@ public class GameTime
     /// <returns>如果当前时间是指定的整点则返回true，否则返回false</returns>
     public bool IsSpecificFullHour(int specificHour)
     {
-        if (specificHour < 0 || specificHour >= 24)
-            throw new System.ArgumentException("小时必须在0-23之间");
-
         return hour == specificHour && minute == 0;
     }
+
+    /// <summary>
+    /// 将天数转换为分钟
+    /// </summary>
+    public static int DayToMinute(double day)
+    {
+        return (int)Math.Floor(day * 24 * 60);
+    }
+
+    /// <summary>
+    /// 将小时转换为分钟
+    /// </summary>
+    public static int HourToMinute(double hour)
+    {
+        return (int)Math.Floor(hour * 60);
+    }
+
 }

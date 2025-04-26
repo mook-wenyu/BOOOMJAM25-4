@@ -1,10 +1,10 @@
 {
   "$type": "System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[BaseConfig, Assembly-CSharp]], mscorlib",
-  "2000301": {
+  "2000101": {
     "$type": "RecipesConfig, Assembly-CSharp",
-    "productName": "无",
+    "productName": "烛芯",
     "productID": [
-      "11001"
+      "10005"
     ],
     "productAmount": [
       3
@@ -14,21 +14,19 @@
     ],
     "productTypeNum": 1,
     "materialIDGroup": [
-      "10001",
-      "10002"
+      "10003"
     ],
     "materialAmountGroup": [
-      2,
-      2
+      1
     ],
-    "time": 1,
-    "id": "2000301"
+    "time": 0.1,
+    "id": "2000101"
   },
-  "2000302": {
+  "2000102": {
     "$type": "RecipesConfig, Assembly-CSharp",
-    "productName": "无",
+    "productName": "木炭",
     "productID": [
-      "11002"
+      "10006"
     ],
     "productAmount": [
       3
@@ -38,21 +36,85 @@
     ],
     "productTypeNum": 1,
     "materialIDGroup": [
-      "10001",
-      "10002"
+      "10001"
     ],
     "materialAmountGroup": [
-      2,
       2
     ],
-    "time": 1,
-    "id": "2000302"
+    "time": 0.1,
+    "id": "2000102"
   },
-  "2000401": {
+  "2000103": {
     "$type": "RecipesConfig, Assembly-CSharp",
-    "productName": "无",
+    "productName": "烤野菜",
     "productID": [
-      "12001"
+      "10035"
+    ],
+    "productAmount": [
+      1
+    ],
+    "ramdomAdjust": [
+      0
+    ],
+    "productTypeNum": 1,
+    "materialIDGroup": [
+      "10032"
+    ],
+    "materialAmountGroup": [
+      1
+    ],
+    "time": 0.1,
+    "id": "2000103"
+  },
+  "2000104": {
+    "$type": "RecipesConfig, Assembly-CSharp",
+    "productName": "烤浆果",
+    "productID": [
+      "10036"
+    ],
+    "productAmount": [
+      1
+    ],
+    "ramdomAdjust": [
+      0
+    ],
+    "productTypeNum": 1,
+    "materialIDGroup": [
+      "10033"
+    ],
+    "materialAmountGroup": [
+      1
+    ],
+    "time": 0.1,
+    "id": "2000104"
+  },
+  "2000105": {
+    "$type": "RecipesConfig, Assembly-CSharp",
+    "productName": "烤肉",
+    "productID": [
+      "10037"
+    ],
+    "productAmount": [
+      1
+    ],
+    "ramdomAdjust": [
+      0
+    ],
+    "productTypeNum": 1,
+    "materialIDGroup": [
+      "10034"
+    ],
+    "materialAmountGroup": [
+      1
+    ],
+    "time": 0.1,
+    "id": "2000105"
+  },
+  "2000201": {
+    "$type": "RecipesConfig, Assembly-CSharp",
+    "productName": "斧头",
+    "productID": [
+      "10020"
     ],
     "productAmount": [
       1
@@ -63,20 +125,20 @@
     "productTypeNum": 1,
     "materialIDGroup": [
       "10001",
-      "10002"
+      "10004"
     ],
     "materialAmountGroup": [
-      2,
-      2
+      1,
+      1
     ],
-    "time": 2,
-    "id": "2000401"
+    "time": 0.1,
+    "id": "2000201"
   },
-  "2000402": {
+  "2000202": {
     "$type": "RecipesConfig, Assembly-CSharp",
-    "productName": "无",
+    "productName": "锤子",
     "productID": [
-      "12003"
+      "10021"
     ],
     "productAmount": [
       1
@@ -87,13 +149,249 @@
     "productTypeNum": 1,
     "materialIDGroup": [
       "10001",
+      "10002",
+      "10003"
+    ],
+    "materialAmountGroup": [
+      1,
+      1,
+      1
+    ],
+    "time": 0.1,
+    "id": "2000202"
+  },
+  "2000203": {
+    "$type": "RecipesConfig, Assembly-CSharp",
+    "productName": "小刀",
+    "productID": [
+      "10022"
+    ],
+    "productAmount": [
+      1
+    ],
+    "ramdomAdjust": [
+      0
+    ],
+    "productTypeNum": 1,
+    "materialIDGroup": [
+      "10001",
+      "10004"
+    ],
+    "materialAmountGroup": [
+      1,
+      1
+    ],
+    "time": 0.1,
+    "id": "2000203"
+  },
+  "2000601": {
+    "$type": "RecipesConfig, Assembly-CSharp",
+    "productName": "铁锭",
+    "productID": [
+      "10008"
+    ],
+    "productAmount": [
+      1
+    ],
+    "ramdomAdjust": [
+      0
+    ],
+    "productTypeNum": 1,
+    "materialIDGroup": [
+      "10004"
+    ],
+    "materialAmountGroup": [
+      1
+    ],
+    "time": 0.1,
+    "id": "2000601"
+  },
+  "2000701": {
+    "$type": "RecipesConfig, Assembly-CSharp",
+    "productName": "鹤嘴锄",
+    "productID": [
+      "10023"
+    ],
+    "productAmount": [
+      1
+    ],
+    "ramdomAdjust": [
+      0
+    ],
+    "productTypeNum": 1,
+    "materialIDGroup": [
+      "10001",
+      "10008"
+    ],
+    "materialAmountGroup": [
+      1,
+      1
+    ],
+    "time": 0.1,
+    "id": "2000701"
+  },
+  "2000702": {
+    "$type": "RecipesConfig, Assembly-CSharp",
+    "productName": "剪钳",
+    "productID": [
+      "10024"
+    ],
+    "productAmount": [
+      1
+    ],
+    "ramdomAdjust": [
+      0
+    ],
+    "productTypeNum": 1,
+    "materialIDGroup": [
+      "10004",
+      "10008",
+      "10003"
+    ],
+    "materialAmountGroup": [
+      1,
+      1,
+      1
+    ],
+    "time": 0.1,
+    "id": "2000702"
+  },
+  "2000901": {
+    "$type": "RecipesConfig, Assembly-CSharp",
+    "productName": "辐射服",
+    "productID": [
+      "10026"
+    ],
+    "productAmount": [
+      1
+    ],
+    "ramdomAdjust": [
+      0
+    ],
+    "productTypeNum": 1,
+    "materialIDGroup": [
+      "10008",
+      "10017"
+    ],
+    "materialAmountGroup": [
+      1,
+      1
+    ],
+    "time": 0.1,
+    "id": "2000901"
+  },
+  "2000902": {
+    "$type": "RecipesConfig, Assembly-CSharp",
+    "productName": "睡衣",
+    "productID": [
+      "10025"
+    ],
+    "productAmount": [
+      1
+    ],
+    "ramdomAdjust": [
+      0
+    ],
+    "productTypeNum": 1,
+    "materialIDGroup": [
+      "10003",
+      "10017"
+    ],
+    "materialAmountGroup": [
+      1,
+      1
+    ],
+    "time": 0.1,
+    "id": "2000902"
+  },
+  "2000903": {
+    "$type": "RecipesConfig, Assembly-CSharp",
+    "productName": "布鞋",
+    "productID": [
+      "10027"
+    ],
+    "productAmount": [
+      1
+    ],
+    "ramdomAdjust": [
+      0
+    ],
+    "productTypeNum": 1,
+    "materialIDGroup": [
+      "10003",
+      "10017"
+    ],
+    "materialAmountGroup": [
+      1,
+      1
+    ],
+    "time": 0.1,
+    "id": "2000903"
+  },
+  "2001101": {
+    "$type": "RecipesConfig, Assembly-CSharp",
+    "productName": "木板",
+    "productID": [
+      "10011"
+    ],
+    "productAmount": [
+      1
+    ],
+    "ramdomAdjust": [
+      0
+    ],
+    "productTypeNum": 1,
+    "materialIDGroup": [
+      "10001"
+    ],
+    "materialAmountGroup": [
+      5
+    ],
+    "time": 0.1,
+    "id": "2001101"
+  },
+  "2001102": {
+    "$type": "RecipesConfig, Assembly-CSharp",
+    "productName": "齿轮",
+    "productID": [
+      "10012"
+    ],
+    "productAmount": [
+      1
+    ],
+    "ramdomAdjust": [
+      0
+    ],
+    "productTypeNum": 1,
+    "materialIDGroup": [
+      "10008"
+    ],
+    "materialAmountGroup": [
+      3
+    ],
+    "time": 0.1,
+    "id": "2001102"
+  },
+  "2001103": {
+    "$type": "RecipesConfig, Assembly-CSharp",
+    "productName": "水泥",
+    "productID": [
+      "10013"
+    ],
+    "productAmount": [
+      1
+    ],
+    "ramdomAdjust": [
+      0
+    ],
+    "productTypeNum": 1,
+    "materialIDGroup": [
       "10002"
     ],
     "materialAmountGroup": [
-      2,
-      2
+      5
     ],
-    "time": 2,
-    "id": "2000402"
+    "time": 0.1,
+    "id": "2001103"
   }
 }

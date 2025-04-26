@@ -83,8 +83,8 @@ public static class GameMgr
         {
             StopTime();
         }
-
-        currentSaveData.gameTime.OnHourChanged += HandleHourChanged;  // 订阅整点事件
+        currentSaveData.gameTime.OnTimeChanged += HandleTimeChanged;    // 订阅时间变化事件
+        currentSaveData.gameTime.OnHourChanged += HandleHourChanged;    // 订阅整点事件
         UpdateTimeChangedAsync().Forget();
     }
 
@@ -113,6 +113,7 @@ public static class GameMgr
     {
         if (_timeUpdateCts == null) return;
 
+        currentSaveData.gameTime.OnTimeChanged -= HandleTimeChanged;
         currentSaveData.gameTime.OnHourChanged -= HandleHourChanged;
         _timeUpdateCts.Cancel();
         _timeUpdateCts.Dispose();
@@ -154,12 +155,38 @@ public static class GameMgr
         }
     }
 
-    private static async UniTask HandleHourChanged(GameTime gameTime)
+    // 时间变化事件处理
+    private static async UniTask HandleTimeChanged(GameTime gameTime)
     {
-        await UpdateHourlyTasksAsync(BATCH_SIZE);
+        // 更新配方 - 遍历所有生产平台
+        var platforms = currentSaveData.productionPlatforms.Values.ToList();
+        for (int i = 0; i < platforms.Count; i += BATCH_SIZE)
+        {
+            int count = Math.Min(BATCH_SIZE, platforms.Count - i);
+            UpdateProductionPlatformBatch(platforms, i, count);
+
+            if (i + BATCH_SIZE < platforms.Count)
+            {
+                await UniTask.Yield();
+            }
+        }
+
+        // 更新建筑 - 遍历所有建造平台
+        var buildPlatforms = currentSaveData.buildPlatforms.Values.ToList();
+        for (int i = 0; i < buildPlatforms.Count; i += BATCH_SIZE)
+        {
+            int count = Math.Min(BATCH_SIZE, buildPlatforms.Count - i);
+            UpdateBuildPlatformBatch(buildPlatforms, i, count);
+
+            if (i + BATCH_SIZE < buildPlatforms.Count)
+            {
+                await UniTask.Yield();
+            }
+        }
     }
 
-    private static async UniTask UpdateHourlyTasksAsync(int batchSize)
+    // 整点事件处理
+    private static async UniTask HandleHourChanged(GameTime gameTime)
     {
         // 当前是上午7点，开启全局光源
         if (currentSaveData.gameTime.IsSpecificFullHour(7))
@@ -174,38 +201,12 @@ public static class GameMgr
 
         // 更新角色
         var characters = currentSaveData.characters.Values.ToList();
-        for (int i = 0; i < characters.Count; i += batchSize)
+        for (int i = 0; i < characters.Count; i += BATCH_SIZE)
         {
-            int count = Math.Min(batchSize, characters.Count - i);
+            int count = Math.Min(BATCH_SIZE, characters.Count - i);
             UpdateCharacterBatch(characters, i, count);
 
-            if (i + batchSize < characters.Count)
-            {
-                await UniTask.Yield();
-            }
-        }
-
-        // 更新配方 - 遍历所有生产平台
-        var platforms = currentSaveData.productionPlatforms.Values.ToList();
-        for (int i = 0; i < platforms.Count; i += batchSize)
-        {
-            int count = Math.Min(batchSize, platforms.Count - i);
-            UpdateProductionPlatformBatch(platforms, i, count);
-
-            if (i + batchSize < platforms.Count)
-            {
-                await UniTask.Yield();
-            }
-        }
-
-        // 更新建筑 - 遍历所有建造平台
-        var buildPlatforms = currentSaveData.buildPlatforms.Values.ToList();
-        for (int i = 0; i < buildPlatforms.Count; i += batchSize)
-        {
-            int count = Math.Min(batchSize, buildPlatforms.Count - i);
-            UpdateBuildPlatformBatch(buildPlatforms, i, count);
-
-            if (i + batchSize < buildPlatforms.Count)
+            if (i + BATCH_SIZE < characters.Count)
             {
                 await UniTask.Yield();
             }
@@ -250,7 +251,7 @@ public static class GameMgr
                     CharacterEntityMgr.Instance.GetPlayer().GetCharacterData().status = CharacterStatus.Idle;
                     CharacterEntityMgr.Instance.GetPlayer().GetAnimator().SetBool("IsBuild", false);
 #if UNITY_EDITOR
-                    Debug.Log($"建筑完成: {building.buildingId} - {building.instanceId} - {building.GetBuilding().name}");
+                    Debug.Log($"建筑完成: {building.buildingId} - {building.instanceId} - {building.GetBuildingConfig().name}");
 #endif
                 }
             }

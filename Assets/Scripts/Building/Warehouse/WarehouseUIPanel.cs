@@ -244,7 +244,7 @@ public class WarehouseUIPanel : MonoSingleton<WarehouseUIPanel>
         if (this._warehouseData != null)
         {
             this._warehouseData.GetWarehouseData().OnInventoryChanged += UpdateUI;
-            titleName.text = this._warehouseData.GetBuilding().name;
+            titleName.text = this._warehouseData.GetBuildingConfig().name;
         }
 
         // 显示仓库UI
