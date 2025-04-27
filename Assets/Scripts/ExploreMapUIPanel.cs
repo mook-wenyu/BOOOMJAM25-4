@@ -10,6 +10,8 @@ public class ExploreMapUIPanel : MonoSingleton<ExploreMapUIPanel>
     public GameObject uiPanel;
     public Button closeBtn;
 
+    public ToggleGroup toggleGroup;
+
 
     public TextMeshProUGUI infoName, infoDesc, infoDistance, infoTime;
     public Button goOut;
@@ -18,7 +20,68 @@ public class ExploreMapUIPanel : MonoSingleton<ExploreMapUIPanel>
     {
         closeBtn.onClick.AddListener(OnCloseBtnClicked);
         goOut.onClick.AddListener(OnGoOutBtnClicked);
+        // 获取所有子Toggle并设置group
+        Toggle[] toggles = toggleGroup.GetComponentsInChildren<Toggle>();
+        foreach (Toggle toggle in toggles)
+        {
+            toggle.group = toggleGroup;
+            // 添加监听事件
+            toggle.onValueChanged.AddListener((isOn) => OnToggleValueChanged(toggle, isOn));
+        }
         Hide();
+    }
+
+    private void OnToggleValueChanged(Toggle changedToggle, bool isOn)
+    {
+        if (isOn)
+        {
+            SelectedMap(changedToggle.name);
+        }
+    }
+
+    public void SelectedMap(string toggleName)
+    {
+        Debug.Log(toggleName + " 被选中");
+        switch (toggleName)
+        {
+            case "JiaoWaiSenLin":
+                infoName.text = "郊外森林";
+                infoDesc.text = "郊外森林描述";
+                infoDistance.text = "距离: 20KM";
+                infoTime.text = "时间: 1.5H";
+
+                ExploreNodeMgr.currentMapId = "0";
+
+                break;
+            case "ZhuZhaiQu":
+                infoName.text = "住宅区";
+                infoDesc.text = "住宅区描述";
+                infoDistance.text = "距离: 20KM";
+                infoTime.text = "时间: 1.5H";
+
+                ExploreNodeMgr.currentMapId = "0";
+
+                break;
+            case "ShiZhongXin":
+                infoName.text = "市中心";
+                infoDesc.text = "市中心描述";
+                infoDistance.text = "距离: 20KM";
+                infoTime.text = "时间: 1.5H";
+
+                ExploreNodeMgr.currentMapId = "0";
+
+                break;
+        }
+    }
+
+    // 获取当前选中的Toggle
+    public Toggle GetSelectedToggle()
+    {
+        foreach (Toggle toggle in toggleGroup.ActiveToggles())
+        {
+            return toggle;
+        }
+        return null;
     }
 
     public void OnGoOutBtnClicked()
@@ -36,8 +99,6 @@ public class ExploreMapUIPanel : MonoSingleton<ExploreMapUIPanel>
         TopLevelUIPanel.Instance.goOut.gameObject.SetActive(false);
         TopLevelUIPanel.Instance.comeBack.gameObject.SetActive(true);
 
-        ExploreNodeMgr.currentMapId = "0";
-
         SceneMgr.Instance.LoadScene("ExploreScene", LoadSceneMode.Additive);
     }
 
@@ -53,10 +114,8 @@ public class ExploreMapUIPanel : MonoSingleton<ExploreMapUIPanel>
         GameMgr.PauseTime();
         CharacterMgr.Player().SetStatus(CharacterStatus.Busy);
         uiPanel.SetActive(true);
-        infoName.text = "探索地图";
-        infoDesc.text = "探索地图描述";
-        infoDistance.text = "距离: 20KM";
-        infoTime.text = "时间: 1.5H";
+
+        SelectedMap(GetSelectedToggle().name);
     }
 
     public void Hide()
