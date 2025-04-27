@@ -13,6 +13,8 @@ public class TopLevelUIPanel : MonoSingleton<TopLevelUIPanel>
     public TextMeshProUGUI timeText;
 
     public Button saveBtn;
+    public TMP_InputField itemIdInput;
+    public Button itemAddBtn;
 
     public Slider health, hunger, energy, spirit;
     // public TextMeshProUGUI healthText, hungerText, energyText, spiritText;
@@ -43,6 +45,11 @@ public class TopLevelUIPanel : MonoSingleton<TopLevelUIPanel>
         goOut.onClick.AddListener(OnGoOutBtnClicked);
         comeBack.onClick.AddListener(OnComeBackBtnClicked);
         comeBack.gameObject.SetActive(false);
+
+        itemAddBtn.onClick.AddListener(() =>
+        {
+            InventoryMgr.GetPlayerInventoryData().AddItem(itemIdInput.text.Trim(), 1);
+        });
     }
 
     void Start()
@@ -144,7 +151,7 @@ public class TopLevelUIPanel : MonoSingleton<TopLevelUIPanel>
         ExploreNodeMgr.currentMapId = string.Empty;
         CharacterMgr.Player().currentMapId = string.Empty;
         CharacterMgr.Player().currentMapNodeIds.Clear();
-        CharacterMgr.Player().status = CharacterStatus.Idle;
+        CharacterMgr.Player().SetStatus(CharacterStatus.Idle);
         GameMgr.ResumeTime();
     }
 

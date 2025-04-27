@@ -47,7 +47,7 @@ public class BuildPlatformData
         }
 
         // 设置角色状态为建造中
-        CharacterEntityMgr.Instance.GetPlayer().GetCharacterData().status = CharacterStatus.Build;
+        CharacterMgr.Player().SetStatus(CharacterStatus.Build);
         CharacterEntityMgr.Instance.GetPlayer().GetAnimator().SetBool("IsBuild", true);
         switch ((BuildingType)buildingConfig.type)
         {

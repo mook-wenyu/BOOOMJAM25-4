@@ -160,6 +160,14 @@ public class GameTime
     }
 
     /// <summary>
+    /// 判断当前时间是否在另一个时间点之前，加上指定的分钟数
+    /// </summary>
+    public bool IsTimeBefore(GameTime other, int minutes)
+    {
+        return this.GetTimeStamp() + minutes < other.GetTimeStamp();
+    }
+
+    /// <summary>
     /// 判断当前时间是否为整点
     /// </summary>
     /// <returns>如果当前时间是整点则返回true，否则返回false</returns>

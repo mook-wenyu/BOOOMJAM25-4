@@ -137,7 +137,7 @@ public static class GameMgr
                 {
                     await currentSaveData.gameTime.AddMinutes(1);
                 }
-                await UniTask.Delay(0, cancellationToken: _timeUpdateCts.Token);
+                await UniTask.Delay(100, cancellationToken: _timeUpdateCts.Token);
             }
         }
         catch (OperationCanceledException)
@@ -191,12 +191,25 @@ public static class GameMgr
         // 当前是上午7点，开启全局光源
         if (currentSaveData.gameTime.IsSpecificFullHour(7))
         {
-            WorldMgr.Instance.globalLight.intensity = 0.9f;
+            WorldMgr.Instance.globalLight.intensity = 1f;
+            WorldMgr.Instance.blackScreen.SetActive(false);
+            ResumeTime();
+            CharacterMgr.Player().SetStatus(CharacterStatus.Idle);
         }
         // 当前是下午午18点，关闭全局光源
         if (currentSaveData.gameTime.IsSpecificFullHour(18))
         {
             WorldMgr.Instance.globalLight.intensity = 0.1f;
+        }
+
+        // 当前是下午1点，暂停时间，黑屏，过6小时
+        if (currentSaveData.gameTime.IsSpecificFullHour(1))
+        {
+            PauseTime();
+            CharacterMgr.Player().SetStatus(CharacterStatus.Sleep);
+            WorldMgr.Instance.blackScreen.SetActive(true);
+            await UniTask.Delay(TimeSpan.FromSeconds(1.5f));
+            _ = currentSaveData.gameTime.AddHours(6);
         }
 
         // 更新角色
@@ -248,7 +261,7 @@ public static class GameMgr
                     // 将建筑添加到建筑列表中
                     currentSaveData.buildings.Add(building.instanceId, building);
                     // 停止建造动画
-                    CharacterEntityMgr.Instance.GetPlayer().GetCharacterData().status = CharacterStatus.Idle;
+                    CharacterMgr.Player().SetStatus(CharacterStatus.Idle);
                     CharacterEntityMgr.Instance.GetPlayer().GetAnimator().SetBool("IsBuild", false);
 #if UNITY_EDITOR
                     Debug.Log($"建筑完成: {building.buildingId} - {building.instanceId} - {building.GetBuildingConfig().name}");

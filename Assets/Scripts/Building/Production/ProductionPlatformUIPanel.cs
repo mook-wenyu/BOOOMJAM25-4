@@ -27,6 +27,8 @@ public class ProductionPlatformUIPanel : MonoSingleton<ProductionPlatformUIPanel
     private ProductionBuildingData _productionBuildingData;
     private ProductionPlatformData _productionPlatformData;
 
+    private bool _isExplore = false;
+
     void Awake()
     {
         // 清除所有物品槽
@@ -91,7 +93,7 @@ public class ProductionPlatformUIPanel : MonoSingleton<ProductionPlatformUIPanel
                     }
                     if (!hasEnoughMaterials)
                     {
-                        Debug.Log("材料不足");
+                        GlobalUIMgr.Instance.ShowMessage("材料不足！");
                         return;
                     }
                     bool hasEmptySlot = false;
@@ -107,13 +109,37 @@ public class ProductionPlatformUIPanel : MonoSingleton<ProductionPlatformUIPanel
                     }
                     if (!hasEmptySlot)
                     {
-                        Debug.Log("没有空槽位");
+                        GlobalUIMgr.Instance.ShowMessage("产品已满，无法生产更多产品！");
                         return;
                     }
 
-                    //Hide();
-                    var productionData = _productionPlatformData.StartProduction(recipeConfig);
+                    // 探索
+                    if (_isExplore)
+                    {
+                        // 检查时间是否足够
+                        if (!GameMgr.currentSaveData.gameTime.IsTimeBefore(new GameTime(GameMgr.currentSaveData.gameTime.day + 1, 0, 0), GameTime.HourToMinute(recipeConfig.time)))
+                        {
+                            GlobalUIMgr.Instance.ShowMessage("太晚了，明天再做吧！");
+                            return;
+                        }
+                    }
+
+                    // 消耗材料
+                    for (int i = 0; i < recipeConfig.materialIDGroup.Length; i++)
+                    {
+                        playerInventory.RemoveItem(recipeConfig.materialIDGroup[i], recipeConfig.materialAmountGroup[i]);
+                    }
+
+                    var productionData = new ProductionData(recipeConfig.id, _productionPlatformData.instanceId);
+                    _productionPlatformData.productionProgress.Add(productionData);
                     emptySlot.Setup(productionData);
+
+                    // 探索
+                    if (_isExplore)
+                    {
+                        // 扣除时间
+                        _ = GameMgr.currentSaveData.gameTime.AddHours(recipeConfig.time);
+                    }
                 });
             });
         }
@@ -122,7 +148,7 @@ public class ProductionPlatformUIPanel : MonoSingleton<ProductionPlatformUIPanel
     public void CreateItemSlots()
     {
         int currentCount = _activeSlots.Count;
-        int targetCount = 5;
+        int targetCount = 3;
 
         // 创建新的物品槽
         for (int i = currentCount; i < targetCount; i++)
@@ -160,14 +186,22 @@ public class ProductionPlatformUIPanel : MonoSingleton<ProductionPlatformUIPanel
         if (item.IsComplete())
         {
             var recipeConfig = RecipeMgr.GetRecipesConfig(item.recipeId);
-            InventoryMgr.GetPlayerInventoryData().AddItem(recipeConfig.productID[0], 1);
+            // 尝试将物品添加到背包中，如果背包已满，则提示用户背包已满
+            int count = InventoryMgr.GetPlayerInventoryData().CalculateCanAddItem(recipeConfig.productID[0], 1);
+            if (count <= 0)
+            {
+                GlobalUIMgr.Instance.ShowMessage("背包已满");
+                return;
+            }
+            InventoryMgr.GetPlayerInventoryData().AddItem(recipeConfig.productID[0], count);
             _productionPlatformData.productionProgress.Remove(item);
             CreateItemSlots();
         }
     }
 
-    public void Show(string buildingInstanceId)
+    public void Show(string buildingInstanceId, bool isExplore = false)
     {
+        _isExplore = isExplore;
         this._buildingInstanceId = buildingInstanceId;
         this._productionBuildingData = BuildingMgr.GetBuildingData<ProductionBuildingData>(buildingInstanceId);
 

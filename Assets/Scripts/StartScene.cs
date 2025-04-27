@@ -147,11 +147,6 @@ public class StartScene : MonoBehaviour
         characterData.fullName = "玩家";
         GameMgr.currentSaveData.characters.Add(characterData.id, characterData);
 
-        Debug.Log($"添加新物品：{InventoryMgr.GetPlayerInventoryData().AddItem("10001", 10)}");
-        Debug.Log($"添加新物品：{InventoryMgr.GetPlayerInventoryData().AddItem("10002", 10)}");
-        Debug.Log($"添加新物品：{InventoryMgr.GetPlayerInventoryData().AddItem("10003", 10)}");
-        Debug.Log($"添加新物品：{InventoryMgr.GetPlayerInventoryData().AddItem("10004", 10)}");
-
         BuildingMgr.AddBuildingData(new BuildBuildingData(string.Empty, "design_platform"));
     }
 

@@ -54,7 +54,7 @@ public class Player : MonoBehaviour
         // 移动和翻转控制
         if (isMoving)
         {
-            _characterData.status = CharacterStatus.Move;
+            _characterData.SetStatus(CharacterStatus.Move);
 
             // 设置方向（true=左，false=右）
             _characterData.direction = moveInput < 0;
@@ -74,7 +74,7 @@ public class Player : MonoBehaviour
         }
         else // 无输入时
         {
-            _characterData.status = CharacterStatus.Idle;
+            _characterData.SetStatus(CharacterStatus.Idle);
             _rigidbody2D.velocity = new Vector2(0, _rigidbody2D.velocity.y); // 立刻停止
         }
     }

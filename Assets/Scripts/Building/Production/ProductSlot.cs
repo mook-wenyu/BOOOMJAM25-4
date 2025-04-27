@@ -142,7 +142,7 @@ public class ProductSlot : MonoBehaviour,
                 }
                 else
                 {
-                    Debug.Log("生产未完成");
+                    GlobalUIMgr.Instance.ShowMessage("生产未完成！");
                 }
             }
         }

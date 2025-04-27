@@ -210,6 +210,14 @@ public class CharacterData
     }
 
     /// <summary>
+    /// 设置角色状态
+    /// </summary>
+    public void SetStatus(CharacterStatus newStatus)
+    {
+        status = newStatus;
+    }
+
+    /// <summary>
     /// 添加激活的Buff
     /// </summary>
     /// <param name="buffDataId">要添加的Buff数据ID</param>

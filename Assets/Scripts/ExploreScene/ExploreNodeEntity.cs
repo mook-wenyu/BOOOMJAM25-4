@@ -12,6 +12,7 @@ public class ExploreNodeEntity : MonoBehaviour,
 {
     private ExploreNodeData _node;
     private SpriteRenderer _spriteRenderer;
+    private SpriteRenderer _iconRenderer;
 
     // 定义不同状态的颜色
     private Color _normalColor;    // 正常状态颜色 
@@ -22,11 +23,14 @@ public class ExploreNodeEntity : MonoBehaviour,
     private bool _isInteractable = true; // 是否可交互
     private bool _isPressed = false;     // 追踪按下状态
 
+    public bool IsPointerOver { get; private set; }
+
     public event Action<ExploreNodeData> OnClick;
 
     private void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _iconRenderer = transform.Find("Icon").GetComponent<SpriteRenderer>();
 
         // 初始化各种状态的颜色
         _normalColor = _spriteRenderer.color;
@@ -38,6 +42,18 @@ public class ExploreNodeEntity : MonoBehaviour,
     public void Setup(ExploreNodeData node)
     {
         this._node = node;
+        var config = node.GetConfig();
+        if (config.type == (int)ExploreNodeType.Empty)
+        {
+            _iconRenderer.gameObject.SetActive(false);
+        }
+        else
+        {
+            if (!string.IsNullOrEmpty(config.path) && config.path != "0")
+            {
+                _iconRenderer.sprite = Resources.Load<Sprite>(config.path);
+            }
+        }
     }
 
     public ExploreNodeData GetNode()
@@ -52,10 +68,33 @@ public class ExploreNodeEntity : MonoBehaviour,
         _spriteRenderer.color = _isInteractable ? _normalColor : _disabledColor;
     }
 
+    /// <summary>
+    /// 更新并显示物品提示
+    /// </summary>
+    public void UpdateTips(ExploreNodeData itemData)
+    {
+        if (!IsPointerOver) return; // 只在鼠标悬停时才显示提示
+
+        var tipsUI = GlobalUIMgr.Instance.Show<SimpleTipsUI>(GlobalUILayer.TooltipLayer);
+
+        tipsUI.SetContent(itemData.GetConfig().name);
+
+        Vector3 uiPos = Camera.main.WorldToScreenPoint(transform.position);
+        uiPos.y += 100;
+        tipsUI.UpdatePosition(uiPos, Vector2.zero);
+    }
+
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (!_isInteractable) return;
         _spriteRenderer.color = _highlightColor;
+
+        if (this._node.GetConfig().type == (int)ExploreNodeType.Empty)
+        {
+            return;
+        }
+        IsPointerOver = true;
+        UpdateTips(_node);
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -63,6 +102,14 @@ public class ExploreNodeEntity : MonoBehaviour,
         if (!_isInteractable) return;
         _spriteRenderer.color = _normalColor;
         _isPressed = false; // 鼠标移出时重置按下状态
+
+        IsPointerOver = false;
+        var tipsUI = GlobalUIMgr.Instance.Get<SimpleTipsUI>();
+
+        if (!IsPointerOver && tipsUI != null && tipsUI.gameObject.activeSelf)
+        {
+            GlobalUIMgr.Instance.Hide<SimpleTipsUI>();
+        }
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -92,5 +139,10 @@ public class ExploreNodeEntity : MonoBehaviour,
         //    Destroy(GetComponent<CircleCollider2D>());
         //    gameObject.AddComponent<PolygonCollider2D>();
         //});
+    }
+
+    void OnDestroy()
+    {
+        GlobalUIMgr.Instance.Hide<SimpleTipsUI>();
     }
 }

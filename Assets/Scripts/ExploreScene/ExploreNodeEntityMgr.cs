@@ -170,41 +170,30 @@ public class ExploreNodeEntityMgr : MonoSingleton<ExploreNodeEntityMgr>
             return;
         }
 
+        // 检查需要消耗的时间
+        int consumeTime = 1;
+        if (!GameMgr.currentSaveData.gameTime.IsTimeBefore(new GameTime(GameMgr.currentSaveData.gameTime.day + 1, 0, 0), consumeTime))
+        {
+            GlobalUIMgr.Instance.ShowMessage("太晚了，先回家吧！");
+            return; // 时间不足，
+        }
+        int energyCost = 1;
+        // 检查需要消耗的体力
+        if (CharacterMgr.Player().energy < energyCost)
+        {
+            GlobalUIMgr.Instance.ShowMessage("体力不足，无法前进！");
+            return; // 体力不足，
+        }
+
         HideAllUIPanels();
 
         MovePlayerToNode(targetNode);
+
+        _ = GameMgr.currentSaveData.gameTime.AddMinutes(consumeTime);
+        CharacterMgr.Player().SetEnergy(CharacterMgr.Player().energy - energyCost);
 
         Debug.Log($"点击节点: {targetNode.id}");
     }
-
-    // 处理节点点击事件
-    /*private void HandleNodeClicked(ExploreNodeData targetNode)
-    {
-        var currentNode = ExploreNodeMgr.GetExploreNodeData(playerUnit.CurrentNodeId);
-        var targetConfig = targetNode.GetConfig();
-
-        if (currentNode.id == targetNode.id)
-        {
-            HandleNodeInteraction(targetNode, targetConfig);
-            return;
-        }
-
-        if (!CanMoveToNode(currentNode, targetNode, targetConfig))
-        {
-            return;
-        }
-
-        MovePlayerToNode(targetNode);
-        HideAllUIPanels();
-        // 默认解锁
-        foreach (var nodeId in targetConfig.unlocksMidNodes)
-        {
-            UnlockNode(nodeId);
-            ActivePath(targetNode.id, nodeId);
-        }
-        HandleNodeInteraction(targetNode, targetConfig);
-        Debug.Log($"点击节点: {targetNode.id}");
-    }*/
 
     // 检查是否可以移动到目标节点
     private bool CanMoveToNode(ExploreNodeData currentNode, ExploreNodeData targetNode, ExploreNodeConfig targetConfig)
@@ -228,8 +217,6 @@ public class ExploreNodeEntityMgr : MonoSingleton<ExploreNodeEntityMgr>
     private void MovePlayerToNode(ExploreNodeData targetNode)
     {
         playerUnit.MoveToNode(targetNode.id);
-        //playerUnit.CurrentNodeId = targetNode.id;
-        //playerUnit.transform.position = new Vector3(targetNode.pos.x, targetNode.pos.y, playerUnit.transform.position.z);
     }
 
     // 隐藏所有UI面板
@@ -288,7 +275,7 @@ public class ExploreNodeEntityMgr : MonoSingleton<ExploreNodeEntityMgr>
         if (!node.isCompleted)
         {
             if (!SubmitUIPanel.Instance.uiPanel.activeSelf)
-                SubmitUIPanel.Instance.Show();
+                SubmitUIPanel.Instance.Show(node);
             else
                 SubmitUIPanel.Instance.Hide();
         }

@@ -23,9 +23,14 @@ public class ExploreMapUIPanel : MonoSingleton<ExploreMapUIPanel>
 
     public void OnGoOutBtnClicked()
     {
-        // Todo: 计算时间，存档
+        int consumeTime = 90;
+        if (!GameMgr.currentSaveData.gameTime.IsTimeBefore(new GameTime(GameMgr.currentSaveData.gameTime.day + 1, 0, 0), consumeTime))
+        {
+            GlobalUIMgr.Instance.ShowMessage("太晚了，明天再探索吧！");
+            return; // 时间不足，无法出门
+        }
 
-        CharacterMgr.Player().status = CharacterStatus.Explore;
+        CharacterMgr.Player().SetStatus(CharacterStatus.Explore);
         GlobalUIMgr.Instance.ShowLoadingMask(true);
         Hide();
         TopLevelUIPanel.Instance.goOut.gameObject.SetActive(false);
@@ -38,7 +43,7 @@ public class ExploreMapUIPanel : MonoSingleton<ExploreMapUIPanel>
 
     public void OnCloseBtnClicked()
     {
-        CharacterMgr.Player().status = CharacterStatus.Idle;
+        CharacterMgr.Player().SetStatus(CharacterStatus.Idle);
         GameMgr.ResumeTime();
         Hide();
     }
@@ -46,7 +51,7 @@ public class ExploreMapUIPanel : MonoSingleton<ExploreMapUIPanel>
     public void Show()
     {
         GameMgr.PauseTime();
-        CharacterMgr.Player().status = CharacterStatus.Busy;
+        CharacterMgr.Player().SetStatus(CharacterStatus.Busy);
         uiPanel.SetActive(true);
         infoName.text = "探索地图";
         infoDesc.text = "探索地图描述";

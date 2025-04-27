@@ -7,6 +7,13 @@ public class WorldMgr : MonoSingleton<WorldMgr>
 {
     public Light2D globalLight;
 
+    public GameObject blackScreen;
+
+    void Awake()
+    {
+        blackScreen.SetActive(false);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
