@@ -23,11 +23,16 @@ public class UnitPathMover : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    public void Init()
+    public void Init(string mapId)
     {
         _characterData = CharacterMgr.Player();
-        var currentMap = ExploreNodeMgr.GetExploreMapData(ExploreNodeMgr.currentMapId);
-        var startNode = ExploreNodeMgr.GetExploreNodeData(currentMap.startNodeId);
+        _characterData.currentMapId = mapId;
+        var currentMap = ExploreNodeMgr.GetExploreMapData(_characterData.currentMapId); // 获取角色当前地图数据
+        if (!_characterData.currentMapNodeIds.ContainsKey(_characterData.currentMapId))
+        {
+            _characterData.currentMapNodeIds[_characterData.currentMapId] = currentMap.startNodeId;
+        }
+        var startNode = ExploreNodeMgr.GetExploreNodeData(_characterData.currentMapNodeIds[_characterData.currentMapId]); // 获取角色当前节点数据
         CurrentNodeId = startNode.id;
         transform.position = new Vector3(startNode.pos.x, startNode.pos.y, transform.position.z);
     }
@@ -59,6 +64,7 @@ public class UnitPathMover : MonoBehaviour
                 }
                 _ = GameMgr.currentSaveData.gameTime.AddMinutes(1);
                 CurrentNodeId = _targetNode.id;
+                _characterData.currentMapNodeIds[_characterData.currentMapId] = CurrentNodeId; // 更新角色当前节点ID
                 OnNodeChanged?.Invoke(CurrentNodeId);
             }
         }

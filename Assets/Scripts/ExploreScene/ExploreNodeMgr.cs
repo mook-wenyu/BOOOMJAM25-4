@@ -7,7 +7,7 @@ public static class ExploreNodeMgr
     /// <summary>
     /// 当前地图ID
     /// </summary>
-    public static string currentMapId = "0";
+    public static string currentMapId = string.Empty;
 
     public static void Init()
     {

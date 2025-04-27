@@ -26,10 +26,10 @@ public class Message : GlobalUIBase
 
         Color color = type switch
         {
-            MessageType.Info => new Color(0.2f, 0.2f, 0.2f, 0.9f),
+            MessageType.Info => new Color(0.9f, 0.9f, 0.9f, 0.9f),
             MessageType.Warning => new Color(0.9f, 0.6f, 0.1f, 0.9f),
             MessageType.Error => new Color(0.9f, 0.2f, 0.2f, 0.9f),
-            _ => Color.black
+            _ => new Color(0.9f, 0.9f, 0.9f, 0.9f)
         };
 
         contentText.color = color;

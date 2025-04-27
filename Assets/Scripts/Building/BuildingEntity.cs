@@ -2,14 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class BuildingEntity : MonoBehaviour
 {
     [SerializeField] private string _instanceId;   // 实例ID
     [SerializeField] private string _buildingId;   // 建筑ID
+    [SerializeField] private int _lightingRange = 0;   // 照亮区域大小
     [SerializeField] private bool _isObstacle = false;   // 是否障碍物
     private SpriteRenderer _spriteRenderer;
     private BoxCollider2D _boxCollider;
+    private Light2D _light2D;
 
     private BuildingData _buildingData;   // 建筑数据
 
@@ -22,6 +25,8 @@ public class BuildingEntity : MonoBehaviour
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _boxCollider = GetComponent<BoxCollider2D>();
+        _light2D = GetComponentInChildren<Light2D>();
+        _light2D.enabled = false;
         GetComponent<Collider2D>().isTrigger = !_isObstacle;
     }
 
@@ -39,6 +44,10 @@ public class BuildingEntity : MonoBehaviour
                 _boxCollider.size = _spriteRenderer.sprite.bounds.size;
                 _boxCollider.offset = _spriteRenderer.sprite.bounds.center;
             }
+            _light2D.enabled = config.light > 0;
+            _light2D.transform.position = new Vector3(_light2D.transform.position.x, _spriteRenderer.sprite.bounds.size.y / 2, _light2D.transform.position.z);
+            _light2D.pointLightInnerRadius = config.light * 2;
+            _light2D.pointLightOuterRadius = config.light * 4;
         }
     }
 
@@ -50,6 +59,14 @@ public class BuildingEntity : MonoBehaviour
     public string GetBuildingId()
     {
         return _buildingId;
+    }
+
+    public void SetLightingRange(int value)
+    {
+        _lightingRange = value;
+        _light2D.enabled = _lightingRange > 0;
+        _light2D.pointLightInnerRadius = _lightingRange * 2;
+        _light2D.pointLightOuterRadius = _lightingRange * 4;
     }
 
     public bool GetIsObstacle()

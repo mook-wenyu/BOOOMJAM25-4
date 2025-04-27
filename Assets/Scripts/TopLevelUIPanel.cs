@@ -141,6 +141,9 @@ public class TopLevelUIPanel : MonoSingleton<TopLevelUIPanel>
         comeBack.gameObject.SetActive(false);
         goOut.gameObject.SetActive(true);
         SceneMgr.Instance.UnloadScene("ExploreScene");
+        ExploreNodeMgr.currentMapId = string.Empty;
+        CharacterMgr.Player().currentMapId = string.Empty;
+        CharacterMgr.Player().currentMapNodeIds.Clear();
         CharacterMgr.Player().status = CharacterStatus.Idle;
         GameMgr.ResumeTime();
     }

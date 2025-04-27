@@ -20,7 +20,7 @@ public class ExploreNodeEntityMgr : MonoSingleton<ExploreNodeEntityMgr>
     void Start()
     {
         GenerateMap();
-        playerUnit.Init();
+        playerUnit.Init(ExploreNodeMgr.currentMapId);
         playerUnit.OnNodeChanged += HandleNodeChanged;
     }
 

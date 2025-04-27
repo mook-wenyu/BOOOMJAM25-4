@@ -30,6 +30,8 @@ public class BuildingData
 
     private int totalTime;  // 总时间
 
+    public ILightingData lightingData = null;
+
     [NonSerialized]
     private BuildingConfig _building;    // 建筑数据缓存
 
@@ -63,6 +65,14 @@ public class BuildingData
             totalTime = GameTime.HourToMinute(_building.time);
             remainingTime = totalTime;
         }
+    }
+
+    /// <summary>
+    /// 设置照明数据
+    /// </summary>
+    public void SetLightingData(ILightingData lightingData)
+    {
+        this.lightingData = lightingData;
     }
 
     public BuildingConfig GetBuildingConfig()

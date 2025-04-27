@@ -34,6 +34,10 @@ public enum CharacterStatus
     /// </summary>
     Explore,
     /// <summary>
+    /// 繁忙
+    /// </summary>
+    Busy,
+    /// <summary>
     /// 死亡
     /// </summary>
     Dead
@@ -57,6 +61,9 @@ public class CharacterData
     public bool direction = true;
 
     public Pos pos = null;
+
+    public string currentMapId = string.Empty;
+    public Dictionary<string, string> currentMapNodeIds = new();
 
     /// <summary>
     /// 生命值

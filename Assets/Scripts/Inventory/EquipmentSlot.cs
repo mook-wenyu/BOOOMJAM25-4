@@ -254,7 +254,7 @@ IEndDragHandler,
                 {
                     // 确认丢弃
                     string itemName = CurrentItem.GetItemData().name;
-                    bool result = InventoryMgr.GetInventoryData().RemoveItemCountByInstanceId(CurrentItem.instanceId, count);
+                    bool result = InventoryMgr.GetInventoryData(InventoryId).RemoveItemCountByInstanceId(CurrentItem.instanceId, count);
                     if (result)
                     {
                         handled = true;

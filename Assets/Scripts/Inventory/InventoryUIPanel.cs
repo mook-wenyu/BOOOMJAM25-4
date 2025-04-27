@@ -98,7 +98,7 @@ public class InventoryUIPanel : MonoBehaviour
         if (fromSlot == null || toSlot == null) return;
 
         var inventory = InventoryMgr.GetPlayerInventoryData();
-        
+
         if (toSlot.CurrentItem == null)
         {
             // 移动到空槽位
@@ -130,26 +130,36 @@ public class InventoryUIPanel : MonoBehaviour
         {
             if (!CheckWarehouseTypeRestriction(toWarehouse, fromSlot.CurrentItem))
             {
-                Debug.Log("该物品不能存放在此类型的仓库中");
+                GlobalUIMgr.Instance.ShowMessage("该物品不能存放在此类型的仓库中");
                 return;
+            }
+        }
+
+        // 如果是装备，则卸下装备
+        if (fromSlot.CurrentItem != null && fromSlot.CurrentItem.GetItemType() == ItemType.Equipment)
+        {
+            if (fromSlot.CurrentItem.isEquipped)
+            {
+                // 卸下装备
+                InventoryMgr.GetPlayerInventoryData().UnequipItem(CharacterMgr.Player(), fromSlot.CurrentItem.instanceId);
             }
         }
 
         // 如果处于探索，则不能将物品放入仓库
         if (CharacterMgr.Player().status == CharacterStatus.Explore && toInventory.GetInventoryType() == InventoryType.Warehouse)
         {
-            Debug.Log("探索中不能将物品放入仓库");
+            GlobalUIMgr.Instance.ShowMessage("探索中不能将物品放入仓库");
             return;
         }
 
         // 如果是交换，且源是仓库，还需要检查源仓库的类型限制
-        if (toSlot.CurrentItem != null && 
-            fromInventory.GetInventoryType() == InventoryType.Warehouse && 
+        if (toSlot.CurrentItem != null &&
+            fromInventory.GetInventoryType() == InventoryType.Warehouse &&
             fromInventory is WarehouseData fromWarehouse)
         {
             if (!CheckWarehouseTypeRestriction(fromWarehouse, toSlot.CurrentItem))
             {
-                Debug.Log("该物品不能存放在源仓库中");
+                GlobalUIMgr.Instance.ShowMessage("该物品不能存放在源仓库中");
                 return;
             }
         }

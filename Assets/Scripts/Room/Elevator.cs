@@ -18,7 +18,7 @@ public class Elevator : MonoBehaviour
                 if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
                 {
                     upCollider.enabled = false;
-                    _collider.gameObject.transform.position = upCollider.transform.position;
+                    _collider.gameObject.transform.position = new Vector3(upCollider.transform.position.x, upCollider.transform.position.y - 1f, _collider.gameObject.transform.position.z);
                     CharacterEntityMgr.Instance.GetPlayer().GetCharacterData().pos.x = upCollider.transform.position.x;
                     CharacterEntityMgr.Instance.GetPlayer().GetCharacterData().pos.y = upCollider.transform.position.y;
                     EnabledCollider(upCollider).Forget();
@@ -29,7 +29,7 @@ public class Elevator : MonoBehaviour
                 if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
                 {
                     downCollider.enabled = false;
-                    _collider.gameObject.transform.position = downCollider.transform.position;
+                    _collider.gameObject.transform.position = new Vector3(downCollider.transform.position.x, downCollider.transform.position.y - 1f, _collider.gameObject.transform.position.z);
                     CharacterEntityMgr.Instance.GetPlayer().GetCharacterData().pos.x = downCollider.transform.position.x;
                     CharacterEntityMgr.Instance.GetPlayer().GetCharacterData().pos.y = downCollider.transform.position.y;
                     EnabledCollider(downCollider).Forget();
@@ -51,7 +51,6 @@ public class Elevator : MonoBehaviour
         {
             _collider = collision;
             _isEnabled = true;
-            Debug.Log($"进入{name}");
         }
     }
 
@@ -61,7 +60,6 @@ public class Elevator : MonoBehaviour
         {
             _collider = null;
             _isEnabled = false;
-            Debug.Log($"离开{name}");
         }
     }
 

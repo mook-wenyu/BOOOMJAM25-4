@@ -23,6 +23,8 @@ public class ExploreMapUIPanel : MonoSingleton<ExploreMapUIPanel>
 
     public void OnGoOutBtnClicked()
     {
+        // Todo: 计算时间，存档
+
         CharacterMgr.Player().status = CharacterStatus.Explore;
         GlobalUIMgr.Instance.ShowLoadingMask(true);
         Hide();
@@ -44,7 +46,7 @@ public class ExploreMapUIPanel : MonoSingleton<ExploreMapUIPanel>
     public void Show()
     {
         GameMgr.PauseTime();
-        CharacterMgr.Player().status = CharacterStatus.Explore;
+        CharacterMgr.Player().status = CharacterStatus.Busy;
         uiPanel.SetActive(true);
         infoName.text = "探索地图";
         infoDesc.text = "探索地图描述";

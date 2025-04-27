@@ -62,7 +62,17 @@ public class BuildPlatformData
                 }
                 break;
             case BuildingType.Production:
-                buildingProgress.Add(new ProductionBuildingData(buildingId, buildingInstanceId));
+                if (buildingConfig.light > 0)
+                {
+                    buildingProgress.Add(new ProductionBuildingData(buildingId, buildingInstanceId) { lightingData = new LightingData() });
+                }
+                else
+                {
+                    buildingProgress.Add(new ProductionBuildingData(buildingId, buildingInstanceId));
+                }
+                break;
+            case BuildingType.Light:
+                buildingProgress.Add(new BuildingData(buildingId, buildingInstanceId) { lightingData = new LightingData() });
                 break;
         }
         Debug.Log("开始建造");

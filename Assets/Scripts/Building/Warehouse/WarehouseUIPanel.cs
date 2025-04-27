@@ -125,7 +125,7 @@ public class WarehouseUIPanel : MonoSingleton<WarehouseUIPanel>
         {
             if (!CheckWarehouseTypeRestriction(toWarehouse, fromSlot.CurrentItem))
             {
-                Debug.Log("该物品不能存放在此类型的仓库中");
+                GlobalUIMgr.Instance.ShowMessage("该物品不能存放在此类型的仓库中");
                 return;
             }
         }
@@ -135,8 +135,18 @@ public class WarehouseUIPanel : MonoSingleton<WarehouseUIPanel>
         {
             if (!CheckWarehouseTypeRestriction(fromWarehouse, toSlot.CurrentItem))
             {
-                Debug.Log("该物品不能存放在源仓库中");
+                GlobalUIMgr.Instance.ShowMessage("该物品不能存放在源仓库中");
                 return;
+            }
+        }
+
+        // 如果是装备，则卸下装备
+        if (fromSlot.CurrentItem != null && fromSlot.CurrentItem.GetItemType() == ItemType.Equipment)
+        {
+            if (fromSlot.CurrentItem.isEquipped)
+            {
+                // 卸下装备
+                InventoryMgr.GetPlayerInventoryData().UnequipItem(CharacterMgr.Player(), fromSlot.CurrentItem.instanceId);
             }
         }
 
@@ -223,17 +233,27 @@ public class WarehouseUIPanel : MonoSingleton<WarehouseUIPanel>
             _selectedSlot = slot;
             slot.SetSelected(true);
 
-            // TODO: 在这里添加右键菜单或其他操作
-            // 例如：使用物品、丢弃物品等
-            /*GlobalUIMgr.Instance.ShowItemActionPopup(item, "使用", (count) =>
+            // 如果是装备，则卸下装备，否则将物品添加到背包中
+            if (item.GetItemType() == ItemType.Equipment)
             {
-                Debug.Log($"使用物品: {item.instanceId} -> {item.itemId} -> {item.GetItemData().name} x {count}");
+                if (item.isEquipped)
+                {
+                    // 卸下装备
+                    InventoryMgr.GetPlayerInventoryData().UnequipItem(CharacterMgr.Player(), item.instanceId);
+                }
+            }
 
-                // 使用物品
-                InventoryMgr.GetInventoryData().RemoveItem(item.itemId, count);
-            });*/
-
-            // InventoryMgr.GetInventoryData().UseItem(CharacterMgr.Player(), item.instanceId);
+            // 尝试将物品添加到背包中，如果背包已满，则提示用户背包已满
+            int count = InventoryMgr.GetPlayerInventoryData().CalculateCanAddItem(item.itemId, item.GetCount()); // 计算能装下物品的数量
+            if (count > 0)
+            {
+                InventoryMgr.GetPlayerInventoryData().AddItem(item.itemId, count); // 添加物品到背包中
+                _warehouseData.GetWarehouseData().RemoveItem(item.instanceId, count); // 仓库中移除物品实例
+            }
+            else
+            {
+                GlobalUIMgr.Instance.ShowMessage("背包已满");
+            }
         }
     }
 

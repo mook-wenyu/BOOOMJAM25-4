@@ -71,7 +71,7 @@ public class BuildPlatformUIPanel : MonoSingleton<BuildPlatformUIPanel>
                     }
                     if (!hasEnoughMaterials)
                     {
-                        Debug.Log("材料不足");
+                        GlobalUIMgr.Instance.ShowMessage("材料不足");
                         return;
                     }
                     Hide();

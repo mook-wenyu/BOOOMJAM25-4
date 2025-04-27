@@ -201,13 +201,12 @@ public class RoomBuildingSystem : MonoSingleton<RoomBuildingSystem>
             currentBuilding = null;
             targetFloor = null;
 
-            Debug.Log("建筑物已放置");
             BuildingMgr.GetBuildingData<BuildBuildingData>(currentBuildingInstanceId)
                 .GetBuildPlatformData().StartBuild(buildingId, buildingInstanceId);
         }
         else
         {
-            Debug.Log("无法在此位置放置建筑物");
+            GlobalUIMgr.Instance.ShowMessage("无法在此位置放置建筑物");
         }
     }
 

@@ -311,7 +311,7 @@ IEndDragHandler,
                 break;
             }
 
-            // 检查是否
+            // 检查是否在背包或仓库面板内
             if (result.gameObject.name is "InventoryBG" or "WarehouseBG")
             {
                 isInValidArea = true;
@@ -326,7 +326,7 @@ IEndDragHandler,
             }
         }
 
-        // 如果不在背包面板内,则丢弃物品
+        // 如果不在背包或仓库面板内，则丢弃物品
         if (!isInValidArea && !isInEquipment)
         {
             // 显示确认对话框
@@ -335,7 +335,7 @@ IEndDragHandler,
                 {
                     // 确认丢弃
                     string itemName = CurrentItem.GetItemData().name;
-                    bool result = InventoryMgr.GetInventoryData().RemoveItemCountByInstanceId(CurrentItem.instanceId, count);
+                    bool result = InventoryMgr.GetInventoryData(InventoryId).RemoveItemCountByInstanceId(CurrentItem.instanceId, count);
                     if (result)
                     {
                         handled = true;
@@ -353,11 +353,11 @@ IEndDragHandler,
             if (result)
             {
                 handled = true;
-                Debug.Log($"丢弃 {itemName} x {count}");
+                GlobalUIMgr.Instance.ShowMessage($"丢弃 {itemName} x {count}");
             }
             else
             {
-                Debug.Log("丢弃失败");
+                GlobalUIMgr.Instance.ShowMessage("丢弃失败");
             }
         }
 

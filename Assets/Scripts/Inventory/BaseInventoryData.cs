@@ -51,7 +51,7 @@ public abstract class BaseInventoryData
         this.capacity = capacity;
         this.inventoryType = inventoryType;
     }
-    
+
     /// <summary>
     /// 获取容器类型
     /// </summary>
@@ -234,15 +234,52 @@ public abstract class BaseInventoryData
         if (item.GetCount() <= 0)
         {
             items.Remove(instanceId);
-            
+
             // 找到并移除对应的插槽索引
             var slotIndex = itemOrder.FirstOrDefault(x => x.Value == instanceId).Key;
             itemOrder.Remove(slotIndex);
-            
+
             OnInventoryChanged?.Invoke();
         }
 
         return true;
+    }
+
+    /// <summary>
+    /// 计算能装下指定物品的数量
+    /// </summary>
+    public virtual int CalculateCanAddItem(string itemId, int amount = 1)
+    {
+        ItemConfig itemData = InventoryMgr.GetItemConfig(itemId);
+        if (itemData == null || amount <= 0)
+        {
+            Debug.LogError($"物品数据不存在: {itemId}");
+            return 0;
+        }
+
+        if (itemData.type == (int)ItemType.Equipment)
+        {
+            return HasAvailableSlot() ? 1 : 0;
+        }
+
+        int canAddTotal = 0;
+        foreach (var item in items.Values)
+        {
+            if (item.itemId == itemId && item.CanAddMore())
+            {
+                int canAdd = itemData.stacking - item.GetCount();
+                canAddTotal += canAdd;
+            }
+        }
+
+        // 如果还有剩余空间，计算可以新建的堆叠数量
+        int availableSlots = GetAvailableSlotCount();
+        if (availableSlots > 0)
+        {
+            canAddTotal += availableSlots * itemData.stacking;
+        }
+
+        return Math.Min(canAddTotal, amount);
     }
 
     /// <summary>
@@ -260,7 +297,7 @@ public abstract class BaseInventoryData
     {
         return capacity - items.Count;
     }
-    
+
     /// <summary>
     /// 获取指定物品数量
     /// </summary>
@@ -276,7 +313,7 @@ public abstract class BaseInventoryData
         }
         return totalCount;
     }
-    
+
     /// <summary>
     /// 检查是否有足够的物品数量
     /// </summary>
@@ -368,5 +405,5 @@ public abstract class BaseInventoryData
 
         OnInventoryChanged?.Invoke();
     }
-    
+
 }
