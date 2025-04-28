@@ -36,6 +36,7 @@ public class ExploreNodeEntityMgr : MonoSingleton<ExploreNodeEntityMgr>
             if (!config.isOnMap)
                 continue;
 
+            node.OnNodeReplaced += HandleNodeReplaced;
             node.OnNodeCompleted += HandleNodeCompleted;
             var nodeObj = Instantiate(nodePrefab, nodeRoot);
             nodeObj.name = node.id;
@@ -43,29 +44,6 @@ public class ExploreNodeEntityMgr : MonoSingleton<ExploreNodeEntityMgr>
             ExploreNodeEntity nodeEntity = nodeObj.GetComponent<ExploreNodeEntity>();
             nodeEntity.Setup(node);
             nodeEntity.OnClick += HandleNodeClicked;
-            /*if (node.type == PlaceType.Area)
-            {
-                Area area = AreaMgr.GetArea(node.id);
-                if (area == null)
-                {
-                    area = new AreaBuilder(node.id)
-                        .SetName($"Area {node.id}")
-                        .SetDesc($"Area {node.id} Description")
-                        .SetBgPath("/citybg_1")
-                        .SetType(AreaType.City)
-                        .SetBuildingType(BuildingType.None)
-                        .SetIconPath("/city1")
-                        .Build();
-                }
-                
-
-                if (!string.IsNullOrEmpty(area.iconPath))
-                {
-                    // placeEntity.SetPic(area.iconPath);
-                }
-
-            }
-            */
 
             nodeEntity.gameObject.SetActive(false);
         }
@@ -125,30 +103,49 @@ public class ExploreNodeEntityMgr : MonoSingleton<ExploreNodeEntityMgr>
             ActivePath(targetNode.id, unlockNodeId);
         }
         HandleNodeInteraction(targetNode, targetConfig);
+
         Debug.Log($"节点改变: {nodeId}");
+    }
+
+    // 处理节点替换事件
+    private void HandleNodeReplaced(ExploreNodeData node)
+    {
+        var nodeObj = nodeRoot.Find(node.id).gameObject;
+        var nodeEntity = nodeObj.GetComponent<ExploreNodeEntity>();
+        nodeEntity.Setup(node);
+
+        var nodeConfig = node.GetConfig();
+        // 默认解锁
+        foreach (var unlockNodeId in nodeConfig.unlocksMidNodes)
+        {
+            UnlockNode(unlockNodeId);
+            ActivePath(node.id, unlockNodeId);
+        }
+
+        Debug.Log($"节点替换: {node.id} -> {node.changedId}");
     }
 
     // 处理节点完成事件
     private void HandleNodeCompleted(ExploreNodeData node)
     {
         var nodeConfig = node.GetConfig();
-        if (!string.IsNullOrEmpty(nodeConfig.nodeAfterComplete) && nodeConfig.nodeAfterComplete != "0")
+
+        HideAllUIPanels();
+
+        if (node.isCompleted)
         {
-            HideAllUIPanels();
-
-            node.SetChangedId(nodeConfig.nodeAfterComplete);
-
-            if (node.isCompleted)
+            // 完成后解锁
+            foreach (var nodeId in nodeConfig.unlocksPostNodes)
             {
-                // 完成后解锁
-                foreach (var nodeId in nodeConfig.unlocksPostNodes)
-                {
-                    UnlockNode(nodeId);
-                    ActivePath(node.id, nodeId);
-                }
+                UnlockNode(nodeId);
+                ActivePath(node.id, nodeId);
             }
         }
 
+        if (!string.IsNullOrEmpty(nodeConfig.nodeAfterComplete) && nodeConfig.nodeAfterComplete != "0")
+        {
+            node.SetChangedId(nodeConfig.nodeAfterComplete);
+        }
     }
 
     // 处理节点点击事件
@@ -308,6 +305,7 @@ public class ExploreNodeEntityMgr : MonoSingleton<ExploreNodeEntityMgr>
     {
         foreach (var node in ExploreNodeMgr.GetExploreMapData(ExploreNodeMgr.currentMapId).nodes.Values)
         {
+            node.OnNodeReplaced -= HandleNodeReplaced;
             node.OnNodeCompleted -= HandleNodeCompleted;
         }
         nodeRoot.DestroyAllChildren();

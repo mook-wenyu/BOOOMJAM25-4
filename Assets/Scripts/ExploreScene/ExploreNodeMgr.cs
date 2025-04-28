@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using MookDialogueScript;
 
 public static class ExploreNodeMgr
 {
@@ -60,6 +61,26 @@ public static class ExploreNodeMgr
     public static ExploreNodeData GetExploreNodeData(string mapId, string nodeId)
     {
         return GetExploreMapData(mapId).nodes.GetValueOrDefault(nodeId, null);
+    }
+
+
+
+    [ScriptFunc("replace_node")]
+    public static void ReplaceExploreNode(string mapId, string originalNodeId, string changedNodeId)
+    {
+        GetExploreMapData(mapId).nodes[originalNodeId].SetChangedId(changedNodeId);
+    }
+
+    [ScriptFunc("complete_node")]
+    public static void CompleteExploreNode(string mapId, string nodeId)
+    {
+        GetExploreMapData(mapId).nodes[nodeId].SetCompleted();
+    }
+
+    [ScriptFunc("uncomplete_node")]
+    public static void UnCompleteExploreNode(string mapId, string nodeId)
+    {
+        GetExploreMapData(mapId).nodes[nodeId].SetUnCompleted();
     }
 
 }

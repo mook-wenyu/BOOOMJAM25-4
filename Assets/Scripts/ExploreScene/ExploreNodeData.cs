@@ -43,6 +43,7 @@ public class ExploreNodeData
 
     public bool isCompleted;
 
+    public event Action<ExploreNodeData> OnNodeReplaced;
     public event Action<ExploreNodeData> OnNodeCompleted;
 
     public ExploreNodeData()
@@ -59,6 +60,8 @@ public class ExploreNodeData
     public void SetChangedId(string changedId)
     {
         this.changedId = changedId;
+        this.isCompleted = false;
+        OnNodeReplaced?.Invoke(this); // 触发节点替换事件，用于更新地图显示
     }
 
     public void SetInitCompleted()
@@ -71,6 +74,11 @@ public class ExploreNodeData
         if (isCompleted) return;
         this.isCompleted = true;
         OnNodeCompleted?.Invoke(this);
+    }
+
+    public void SetUnCompleted()
+    {
+        this.isCompleted = false;
     }
 
     /// <summary>
