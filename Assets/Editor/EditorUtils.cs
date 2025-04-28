@@ -168,7 +168,7 @@ public class EditorUtils
                 if (string.IsNullOrEmpty(value))
                 {
                     Debug.LogWarning($"空值出现在第 {i + 1} 行，第 {j + 1} 列（字段名：{propertyInfos[j].Name}）");
-                    break;
+                    //break;
                 }
 
                 if (propertyInfos[j].Type.Contains("[]"))

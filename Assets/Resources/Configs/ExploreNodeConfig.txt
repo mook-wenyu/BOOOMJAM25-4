@@ -1,45 +1,56 @@
 {
   "$type": "System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[BaseConfig, Assembly-CSharp]], mscorlib",
-  "71001": {
+  "70000": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": "无",
+    "name": "通用空",
     "desc": "无",
     "type": 0,
-    "ownMap": "0",
+    "ownMap": "1",
+    "isOnMap": false,
+    "mapLocation": null,
+    "isStartPoint": false,
+    "neighborNodes": null,
+    "unlocksMidNodes": null,
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "70000"
+  },
+  "71001": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "起点",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "1",
     "isOnMap": true,
     "mapLocation": [
-      0,
-      0
+      16,
+      1
     ],
     "isStartPoint": true,
     "neighborNodes": [
       "71002"
     ],
     "unlocksMidNodes": [
-      "0"
-    ],
-    "unlocksPostNodes": [
       "71002"
     ],
-    "nodeAfterComplete": "0",
-    "rewardIdGroup": [
-      "0"
-    ],
-    "rewardAmountGroup": [
-      0
-    ],
-    "requiredMaterialIdGroup": [
-      "0"
-    ],
-    "requiredMaterialAmountGroup": [
-      0
-    ],
+    "unlocksPostNodes": [],
+    "nodeAfterComplete": "",
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
     "submitTime": 0.0,
-    "recipeIdGroup": [
-      "0"
-    ],
-    "storyId": "0",
-    "path": "0",
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
     "id": "71001"
   },
   "71002": {
@@ -47,42 +58,32 @@
     "name": "无",
     "desc": "无",
     "type": 0,
-    "ownMap": "0",
+    "ownMap": "1",
     "isOnMap": true,
     "mapLocation": [
-      1,
-      1
+      16,
+      3
     ],
     "isStartPoint": false,
     "neighborNodes": [
       "71001",
-      "71003"
+      "71003",
+      "71017"
     ],
     "unlocksMidNodes": [
-      "71003"
+      "71003",
+      "71017"
     ],
-    "unlocksPostNodes": [
-      "0"
-    ],
-    "nodeAfterComplete": "0",
-    "rewardIdGroup": [
-      "0"
-    ],
-    "rewardAmountGroup": [
-      0
-    ],
-    "requiredMaterialIdGroup": [
-      "0"
-    ],
-    "requiredMaterialAmountGroup": [
-      0
-    ],
+    "unlocksPostNodes": [],
+    "nodeAfterComplete": "",
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
     "submitTime": 0.0,
-    "recipeIdGroup": [
-      "0"
-    ],
-    "storyId": "0",
-    "path": "0",
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
     "id": "71002"
   },
   "71003": {
@@ -90,41 +91,1515 @@
     "name": "无",
     "desc": "无",
     "type": 0,
-    "ownMap": "0",
+    "ownMap": "1",
     "isOnMap": true,
     "mapLocation": [
-      0,
-      2
+      18,
+      5
     ],
     "isStartPoint": false,
     "neighborNodes": [
+      "71004",
+      "71002",
+      "71011"
+    ],
+    "unlocksMidNodes": [
+      "71004",
+      "71006",
+      "71011"
+    ],
+    "unlocksPostNodes": [],
+    "nodeAfterComplete": "",
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "71003"
+  },
+  "71004": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "1",
+    "isOnMap": true,
+    "mapLocation": [
+      20,
+      4
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "71003",
+      "71005"
+    ],
+    "unlocksMidNodes": [
+      "71005"
+    ],
+    "unlocksPostNodes": [],
+    "nodeAfterComplete": "",
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "71004"
+  },
+  "71005": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "1",
+    "isOnMap": true,
+    "mapLocation": [
+      22,
+      4
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "71004"
+    ],
+    "unlocksMidNodes": [],
+    "unlocksPostNodes": [],
+    "nodeAfterComplete": "",
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "71005"
+  },
+  "71006": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "1",
+    "isOnMap": true,
+    "mapLocation": [
+      20,
+      7
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "71003",
+      "71007",
+      "71009"
+    ],
+    "unlocksMidNodes": [
+      "71007",
+      "71009"
+    ],
+    "unlocksPostNodes": [],
+    "nodeAfterComplete": "",
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "71006"
+  },
+  "71007": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "1",
+    "isOnMap": true,
+    "mapLocation": [
+      23,
+      7
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "71006",
+      "71008"
+    ],
+    "unlocksMidNodes": [
+      "71008"
+    ],
+    "unlocksPostNodes": [],
+    "nodeAfterComplete": "",
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "71007"
+  },
+  "71008": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "小溪",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "1",
+    "isOnMap": true,
+    "mapLocation": [
+      26,
+      7
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "71007"
+    ],
+    "unlocksMidNodes": [],
+    "unlocksPostNodes": [],
+    "nodeAfterComplete": "",
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "71008"
+  },
+  "71009": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "初遇瑞迪亚",
+    "desc": "无",
+    "type": 5,
+    "ownMap": "1",
+    "isOnMap": true,
+    "mapLocation": [
+      21,
+      10
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "71006",
+      "71010"
+    ],
+    "unlocksMidNodes": [],
+    "unlocksPostNodes": [],
+    "nodeAfterComplete": "70000",
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": "Meet_Ridia",
+    "path": null,
+    "id": "71009"
+  },
+  "71010": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "1",
+    "isOnMap": true,
+    "mapLocation": [
+      22,
+      12
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "71009"
+    ],
+    "unlocksMidNodes": [],
+    "unlocksPostNodes": [],
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "71010"
+  },
+  "71011": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "1",
+    "isOnMap": true,
+    "mapLocation": [
+      17,
+      8
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "71003",
+      "71014",
       "71002"
     ],
     "unlocksMidNodes": [
-      "0"
+      "71014",
+      "71012"
     ],
+    "unlocksPostNodes": [],
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "71011"
+  },
+  "71012": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "1",
+    "isOnMap": true,
+    "mapLocation": [
+      18,
+      10
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "71011",
+      "71013"
+    ],
+    "unlocksMidNodes": [
+      "71013"
+    ],
+    "unlocksPostNodes": [],
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "71012"
+  },
+  "71013": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "猎场",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "1",
+    "isOnMap": true,
+    "mapLocation": [
+      18,
+      13
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "71012"
+    ],
+    "unlocksMidNodes": [],
+    "unlocksPostNodes": [],
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "71013"
+  },
+  "71014": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "1",
+    "isOnMap": true,
+    "mapLocation": [
+      16,
+      10
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "71011",
+      "71015"
+    ],
+    "unlocksMidNodes": [
+      "71015"
+    ],
+    "unlocksPostNodes": [],
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "71014"
+  },
+  "71015": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "1",
+    "isOnMap": true,
+    "mapLocation": [
+      14,
+      12
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "71014",
+      "71016"
+    ],
+    "unlocksMidNodes": [
+      "71016"
+    ],
+    "unlocksPostNodes": [],
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "71015"
+  },
+  "71016": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "1",
+    "isOnMap": true,
+    "mapLocation": [
+      12,
+      14
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "71015",
+      "71020",
+      "71028"
+    ],
+    "unlocksMidNodes": [
+      "71028"
+    ],
+    "unlocksPostNodes": [],
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "71016"
+  },
+  "71017": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "1",
+    "isOnMap": true,
+    "mapLocation": [
+      15,
+      6
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "71002",
+      "71018"
+    ],
+    "unlocksMidNodes": [
+      "71018"
+    ],
+    "unlocksPostNodes": [],
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "71017"
+  },
+  "71018": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "1",
+    "isOnMap": true,
+    "mapLocation": [
+      12,
+      7
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "71017",
+      "71019"
+    ],
+    "unlocksMidNodes": [
+      "71019"
+    ],
+    "unlocksPostNodes": [],
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "71018"
+  },
+  "71019": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "1",
+    "isOnMap": true,
+    "mapLocation": [
+      9,
+      9
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "71020",
+      "71021",
+      "71023"
+    ],
+    "unlocksMidNodes": [
+      "71023",
+      "71021",
+      "71020"
+    ],
+    "unlocksPostNodes": [],
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "71019"
+  },
+  "71020": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "1",
+    "isOnMap": true,
+    "mapLocation": [
+      11,
+      11
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "71019",
+      "71016"
+    ],
+    "unlocksMidNodes": [
+      "71016"
+    ],
+    "unlocksPostNodes": [],
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "71020"
+  },
+  "71021": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "1",
+    "isOnMap": true,
+    "mapLocation": [
+      8,
+      12
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "71019",
+      "71022"
+    ],
+    "unlocksMidNodes": [
+      "71022"
+    ],
+    "unlocksPostNodes": [],
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "71021"
+  },
+  "71022": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "1",
+    "isOnMap": true,
+    "mapLocation": [
+      7,
+      14
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "71021",
+      "71028"
+    ],
+    "unlocksMidNodes": [
+      "71028"
+    ],
+    "unlocksPostNodes": [],
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "71022"
+  },
+  "71023": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "传送点",
+    "desc": "无",
+    "type": 1,
+    "ownMap": "1",
+    "isOnMap": true,
+    "mapLocation": [
+      6,
+      9
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "71019",
+      "71024"
+    ],
+    "unlocksMidNodes": [
+      "71024"
+    ],
+    "unlocksPostNodes": [],
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "71023"
+  },
+  "71024": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "1",
+    "isOnMap": true,
+    "mapLocation": [
+      4,
+      10
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "71023",
+      "71025",
+      "71026"
+    ],
+    "unlocksMidNodes": [
+      "71025",
+      "71026"
+    ],
+    "unlocksPostNodes": [],
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "71024"
+  },
+  "71025": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "1",
+    "isOnMap": true,
+    "mapLocation": [
+      3,
+      12
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "71024"
+    ],
+    "unlocksMidNodes": [],
+    "unlocksPostNodes": [],
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "71025"
+  },
+  "71026": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "1",
+    "isOnMap": true,
+    "mapLocation": [
+      2,
+      8
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "71024",
+      "71027"
+    ],
+    "unlocksMidNodes": [
+      "71027"
+    ],
+    "unlocksPostNodes": [],
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "71026"
+  },
+  "71027": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "1",
+    "isOnMap": true,
+    "mapLocation": [
+      1,
+      6
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "71026"
+    ],
+    "unlocksMidNodes": [],
+    "unlocksPostNodes": [],
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "71027"
+  },
+  "71028": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "横木",
+    "desc": "有一根横木挡住了你的去路",
+    "type": 3,
+    "ownMap": "1",
+    "isOnMap": true,
+    "mapLocation": [
+      8,
+      17
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "71022",
+      "71016",
+      "71029"
+    ],
+    "unlocksMidNodes": [],
     "unlocksPostNodes": [
-      "0"
+      "71029"
     ],
-    "nodeAfterComplete": "0",
-    "rewardIdGroup": [
-      "0"
-    ],
-    "rewardAmountGroup": [
-      0
-    ],
+    "nodeAfterComplete": "70000",
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
     "requiredMaterialIdGroup": [
-      "0"
+      "10020"
     ],
     "requiredMaterialAmountGroup": [
-      0
+      1
     ],
+    "submitTime": 1.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "71028"
+  },
+  "71029": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "1",
+    "isOnMap": true,
+    "mapLocation": [
+      8,
+      20
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "71028",
+      "71030",
+      "71035"
+    ],
+    "unlocksMidNodes": [
+      "71030",
+      "71035"
+    ],
+    "unlocksPostNodes": [],
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "71029"
+  },
+  "71030": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "1",
+    "isOnMap": true,
+    "mapLocation": [
+      6,
+      21
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "71031",
+      "71032",
+      "71029"
+    ],
+    "unlocksMidNodes": [
+      "71031",
+      "71032"
+    ],
+    "unlocksPostNodes": [],
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "71030"
+  },
+  "71031": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "1",
+    "isOnMap": true,
+    "mapLocation": [
+      3,
+      21
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "71030"
+    ],
+    "unlocksMidNodes": [],
+    "unlocksPostNodes": [],
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "71031"
+  },
+  "71032": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "1",
+    "isOnMap": true,
+    "mapLocation": [
+      5,
+      24
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "71030",
+      "71033"
+    ],
+    "unlocksMidNodes": [
+      "71033"
+    ],
+    "unlocksPostNodes": [],
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "71032"
+  },
+  "71033": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "1",
+    "isOnMap": true,
+    "mapLocation": [
+      6,
+      26
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "71032",
+      "71034"
+    ],
+    "unlocksMidNodes": [
+      "71034"
+    ],
+    "unlocksPostNodes": [],
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "71033"
+  },
+  "71034": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "损坏的窑炉",
+    "desc": "你遇到了一处损坏的窑炉，可以尝试修一修",
+    "type": 3,
+    "ownMap": "1",
+    "isOnMap": true,
+    "mapLocation": [
+      8,
+      28
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "71033",
+      "71036"
+    ],
+    "unlocksMidNodes": [],
+    "unlocksPostNodes": [
+      "71046"
+    ],
+    "nodeAfterComplete": "71049",
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": [
+      "10002"
+    ],
+    "requiredMaterialAmountGroup": [
+      5
+    ],
+    "submitTime": 1.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "71034"
+  },
+  "71035": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "传送点",
+    "desc": "无",
+    "type": 1,
+    "ownMap": "1",
+    "isOnMap": true,
+    "mapLocation": [
+      12,
+      24
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "71036",
+      "71041",
+      "71037"
+    ],
+    "unlocksMidNodes": [
+      "71036",
+      "71041",
+      "71037"
+    ],
+    "unlocksPostNodes": [],
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "71035"
+  },
+  "71036": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "1",
+    "isOnMap": true,
+    "mapLocation": [
+      10,
+      26
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "71034",
+      "71035"
+    ],
+    "unlocksMidNodes": [
+      "71034"
+    ],
+    "unlocksPostNodes": [],
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "71036"
+  },
+  "71037": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "1",
+    "isOnMap": true,
+    "mapLocation": [
+      13,
+      21
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "71035",
+      "71038"
+    ],
+    "unlocksMidNodes": [
+      "71038"
+    ],
+    "unlocksPostNodes": [],
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "71037"
+  },
+  "71038": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "1",
+    "isOnMap": true,
+    "mapLocation": [
+      14,
+      18
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "71037",
+      "71039",
+      "71040"
+    ],
+    "unlocksMidNodes": [
+      "71039",
+      "71040"
+    ],
+    "unlocksPostNodes": [],
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "71038"
+  },
+  "71039": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "1",
+    "isOnMap": true,
+    "mapLocation": [
+      17,
+      18
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "71038"
+    ],
+    "unlocksMidNodes": [],
+    "unlocksPostNodes": [],
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "71039"
+  },
+  "71040": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "1",
+    "isOnMap": true,
+    "mapLocation": [
+      16,
+      15
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "71038"
+    ],
+    "unlocksMidNodes": [],
+    "unlocksPostNodes": [],
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "71040"
+  },
+  "71041": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "1",
+    "isOnMap": true,
+    "mapLocation": [
+      15,
+      25
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "71035",
+      "71042"
+    ],
+    "unlocksMidNodes": [
+      "71042"
+    ],
+    "unlocksPostNodes": [],
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "71041"
+  },
+  "71042": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "声音",
+    "desc": "无",
+    "type": 5,
+    "ownMap": "1",
+    "isOnMap": true,
+    "mapLocation": [
+      17,
+      22
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "71041",
+      "71043",
+      "71045"
+    ],
+    "unlocksMidNodes": [
+      "71043",
+      "71045"
+    ],
+    "unlocksPostNodes": [],
+    "nodeAfterComplete": "",
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": "Hear_Star_Servant",
+    "path": null,
+    "id": "71042"
+  },
+  "71043": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "救人",
+    "desc": "无",
+    "type": 5,
+    "ownMap": "1",
+    "isOnMap": true,
+    "mapLocation": [
+      21,
+      23
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "71042",
+      "71044"
+    ],
+    "unlocksMidNodes": [],
+    "unlocksPostNodes": [
+      "71044"
+    ],
+    "nodeAfterComplete": "70000",
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": "Encounter_Woman",
+    "path": null,
+    "id": "71043"
+  },
+  "71044": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "1",
+    "isOnMap": true,
+    "mapLocation": [
+      24,
+      21
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "71043"
+    ],
+    "unlocksMidNodes": [],
+    "unlocksPostNodes": [],
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "71044"
+  },
+  "71045": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "1",
+    "isOnMap": true,
+    "mapLocation": [
+      20,
+      20
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "71042"
+    ],
+    "unlocksMidNodes": [],
+    "unlocksPostNodes": [],
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "71045"
+  },
+  "71046": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "神秘物品",
+    "desc": "无",
+    "type": 5,
+    "ownMap": "1",
+    "isOnMap": true,
+    "mapLocation": [
+      8,
+      30
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "71034"
+    ],
+    "unlocksMidNodes": [],
+    "unlocksPostNodes": [],
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": "Get_Ignition_Coil",
+    "path": null,
+    "id": "71046"
+  },
+  "71047": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "给瑞迪亚斧头",
+    "desc": "无",
+    "type": 3,
+    "ownMap": "1",
+    "isOnMap": false,
+    "mapLocation": null,
+    "isStartPoint": false,
+    "neighborNodes": null,
+    "unlocksMidNodes": null,
+    "unlocksPostNodes": [
+      "71010"
+    ],
+    "nodeAfterComplete": "71048",
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": [
+      "10020"
+    ],
+    "requiredMaterialAmountGroup": [
+      1
+    ],
+    "submitTime": 1.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "71047"
+  },
+  "71048": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "给瑞迪亚斧头后",
+    "desc": "无",
+    "type": 5,
+    "ownMap": "1",
+    "isOnMap": false,
+    "mapLocation": null,
+    "isStartPoint": false,
+    "neighborNodes": null,
+    "unlocksMidNodes": null,
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": "",
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": "Give_Ridia_Axe",
+    "path": null,
+    "id": "71048"
+  },
+  "71049": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "完好的窑炉",
+    "desc": "被你修好的窑炉",
+    "type": 4,
+    "ownMap": "1",
+    "isOnMap": false,
+    "mapLocation": null,
+    "isStartPoint": false,
+    "neighborNodes": null,
+    "unlocksMidNodes": null,
+    "unlocksPostNodes": [],
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
     "submitTime": 0.0,
     "recipeIdGroup": [
-      "0"
+      "2000103",
+      "2000104"
     ],
-    "storyId": "0",
-    "path": "0",
-    "id": "71003"
+    "storyId": null,
+    "path": null,
+    "id": "71049"
+  },
+  "71050": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "救下神秘人",
+    "desc": "无",
+    "type": 3,
+    "ownMap": "1",
+    "isOnMap": false,
+    "mapLocation": null,
+    "isStartPoint": false,
+    "neighborNodes": null,
+    "unlocksMidNodes": [
+      "71044"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": "71051",
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": [
+      "10022"
+    ],
+    "requiredMaterialAmountGroup": [
+      1
+    ],
+    "submitTime": 1.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "71050"
+  },
+  "71051": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "救下了神秘人",
+    "desc": "无",
+    "type": 5,
+    "ownMap": "1",
+    "isOnMap": false,
+    "mapLocation": null,
+    "isStartPoint": false,
+    "neighborNodes": null,
+    "unlocksMidNodes": null,
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": [],
+    "storyId": "Save_Camus",
+    "path": null,
+    "id": "71051"
+  },
+  "71052": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "神秘零件",
+    "desc": "无",
+    "type": 2,
+    "ownMap": "1",
+    "isOnMap": false,
+    "mapLocation": null,
+    "isStartPoint": false,
+    "neighborNodes": null,
+    "unlocksMidNodes": null,
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": [
+      "10018"
+    ],
+    "rewardAmountGroup": [
+      5
+    ],
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "71052"
   }
 }
