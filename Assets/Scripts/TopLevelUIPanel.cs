@@ -13,6 +13,8 @@ public class TopLevelUIPanel : MonoSingleton<TopLevelUIPanel>
     public TextMeshProUGUI timeText;
 
     public Button saveBtn;
+    public TMP_InputField sayIdInput;
+    public Button sayBtn;
     public TMP_InputField itemIdInput;
     public Button itemAddBtn;
 
@@ -49,6 +51,11 @@ public class TopLevelUIPanel : MonoSingleton<TopLevelUIPanel>
         itemAddBtn.onClick.AddListener(() =>
         {
             InventoryMgr.GetPlayerInventoryData().AddItem(itemIdInput.text.Trim(), 1);
+        });
+
+        sayBtn.onClick.AddListener(() =>
+        {
+            DialogueUIPanel.Instance.StartDialogue(sayIdInput.text.Trim());
         });
     }
 

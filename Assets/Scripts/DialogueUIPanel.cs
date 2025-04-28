@@ -100,6 +100,7 @@ public class DialogueUIPanel : MonoSingleton<DialogueUIPanel>
 
         if (CharacterMgr.Player().status != CharacterStatus.Explore)
         {
+            GameMgr.PauseTime();
             // 存档时机
             await GameMgr.SaveGameData();
         }
@@ -218,6 +219,7 @@ public class DialogueUIPanel : MonoSingleton<DialogueUIPanel>
         {
             // 存档时机
             _ = GameMgr.SaveGameData();
+            GameMgr.ResumeTime();
         }
 
     }
