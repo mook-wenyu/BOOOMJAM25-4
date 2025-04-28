@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6164952221931062775}
   - component: {fileID: 7478787653293012837}
   - component: {fileID: 7559982934979673461}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: ExploreNodeEntity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -144,7 +144,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7410272886604975424}
   - component: {fileID: 4119854462200601511}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -28,6 +28,19 @@ public class WarehouseUIPanel : MonoSingleton<WarehouseUIPanel>
         Hide();
     }
 
+    void Update()
+    {
+        if (!uiPanel.activeSelf) return;
+        if (uiPanel.transform.GetSiblingIndex() != uiPanel.transform.parent.childCount - 1)
+        {
+            return;
+        }
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            Hide();
+        }
+    }
+
     // 创建固定数量的物品槽
     private void CreateItemSlots()
     {
@@ -269,6 +282,7 @@ public class WarehouseUIPanel : MonoSingleton<WarehouseUIPanel>
 
         // 显示仓库UI
         uiPanel.SetActive(true);
+        uiPanel.transform.SetAsLastSibling();
         // 创建物品槽
         CreateItemSlots();
         // 初始显示
@@ -281,6 +295,7 @@ public class WarehouseUIPanel : MonoSingleton<WarehouseUIPanel>
         {
             this._warehouseData.GetWarehouseData().OnInventoryChanged -= UpdateUI;
         }
+        uiPanel.transform.SetAsFirstSibling();
         uiPanel.SetActive(false);
     }
 

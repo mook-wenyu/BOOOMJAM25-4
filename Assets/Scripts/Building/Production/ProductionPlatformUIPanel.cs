@@ -39,6 +39,19 @@ public class ProductionPlatformUIPanel : MonoSingleton<ProductionPlatformUIPanel
         Hide();
     }
 
+    void Update()
+    {
+        if (!uiPanel.activeSelf) return;
+        if (uiPanel.transform.GetSiblingIndex() != uiPanel.transform.parent.childCount - 1)
+        {
+            return;
+        }
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            Hide();
+        }
+    }
+
     void CreateItem()
     {
         itemContainer.content.DestroyAllChildren();
@@ -214,6 +227,7 @@ public class ProductionPlatformUIPanel : MonoSingleton<ProductionPlatformUIPanel
 
         // 显示仓库UI
         uiPanel.SetActive(true);
+        uiPanel.transform.SetAsLastSibling();
         // 创建物品
         CreateItem();
         CreateItemSlots();
@@ -221,6 +235,8 @@ public class ProductionPlatformUIPanel : MonoSingleton<ProductionPlatformUIPanel
 
     public void Hide()
     {
+        _isExplore = false;
+        uiPanel.transform.SetAsFirstSibling();
         uiPanel.SetActive(false);
     }
 }

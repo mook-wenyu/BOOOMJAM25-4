@@ -29,6 +29,19 @@ public class BuildPlatformUIPanel : MonoSingleton<BuildPlatformUIPanel>
         Hide();
     }
 
+    void Update()
+    {
+        if (!uiPanel.activeSelf) return;
+        if (uiPanel.transform.GetSiblingIndex() != uiPanel.transform.parent.childCount - 1)
+        {
+            return;
+        }
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            Hide();
+        }
+    }
+
     void CreateItem()
     {
         itemContainer.content.DestroyAllChildren();
@@ -92,12 +105,14 @@ public class BuildPlatformUIPanel : MonoSingleton<BuildPlatformUIPanel>
 
         // 显示UI
         uiPanel.SetActive(true);
+        uiPanel.transform.SetAsLastSibling();
         // 创建物品
         CreateItem();
     }
 
     public void Hide()
     {
+        uiPanel.transform.SetAsFirstSibling();
         uiPanel.SetActive(false);
     }
 }

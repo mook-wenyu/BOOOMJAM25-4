@@ -131,7 +131,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 158035895}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Characters
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,7 +163,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 235398961}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: ExploreNodes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -198,7 +198,7 @@ GameObject:
   - component: {fileID: 846614079}
   - component: {fileID: 846614081}
   - component: {fileID: 846614080}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: PlayerUnit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -532,7 +532,7 @@ Transform:
   m_GameObject: {fileID: 961739749}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -3.1999998, z: -10}
+  m_LocalPosition: {x: 4.2222223, y: -2, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -594,7 +594,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_EventMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 32768
   m_MaxRayIntersections: 0
 --- !u!1 &1243648957
 GameObject:
@@ -668,6 +668,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 309bf972b0e0242439442737e1003e5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  virtualCamera: {fileID: 1972094178}
+  confiner2D: {fileID: 1972094180}
   playerUnit: {fileID: 846614080}
   nodeRoot: {fileID: 235398961}
   nodePrefab: {fileID: 7376705222889302757, guid: b709f65072317bc4883933e9b0c24f32, type: 3}
@@ -693,7 +695,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1678596976}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Paths
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -725,6 +727,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1972094179}
   - component: {fileID: 1972094178}
+  - component: {fileID: 1972094180}
   m_Layer: 0
   m_Name: Virtual Camera
   m_TagString: Untagged
@@ -751,7 +754,7 @@ MonoBehaviour:
   m_Priority: 10
   m_StandbyUpdate: 1
   m_LookAt: {fileID: 0}
-  m_Follow: {fileID: 846614078}
+  m_Follow: {fileID: 0}
   m_Lens:
     FieldOfView: 60
     OrthographicSize: 8
@@ -787,6 +790,22 @@ Transform:
   - {fileID: 854444027}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1972094180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1972094177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f453f694addf4275988fac205bc91968, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BoundingShape2D: {fileID: 2133778958}
+  m_Damping: 0.5
+  m_MaxWindowSize: -1
+  m_Padding: 0
 --- !u!1 &1986285284
 GameObject:
   m_ObjectHideFlags: 0
@@ -796,7 +815,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1986285285}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Maps
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -887,10 +906,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 40, y: -20}
-      - {x: 40, y: 20}
-      - {x: -40, y: 20}
-      - {x: -40, y: -20}
+    - - {x: 40, y: -10}
+      - {x: 40, y: 40}
+      - {x: -10, y: 40}
+      - {x: -10, y: -10}
   m_UseDelaunayMesh: 0
 --- !u!4 &2133778959
 Transform:
@@ -971,9 +990,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: ExploreNodeEntity
       objectReference: {fileID: 0}
+    - target: {fileID: 7376705222889302757, guid: b709f65072317bc4883933e9b0c24f32, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 7478787653293012837, guid: b709f65072317bc4883933e9b0c24f32, type: 3}
       propertyPath: m_Radius
       value: 0.64
+      objectReference: {fileID: 0}
+    - target: {fileID: 8719744750717554523, guid: b709f65072317bc4883933e9b0c24f32, type: 3}
+      propertyPath: m_Layer
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

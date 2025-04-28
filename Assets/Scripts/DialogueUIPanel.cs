@@ -88,6 +88,7 @@ public class DialogueUIPanel : MonoSingleton<DialogueUIPanel>
     private async UniTask ShowDialogueUIPanel()
     {
         dialogueUIPanel.SetActive(true);
+        dialogueUIPanel.transform.SetAsLastSibling();
         dialogueContent.ClearText();
         dialogueSpeaker.text = string.Empty;
         await UniTask.CompletedTask;

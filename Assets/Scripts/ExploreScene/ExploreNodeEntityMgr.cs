@@ -2,18 +2,39 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Cinemachine;
+using PrimeTween;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class ExploreNodeEntityMgr : MonoSingleton<ExploreNodeEntityMgr>
 {
+    public CinemachineVirtualCamera virtualCamera; // 添加虚拟相机引用
+    public CinemachineConfiner2D confiner2D;       // 添加 Confiner2D 引用
+
     public UnitPathMover playerUnit;
 
     public Transform nodeRoot;
     public GameObject nodePrefab;
 
+    private Vector3 _lastMousePosition;
+    private bool _isDragging = false;
+
+    private const float DRAG_SPEED = 2f;                              // 设置为 2 以实现 1:1 的移动比例
+
     void Awake()
     {
         nodeRoot.DestroyAllChildren();
+
+        if (!virtualCamera)
+        {
+            virtualCamera = FindAnyObjectByType<CinemachineVirtualCamera>();
+        }
+
+        if (!confiner2D)
+        {
+            confiner2D = virtualCamera.GetComponent<CinemachineConfiner2D>();
+        }
     }
 
     // Start is called before the first frame update
@@ -22,6 +43,85 @@ public class ExploreNodeEntityMgr : MonoSingleton<ExploreNodeEntityMgr>
         GenerateMap();
         playerUnit.Init(ExploreNodeMgr.currentMapId);
         playerUnit.OnNodeChanged += HandleNodeChanged;
+
+        CenterCameraOnUnit(true);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        HandleMapDragging();
+    }
+
+    /// <summary>
+    /// 将相机中心移动到单位位置
+    /// </summary>
+    /// <param name="instant">是否立即移动</param>
+    public void CenterCameraOnUnit(bool instant = false)
+    {
+        if (virtualCamera != null && playerUnit != null)
+        {
+            Vector3 unitPosition = playerUnit.transform.position;
+            if (instant)
+                virtualCamera.transform.position = new Vector3(unitPosition.x, unitPosition.y, virtualCamera.transform.position.z);
+            else
+                Tween.Position(virtualCamera.transform, new Vector3(unitPosition.x, unitPosition.y, virtualCamera.transform.position.z), 0.2f);
+        }
+    }
+
+
+    /// <summary>
+    /// 处理地图拖动
+    /// </summary>
+    private void HandleMapDragging()
+    {
+        // 检查是否点击了UI元素
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            return; // 如果点击了UI，直接返回不处理拖动
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            _isDragging = true;
+            _lastMousePosition = Input.mousePosition;
+        }
+        else if (Input.GetMouseButtonUp(1))
+        {
+            _isDragging = false;
+        }
+
+        if (_isDragging)
+        {
+            Vector3 delta = Input.mousePosition - _lastMousePosition;
+            Vector3 translate = new Vector3(-delta.x, -delta.y, 0) * Camera.main.orthographicSize / Screen.height * DRAG_SPEED;
+
+            // 计算预期位置
+            Vector3 targetPosition = virtualCamera.transform.position + translate;
+
+            // 检查是否超出边界
+            if (confiner2D && confiner2D.enabled)
+            {
+                Bounds bounds = confiner2D.m_BoundingShape2D.bounds;
+                // 获取相机的正交尺寸
+                float orthoSize = virtualCamera.m_Lens.OrthographicSize;
+                // 计算相机视口的宽度
+                float aspectRatio = Screen.width / (float)Screen.height;
+                float horizontalSize = orthoSize * aspectRatio;
+
+                // 限制目标位置在边界内
+                targetPosition.x = Mathf.Clamp(targetPosition.x,
+                    bounds.min.x + horizontalSize,
+                    bounds.max.x - horizontalSize);
+                targetPosition.y = Mathf.Clamp(targetPosition.y,
+                    bounds.min.y + orthoSize,
+                    bounds.max.y - orthoSize);
+
+            }
+            virtualCamera.transform.position = targetPosition;
+
+            _lastMousePosition = Input.mousePosition;
+        }
     }
 
     /// <summary>
@@ -221,7 +321,7 @@ public class ExploreNodeEntityMgr : MonoSingleton<ExploreNodeEntityMgr>
             return false;
         }
 
-        if (!targetNode.neighborNodes.Contains(currentNode.id) && targetConfig.type != (int)ExploreNodeType.Functional)
+        if (!targetNode.neighborNodes.Contains(currentNode.id) && !currentNode.neighborNodes.Contains(targetNode.id) && targetConfig.type != (int)ExploreNodeType.Functional)
         {
             Debug.Log($"无法到达节点: {targetNode.id}，当前节点: {currentNode.id}");
             return false;

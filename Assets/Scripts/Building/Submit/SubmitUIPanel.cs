@@ -23,6 +23,19 @@ public class SubmitUIPanel : MonoSingleton<SubmitUIPanel>
         Hide();
     }
 
+    void Update()
+    {
+        if (!uiPanel.activeSelf) return;
+        if (uiPanel.transform.GetSiblingIndex() != uiPanel.transform.parent.childCount - 1)
+        {
+            return;
+        }
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            Hide();
+        }
+    }
+
     public void CreateItem(string[] requiredMaterialIdGroup, int[] requiredMaterialAmountGroup, double submitTime)
     {
         requiredContainer.DestroyAllChildren();
@@ -71,6 +84,7 @@ public class SubmitUIPanel : MonoSingleton<SubmitUIPanel>
         _node = node;
         var config = node.GetConfig();
         uiPanel.SetActive(true);
+        uiPanel.transform.SetAsLastSibling();
         titleName.text = config.name;
         desc.text = config.desc;
         CreateItem(config.requiredMaterialIdGroup, config.requiredMaterialAmountGroup, config.submitTime);
@@ -78,6 +92,7 @@ public class SubmitUIPanel : MonoSingleton<SubmitUIPanel>
 
     public void Hide()
     {
+        uiPanel.transform.SetAsFirstSibling();
         uiPanel.SetActive(false);
     }
 
