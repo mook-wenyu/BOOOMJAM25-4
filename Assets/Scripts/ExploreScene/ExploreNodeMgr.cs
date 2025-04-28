@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using MookDialogueScript;
 
 public static class ExploreNodeMgr
@@ -21,7 +22,11 @@ public static class ExploreNodeMgr
             {
                 tempExploreMaps.Add(config.ownMap, new ExploreMapData(config.ownMap));
             }
-            var node = new ExploreNodeData(config.id, new Pos(config.mapLocation[0], config.mapLocation[1]), config.neighborNodes);
+            var node = new ExploreNodeData(config.id, null, config.neighborNodes);
+            if (config.mapLocation != null && config.mapLocation.Length >= 2)
+            {
+                node.pos = new Pos(config.mapLocation[0], config.mapLocation[1]);
+            }
             if (config.isStartPoint)
             {
                 tempExploreMaps[config.ownMap].SetStartNodeId(config.id);

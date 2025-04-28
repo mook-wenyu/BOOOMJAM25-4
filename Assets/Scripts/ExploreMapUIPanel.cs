@@ -50,7 +50,7 @@ public class ExploreMapUIPanel : MonoSingleton<ExploreMapUIPanel>
                 infoDistance.text = "距离: 20KM";
                 infoTime.text = "时间: 1.5H";
 
-                ExploreNodeMgr.currentMapId = "0";
+                ExploreNodeMgr.currentMapId = "1";
 
                 break;
             case "ZhuZhaiQu":
@@ -59,7 +59,7 @@ public class ExploreMapUIPanel : MonoSingleton<ExploreMapUIPanel>
                 infoDistance.text = "距离: 20KM";
                 infoTime.text = "时间: 1.5H";
 
-                ExploreNodeMgr.currentMapId = "0";
+                ExploreNodeMgr.currentMapId = "2";
 
                 break;
             case "ShiZhongXin":
@@ -68,7 +68,7 @@ public class ExploreMapUIPanel : MonoSingleton<ExploreMapUIPanel>
                 infoDistance.text = "距离: 20KM";
                 infoTime.text = "时间: 1.5H";
 
-                ExploreNodeMgr.currentMapId = "0";
+                ExploreNodeMgr.currentMapId = "3";
 
                 break;
         }

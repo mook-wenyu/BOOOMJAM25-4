@@ -23,6 +23,7 @@ public class RoadPathMgr : MonoSingleton<RoadPathMgr>
 
         foreach (var node in nodes)
         {
+            if (node.neighborNodes == null || node.neighborNodes.Length == 0) continue;
             foreach (var connectedId in node.neighborNodes)
             {
                 string pathPairId = GetPathPairId(node.id, connectedId);
@@ -120,7 +121,7 @@ public class RoadPathMgr : MonoSingleton<RoadPathMgr>
     {
         return pathRenderers;
     }
-    
+
     /// <summary>
     /// 生成路径对的唯一标识符
     /// </summary>

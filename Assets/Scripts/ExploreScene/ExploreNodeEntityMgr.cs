@@ -60,16 +60,23 @@ public class ExploreNodeEntityMgr : MonoSingleton<ExploreNodeEntityMgr>
                 // 显示节点
                 nodeRoot.Find(node.id).gameObject.SetActive(true);
                 // 默认解锁
-                foreach (var nodeId in nodeConfig.unlocksMidNodes)
+                if (nodeConfig.unlocksMidNodes != null && nodeConfig.unlocksMidNodes.Length > 0)
                 {
-                    UnlockNode(nodeId);
-                    ActivePath(node.id, nodeId);
+                    foreach (var nodeId in nodeConfig.unlocksMidNodes)
+                    {
+                        UnlockNode(nodeId);
+                        ActivePath(node.id, nodeId);
+                    }
                 }
+
                 // 完成后解锁
-                foreach (var nodeId in nodeConfig.unlocksPostNodes)
+                if (nodeConfig.unlocksPostNodes != null && nodeConfig.unlocksPostNodes.Length > 0)
                 {
-                    UnlockNode(nodeId);
-                    ActivePath(node.id, nodeId);
+                    foreach (var nodeId in nodeConfig.unlocksPostNodes)
+                    {
+                        UnlockNode(nodeId);
+                        ActivePath(node.id, nodeId);
+                    }
                 }
             }
         }
@@ -97,11 +104,15 @@ public class ExploreNodeEntityMgr : MonoSingleton<ExploreNodeEntityMgr>
         var targetConfig = targetNode.GetConfig();
 
         // 默认解锁
-        foreach (var unlockNodeId in targetConfig.unlocksMidNodes)
+        if (targetConfig.unlocksMidNodes != null && targetConfig.unlocksMidNodes.Length > 0)
         {
-            UnlockNode(unlockNodeId);
-            ActivePath(targetNode.id, unlockNodeId);
+            foreach (var unlockNodeId in targetConfig.unlocksMidNodes)
+            {
+                UnlockNode(unlockNodeId);
+                ActivePath(targetNode.id, unlockNodeId);
+            }
         }
+
         HandleNodeInteraction(targetNode, targetConfig);
 
         Debug.Log($"节点改变: {nodeId}");
@@ -110,16 +121,21 @@ public class ExploreNodeEntityMgr : MonoSingleton<ExploreNodeEntityMgr>
     // 处理节点替换事件
     private void HandleNodeReplaced(ExploreNodeData node)
     {
+        HideAllUIPanels();
+
         var nodeObj = nodeRoot.Find(node.id).gameObject;
         var nodeEntity = nodeObj.GetComponent<ExploreNodeEntity>();
         nodeEntity.Setup(node);
 
         var nodeConfig = node.GetConfig();
         // 默认解锁
-        foreach (var unlockNodeId in nodeConfig.unlocksMidNodes)
+        if (nodeConfig.unlocksMidNodes != null && nodeConfig.unlocksMidNodes.Length > 0)
         {
-            UnlockNode(unlockNodeId);
-            ActivePath(node.id, unlockNodeId);
+            foreach (var unlockNodeId in nodeConfig.unlocksMidNodes)
+            {
+                UnlockNode(unlockNodeId);
+                ActivePath(node.id, unlockNodeId);
+            }
         }
 
         Debug.Log($"节点替换: {node.id} -> {node.changedId}");
@@ -135,11 +151,15 @@ public class ExploreNodeEntityMgr : MonoSingleton<ExploreNodeEntityMgr>
         if (node.isCompleted)
         {
             // 完成后解锁
-            foreach (var nodeId in nodeConfig.unlocksPostNodes)
+            if (nodeConfig.unlocksPostNodes != null && nodeConfig.unlocksPostNodes.Length > 0)
             {
-                UnlockNode(nodeId);
-                ActivePath(node.id, nodeId);
+                foreach (var nodeId in nodeConfig.unlocksPostNodes)
+                {
+                    UnlockNode(nodeId);
+                    ActivePath(node.id, nodeId);
+                }
             }
+
         }
 
         if (!string.IsNullOrEmpty(nodeConfig.nodeAfterComplete) && nodeConfig.nodeAfterComplete != "0")
@@ -227,6 +247,7 @@ public class ExploreNodeEntityMgr : MonoSingleton<ExploreNodeEntityMgr>
     // 处理节点交互
     private void HandleNodeInteraction(ExploreNodeData node, ExploreNodeConfig config)
     {
+        Debug.Log($"节点交互: {node.id}");
         switch ((ExploreNodeType)config.type)
         {
             case ExploreNodeType.Empty:
