@@ -17,6 +17,8 @@ public class DialogueUIPanel : MonoSingleton<DialogueUIPanel>
     public TypeTextComponent dialogueContent;
     public GameObject dialogueSpeakerBG;
     public TextMeshProUGUI dialogueSpeaker;
+    public Image speakerLeft;
+    public Image speakerRight;
     public ScrollRect choiceContainer;
     public GameObject choiceBtn;
 
@@ -28,6 +30,8 @@ public class DialogueUIPanel : MonoSingleton<DialogueUIPanel>
 
     private ObjectPool<GameObject> _choicePool;
     private List<GameObject> _activeChoices = new List<GameObject>();
+
+    private SynchronizationContext mainThreadContext;
 
     void Awake()
     {
@@ -70,6 +74,8 @@ public class DialogueUIPanel : MonoSingleton<DialogueUIPanel>
 
     void Start()
     {
+        mainThreadContext = SynchronizationContext.Current;
+
         // 恢复对话
         if (DialogueMgr.RunMgrs.Storage.isInDialogue)
         {
@@ -127,10 +133,30 @@ public class DialogueUIPanel : MonoSingleton<DialogueUIPanel>
         if (!string.IsNullOrEmpty(dialogue.Speaker))
         {
             dialogueSpeaker.text = dialogue.Speaker;
+            dialogueSpeakerBG.SetActive(true);
+
+            if (dialogue.Speaker == "我")
+            {
+                // 使用同步上下文更新UI
+                mainThreadContext.Post(_ =>
+                {
+                    speakerLeft.sprite = Resources.Load<Sprite>("Character/Pictures/player_left");
+                    speakerLeft.transform.localScale = new Vector3(-1, 1, 1);
+                    speakerLeft.gameObject.SetActive(true);
+                }, null);
+            }
+            else
+            {
+                mainThreadContext.Post(_ =>
+                {
+                    speakerRight.gameObject.SetActive(true);
+                }, null);
+            }
         }
         else
         {
             dialogueSpeaker.text = string.Empty;
+            dialogueSpeakerBG.SetActive(false);
         }
 
         // 对话内容

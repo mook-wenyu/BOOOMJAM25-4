@@ -80,7 +80,7 @@ public class RoadPathMgr : MonoSingleton<RoadPathMgr>
         lineRenderer.startWidth = 0.1f;
         lineRenderer.endWidth = 0.1f;
 
-        // 线条渲染
+        // 线条渲染设置
         lineRenderer.numCornerVertices = 32;
         lineRenderer.numCapVertices = 32;
         lineRenderer.alignment = LineAlignment.TransformZ;
@@ -88,17 +88,21 @@ public class RoadPathMgr : MonoSingleton<RoadPathMgr>
         lineRenderer.receiveShadows = false;
         lineRenderer.allowOcclusionWhenDynamic = false;
 
-        // 设置材质
-        var material = new Material(Shader.Find("Sprites/Default"))
+        // 使用自定义虚线材质
+        var material = new Material(Shader.Find("Custom/DashedLine"))
         {
             color = Color.white
         };
-        material.renderQueue = 3000;
+
+        // 设置虚线参数
+        material.SetFloat("_DashSize", 0.2f);  // 虚线长度
+        material.SetFloat("_GapSize", 0.1f);   // 间隙长度
+        material.SetFloat("_Tiling", 1.0f);   // 平铺密度
 
         lineRenderer.material = material;
         lineRenderer.useWorldSpace = true;
         lineRenderer.generateLightingData = false;
-        lineRenderer.textureMode = LineTextureMode.Stretch;
+        lineRenderer.textureMode = LineTextureMode.Tile;
 
         // 获取路径点
         List<Vector2> pathPoints = path;
@@ -110,8 +114,17 @@ public class RoadPathMgr : MonoSingleton<RoadPathMgr>
         }
 
         lineRenderer.gameObject.SetActive(false);
-
         pathRenderers[pathId] = lineRenderer;
+    }
+
+    public void UpdateDashedLineSettings(LineRenderer lineRenderer, float dashSize, float gapSize, float tiling)
+    {
+        if (lineRenderer.material.shader.name == "Custom/DashedLine")
+        {
+            lineRenderer.material.SetFloat("_DashSize", dashSize);  // 虚线长度
+            lineRenderer.material.SetFloat("_GapSize", gapSize);    // 间隙长度
+            lineRenderer.material.SetFloat("_Tiling", tiling);      // 平铺密度
+        }
     }
 
     /// <summary>

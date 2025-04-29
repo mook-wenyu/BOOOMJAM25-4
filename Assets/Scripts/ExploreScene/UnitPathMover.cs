@@ -27,14 +27,14 @@ public class UnitPathMover : MonoBehaviour
     {
         _characterData = CharacterMgr.Player();
         _characterData.currentMapId = mapId;
-        var currentMap = ExploreNodeMgr.GetExploreMapData(_characterData.currentMapId); // 获取角色当前地图数据
+        var currentMap = ExploreNodeMgr.GetExploreMapData(_characterData.currentMapId);
         if (!_characterData.currentMapNodeIds.ContainsKey(_characterData.currentMapId))
         {
             _characterData.currentMapNodeIds[_characterData.currentMapId] = currentMap.startNodeId;
         }
-        var startNode = ExploreNodeMgr.GetExploreNodeData(_characterData.currentMapNodeIds[_characterData.currentMapId]); // 获取角色当前节点数据
+        var startNode = ExploreNodeMgr.GetExploreNodeData(_characterData.currentMapNodeIds[_characterData.currentMapId]);
         CurrentNodeId = startNode.id;
-        transform.position = new Vector3(startNode.pos.x, startNode.pos.y, transform.position.z);
+        transform.position = new Vector3(startNode.pos.x + 0.6f, startNode.pos.y + 0.5f, transform.position.z);
     }
 
     // Update is called once per frame
@@ -63,7 +63,7 @@ public class UnitPathMover : MonoBehaviour
                     PreviousNodeIds.RemoveAt(0);
                 }
                 CurrentNodeId = _targetNode.id;
-                _characterData.currentMapNodeIds[_characterData.currentMapId] = CurrentNodeId; // 更新角色当前节点ID
+                _characterData.currentMapNodeIds[_characterData.currentMapId] = CurrentNodeId;
                 OnNodeChanged?.Invoke(CurrentNodeId);
             }
         }
@@ -72,7 +72,7 @@ public class UnitPathMover : MonoBehaviour
     public void MoveToNode(string nodeId)
     {
         _targetNode = ExploreNodeMgr.GetExploreNodeData(nodeId);
-        _targetPos = new Vector2(_targetNode.pos.x, _targetNode.pos.y);
+        _targetPos = new Vector2(_targetNode.pos.x + 0.6f, _targetNode.pos.y + 0.5f);
         IsMoving = true;
     }
 }
