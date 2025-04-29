@@ -34,7 +34,7 @@ public class UnitPathMover : MonoBehaviour
         }
         var startNode = ExploreNodeMgr.GetExploreNodeData(_characterData.currentMapNodeIds[_characterData.currentMapId]);
         CurrentNodeId = startNode.id;
-        transform.position = new Vector3(startNode.pos.x + 0.6f, startNode.pos.y + 0.5f, transform.position.z);
+        transform.position = new Vector3(startNode.pos.x + 0.65f, startNode.pos.y + 0.22f, transform.position.z);
     }
 
     // Update is called once per frame
@@ -72,7 +72,7 @@ public class UnitPathMover : MonoBehaviour
     public void MoveToNode(string nodeId)
     {
         _targetNode = ExploreNodeMgr.GetExploreNodeData(nodeId);
-        _targetPos = new Vector2(_targetNode.pos.x + 0.6f, _targetNode.pos.y + 0.5f);
+        _targetPos = new Vector2(_targetNode.pos.x + 0.65f, _targetNode.pos.y + 0.22f);
         IsMoving = true;
     }
 }

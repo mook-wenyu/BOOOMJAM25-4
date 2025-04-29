@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -49,9 +50,29 @@ public class ExploreNodeEntity : MonoBehaviour,
         }
         else
         {
-            if (!string.IsNullOrEmpty(config.path) && config.path != "0")
+            //if (!string.IsNullOrEmpty(config.path) && config.path != "0")
+            //{
+            //    _iconRenderer.sprite = Resources.Load<Sprite>(config.path);
+            //}
+            switch ((ExploreNodeType)config.type)
             {
-                _iconRenderer.sprite = Resources.Load<Sprite>(config.path);
+                case ExploreNodeType.Empty:
+                    break;
+                case ExploreNodeType.Functional:
+                    SetPic("Location");
+                    break;
+                case ExploreNodeType.Reward:
+                    SetPic("Reward");
+                    break;
+                case ExploreNodeType.Submit:
+                    SetPic("Obstacle");
+                    break;
+                case ExploreNodeType.Production:
+                    SetPic("Reward");
+                    break;
+                case ExploreNodeType.Story:
+                    SetPic("Dialogue");
+                    break;
             }
         }
     }
@@ -133,12 +154,7 @@ public class ExploreNodeEntity : MonoBehaviour,
 
     public void SetPic(string picPath)
     {
-        //ImageLoader.LoadSprite(picPath, (sprite) =>
-        //{
-        //    _spriteRenderer.sprite = sprite;
-        //    Destroy(GetComponent<CircleCollider2D>());
-        //    gameObject.AddComponent<PolygonCollider2D>();
-        //});
+        _iconRenderer.sprite = Resources.Load<Sprite>(Path.Combine("UI", "Explore", "Pic", picPath));
     }
 
     void OnDestroy()

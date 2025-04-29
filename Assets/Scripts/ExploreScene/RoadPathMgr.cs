@@ -75,6 +75,7 @@ public class RoadPathMgr : MonoSingleton<RoadPathMgr>
     {
         var lineRenderer = new GameObject($"Path_{pathId}").AddComponent<LineRenderer>();
         lineRenderer.transform.SetParent(pathContainer);
+        lineRenderer.gameObject.layer = LayerMask.NameToLayer("Explore");
 
         // 设置线条属性
         lineRenderer.startWidth = 0.1f;
