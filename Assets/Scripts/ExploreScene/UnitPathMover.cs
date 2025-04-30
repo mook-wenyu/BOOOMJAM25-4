@@ -50,7 +50,7 @@ public class UnitPathMover : MonoBehaviour
             // 移动到目标位置
             transform.position = Vector2.MoveTowards(transform.position,
             _targetPos,
-            _characterData.moveSpeed * Time.deltaTime);
+            _characterData.GetMoveSpeed() * Time.deltaTime);
 
             // 到达目标位置后停止移动
             if (Vector2.Distance(transform.position, _targetPos) < 0.1f)

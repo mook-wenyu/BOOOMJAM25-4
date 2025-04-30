@@ -156,8 +156,12 @@ public class CharacterData
     {
         health = newHealth;
         OnHpChanged?.Invoke(this, health);
+        if (health <= 0)
+        {
+            SetStatus(CharacterStatus.Dead);
+            Debug.Log($"角色已死亡，角色ID：{id}，角色名称：{fullName}");
+        }
     }
-
     /// <summary>
     /// 设置最大生命值
     /// </summary>
@@ -165,6 +169,14 @@ public class CharacterData
     {
         healthMax = newHealthMax;
         OnHpMaxChanged?.Invoke(this, healthMax);
+    }
+    public void IncreaseHealth(int amount)
+    {
+        SetHealth(health + amount);
+    }
+    public void DecreaseHealth(int amount)
+    {
+        SetHealth(health - amount);
     }
 
     /// <summary>
@@ -180,6 +192,14 @@ public class CharacterData
         hungerMax = newHungerMax;
         OnHungerMaxChanged?.Invoke(this, hungerMax);
     }
+    public void IncreaseHunger(int amount)
+    {
+        SetHunger(hunger + amount);
+    }
+    public void DecreaseHunger(int amount)
+    {
+        SetHunger(hunger - amount);
+    }
 
     /// <summary>
     /// 设置活力
@@ -193,6 +213,14 @@ public class CharacterData
     {
         energyMax = newEnergyMax;
         OnEnergyMaxChanged?.Invoke(this, energyMax);
+    }
+    public void IncreaseEnergy(int amount)
+    {
+        SetEnergy(energy + amount);
+    }
+    public void DecreaseEnergy(int amount)
+    {
+        SetEnergy(energy - amount);
     }
 
     /// <summary>
@@ -208,6 +236,14 @@ public class CharacterData
         spiritMax = newSpiritMax;
         OnSpiritMaxChanged?.Invoke(this, spiritMax);
     }
+    public void IncreaseSpirit(int amount)
+    {
+        SetSpirit(spirit + amount);
+    }
+    public void DecreaseSpirit(int amount)
+    {
+        SetSpirit(spirit - amount);
+    }
 
     /// <summary>
     /// 设置角色状态
@@ -216,6 +252,24 @@ public class CharacterData
     {
         status = newStatus;
     }
+
+    public float GetMoveSpeed()
+    {
+        // 获取角色的移动速度
+        float baseMoveSpeed = moveSpeed;
+
+        // 如果拥有 50002 增加50%，如果拥有 50003 减少50%
+        float buffMoveSpeed = activeBuffs
+            .Where(b => b.buffDataId == "50002" || b.buffDataId == "50003")
+            .Sum(b => b.buffDataId == "50002" ? -0.5f : 0.5f);
+
+        // 计算最终的移动速度
+        float finalMoveSpeed = baseMoveSpeed * (1 + buffMoveSpeed);
+
+        // 返回最终的移动速度
+        return finalMoveSpeed;
+    }
+
 
     /// <summary>
     /// 添加激活的Buff

@@ -176,19 +176,19 @@ public class InventoryData : BaseInventoryData
 
         if (item.healthAdjust != 0)
         {
-            character.SetHealth(character.health + item.healthAdjust * count);
+            character.IncreaseHealth(item.healthAdjust * count);
         }
         if (item.hungerAdjust != 0)
         {
-            character.SetHunger(character.hunger + item.hungerAdjust * count);
+            character.IncreaseHunger(item.hungerAdjust * count);
         }
         if (item.energyAdjust != 0)
         {
-            character.SetEnergy(character.energy + item.energyAdjust * count);
+            character.IncreaseEnergy(item.energyAdjust * count);
         }
         if (item.spiritAdjust != 0)
         {
-            character.SetSpirit(character.spirit + item.spiritAdjust * count);
+            character.IncreaseSpirit(item.spiritAdjust * count);
         }
 
         if (item.getBuff != null && item.getBuff.Length > 0)

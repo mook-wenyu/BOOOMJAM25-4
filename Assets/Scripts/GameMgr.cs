@@ -150,14 +150,26 @@ public static class GameMgr
         }
         finally
         {
-            _timeUpdateCts?.Dispose();
-            _timeUpdateCts = null;
+            StopTime();
         }
     }
 
     // 时间变化事件处理
     private static async UniTask HandleTimeChanged(GameTime gameTime)
     {
+        // 更新角色属性
+        var characters = currentSaveData.characters.Values.ToList();
+        for (int i = 0; i < characters.Count; i += BATCH_SIZE)
+        {
+            int count = Math.Min(BATCH_SIZE, characters.Count - i);
+            UpdateCharacterAttributesBatch(characters, i, count);
+
+            if (i + BATCH_SIZE < characters.Count)
+            {
+                await UniTask.Yield();
+            }
+        }
+
         // 更新配方 - 遍历所有生产平台
         var platforms = currentSaveData.productionPlatforms.Values.ToList();
         for (int i = 0; i < platforms.Count; i += BATCH_SIZE)
@@ -191,6 +203,7 @@ public static class GameMgr
         // 当前是上午7点，开启全局光源
         if (currentSaveData.gameTime.IsSpecificFullHour(7))
         {
+            // 起床
             WorldMgr.Instance.globalLight.intensity = 1f;
             WorldMgr.Instance.blackScreen.SetActive(false);
             ResumeTime();
@@ -227,7 +240,7 @@ public static class GameMgr
     }
 
     /// <summary>
-    /// 批量更新角色属性
+    /// 批量更新角色Buff（每小时）
     /// </summary>
     private static void UpdateCharacterBatch(List<CharacterData> characters, int startIndex, int count)
     {
@@ -235,7 +248,28 @@ public static class GameMgr
         {
             var character = characters[i];
             character.UpdateBuffs();
-            character.SetHunger(character.hunger - 1);
+        }
+    }
+
+    /// <summary>
+    /// 批量更新角色属性（每分钟）
+    /// </summary>
+    private static void UpdateCharacterAttributesBatch(List<CharacterData> characters, int startIndex, int count)
+    {
+        for (int i = startIndex; i < startIndex + count && i < characters.Count; i++)
+        {
+            var character = characters[i];
+            if (character.hunger > 0)
+            {
+                // 饱食度大于0，减少饱食度
+                //character.DecreaseHunger(1);
+            }
+            else
+            {
+                // 饱食度为0，减少精神和生命值
+                character.DecreaseSpirit(1);
+                character.DecreaseHealth(1);
+            }
             // 其他属性更新...
         }
     }

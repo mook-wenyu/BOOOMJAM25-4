@@ -68,7 +68,7 @@ public class Player : MonoBehaviour
 
             // 物理移动
             _rigidbody2D.velocity = new Vector2(
-                moveInput * _characterData.moveSpeed,
+                moveInput * _characterData.GetMoveSpeed(),
                 _rigidbody2D.velocity.y
             );
         }

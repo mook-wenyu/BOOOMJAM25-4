@@ -307,7 +307,7 @@ public class ExploreNodeEntityMgr : MonoSingleton<ExploreNodeEntityMgr>
         MovePlayerToNode(targetNode);
 
         _ = GameMgr.currentSaveData.gameTime.AddMinutes(consumeTime);
-        CharacterMgr.Player().SetEnergy(CharacterMgr.Player().energy - energyCost);
+        CharacterMgr.Player().DecreaseEnergy(energyCost);
 
         Debug.Log($"点击节点: {targetNode.id}");
     }

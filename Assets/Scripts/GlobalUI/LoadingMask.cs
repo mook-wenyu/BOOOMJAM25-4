@@ -10,7 +10,7 @@ public class LoadingMask : GlobalUIBase
     public TextMeshProUGUI loadingText;
 
     private bool _isLoading = true;
-    private string _loadingText = "加载中";
+    private string _loadingText = "Loading";
     private float _timer = 0f;
     private int _dotCount = 0;
 
