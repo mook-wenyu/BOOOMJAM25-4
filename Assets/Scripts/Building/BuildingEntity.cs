@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
@@ -100,8 +102,7 @@ public class BuildingEntity : MonoBehaviour
 
                 if (_instanceId == "bed")
                 {
-                    // 睡觉
-                    Debug.Log("睡觉");
+                    GameMgr.PlayerSleep().Forget();
                     return;
                 }
 

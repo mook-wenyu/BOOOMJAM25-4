@@ -154,6 +154,15 @@ public static class GameMgr
         }
     }
 
+    public static async UniTask PlayerSleep()
+    {
+        PauseTime();
+        CharacterMgr.Player().SetStatus(CharacterStatus.Sleep);
+        WorldMgr.Instance.blackScreen.SetActive(true);
+        await UniTask.Delay(TimeSpan.FromSeconds(1.5f));
+        _ = currentSaveData.gameTime.ConsumeTimeToHour(7);
+    }
+
     // 时间变化事件处理
     private static async UniTask HandleTimeChanged(GameTime gameTime)
     {
@@ -207,14 +216,14 @@ public static class GameMgr
             WorldMgr.Instance.globalLight.intensity = 0.1f;
         }
 
-        // 当前是下午1点，暂停时间，黑屏，过6小时
+        // 当前是下午1点，暂停时间，黑屏，强制进入睡眠状态
         if (currentSaveData.gameTime.IsSpecificFullHour(1))
         {
-            PauseTime();
-            CharacterMgr.Player().SetStatus(CharacterStatus.Sleep);
-            WorldMgr.Instance.blackScreen.SetActive(true);
-            await UniTask.Delay(TimeSpan.FromSeconds(1.5f));
-            _ = currentSaveData.gameTime.AddHours(6);
+            if (CharacterMgr.Player().status != CharacterStatus.Sleep)
+            {
+                // 睡觉
+                await PlayerSleep();
+            }
         }
 
         // 更新角色

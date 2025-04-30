@@ -114,6 +114,7 @@ public class ExploreMapUIPanel : MonoSingleton<ExploreMapUIPanel>
         GameMgr.PauseTime();
         CharacterMgr.Player().SetStatus(CharacterStatus.Busy);
         uiPanel.SetActive(true);
+        uiPanel.transform.SetAsLastSibling();
 
         SelectedMap(GetSelectedToggle().name);
     }

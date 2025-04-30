@@ -100,6 +100,11 @@ public class TopLevelUIPanel : MonoSingleton<TopLevelUIPanel>
     {
         health.value = hp;
         //healthText.text = $"{hp} / {player.healthMax}";
+        if (hp <= 0)
+        {
+            GameMgr.PauseTime();
+            GlobalUIMgr.Instance.ShowMessage("您已死亡！");
+        }
     }
 
     private void HandleHpMaxChanged(CharacterData character, float hpMax)
