@@ -8,4 +8,5 @@ public class RecipesConfig : BaseConfig
     public string[] materialIDGroup;
     public int[] materialAmountGroup;
     public double time;
+    public double energyCost;
 }

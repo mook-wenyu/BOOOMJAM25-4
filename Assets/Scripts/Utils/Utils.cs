@@ -103,4 +103,12 @@ public static class Utils
         // 清除所有子物体的引用
         transform.DetachChildren();
     }
+
+    /// <summary>
+    /// 获取通用参数配置
+    /// </summary>
+    public static GeneralParametersConfig GetGeneralParametersConfig(string id)
+    {
+        return ConfigManager.Instance.GetConfig<GeneralParametersConfig>(id);
+    }
 }

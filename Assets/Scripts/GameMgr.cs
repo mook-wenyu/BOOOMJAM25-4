@@ -137,7 +137,7 @@ public static class GameMgr
                 {
                     await currentSaveData.gameTime.AddMinutes(1);
                 }
-                await UniTask.Delay(100, cancellationToken: _timeUpdateCts.Token);
+                await UniTask.Delay(334, cancellationToken: _timeUpdateCts.Token);
             }
         }
         catch (OperationCanceledException)
@@ -157,19 +157,6 @@ public static class GameMgr
     // 时间变化事件处理
     private static async UniTask HandleTimeChanged(GameTime gameTime)
     {
-        // 更新角色属性
-        var characters = currentSaveData.characters.Values.ToList();
-        for (int i = 0; i < characters.Count; i += BATCH_SIZE)
-        {
-            int count = Math.Min(BATCH_SIZE, characters.Count - i);
-            UpdateCharacterAttributesBatch(characters, i, count);
-
-            if (i + BATCH_SIZE < characters.Count)
-            {
-                await UniTask.Yield();
-            }
-        }
-
         // 更新配方 - 遍历所有生产平台
         var platforms = currentSaveData.productionPlatforms.Values.ToList();
         for (int i = 0; i < platforms.Count; i += BATCH_SIZE)
@@ -204,6 +191,11 @@ public static class GameMgr
         if (currentSaveData.gameTime.IsSpecificFullHour(7))
         {
             // 起床
+            if (CharacterMgr.Player().status == CharacterStatus.Sleep)
+            {
+                // 睡觉起床
+                CharacterMgr.Player().IncreaseEnergy((float)Utils.GetGeneralParametersConfig("energyGrowInSleep").par);
+            }
             WorldMgr.Instance.globalLight.intensity = 1f;
             WorldMgr.Instance.blackScreen.SetActive(false);
             ResumeTime();
@@ -240,37 +232,40 @@ public static class GameMgr
     }
 
     /// <summary>
-    /// 批量更新角色Buff（每小时）
+    /// 批量更新角色（每小时）
     /// </summary>
     private static void UpdateCharacterBatch(List<CharacterData> characters, int startIndex, int count)
     {
         for (int i = startIndex; i < startIndex + count && i < characters.Count; i++)
         {
             var character = characters[i];
+            // 更新Buff
             character.UpdateBuffs();
-        }
-    }
 
-    /// <summary>
-    /// 批量更新角色属性（每分钟）
-    /// </summary>
-    private static void UpdateCharacterAttributesBatch(List<CharacterData> characters, int startIndex, int count)
-    {
-        for (int i = startIndex; i < startIndex + count && i < characters.Count; i++)
-        {
-            var character = characters[i];
+            // 更新属性
             if (character.hunger > 0)
             {
                 // 饱食度大于0，减少饱食度
-                //character.DecreaseHunger(1);
+                character.DecreaseHunger((float)Utils.GetGeneralParametersConfig("hungerLostValue").par);
             }
             else
             {
                 // 饱食度为0，减少精神和生命值
-                character.DecreaseSpirit(1);
-                character.DecreaseHealth(1);
+                character.DecreaseSpirit((float)Utils.GetGeneralParametersConfig("zeroHungerLostSpiritValue").par);
+                character.DecreaseHealth((float)Utils.GetGeneralParametersConfig("zeroHungerLostHPValue").par);
             }
-            // 其他属性更新...
+
+            if (character.hunger >= (float)Utils.GetGeneralParametersConfig("hPGrowHunger").par && character.health > 0)
+            {
+                // 饱食度大于80，增加生命值
+                character.IncreaseHealth((float)Utils.GetGeneralParametersConfig("hPGrowValue").par);
+            }
+
+            if (currentSaveData.gameTime.hour >= 7 && currentSaveData.gameTime.hour <= 18)
+            {
+                // 白天，增加体力
+                character.IncreaseEnergy(2);
+            }
         }
     }
 

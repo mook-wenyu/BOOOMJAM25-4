@@ -145,9 +145,19 @@ public class StartScene : MonoBehaviour
         CharacterData characterData = new CharacterData();
         characterData.id = "player";
         characterData.fullName = "玩家";
+        characterData.healthMax = (int)Utils.GetGeneralParametersConfig("mostHP").par;
+        characterData.hungerMax = (int)Utils.GetGeneralParametersConfig("mostHunger").par;
+        characterData.energyMax = (int)Utils.GetGeneralParametersConfig("mostEnergy").par;
+        characterData.spiritMax = (int)Utils.GetGeneralParametersConfig("mostSpirit").par;
+        characterData.health = characterData.healthMax;
+        characterData.hunger = characterData.hungerMax;
+        characterData.energy = characterData.energyMax;
+        characterData.spirit = characterData.spiritMax;
+
         GameMgr.currentSaveData.characters.Add(characterData.id, characterData);
 
         BuildingMgr.AddBuildingData(new BuildBuildingData(string.Empty, "design_platform"));
+        BuildingMgr.AddBuildingData(new BuildBuildingData(string.Empty, "bed"));
     }
 
 }

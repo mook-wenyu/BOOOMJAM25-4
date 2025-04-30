@@ -98,6 +98,13 @@ public class BuildingEntity : MonoBehaviour
                     return;
                 }
 
+                if (_instanceId == "bed")
+                {
+                    // 睡觉
+                    Debug.Log("睡觉");
+                    return;
+                }
+
                 _buildingData ??= BuildingMgr.GetBuildingData(_instanceId);
                 switch (_buildingData.GetBuildingType())
                 {

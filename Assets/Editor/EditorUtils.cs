@@ -189,11 +189,23 @@ public class EditorUtils
                 continue;
             }
 
-            var config = JsonConvert.DeserializeObject(sb.ToString(), type) as BaseConfig;
+            try
+            {
+                var config = JsonConvert.DeserializeObject(sb.ToString(), type) as BaseConfig;
+                if (config == null || string.IsNullOrEmpty(config.id)) continue;
+                rawDataDic.Add(config.id, config);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"解析错误: {e}");
+                break;
+            }
+
+            //var config = JsonConvert.DeserializeObject(sb.ToString(), type) as BaseConfig;
             //if (config == null || config.id == "0") continue;
 
-            if (config == null || string.IsNullOrEmpty(config.id)) continue;
-            rawDataDic.Add(config.id, config);
+            //if (config == null || string.IsNullOrEmpty(config.id)) continue;
+            //rawDataDic.Add(config.id, config);
         }
 
         var json = JsonConvert.SerializeObject(rawDataDic, new JsonSerializerSettings

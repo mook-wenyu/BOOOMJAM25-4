@@ -28,6 +28,7 @@
       "2000105"
     ],
     "light": 1,
+    "energyCost": 20.0,
     "path": "Building\\20001",
     "id": "20001"
   },
@@ -57,6 +58,7 @@
       "2000203"
     ],
     "light": 0,
+    "energyCost": 20.0,
     "path": "Building\\20002",
     "id": "20002"
   },
@@ -81,6 +83,7 @@
       "0"
     ],
     "light": 0,
+    "energyCost": 20.0,
     "path": "Building\\20003",
     "id": "20003"
   },
@@ -106,6 +109,7 @@
       "0"
     ],
     "light": 0,
+    "energyCost": 20.0,
     "path": "Building\\20004",
     "id": "20004"
   },
@@ -131,6 +135,7 @@
       "0"
     ],
     "light": 3,
+    "energyCost": 20.0,
     "path": "Building\\20005",
     "id": "20005"
   },
@@ -158,6 +163,7 @@
       "2000601"
     ],
     "light": 0,
+    "energyCost": 20.0,
     "path": "Building\\20006",
     "id": "20006"
   },
@@ -186,6 +192,7 @@
       "2000702"
     ],
     "light": 0,
+    "energyCost": 20.0,
     "path": "Building\\20007",
     "id": "20007"
   },
@@ -211,6 +218,7 @@
       "0"
     ],
     "light": 0,
+    "energyCost": 20.0,
     "path": "Building\\20008",
     "id": "20008"
   },
@@ -240,6 +248,7 @@
       "2000903"
     ],
     "light": 0,
+    "energyCost": 20.0,
     "path": "Building\\20009",
     "id": "20009"
   },
@@ -265,6 +274,7 @@
       "0"
     ],
     "light": 5,
+    "energyCost": 20.0,
     "path": "Building\\20010",
     "id": "20010"
   },
@@ -294,6 +304,7 @@
       "20011003"
     ],
     "light": 0,
+    "energyCost": 20.0,
     "path": "Building\\20011",
     "id": "20011"
   },
@@ -320,6 +331,7 @@
       "0"
     ],
     "light": 0,
+    "energyCost": 20.0,
     "path": "Building\\20012",
     "id": "20012"
   },
@@ -344,6 +356,7 @@
       "0"
     ],
     "light": 0,
+    "energyCost": 20.0,
     "path": "Building\\20013",
     "id": "20013"
   },
@@ -369,6 +382,7 @@
       "0"
     ],
     "light": 8,
+    "energyCost": 20.0,
     "path": "Building\\20014",
     "id": "20014"
   }

@@ -26,25 +26,25 @@ public static class CharacterMgr
     [ScriptFunc("increase_player_hp")]
     public static void IncreasePlayerHp(double amount)
     {
-        Player().IncreaseHealth((int)amount);
+        Player().IncreaseHealth((float)amount);
     }
 
     [ScriptFunc("increase_player_hunger")]
     public static void IncreasePlayerHunger(double amount)
     {
-        Player().IncreaseHunger((int)amount);
+        Player().IncreaseHunger((float)amount);
     }
 
     [ScriptFunc("increase_player_energy")]
     public static void IncreasePlayerEnergy(double amount)
     {
-        Player().IncreaseEnergy((int)amount);
+        Player().IncreaseEnergy((float)amount);
     }
 
     [ScriptFunc("increase_player_spirit")]
     public static void IncreasePlayerSpirit(double amount)
     {
-        Player().IncreaseSpirit((int)amount);
+        Player().IncreaseSpirit((float)amount);
     }
 
     /// <summary>
@@ -53,7 +53,7 @@ public static class CharacterMgr
     [ScriptFunc("reduce_player_hp")]
     public static void ReducePlayerHp(double amount)
     {
-        Player().DecreaseHealth((int)amount);
+        Player().DecreaseHealth((float)amount);
     }
 
     /// <summary>
@@ -62,7 +62,7 @@ public static class CharacterMgr
     [ScriptFunc("reduce_player_hunger")]
     public static void ReducePlayerHunger(double amount)
     {
-        Player().DecreaseHunger((int)amount);
+        Player().DecreaseHunger((float)amount);
     }
 
     /// <summary>
@@ -71,7 +71,7 @@ public static class CharacterMgr
     [ScriptFunc("reduce_player_energy")]
     public static void ReducePlayerEnergy(double amount)
     {
-        Player().DecreaseEnergy((int)amount);
+        Player().DecreaseEnergy((float)amount);
     }
 
     /// <summary>
@@ -80,6 +80,6 @@ public static class CharacterMgr
     [ScriptFunc("reduce_player_spirit")]
     public static void ReducePlayerSpirit(double amount)
     {
-        Player().DecreaseSpirit((int)amount);
+        Player().DecreaseSpirit((float)amount);
     }
 }

@@ -1602,5 +1602,3509 @@
     "storyId": null,
     "path": null,
     "id": "71052"
+  },
+  "72000": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "通用空",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": false,
+    "mapLocation": null,
+    "isStartPoint": false,
+    "neighborNodes": null,
+    "unlocksMidNodes": null,
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72000"
+  },
+  "72001": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "起点",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": true,
+    "mapLocation": [
+      19,
+      1
+    ],
+    "isStartPoint": true,
+    "neighborNodes": [
+      "72003"
+    ],
+    "unlocksMidNodes": [],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72001"
+  },
+  "72002": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": true,
+    "mapLocation": [
+      16,
+      4
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "72003",
+      "72008"
+    ],
+    "unlocksMidNodes": [
+      "72008"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72002"
+  },
+  "72003": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": true,
+    "mapLocation": [
+      19,
+      4
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "72001",
+      "72002",
+      "72009"
+    ],
+    "unlocksMidNodes": [
+      "72002",
+      "72009"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72003"
+  },
+  "72004": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": true,
+    "mapLocation": [
+      25,
+      4
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "72011"
+    ],
+    "unlocksMidNodes": [],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72004"
+  },
+  "72005": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": true,
+    "mapLocation": [
+      4,
+      7
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "72006"
+    ],
+    "unlocksMidNodes": null,
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72005"
+  },
+  "72006": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": true,
+    "mapLocation": [
+      7,
+      7
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "72005",
+      "72015"
+    ],
+    "unlocksMidNodes": [
+      "72005"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72006"
+  },
+  "72007": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": true,
+    "mapLocation": [
+      13,
+      7
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "72017",
+      "72008"
+    ],
+    "unlocksMidNodes": [
+      "72017"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72007"
+  },
+  "72008": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": true,
+    "mapLocation": [
+      16,
+      7
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "72002",
+      "72012",
+      "72007"
+    ],
+    "unlocksMidNodes": [
+      "72007",
+      "72012"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72008"
+  },
+  "72009": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": true,
+    "mapLocation": [
+      19,
+      7
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "72003",
+      "72010",
+      "72018"
+    ],
+    "unlocksMidNodes": [
+      "72018",
+      "72010"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72009"
+  },
+  "72010": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": true,
+    "mapLocation": [
+      22,
+      7
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "72009",
+      "72019",
+      "72011"
+    ],
+    "unlocksMidNodes": [
+      "72011",
+      "72019",
+      "72009"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72010"
+  },
+  "72011": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": true,
+    "mapLocation": [
+      25,
+      7
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "72010",
+      "72004"
+    ],
+    "unlocksMidNodes": [
+      "72004"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72011"
+  },
+  "72012": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": true,
+    "mapLocation": [
+      16,
+      9
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "72008"
+    ],
+    "unlocksMidNodes": null,
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72012"
+  },
+  "72013": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": true,
+    "mapLocation": [
+      1,
+      10
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "72021",
+      "72014"
+    ],
+    "unlocksMidNodes": [
+      "72021"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72013"
+  },
+  "72014": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": true,
+    "mapLocation": [
+      4,
+      10
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "72013",
+      "72015"
+    ],
+    "unlocksMidNodes": [
+      "72013",
+      "72015"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72014"
+  },
+  "72015": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": true,
+    "mapLocation": [
+      7,
+      10
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "72014",
+      "72016",
+      "72022",
+      "72006"
+    ],
+    "unlocksMidNodes": [
+      "72014",
+      "72022"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72015"
+  },
+  "72016": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": true,
+    "mapLocation": [
+      10,
+      10
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "72015",
+      "72017"
+    ],
+    "unlocksMidNodes": [
+      "72015"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72016"
+  },
+  "72017": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": true,
+    "mapLocation": [
+      13,
+      10
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "72007",
+      "72016",
+      "72023"
+    ],
+    "unlocksMidNodes": null,
+    "unlocksPostNodes": [
+      "16"
+    ],
+    "nodeAfterComplete": "72000",
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72017"
+  },
+  "72018": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": true,
+    "mapLocation": [
+      19,
+      10
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "72009",
+      "72025",
+      "72019"
+    ],
+    "unlocksMidNodes": [
+      "72019",
+      "72025",
+      "72009"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72018"
+  },
+  "72019": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": true,
+    "mapLocation": [
+      22,
+      10
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "72018",
+      "72010",
+      "72026"
+    ],
+    "unlocksMidNodes": [
+      "72018",
+      "72010",
+      "72026"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72019"
+  },
+  "72020": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": true,
+    "mapLocation": [
+      25,
+      11
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "72017"
+    ],
+    "unlocksMidNodes": null,
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72020"
+  },
+  "72021": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": true,
+    "mapLocation": [
+      1,
+      13
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "72013",
+      "72032"
+    ],
+    "unlocksMidNodes": [
+      "72032",
+      "72013"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72021"
+  },
+  "72022": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": true,
+    "mapLocation": [
+      7,
+      13
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "72034",
+      "72015"
+    ],
+    "unlocksMidNodes": [
+      "72034"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72022"
+  },
+  "72023": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": true,
+    "mapLocation": [
+      13,
+      13
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "72017",
+      "72024"
+    ],
+    "unlocksMidNodes": [
+      "72017",
+      "72024"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72023"
+  },
+  "72024": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": true,
+    "mapLocation": [
+      16,
+      13
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "72023",
+      "72025"
+    ],
+    "unlocksMidNodes": [
+      "72023",
+      "72025"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72024"
+  },
+  "72025": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": true,
+    "mapLocation": [
+      19,
+      13
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "72018",
+      "72024",
+      "72036"
+    ],
+    "unlocksMidNodes": [
+      "72018",
+      "72036"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72025"
+  },
+  "72026": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": true,
+    "mapLocation": [
+      22,
+      13
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "72019",
+      "72027"
+    ],
+    "unlocksMidNodes": [
+      "72027"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72026"
+  },
+  "72027": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": true,
+    "mapLocation": [
+      25,
+      13
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "72020",
+      "72038",
+      "72026",
+      "72028"
+    ],
+    "unlocksMidNodes": [
+      "72020",
+      "72038",
+      "72028"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72027"
+  },
+  "72028": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": true,
+    "mapLocation": [
+      28,
+      13
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "72027",
+      "72031",
+      "72029"
+    ],
+    "unlocksMidNodes": [
+      "72031",
+      "72029"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72028"
+  },
+  "72029": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": true,
+    "mapLocation": [
+      30,
+      13
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "72028"
+    ],
+    "unlocksMidNodes": null,
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72029"
+  },
+  "72030": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": true,
+    "mapLocation": [
+      4,
+      14
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "72033"
+    ],
+    "unlocksMidNodes": null,
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72030"
+  },
+  "72031": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": true,
+    "mapLocation": [
+      28,
+      15
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "72028"
+    ],
+    "unlocksMidNodes": null,
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72031"
+  },
+  "72032": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": true,
+    "mapLocation": [
+      1,
+      16
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "72021",
+      "72033"
+    ],
+    "unlocksMidNodes": [
+      "72021",
+      "72033"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72032"
+  },
+  "72033": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": true,
+    "mapLocation": [
+      4,
+      16
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "72032",
+      "72034",
+      "72030"
+    ],
+    "unlocksMidNodes": [
+      "72032",
+      "72034"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72033"
+  },
+  "72034": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": true,
+    "mapLocation": [
+      7,
+      16
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "72033",
+      "72035",
+      "72022",
+      "72040"
+    ],
+    "unlocksMidNodes": [
+      "72033",
+      "72035",
+      "72022",
+      "72040"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72034"
+  },
+  "72035": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": true,
+    "mapLocation": [
+      10,
+      16
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "72034"
+    ],
+    "unlocksMidNodes": null,
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72035"
+  },
+  "72036": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": true,
+    "mapLocation": [
+      19,
+      16
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "72025",
+      "72037",
+      "72039"
+    ],
+    "unlocksMidNodes": [
+      "72037",
+      "72039",
+      "72042"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72036"
+  },
+  "72037": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": true,
+    "mapLocation": [
+      21,
+      16
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "72036"
+    ],
+    "unlocksMidNodes": [],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72037"
+  },
+  "72038": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": true,
+    "mapLocation": [
+      25,
+      16
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "72027"
+    ],
+    "unlocksMidNodes": [],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72038"
+  },
+  "72039": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": true,
+    "mapLocation": [
+      18,
+      18
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "72036"
+    ],
+    "unlocksMidNodes": [],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72039"
+  },
+  "72040": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": true,
+    "mapLocation": [
+      7,
+      19
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "72034",
+      "72043",
+      "72041"
+    ],
+    "unlocksMidNodes": [
+      "72041",
+      "72043"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72040"
+  },
+  "72041": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": true,
+    "mapLocation": [
+      10,
+      19
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "72040"
+    ],
+    "unlocksMidNodes": [],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72041"
+  },
+  "72042": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": true,
+    "mapLocation": [
+      19,
+      19
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "72036",
+      "72044"
+    ],
+    "unlocksMidNodes": [],
+    "unlocksPostNodes": [
+      "44"
+    ],
+    "nodeAfterComplete": "72000",
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72042"
+  },
+  "72043": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": true,
+    "mapLocation": [
+      7,
+      21
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "72040"
+    ],
+    "unlocksMidNodes": [],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72043"
+  },
+  "72044": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": true,
+    "mapLocation": [
+      19,
+      22
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "72042",
+      "72047"
+    ],
+    "unlocksMidNodes": [
+      "72047"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72044"
+  },
+  "72045": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": true,
+    "mapLocation": [
+      13,
+      24
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "72046",
+      "72050"
+    ],
+    "unlocksMidNodes": [
+      "72050"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72045"
+  },
+  "72046": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": true,
+    "mapLocation": [
+      16,
+      24
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "72045",
+      "72047",
+      "72051"
+    ],
+    "unlocksMidNodes": [
+      "72045",
+      "72051"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72046"
+  },
+  "72047": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": true,
+    "mapLocation": [
+      19,
+      24
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "72046",
+      "72048",
+      "72052",
+      "72044"
+    ],
+    "unlocksMidNodes": [
+      "72046",
+      "72048",
+      "72052"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72047"
+  },
+  "72048": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": true,
+    "mapLocation": [
+      22,
+      24
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "72047",
+      "72053",
+      "72049"
+    ],
+    "unlocksMidNodes": [
+      "72049",
+      "72053"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72048"
+  },
+  "72049": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": true,
+    "mapLocation": [
+      25,
+      24
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "72048",
+      "72054"
+    ],
+    "unlocksMidNodes": [
+      "72054"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72049"
+  },
+  "72050": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": true,
+    "mapLocation": [
+      13,
+      27
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "72045"
+    ],
+    "unlocksMidNodes": null,
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72050"
+  },
+  "72051": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": true,
+    "mapLocation": [
+      16,
+      27
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "72046"
+    ],
+    "unlocksMidNodes": null,
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72051"
+  },
+  "72052": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": true,
+    "mapLocation": [
+      19,
+      27
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "72047"
+    ],
+    "unlocksMidNodes": null,
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72052"
+  },
+  "72053": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": true,
+    "mapLocation": [
+      22,
+      27
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "72048"
+    ],
+    "unlocksMidNodes": null,
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72053"
+  },
+  "72054": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": true,
+    "mapLocation": [
+      25,
+      27
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "72049"
+    ],
+    "unlocksMidNodes": null,
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72054"
+  },
+  "72055": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": false,
+    "mapLocation": null,
+    "isStartPoint": false,
+    "neighborNodes": null,
+    "unlocksMidNodes": null,
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72055"
+  },
+  "72056": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": false,
+    "mapLocation": null,
+    "isStartPoint": false,
+    "neighborNodes": null,
+    "unlocksMidNodes": null,
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72056"
+  },
+  "72057": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": false,
+    "mapLocation": null,
+    "isStartPoint": false,
+    "neighborNodes": null,
+    "unlocksMidNodes": null,
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72057"
+  },
+  "72058": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": false,
+    "mapLocation": null,
+    "isStartPoint": false,
+    "neighborNodes": null,
+    "unlocksMidNodes": null,
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72058"
+  },
+  "72059": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": false,
+    "mapLocation": null,
+    "isStartPoint": false,
+    "neighborNodes": null,
+    "unlocksMidNodes": null,
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72059"
+  },
+  "73000": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "通用空",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "3",
+    "isOnMap": false,
+    "mapLocation": null,
+    "isStartPoint": false,
+    "neighborNodes": null,
+    "unlocksMidNodes": null,
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "73000"
+  },
+  "73001": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "起点",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "3",
+    "isOnMap": true,
+    "mapLocation": [
+      15,
+      1
+    ],
+    "isStartPoint": true,
+    "neighborNodes": [
+      "73002"
+    ],
+    "unlocksMidNodes": [
+      "73002"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "73001"
+  },
+  "73002": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "3",
+    "isOnMap": true,
+    "mapLocation": [
+      15,
+      4
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "73005",
+      "73001",
+      "73006"
+    ],
+    "unlocksMidNodes": [
+      "73005",
+      "73006",
+      "73009"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "73002"
+  },
+  "73003": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "3",
+    "isOnMap": true,
+    "mapLocation": [
+      3,
+      7
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "73004"
+    ],
+    "unlocksMidNodes": null,
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "73003"
+  },
+  "73004": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "3",
+    "isOnMap": true,
+    "mapLocation": [
+      6,
+      6
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "73003",
+      "73010",
+      "73005"
+    ],
+    "unlocksMidNodes": [
+      "73003",
+      "73010",
+      "73005"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "73004"
+  },
+  "73005": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "3",
+    "isOnMap": true,
+    "mapLocation": [
+      10,
+      5
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "73004",
+      "73002"
+    ],
+    "unlocksMidNodes": [
+      "73004"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "73005"
+  },
+  "73006": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "3",
+    "isOnMap": true,
+    "mapLocation": [
+      20,
+      5
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "73002",
+      "73007"
+    ],
+    "unlocksMidNodes": [
+      "73007"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "73006"
+  },
+  "73007": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "3",
+    "isOnMap": true,
+    "mapLocation": [
+      24,
+      6
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "73006",
+      "73008",
+      "73011"
+    ],
+    "unlocksMidNodes": [
+      "73008",
+      "73011",
+      "73006"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "73007"
+  },
+  "73008": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "3",
+    "isOnMap": true,
+    "mapLocation": [
+      27,
+      7
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "73007"
+    ],
+    "unlocksMidNodes": null,
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "73008"
+  },
+  "73009": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "3",
+    "isOnMap": true,
+    "mapLocation": [
+      15,
+      7
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "73012",
+      "73013",
+      "7302"
+    ],
+    "unlocksMidNodes": [],
+    "unlocksPostNodes": [
+      "73012",
+      "73013"
+    ],
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "73009"
+  },
+  "73010": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "3",
+    "isOnMap": true,
+    "mapLocation": [
+      7,
+      9
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "73004",
+      "73014"
+    ],
+    "unlocksMidNodes": [],
+    "unlocksPostNodes": [
+      "73004",
+      "73014"
+    ],
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "73010"
+  },
+  "73011": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "3",
+    "isOnMap": true,
+    "mapLocation": [
+      23,
+      9
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "73007",
+      "73029"
+    ],
+    "unlocksMidNodes": [],
+    "unlocksPostNodes": [
+      "73007",
+      "73029"
+    ],
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "73011"
+  },
+  "73012": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "3",
+    "isOnMap": true,
+    "mapLocation": [
+      15,
+      10
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "73009"
+    ],
+    "unlocksMidNodes": null,
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "73012"
+  },
+  "73013": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "3",
+    "isOnMap": true,
+    "mapLocation": [
+      17,
+      9
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "73009"
+    ],
+    "unlocksMidNodes": null,
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "73013"
+  },
+  "73014": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "3",
+    "isOnMap": true,
+    "mapLocation": [
+      8,
+      12
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "73010",
+      "73015",
+      "73016"
+    ],
+    "unlocksMidNodes": [
+      "73010",
+      "73015",
+      "73016"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "73014"
+  },
+  "73015": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "3",
+    "isOnMap": true,
+    "mapLocation": [
+      9,
+      15
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "73014",
+      "73022",
+      "73020"
+    ],
+    "unlocksMidNodes": [
+      "73014",
+      "73022",
+      "73020"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "73015"
+  },
+  "73016": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "3",
+    "isOnMap": true,
+    "mapLocation": [
+      5,
+      13
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "73014",
+      "73017",
+      "73018"
+    ],
+    "unlocksMidNodes": [
+      "73017",
+      "73018"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "73016"
+  },
+  "73017": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "3",
+    "isOnMap": true,
+    "mapLocation": [
+      6,
+      15
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "73016"
+    ],
+    "unlocksMidNodes": null,
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "73017"
+  },
+  "73018": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "3",
+    "isOnMap": true,
+    "mapLocation": [
+      2,
+      14
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "73019",
+      "916"
+    ],
+    "unlocksMidNodes": [
+      "73019"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "73018"
+  },
+  "73019": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "3",
+    "isOnMap": true,
+    "mapLocation": [
+      1,
+      11
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "73018"
+    ],
+    "unlocksMidNodes": null,
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "73019"
+  },
+  "73020": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "3",
+    "isOnMap": true,
+    "mapLocation": [
+      10,
+      18
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "73015",
+      "73021",
+      "73024"
+    ],
+    "unlocksMidNodes": [
+      "73015",
+      "73024",
+      "73021"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "73020"
+  },
+  "73021": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "3",
+    "isOnMap": true,
+    "mapLocation": [
+      11,
+      21
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "73025",
+      "73020",
+      "73028"
+    ],
+    "unlocksMidNodes": [
+      "73028",
+      "73020",
+      "73025"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "73021"
+  },
+  "73022": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "3",
+    "isOnMap": true,
+    "mapLocation": [
+      12,
+      15
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "73015",
+      "73023"
+    ],
+    "unlocksMidNodes": [
+      "73023"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "73022"
+  },
+  "73023": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "3",
+    "isOnMap": true,
+    "mapLocation": [
+      14,
+      13
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "73022"
+    ],
+    "unlocksMidNodes": null,
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "73023"
+  },
+  "73024": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "3",
+    "isOnMap": true,
+    "mapLocation": [
+      13,
+      18
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "73020"
+    ],
+    "unlocksMidNodes": null,
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "73024"
+  },
+  "73025": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "3",
+    "isOnMap": true,
+    "mapLocation": [
+      8,
+      22
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "73021",
+      "73026"
+    ],
+    "unlocksMidNodes": [
+      "73026"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "73025"
+  },
+  "73026": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "3",
+    "isOnMap": true,
+    "mapLocation": [
+      5,
+      23
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "73027",
+      "73025"
+    ],
+    "unlocksMidNodes": [
+      "73027"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "73026"
+  },
+  "73027": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "3",
+    "isOnMap": true,
+    "mapLocation": [
+      4,
+      25
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "73026"
+    ],
+    "unlocksMidNodes": null,
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "73027"
+  },
+  "73028": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "3",
+    "isOnMap": true,
+    "mapLocation": [
+      12,
+      24
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "73021",
+      "73049"
+    ],
+    "unlocksMidNodes": [
+      "73021",
+      "73049"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "73028"
+  },
+  "73029": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "3",
+    "isOnMap": true,
+    "mapLocation": [
+      22,
+      12
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "73011",
+      "73030",
+      "73035"
+    ],
+    "unlocksMidNodes": [
+      "73011",
+      "73035",
+      "73030"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "73029"
+  },
+  "73030": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "3",
+    "isOnMap": true,
+    "mapLocation": [
+      25,
+      13
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "73029",
+      "73031"
+    ],
+    "unlocksMidNodes": [
+      "73031"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "73030"
+  },
+  "73031": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "3",
+    "isOnMap": true,
+    "mapLocation": [
+      27,
+      25
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "73030",
+      "73032"
+    ],
+    "unlocksMidNodes": [
+      "73032"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "73031"
+  },
+  "73032": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "3",
+    "isOnMap": true,
+    "mapLocation": [
+      30,
+      12
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "73031",
+      "73033"
+    ],
+    "unlocksMidNodes": [
+      "73033"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "73032"
+  },
+  "73033": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "3",
+    "isOnMap": true,
+    "mapLocation": [
+      29,
+      15
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "73032",
+      "73034"
+    ],
+    "unlocksMidNodes": [
+      "73034"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "73033"
+  },
+  "73034": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "3",
+    "isOnMap": true,
+    "mapLocation": [
+      32,
+      16
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "73033"
+    ],
+    "unlocksMidNodes": null,
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "73034"
+  },
+  "73035": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "3",
+    "isOnMap": true,
+    "mapLocation": [
+      21,
+      15
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "73029",
+      "73036",
+      "73039",
+      "73037"
+    ],
+    "unlocksMidNodes": [
+      "73036",
+      "73039",
+      "73037",
+      "73029"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "73035"
+  },
+  "73036": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "3",
+    "isOnMap": true,
+    "mapLocation": [
+      20,
+      17
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "73035"
+    ],
+    "unlocksMidNodes": null,
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "73036"
+  },
+  "73037": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "3",
+    "isOnMap": true,
+    "mapLocation": [
+      19,
+      14
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "73035",
+      "73038"
+    ],
+    "unlocksMidNodes": [
+      "73038"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "73037"
+  },
+  "73038": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "3",
+    "isOnMap": true,
+    "mapLocation": [
+      17,
+      13
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "73037"
+    ],
+    "unlocksMidNodes": null,
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "73038"
+  },
+  "73039": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "3",
+    "isOnMap": true,
+    "mapLocation": [
+      24,
+      17
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "73035",
+      "73040"
+    ],
+    "unlocksMidNodes": [
+      "73035",
+      "73040"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "73039"
+  },
+  "73040": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "3",
+    "isOnMap": true,
+    "mapLocation": [
+      25,
+      20
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "73039",
+      "73041"
+    ],
+    "unlocksMidNodes": [
+      "73039",
+      "73041"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "73040"
+  },
+  "73041": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "3",
+    "isOnMap": true,
+    "mapLocation": [
+      22,
+      22
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "73040",
+      "73044",
+      "73043",
+      "73042"
+    ],
+    "unlocksMidNodes": [
+      "73044",
+      "73040",
+      "73043",
+      "73042"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "73041"
+  },
+  "73042": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "3",
+    "isOnMap": true,
+    "mapLocation": [
+      24,
+      24
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "73041"
+    ],
+    "unlocksMidNodes": null,
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "73042"
+  },
+  "73043": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "3",
+    "isOnMap": true,
+    "mapLocation": [
+      21,
+      25
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "73041"
+    ],
+    "unlocksMidNodes": null,
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "73043"
+  },
+  "73044": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "3",
+    "isOnMap": true,
+    "mapLocation": [
+      19,
+      21
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "73045",
+      "73041",
+      "73046"
+    ],
+    "unlocksMidNodes": [
+      "73041",
+      "73045",
+      "73046"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "73044"
+  },
+  "73045": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "3",
+    "isOnMap": true,
+    "mapLocation": [
+      18,
+      24
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "73044",
+      "73049"
+    ],
+    "unlocksMidNodes": [
+      "73049",
+      "73044"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "73045"
+  },
+  "73046": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "3",
+    "isOnMap": true,
+    "mapLocation": [
+      17,
+      20
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "73044",
+      "73047"
+    ],
+    "unlocksMidNodes": [
+      "73047"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "73046"
+  },
+  "73047": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "3",
+    "isOnMap": true,
+    "mapLocation": [
+      15,
+      19
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "73048",
+      "73046"
+    ],
+    "unlocksMidNodes": [
+      "73048"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "73047"
+  },
+  "73048": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "3",
+    "isOnMap": true,
+    "mapLocation": [
+      16,
+      17
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "73047"
+    ],
+    "unlocksMidNodes": null,
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "73048"
+  },
+  "73049": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "3",
+    "isOnMap": true,
+    "mapLocation": [
+      15,
+      24
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "73028",
+      "73045",
+      "73050"
+    ],
+    "unlocksMidNodes": [],
+    "unlocksPostNodes": [
+      "73028",
+      "73045",
+      "73050"
+    ],
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "73049"
+  },
+  "73050": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "3",
+    "isOnMap": true,
+    "mapLocation": [
+      15,
+      27
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "73049",
+      "73051"
+    ],
+    "unlocksMidNodes": [],
+    "unlocksPostNodes": [
+      "73051"
+    ],
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "73050"
+  },
+  "73051": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "3",
+    "isOnMap": true,
+    "mapLocation": [
+      15,
+      30
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "73050",
+      "73052"
+    ],
+    "unlocksMidNodes": [
+      "73052"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "73051"
+  },
+  "73052": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "3",
+    "isOnMap": true,
+    "mapLocation": [
+      15,
+      33
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "73051",
+      "73053",
+      "73054"
+    ],
+    "unlocksMidNodes": [
+      "73053",
+      "73054"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "73052"
+  },
+  "73053": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "3",
+    "isOnMap": true,
+    "mapLocation": [
+      13,
+      30
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "73052"
+    ],
+    "unlocksMidNodes": null,
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "73053"
+  },
+  "73054": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "无",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "3",
+    "isOnMap": true,
+    "mapLocation": [
+      17,
+      30
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "73052"
+    ],
+    "unlocksMidNodes": null,
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "73054"
   }
 }

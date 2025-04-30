@@ -96,49 +96,49 @@ public class TopLevelUIPanel : MonoSingleton<TopLevelUIPanel>
         spirit.value = player.spirit;
     }
 
-    private void HandleHpChanged(CharacterData character, int hp)
+    private void HandleHpChanged(CharacterData character, float hp)
     {
         health.value = hp;
         //healthText.text = $"{hp} / {player.healthMax}";
     }
 
-    private void HandleHpMaxChanged(CharacterData character, int hpMax)
+    private void HandleHpMaxChanged(CharacterData character, float hpMax)
     {
         health.maxValue = hpMax;
         //healthText.text = $"{player.health} / {hpMax}";
     }
 
-    private void HandleHungerChanged(CharacterData character, int hunger)
+    private void HandleHungerChanged(CharacterData character, float hunger)
     {
         this.hunger.value = hunger;
         //hungerText.text = $"{hunger} / {player.hungerMax}";
     }
 
-    private void HandleHungerMaxChanged(CharacterData character, int hungerMax)
+    private void HandleHungerMaxChanged(CharacterData character, float hungerMax)
     {
         this.hunger.maxValue = hungerMax;
         //hungerText.text = $"{player.hunger} / {hungerMax}";
     }
 
-    private void HandleEnergyChanged(CharacterData character, int energy)
+    private void HandleEnergyChanged(CharacterData character, float energy)
     {
         this.energy.value = energy;
         //energyText.text = $"{energy} / {player.energyMax}";
     }
 
-    private void HandleEnergyMaxChanged(CharacterData character, int energyMax)
+    private void HandleEnergyMaxChanged(CharacterData character, float energyMax)
     {
         this.energy.maxValue = energyMax;
         //energyText.text = $"{player.energy} / {energyMax}";
     }
 
-    private void HandleSpiritChanged(CharacterData character, int spirit)
+    private void HandleSpiritChanged(CharacterData character, float spirit)
     {
         this.spirit.value = spirit;
         //spiritText.text = $"{spirit} / {player.spiritMax}";
     }
 
-    private void HandleSpiritMaxChanged(CharacterData character, int spiritMax)
+    private void HandleSpiritMaxChanged(CharacterData character, float spiritMax)
     {
         this.spirit.maxValue = spiritMax;
         //spiritText.text = $"{player.spirit} / {spiritMax}";

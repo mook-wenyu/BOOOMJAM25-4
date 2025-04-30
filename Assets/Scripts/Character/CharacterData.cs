@@ -68,26 +68,26 @@ public class CharacterData
     /// <summary>
     /// 生命值
     /// </summary>
-    public int health = 100;
-    public int healthMax = 100;
+    public float health = 100;
+    public float healthMax = 100;
 
     /// <summary>
     /// 饱食度
     /// </summary>
-    public int hunger = 100;
-    public int hungerMax = 100;
+    public float hunger = 100;
+    public float hungerMax = 100;
 
     /// <summary>
     /// 活力
     /// </summary>
-    public int energy = 100;
-    public int energyMax = 100;
+    public float energy = 100;
+    public float energyMax = 100;
 
     /// <summary>
     /// 精神
     /// </summary>
-    public int spirit = 100;
-    public int spiritMax = 100;
+    public float spirit = 100;
+    public float spiritMax = 100;
 
     /// <summary>
     /// 移动速度
@@ -118,26 +118,26 @@ public class CharacterData
     /// <summary>
     /// 生命值变化事件
     /// </summary>
-    public event Action<CharacterData, int> OnHpChanged;
-    public event Action<CharacterData, int> OnHpMaxChanged;
+    public event Action<CharacterData, float> OnHpChanged;
+    public event Action<CharacterData, float> OnHpMaxChanged;
 
     /// <summary>
     /// 饱食度变化事件
     /// </summary>
-    public event Action<CharacterData, int> OnHungerChanged;
-    public event Action<CharacterData, int> OnHungerMaxChanged;
+    public event Action<CharacterData, float> OnHungerChanged;
+    public event Action<CharacterData, float> OnHungerMaxChanged;
 
     /// <summary>
     /// 体力变化事件
     /// </summary>
-    public event Action<CharacterData, int> OnEnergyChanged;
-    public event Action<CharacterData, int> OnEnergyMaxChanged;
+    public event Action<CharacterData, float> OnEnergyChanged;
+    public event Action<CharacterData, float> OnEnergyMaxChanged;
 
     /// <summary>
     /// 精神变化事件
     /// </summary>
-    public event Action<CharacterData, int> OnSpiritChanged;
-    public event Action<CharacterData, int> OnSpiritMaxChanged;
+    public event Action<CharacterData, float> OnSpiritChanged;
+    public event Action<CharacterData, float> OnSpiritMaxChanged;
 
     public CharacterData()
     {
@@ -152,7 +152,7 @@ public class CharacterData
     /// <summary>
     /// 设置生命值
     /// </summary>
-    public void SetHealth(int newHealth)
+    public void SetHealth(float newHealth)
     {
         health = newHealth;
         OnHpChanged?.Invoke(this, health);
@@ -165,16 +165,16 @@ public class CharacterData
     /// <summary>
     /// 设置最大生命值
     /// </summary>
-    public void SetHealthMax(int newHealthMax)
+    public void SetHealthMax(float newHealthMax)
     {
         healthMax = newHealthMax;
         OnHpMaxChanged?.Invoke(this, healthMax);
     }
-    public void IncreaseHealth(int amount)
+    public void IncreaseHealth(float amount)
     {
         SetHealth(health + amount);
     }
-    public void DecreaseHealth(int amount)
+    public void DecreaseHealth(float amount)
     {
         SetHealth(health - amount);
     }
@@ -182,21 +182,21 @@ public class CharacterData
     /// <summary>
     /// 设置饱食度
     /// </summary>
-    public void SetHunger(int newHunger)
+    public void SetHunger(float newHunger)
     {
         hunger = newHunger;
         OnHungerChanged?.Invoke(this, hunger);
     }
-    public void SetHungerMax(int newHungerMax)
+    public void SetHungerMax(float newHungerMax)
     {
         hungerMax = newHungerMax;
         OnHungerMaxChanged?.Invoke(this, hungerMax);
     }
-    public void IncreaseHunger(int amount)
+    public void IncreaseHunger(float amount)
     {
         SetHunger(hunger + amount);
     }
-    public void DecreaseHunger(int amount)
+    public void DecreaseHunger(float amount)
     {
         SetHunger(hunger - amount);
     }
@@ -204,21 +204,21 @@ public class CharacterData
     /// <summary>
     /// 设置活力
     /// </summary>
-    public void SetEnergy(int newEnergy)
+    public void SetEnergy(float newEnergy)
     {
         energy = newEnergy;
         OnEnergyChanged?.Invoke(this, energy);
     }
-    public void SetEnergyMax(int newEnergyMax)
+    public void SetEnergyMax(float newEnergyMax)
     {
         energyMax = newEnergyMax;
         OnEnergyMaxChanged?.Invoke(this, energyMax);
     }
-    public void IncreaseEnergy(int amount)
+    public void IncreaseEnergy(float amount)
     {
         SetEnergy(energy + amount);
     }
-    public void DecreaseEnergy(int amount)
+    public void DecreaseEnergy(float amount)
     {
         SetEnergy(energy - amount);
     }
@@ -226,21 +226,21 @@ public class CharacterData
     /// <summary>
     /// 设置精神
     /// </summary>
-    public void SetSpirit(int newSpirit)
+    public void SetSpirit(float newSpirit)
     {
         spirit = newSpirit;
         OnSpiritChanged?.Invoke(this, spirit);
     }
-    public void SetSpiritMax(int newSpiritMax)
+    public void SetSpiritMax(float newSpiritMax)
     {
         spiritMax = newSpiritMax;
         OnSpiritMaxChanged?.Invoke(this, spiritMax);
     }
-    public void IncreaseSpirit(int amount)
+    public void IncreaseSpirit(float amount)
     {
         SetSpirit(spirit + amount);
     }
-    public void DecreaseSpirit(int amount)
+    public void DecreaseSpirit(float amount)
     {
         SetSpirit(spirit - amount);
     }

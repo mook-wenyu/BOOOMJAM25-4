@@ -10,5 +10,6 @@ public class BuildingConfig : BaseConfig
     public int[] capacity;
     public string[] recipes;
     public int light;
+    public double energyCost;
     public string path;
 }

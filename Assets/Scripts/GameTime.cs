@@ -187,6 +187,35 @@ public class GameTime
     }
 
     /// <summary>
+    /// 消耗时间一直到指定整点（今天或明天）
+    /// </summary>
+    /// <param name="targetHour">目标小时（0-23）</param>
+    public async UniTask ConsumeTimeToHour(int targetHour)
+    {
+        if (targetHour < 0 || targetHour >= 24)
+            throw new System.ArgumentException("小时必须在0-23之间");
+
+        int minutesToAdd;
+        if (hour < targetHour)
+        {
+            // 目标时间在今天
+            minutesToAdd = (targetHour - hour) * 60 - minute;
+        }
+        else if (hour > targetHour || (hour == targetHour && minute > 0))
+        {
+            // 目标时间在明天
+            minutesToAdd = ((24 - hour) + targetHour) * 60 - minute;
+        }
+        else
+        {
+            // 已经是目标整点
+            return;
+        }
+
+        await AddMinutes(minutesToAdd);
+    }
+
+    /// <summary>
     /// 将天数转换为分钟
     /// </summary>
     public static int DayToMinute(double day)

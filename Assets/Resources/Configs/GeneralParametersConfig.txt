@@ -1,0 +1,93 @@
+{
+  "$type": "System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[BaseConfig, Assembly-CSharp]], mscorlib",
+  "mostHP": {
+    "$type": "GeneralParametersConfig, Assembly-CSharp",
+    "par": 100.0,
+    "id": "mostHP"
+  },
+  "mostHunger": {
+    "$type": "GeneralParametersConfig, Assembly-CSharp",
+    "par": 100.0,
+    "id": "mostHunger"
+  },
+  "mostEnergy": {
+    "$type": "GeneralParametersConfig, Assembly-CSharp",
+    "par": 100.0,
+    "id": "mostEnergy"
+  },
+  "mostSpirit": {
+    "$type": "GeneralParametersConfig, Assembly-CSharp",
+    "par": 100.0,
+    "id": "mostSpirit"
+  },
+  "hungerLostValue": {
+    "$type": "GeneralParametersConfig, Assembly-CSharp",
+    "par": 3.0,
+    "id": "hungerLostValue"
+  },
+  "hungerLostTime": {
+    "$type": "GeneralParametersConfig, Assembly-CSharp",
+    "par": 1.0,
+    "id": "hungerLostTime"
+  },
+  "nodeEnergyCost": {
+    "$type": "GeneralParametersConfig, Assembly-CSharp",
+    "par": 10.0,
+    "id": "nodeEnergyCost"
+  },
+  "nodeTimeCost": {
+    "$type": "GeneralParametersConfig, Assembly-CSharp",
+    "par": 0.5,
+    "id": "nodeTimeCost"
+  },
+  "zeroHungerLostHPValue": {
+    "$type": "GeneralParametersConfig, Assembly-CSharp",
+    "par": 10.0,
+    "id": "zeroHungerLostHPValue"
+  },
+  "zeroHungerLostSpiritValue": {
+    "$type": "GeneralParametersConfig, Assembly-CSharp",
+    "par": 10.0,
+    "id": "zeroHungerLostSpiritValue"
+  },
+  "zeroHungerLostTime": {
+    "$type": "GeneralParametersConfig, Assembly-CSharp",
+    "par": 1.0,
+    "id": "zeroHungerLostTime"
+  },
+  "hPGrowHunger": {
+    "$type": "GeneralParametersConfig, Assembly-CSharp",
+    "par": 80.0,
+    "id": "hPGrowHunger"
+  },
+  "hPGrowValue": {
+    "$type": "GeneralParametersConfig, Assembly-CSharp",
+    "par": 2.0,
+    "id": "hPGrowValue"
+  },
+  "hPGrowTime": {
+    "$type": "GeneralParametersConfig, Assembly-CSharp",
+    "par": 1.0,
+    "id": "hPGrowTime"
+  },
+  "energyGrowValueInDay": {
+    "$type": "GeneralParametersConfig, Assembly-CSharp",
+    "par": 1.0,
+    "id": "energyGrowValueInDay"
+  },
+  "energyGrowTimeInDay": {
+    "$type": "GeneralParametersConfig, Assembly-CSharp",
+    "par": 0.5,
+    "id": "energyGrowTimeInDay"
+  },
+  "energyGrowInSleep": {
+    "$type": "GeneralParametersConfig, Assembly-CSharp",
+    "par": 50.0,
+    "id": "energyGrowInSleep"
+  },
+  "aHourInRealTime": {
+    "$type": "GeneralParametersConfig, Assembly-CSharp",
+    "par": 20.0,
+    "id": "aHourInRealTime"
+  }
+}

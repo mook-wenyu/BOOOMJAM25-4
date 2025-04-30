@@ -287,14 +287,14 @@ public class ExploreNodeEntityMgr : MonoSingleton<ExploreNodeEntityMgr>
             return;
         }
 
-        // 检查需要消耗的时间
-        int consumeTime = 1;
+        // 检查需要消耗的时间 0.5小时
+        int consumeTime = GameTime.HourToMinute(Utils.GetGeneralParametersConfig("nodeTimeCost").par);
         if (!GameMgr.currentSaveData.gameTime.IsTimeBefore(new GameTime(GameMgr.currentSaveData.gameTime.day + 1, 0, 0), consumeTime))
         {
             GlobalUIMgr.Instance.ShowMessage("太晚了，先回家吧！");
             return; // 时间不足，
         }
-        int energyCost = 1;
+        float energyCost = (float)Utils.GetGeneralParametersConfig("nodeEnergyCost").par;
         // 检查需要消耗的体力
         if (CharacterMgr.Player().energy < energyCost)
         {
