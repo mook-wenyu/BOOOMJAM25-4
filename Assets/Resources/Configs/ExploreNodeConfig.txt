@@ -3881,7 +3881,7 @@
     ],
     "isStartPoint": false,
     "neighborNodes": [
-      "72043"
+      "0"
     ],
     "unlocksMidNodes": [
       "0"
