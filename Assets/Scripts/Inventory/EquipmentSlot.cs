@@ -340,6 +340,23 @@ IEndDragHandler,
         }
     }
 
+    void OnDisable()
+    {
+        // 确保取消所有事件订阅
+        UnsubscribeItemEvents();
+
+        // 清理拖拽副本
+        if (_dragItemClone != null)
+        {
+            Destroy(_dragItemClone);
+            _dragItemClone.transform.SetParent(null);
+        }
+        _dragRectTransform = null;
+        _dragCanvasGroup = null;
+
+        GlobalUIMgr.Instance.Hide<ItemTipsUI>();
+    }
+
     void OnDestroy()
     {
         // 确保取消所有事件订阅

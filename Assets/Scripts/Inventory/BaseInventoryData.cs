@@ -26,7 +26,7 @@ public enum InventoryType
 [Serializable]
 public abstract class BaseInventoryData
 {
-    public string inventoryId = System.Guid.NewGuid().ToString("N"); // 容器ID
+    public string inventoryId; // 容器ID
     public int capacity;
     public InventoryType inventoryType; // 容器类型
     public Dictionary<string, InventoryItem> items = new();
@@ -48,6 +48,14 @@ public abstract class BaseInventoryData
 
     protected BaseInventoryData(InventoryType inventoryType, int capacity)
     {
+        this.inventoryId = System.Guid.NewGuid().ToString("N");
+        this.capacity = capacity;
+        this.inventoryType = inventoryType;
+    }
+
+    protected BaseInventoryData(string inventoryId, InventoryType inventoryType, int capacity)
+    {
+        this.inventoryId = inventoryId;
         this.capacity = capacity;
         this.inventoryType = inventoryType;
     }

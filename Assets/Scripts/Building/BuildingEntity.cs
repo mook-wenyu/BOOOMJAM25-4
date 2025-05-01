@@ -11,7 +11,6 @@ public class BuildingEntity : MonoBehaviour
     [SerializeField] private string _instanceId;   // 实例ID
     [SerializeField] private string _buildingId;   // 建筑ID
     [SerializeField] private int _lightingRange = 0;   // 照亮区域大小
-    [SerializeField] private bool _isObstacle = false;   // 是否障碍物
     private SpriteRenderer _spriteRenderer;
     private BoxCollider2D _boxCollider;
     private Light2D _light2D;
@@ -19,17 +18,15 @@ public class BuildingEntity : MonoBehaviour
     private BuildingData _buildingData;   // 建筑数据
 
     private bool _isEnabled = false;
-    private bool _isObstacleEnabled = false;
     private Collider2D _collider;
-    private Collision2D _collision;
 
     void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _boxCollider = GetComponent<BoxCollider2D>();
+        _boxCollider.isTrigger = true;
         _light2D = GetComponentInChildren<Light2D>();
         _light2D.enabled = false;
-        GetComponent<Collider2D>().isTrigger = !_isObstacle;
     }
 
     public void Setup(string buildingId, string instanceId)
@@ -69,17 +66,6 @@ public class BuildingEntity : MonoBehaviour
         _light2D.enabled = _lightingRange > 0;
         _light2D.pointLightInnerRadius = _lightingRange * 2;
         _light2D.pointLightOuterRadius = _lightingRange * 4;
-    }
-
-    public bool GetIsObstacle()
-    {
-        return _isObstacle;
-    }
-
-    public void SetIsObstacle(bool value)
-    {
-        _isObstacle = value;
-        GetComponent<Collider2D>().isTrigger = !_isObstacle;
     }
 
     void Update()
@@ -128,15 +114,6 @@ public class BuildingEntity : MonoBehaviour
                 }
             }
         }
-
-        if (_isObstacleEnabled)
-        {
-            if (Input.GetKeyUp(KeyCode.F) && CharacterMgr.Player().status == CharacterStatus.Idle)
-            {
-                // 清障
-                Debug.Log("清障");
-            }
-        }
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -166,30 +143,4 @@ public class BuildingEntity : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            _collision = collision;
-            _isObstacleEnabled = true;
-        }
-    }
-
-    void OnCollisionStay2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            _collision = collision;
-            _isObstacleEnabled = true;
-        }
-    }
-
-    void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            _collision = null;
-            _isObstacleEnabled = false;
-        }
-    }
 }

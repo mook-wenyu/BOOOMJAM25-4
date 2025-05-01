@@ -37,6 +37,14 @@ public static class ExploreNodeMgr
     }
 
     /// <summary>
+    /// 获取地图配置
+    /// </summary>
+    public static MapConfig GetMapConfig(string mapId)
+    {
+        return ConfigManager.Instance.GetConfig<MapConfig>(mapId);
+    }
+
+    /// <summary>
     /// 获取探索节点配置
     /// </summary>
     public static ExploreNodeConfig GetExploreNodeConfig(string nodeId)

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -44,7 +45,7 @@ public class SubmitUIPanel : MonoSingleton<SubmitUIPanel>
             var requiredItem = Instantiate(requiredItemPrefab, requiredContainer).GetComponent<RequiredItemSlot>();
             requiredItem.Setup(requiredMaterialIdGroup[i], requiredMaterialAmountGroup[i]);
         }
-        time.text = submitTime.ToString() + "小时";
+        time.text = $"{submitTime} 小时";
         startBtn.onClick.RemoveAllListeners();
         startBtn.onClick.AddListener(() =>
         {
@@ -71,8 +72,11 @@ public class SubmitUIPanel : MonoSingleton<SubmitUIPanel>
                 InventoryMgr.GetPlayerInventoryData().RemoveItem(requiredMaterialIdGroup[i], requiredMaterialAmountGroup[i]);
             }
 
-            // 扣除时间
-            _ = GameMgr.currentSaveData.gameTime.AddHours(submitTime);
+            if (submitTime > 0)
+            {
+                // 扣除时间
+                GameMgr.currentSaveData.gameTime.AddHours(submitTime).Forget();
+            }
 
             _node.SetCompleted();
             Hide();

@@ -16,8 +16,10 @@ public class TopLevelUIPanel : MonoSingleton<TopLevelUIPanel>
     public TMP_InputField sayIdInput;
     public Button sayBtn;
     public TMP_InputField itemIdInput;
-    public Button itemAddBtn;
-    public Button backNode;
+    public Button itemAddBtn, backNode, fullAll;
+
+    public Transform buffContainer;
+    public GameObject buffPrefab;
 
     public Slider health, hunger, energy, spirit;
     // public TextMeshProUGUI healthText, hungerText, energyText, spiritText;
@@ -28,11 +30,11 @@ public class TopLevelUIPanel : MonoSingleton<TopLevelUIPanel>
 
     private void Awake()
     {
+        buffContainer.DestroyAllChildren();
+
         GameMgr.OnGameTimePaused += HandleGameTimePaused;
         GameMgr.OnGameTimeResumed += HandleGameTimeResumed;
         GameMgr.currentSaveData.gameTime.OnTimeChanged += HandleTimeChanged;
-
-        saveBtn.onClick.AddListener(() => _ = GameMgr.SaveGameData());
 
         player = CharacterMgr.Player();
         UpdateCharacterData();
@@ -44,10 +46,15 @@ public class TopLevelUIPanel : MonoSingleton<TopLevelUIPanel>
         player.OnEnergyMaxChanged += HandleEnergyMaxChanged;
         player.OnSpiritChanged += HandleSpiritChanged;
         player.OnSpiritMaxChanged += HandleSpiritMaxChanged;
+        player.OnBuffAdded += HandleBuffAdded;
+        player.OnBuffRemoved += HandleBuffRemoved;
 
         goOut.onClick.AddListener(OnGoOutBtnClicked);
         comeBack.onClick.AddListener(OnComeBackBtnClicked);
         comeBack.gameObject.SetActive(false);
+
+
+        saveBtn.onClick.AddListener(() => _ = GameMgr.SaveGameData());
 
         itemAddBtn.onClick.AddListener(() =>
         {
@@ -62,6 +69,13 @@ public class TopLevelUIPanel : MonoSingleton<TopLevelUIPanel>
         backNode.onClick.AddListener(() =>
         {
             ExploreNodeMgr.BackNode();
+        });
+        fullAll.onClick.AddListener(() =>
+        {
+            player.health = player.healthMax;
+            player.hunger = player.hungerMax;
+            player.energy = player.energyMax;
+            player.spirit = player.spiritMax;
         });
     }
 
@@ -100,6 +114,11 @@ public class TopLevelUIPanel : MonoSingleton<TopLevelUIPanel>
         hunger.value = player.hunger;
         energy.value = player.energy;
         spirit.value = player.spirit;
+
+        foreach (var buff in player.activeBuffs)
+        {
+            HandleBuffAdded(player, buff);
+        }
     }
 
     private void HandleHpChanged(CharacterData character, float hp)
@@ -153,6 +172,22 @@ public class TopLevelUIPanel : MonoSingleton<TopLevelUIPanel>
     {
         this.spirit.maxValue = spiritMax;
         //spiritText.text = $"{player.spirit} / {spiritMax}";
+    }
+
+    private void HandleBuffAdded(CharacterData character, ActiveBuff buff)
+    {
+        var buffObj = Instantiate(buffPrefab, buffContainer);
+        buffObj.name = buff.instanceId;
+        buffObj.GetComponent<BuffItem>().Setup(buff);
+    }
+
+    private void HandleBuffRemoved(CharacterData character, ActiveBuff buff)
+    {
+        var buffObj = buffContainer.Find(buff.instanceId).gameObject;
+        if (buffObj != null)
+        {
+            Destroy(buffObj);
+        }
     }
 
     public void OnGoOutBtnClicked()

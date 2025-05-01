@@ -441,6 +441,17 @@ IEndDragHandler,
         // 取消订阅事件
         UnsubscribeItemEvents();
 
+        // 清理拖拽副本
+        if (_dragItemClone != null)
+        {
+            Destroy(_dragItemClone);
+            _dragItemClone.transform.SetParent(null);
+        }
+        _dragRectTransform = null;
+        _dragCanvasGroup = null;
+
+        GlobalUIMgr.Instance.Hide<ItemTipsUI>();
+
         // 清空物品引用
         CurrentItem = null;
 
@@ -454,6 +465,23 @@ IEndDragHandler,
         {
             durabilityBar.SetActive(false);
         }
+    }
+
+    void OnDisable()
+    {
+        // 确保取消所有事件订阅
+        UnsubscribeItemEvents();
+
+        // 清理拖拽副本
+        if (_dragItemClone != null)
+        {
+            Destroy(_dragItemClone);
+            _dragItemClone.transform.SetParent(null);
+        }
+        _dragRectTransform = null;
+        _dragCanvasGroup = null;
+
+        GlobalUIMgr.Instance.Hide<ItemTipsUI>();
     }
 
     void OnDestroy()

@@ -23,6 +23,7 @@ public enum WarehouseType
 public class WarehouseData : BaseInventoryData
 {
     public string buildingInstanceId;
+    public string wName;
     public WarehouseType warehouseType;
 
     public WarehouseData() : base()
@@ -33,6 +34,14 @@ public class WarehouseData : BaseInventoryData
         : base(InventoryType.Warehouse, capacity)
     {
         this.buildingInstanceId = buildingInstanceId;
+        this.warehouseType = warehouseType;
+    }
+
+    public WarehouseData(string inventoryId, string wName, WarehouseType warehouseType, int capacity)
+        : base(inventoryId, InventoryType.Warehouse, capacity)
+    {
+        this.buildingInstanceId = string.Empty;
+        this.wName = wName;
         this.warehouseType = warehouseType;
     }
 

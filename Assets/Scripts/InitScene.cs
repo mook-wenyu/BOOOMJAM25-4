@@ -68,6 +68,10 @@ public class InitScene : MonoBehaviour
         // 初始化对话
         DialogueMgr.Initialize();
         await UniTask.Yield();
+        
+        // 初始化角色
+        CharacterMgr.Init();
+        await UniTask.Yield();
 
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -45,28 +46,33 @@ public class ExploreMapUIPanel : MonoSingleton<ExploreMapUIPanel>
         switch (toggleName)
         {
             case "JiaoWaiSenLin":
-                infoName.text = "郊外森林";
-                infoDesc.text = "郊外森林描述";
-                infoDistance.text = "距离: 20KM";
-                infoTime.text = "时间: 1.5H";
+                var config = ExploreNodeMgr.GetMapConfig("1");
+                infoName.text = config.name;
+                infoDesc.text = config.desc;
+                infoDistance.text = $"体力: {config.energyCost}";
+                infoTime.text = $"时间: {config.timeCost}小时";
 
                 ExploreNodeMgr.currentMapId = "1";
 
                 break;
+
             case "ZhuZhaiQu":
-                infoName.text = "住宅区";
-                infoDesc.text = "住宅区描述";
-                infoDistance.text = "距离: 20KM";
-                infoTime.text = "时间: 1.5H";
+                config = ExploreNodeMgr.GetMapConfig("2");
+                infoName.text = config.name;
+                infoDesc.text = config.desc;
+                infoDistance.text = $"体力: {config.energyCost}";
+                infoTime.text = $"时间: {config.timeCost}小时";
 
                 ExploreNodeMgr.currentMapId = "2";
 
                 break;
+
             case "ShiZhongXin":
-                infoName.text = "市中心";
-                infoDesc.text = "市中心描述";
-                infoDistance.text = "距离: 20KM";
-                infoTime.text = "时间: 1.5H";
+                config = ExploreNodeMgr.GetMapConfig("3");
+                infoName.text = config.name;
+                infoDesc.text = config.desc;
+                infoDistance.text = $"体力: {config.energyCost}";
+                infoTime.text = $"时间: {config.timeCost}小时";
 
                 ExploreNodeMgr.currentMapId = "3";
 
@@ -86,13 +92,28 @@ public class ExploreMapUIPanel : MonoSingleton<ExploreMapUIPanel>
 
     public void OnGoOutBtnClicked()
     {
-        int consumeTime = 90;
+        var config = ExploreNodeMgr.GetMapConfig(ExploreNodeMgr.currentMapId);
+        if (config == null)
+        {
+            GlobalUIMgr.Instance.ShowMessage("请选择一个地点！");
+            return;
+        }
+        // 检查时间是否足够
+        int consumeTime = GameTime.HourToMinute(config.timeCost);
         if (!GameMgr.currentSaveData.gameTime.IsTimeBefore(new GameTime(GameMgr.currentSaveData.gameTime.day + 1, 0, 0), consumeTime))
         {
             GlobalUIMgr.Instance.ShowMessage("太晚了，明天再探索吧！");
             return; // 时间不足，无法出门
         }
+        // 检查体力是否足够
+        if (CharacterMgr.Player().energy < config.energyCost)
+        {
+            GlobalUIMgr.Instance.ShowMessage("体力不足，无法出门！");
+            return; // 体力不足，无法出门
+        }
 
+        GameMgr.currentSaveData.gameTime.AddMinutes(consumeTime).Forget();
+        CharacterMgr.Player().DecreaseEnergy((float)config.energyCost);
         CharacterMgr.Player().SetStatus(CharacterStatus.Explore);
         GlobalUIMgr.Instance.ShowLoadingMask(true);
         Hide();

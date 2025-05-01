@@ -27,7 +27,7 @@ public class ProductionData
         this.recipeId = recipeId;
         this.productionPlatformInstanceId = productionPlatformInstanceId;
 
-        _recipe = RecipeMgr.GetRecipesConfig(recipeId);
+        _recipe = ProductionPlatformMgr.GetRecipesConfig(recipeId);
         if (_recipe != null)
         {
             totalTime = GameTime.HourToMinute(_recipe.time);
@@ -37,13 +37,13 @@ public class ProductionData
 
     public RecipesConfig GetRecipe()
     {
-        _recipe ??= RecipeMgr.GetRecipesConfig(recipeId);
+        _recipe ??= ProductionPlatformMgr.GetRecipesConfig(recipeId);
         return _recipe;
     }
 
     public void SetTime(int time)
     {
-        _recipe ??= RecipeMgr.GetRecipesConfig(recipeId);
+        _recipe ??= ProductionPlatformMgr.GetRecipesConfig(recipeId);
         if (_recipe == null || _recipe.time <= 0)
             return;
 

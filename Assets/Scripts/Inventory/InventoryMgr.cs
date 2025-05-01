@@ -3,6 +3,7 @@ using System;
 using UnityEngine;
 using Newtonsoft.Json;
 using System.Linq;
+using MookDialogueScript;
 
 public static class InventoryMgr
 {
@@ -36,6 +37,32 @@ public static class InventoryMgr
     {
         return GetInventoryData<InventoryData>(CharacterMgr.Player().inventoryId);
     }
+
+    /// <summary>
+    /// 创建仓库数据
+    /// </summary>
+    public static void CreateWarehouseData(string instanceId, string wName, WarehouseType warehouseType, int capacity)
+    {
+        var warehouseData = new WarehouseData(instanceId, wName, warehouseType, capacity);
+        GameMgr.currentSaveData.inventories[warehouseData.inventoryId] = warehouseData;
+    }
+
+    /// <summary>
+    /// 获取仓库数据
+    /// </summary>
+    public static WarehouseData GetWarehouseData(string inventoryId)
+    {
+        return GetInventoryData<WarehouseData>(inventoryId);
+    }
+
+    /// <summary>
+    /// 检查是否存在指定仓库数据
+    /// </summary>
+    public static bool HasInventoryData(string inventoryId)
+    {
+        return GameMgr.currentSaveData.inventories.ContainsKey(inventoryId);
+    }
+
 
     /// <summary>
     /// 获取指定类型的所有物品数据
@@ -118,5 +145,31 @@ public static class InventoryMgr
         // 其他类型可以堆叠
         return itemData.stacking > 1;
     }
+
+
+    /// <summary>
+    /// 检查玩家背包中是否存在指定物品
+    /// </summary>
+    [ScriptFunc("has_item")]
+    public static bool HasItem(string itemId)
+    {
+        var inventory = GetPlayerInventoryData();
+        if (inventory == null) return false;
+
+        return inventory.items.Values.Any(item => item.itemId == itemId);
+    }
+
+    /// <summary>
+    /// 获取玩家背包中指定物品的数量
+    /// </summary>
+    [ScriptFunc("get_item_count")]
+    public static int GetItemCount(string itemId)
+    {
+        var inventory = GetPlayerInventoryData();
+        if (inventory == null) return 0;
+
+        return inventory.GetItemCount(itemId);
+    }
+
 
 }

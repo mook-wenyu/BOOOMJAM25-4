@@ -1,7 +1,20 @@
+using System.Collections.Generic;
 using MookDialogueScript;
 
 public static class CharacterMgr
 {
+    /// <summary>
+    /// NPC 名字和文件名映射
+    /// </summary>
+    public static Dictionary<string, string> npcs = new Dictionary<string, string>();
+    public static void Init()
+    {
+        npcs["瑞迪亚"] = "npc2";
+        npcs["德鲁斯特"] = "npc3_right";
+        npcs["加缪"] = "npc4";
+        npcs["莉莉安"] = "npc5_left";
+    }
+
     /// <summary>
     /// 获取角色数据
     /// </summary>

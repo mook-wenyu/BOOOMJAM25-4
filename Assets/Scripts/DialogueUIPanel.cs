@@ -97,6 +97,9 @@ public class DialogueUIPanel : MonoSingleton<DialogueUIPanel>
         dialogueUIPanel.transform.SetAsLastSibling();
         dialogueContent.ClearText();
         dialogueSpeaker.text = string.Empty;
+        dialogueSpeakerBG.SetActive(false);
+        speakerLeft.gameObject.SetActive(false);
+        speakerRight.gameObject.SetActive(false);
         await UniTask.CompletedTask;
     }
 
@@ -125,6 +128,26 @@ public class DialogueUIPanel : MonoSingleton<DialogueUIPanel>
         {
             foreach (var label in dialogue.Labels)
             {
+                string[] parts = label.Split('_');
+                if (parts.Length > 1 && parts[0] == "pic")
+                {
+                    var picPath = label.Substring(4);
+                    mainThreadContext.Post(_ =>
+                    {
+                        string path = CharacterMgr.npcs[picPath]; // 角色图片路径
+                        string[] parts = path.Split('_');
+                        speakerRight.sprite = Resources.Load<Sprite>($"Character/Pictures/{path}");
+                        if (parts.Length > 1 && parts[1] == "right")
+                        {
+                            speakerRight.transform.localScale = new Vector3(-1, 1, 1);
+                        }
+                        else
+                        {
+                            speakerRight.transform.localScale = new Vector3(1, 1, 1);
+                        }
+                        speakerRight.gameObject.SetActive(true);
+                    }, null);
+                }
                 Debug.Log($"标签：{label}");
             }
         }
@@ -149,6 +172,22 @@ public class DialogueUIPanel : MonoSingleton<DialogueUIPanel>
             {
                 mainThreadContext.Post(_ =>
                 {
+                    if (!CharacterMgr.npcs.ContainsKey(dialogue.Speaker))
+                    {
+                        Debug.Log($"找不到角色：{dialogue.Speaker}");
+                        return;
+                    }
+                    string path = CharacterMgr.npcs[dialogue.Speaker];
+                    string[] parts = path.Split('_');
+                    speakerRight.sprite = Resources.Load<Sprite>($"Character/Pictures/{path}");
+                    if (parts.Length > 1 && parts[1] == "right")
+                    {
+                        speakerRight.transform.localScale = new Vector3(-1, 1, 1);
+                    }
+                    else
+                    {
+                        speakerRight.transform.localScale = new Vector3(1, 1, 1);
+                    }
                     speakerRight.gameObject.SetActive(true);
                 }, null);
             }

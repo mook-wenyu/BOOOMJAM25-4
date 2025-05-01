@@ -17,7 +17,8 @@ public class WarehouseUIPanel : MonoSingleton<WarehouseUIPanel>
     private ItemSlot _selectedSlot;
 
     private string _buildingInstanceId;
-    private WarehouseBuildingData _warehouseData;
+    private WarehouseBuildingData _warehouseBuildingData;
+    private WarehouseData _warehouseData;
 
     void Awake()
     {
@@ -45,7 +46,7 @@ public class WarehouseUIPanel : MonoSingleton<WarehouseUIPanel>
     private void CreateItemSlots()
     {
         int currentCount = _activeSlots.Count;
-        int targetCount = _warehouseData.GetWarehouseData().capacity;
+        int targetCount = _warehouseData.capacity;
 
         // 创建新的物品槽
         for (int i = currentCount; i < targetCount; i++)
@@ -68,7 +69,7 @@ public class WarehouseUIPanel : MonoSingleton<WarehouseUIPanel>
     private void UpdateUI()
     {
         // 确保有足够的插槽
-        int currentSlotCount = _warehouseData.GetWarehouseData().capacity;
+        int currentSlotCount = _warehouseData.capacity;
         if (_activeSlots.Count != currentSlotCount)
         {
             CreateItemSlots();
@@ -88,7 +89,7 @@ public class WarehouseUIPanel : MonoSingleton<WarehouseUIPanel>
     {
         for (int i = 0; i < _activeSlots.Count; i++)
         {
-            var item = _warehouseData.GetWarehouseData().GetItemAtSlot(i);
+            var item = _warehouseData.GetItemAtSlot(i);
             var slot = _activeSlots[i];
 
             if (item != null)
@@ -110,12 +111,12 @@ public class WarehouseUIPanel : MonoSingleton<WarehouseUIPanel>
         if (toSlot.CurrentItem == null)
         {
             // 移动到空槽位
-            InventoryHelper.MoveItemToEmptySlot(fromSlot, toSlot, _warehouseData.GetWarehouseData());
+            InventoryHelper.MoveItemToEmptySlot(fromSlot, toSlot, _warehouseData);
         }
         else
         {
             // 交换物品
-            InventoryHelper.SwapItems(fromSlot, toSlot, _warehouseData.GetWarehouseData());
+            InventoryHelper.SwapItems(fromSlot, toSlot, _warehouseData);
         }
     }
 
@@ -261,7 +262,7 @@ public class WarehouseUIPanel : MonoSingleton<WarehouseUIPanel>
             if (count > 0)
             {
                 InventoryMgr.GetPlayerInventoryData().AddItem(item.itemId, count); // 添加物品到背包中
-                _warehouseData.GetWarehouseData().RemoveItem(item.instanceId, count); // 仓库中移除物品实例
+                _warehouseData.RemoveItemCountByInstanceId(item.instanceId, count); // 仓库中移除物品实例
             }
             else
             {
@@ -273,11 +274,35 @@ public class WarehouseUIPanel : MonoSingleton<WarehouseUIPanel>
     public void Show(string buildingInstanceId)
     {
         this._buildingInstanceId = buildingInstanceId;
-        this._warehouseData = BuildingMgr.GetBuildingData<WarehouseBuildingData>(buildingInstanceId);
+        this._warehouseBuildingData = BuildingMgr.GetBuildingData<WarehouseBuildingData>(buildingInstanceId);
+        if (this._warehouseBuildingData != null)
+        {
+            titleName.text = this._warehouseBuildingData.GetBuildingConfig().name;
+        }
+
+        this._warehouseData = this._warehouseBuildingData.GetWarehouseData();
         if (this._warehouseData != null)
         {
-            this._warehouseData.GetWarehouseData().OnInventoryChanged += UpdateUI;
-            titleName.text = this._warehouseData.GetBuildingConfig().name;
+            this._warehouseData.OnInventoryChanged += UpdateUI;
+        }
+
+        // 显示仓库UI
+        uiPanel.SetActive(true);
+        uiPanel.transform.SetAsLastSibling();
+        // 创建物品槽
+        CreateItemSlots();
+        // 初始显示
+        UpdateUI();
+    }
+
+    public void ShowWarehouse(string instanceId, bool isExplore = false)
+    {
+        this._buildingInstanceId = string.Empty;
+        this._warehouseData = InventoryMgr.GetWarehouseData(instanceId);
+        if (this._warehouseData != null)
+        {
+            titleName.text = this._warehouseData.wName;
+            this._warehouseData.OnInventoryChanged += UpdateUI;
         }
 
         // 显示仓库UI
@@ -293,7 +318,7 @@ public class WarehouseUIPanel : MonoSingleton<WarehouseUIPanel>
     {
         if (this._warehouseData != null)
         {
-            this._warehouseData.GetWarehouseData().OnInventoryChanged -= UpdateUI;
+            this._warehouseData.OnInventoryChanged -= UpdateUI;
         }
         uiPanel.transform.SetAsFirstSibling();
         uiPanel.SetActive(false);

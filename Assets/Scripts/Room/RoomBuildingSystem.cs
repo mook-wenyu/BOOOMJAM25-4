@@ -41,7 +41,7 @@ public class RoomBuildingSystem : MonoSingleton<RoomBuildingSystem>
                 endX = building.transform.position.x + building.GetComponent<BoxCollider2D>().size.x,
                 floorId = floor.id,
                 building = building.gameObject,
-                buildingInstanceId = be.GetIsObstacle() ? "obstacle_" + be.GetId() : be.GetId(),
+                buildingInstanceId = be.GetId(),
                 buildingId = be.GetBuildingId()
             };
             floor.placedBuildings[slot.buildingInstanceId] = slot;
@@ -56,7 +56,6 @@ public class RoomBuildingSystem : MonoSingleton<RoomBuildingSystem>
                 var building = Instantiate(buildingPrefab, buildingContainer);
                 building.transform.position = new Vector2(slot.startX, floor.yPosition);
                 building.GetComponent<BuildingEntity>().Setup(slot.buildingId, slot.buildingInstanceId);
-                building.GetComponent<BuildingEntity>().SetIsObstacle(slot.buildingInstanceId.Split('_')[0] == "obstacle");
             }
         }
     }

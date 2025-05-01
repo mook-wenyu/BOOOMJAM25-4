@@ -69,7 +69,7 @@ public class ProductionPlatformUIPanel : MonoSingleton<ProductionPlatformUIPanel
         foreach (string recipeId in _productionPlatformData.recipes)
         {
             var item = Instantiate(itemPrefab, itemContainer.content).GetComponent<ProductionPlatformItem>();
-            var recipeConfig = RecipeMgr.GetRecipesConfig(recipeId);
+            var recipeConfig = ProductionPlatformMgr.GetRecipesConfig(recipeId);
             item.Setup(recipeConfig);
             item.GetComponent<Button>().onClick.AddListener(() =>
             {
@@ -79,6 +79,7 @@ public class ProductionPlatformUIPanel : MonoSingleton<ProductionPlatformUIPanel
                 requiredContainer.DestroyAllChildren();
                 for (int i = 0; i < recipeConfig.materialIDGroup.Length; i++)
                 {
+                    if (recipeConfig.materialIDGroup[i] == "0") continue;
                     var requiredItem = Instantiate(requiredItemPrefab, requiredContainer).GetComponent<RequiredItemSlot>();
                     requiredItem.Setup(recipeConfig.materialIDGroup[i].ToString(), recipeConfig.materialAmountGroup[i]);
                 }
@@ -198,7 +199,7 @@ public class ProductionPlatformUIPanel : MonoSingleton<ProductionPlatformUIPanel
         if (item == null) return;
         if (item.IsComplete())
         {
-            var recipeConfig = RecipeMgr.GetRecipesConfig(item.recipeId);
+            var recipeConfig = ProductionPlatformMgr.GetRecipesConfig(item.recipeId);
             // 尝试将物品添加到背包中，如果背包已满，则提示用户背包已满
             int count = InventoryMgr.GetPlayerInventoryData().CalculateCanAddItem(recipeConfig.productID[0], 1);
             if (count <= 0)
@@ -212,9 +213,8 @@ public class ProductionPlatformUIPanel : MonoSingleton<ProductionPlatformUIPanel
         }
     }
 
-    public void Show(string buildingInstanceId, bool isExplore = false)
+    public void Show(string buildingInstanceId)
     {
-        _isExplore = isExplore;
         this._buildingInstanceId = buildingInstanceId;
         this._productionBuildingData = BuildingMgr.GetBuildingData<ProductionBuildingData>(buildingInstanceId);
 
@@ -224,6 +224,25 @@ public class ProductionPlatformUIPanel : MonoSingleton<ProductionPlatformUIPanel
         }
 
         this._productionPlatformData = this._productionBuildingData.GetProductionPlatformData();
+
+        // 显示仓库UI
+        uiPanel.SetActive(true);
+        uiPanel.transform.SetAsLastSibling();
+        // 创建物品
+        CreateItem();
+        CreateItemSlots();
+    }
+
+    public void ShowProductionPlatform(string productionPlatformInstanceId, bool isExplore = false)
+    {
+        _isExplore = isExplore;
+        this._buildingInstanceId = string.Empty;
+
+        this._productionPlatformData = ProductionPlatformMgr.GetProductionPlatformData(productionPlatformInstanceId);
+        if (this._productionPlatformData != null)
+        {
+            titleName.text = _productionPlatformData.pName;
+        }
 
         // 显示仓库UI
         uiPanel.SetActive(true);

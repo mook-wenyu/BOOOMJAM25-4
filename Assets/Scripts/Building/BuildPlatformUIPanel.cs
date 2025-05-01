@@ -53,6 +53,8 @@ public class BuildPlatformUIPanel : MonoSingleton<BuildPlatformUIPanel>
 
         foreach (var building in BuildingMgr.GetAllBuildingConfigs())
         {
+            if (building.materialIDGroup == null && building.time <= 0) continue;
+
             var item = Instantiate(itemPrefab, itemContainer.content).GetComponent<BuildPlatformItem>();
             item.Setup(building);
             item.GetComponent<Button>().onClick.AddListener(() =>

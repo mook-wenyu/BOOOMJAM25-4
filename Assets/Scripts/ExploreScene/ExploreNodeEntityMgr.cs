@@ -17,6 +17,8 @@ public class ExploreNodeEntityMgr : MonoSingleton<ExploreNodeEntityMgr>
     public Transform nodeRoot;
     public GameObject nodePrefab;
 
+    private string currentMapId;
+
     private Vector3 _lastMousePosition;
     private bool _isDragging = false;
 
@@ -40,6 +42,7 @@ public class ExploreNodeEntityMgr : MonoSingleton<ExploreNodeEntityMgr>
     // Start is called before the first frame update
     void Start()
     {
+        currentMapId = ExploreNodeMgr.currentMapId;
         GenerateMap();
         playerUnit.Init(ExploreNodeMgr.currentMapId);
         playerUnit.OnNodeChanged += HandleNodeChanged;
@@ -81,12 +84,12 @@ public class ExploreNodeEntityMgr : MonoSingleton<ExploreNodeEntityMgr>
             return; // 如果点击了UI，直接返回不处理拖动
         }
 
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1) || Input.GetMouseButtonDown(0))
         {
             _isDragging = true;
             _lastMousePosition = Input.mousePosition;
         }
-        else if (Input.GetMouseButtonUp(1))
+        else if (Input.GetMouseButtonUp(1) || Input.GetMouseButtonUp(0))
         {
             _isDragging = false;
         }
@@ -391,12 +394,19 @@ public class ExploreNodeEntityMgr : MonoSingleton<ExploreNodeEntityMgr>
     private void HandleRewardNode(ExploreNodeData node)
     {
         node.SetCompleted();
-        if (!BuildingMgr.HasBuildingData(node.id))
+        if (!InventoryMgr.HasInventoryData(node.id))
         {
-            BuildingMgr.AddBuildingData(new WarehouseBuildingData("20001", node.id, WarehouseType.Box, 9));
+            InventoryMgr.CreateWarehouseData(node.id, node.GetConfig().name, WarehouseType.Box, 9);
+            // 添加奖励物品
+            var warehouseData = InventoryMgr.GetWarehouseData(node.id);
+            var config = node.GetConfig();
+            for (int i = 0; i < config.rewardIdGroup.Length; i++)
+            {
+                warehouseData.AddItem(config.rewardIdGroup[i], config.rewardAmountGroup[i]);
+            }
         }
         if (!WarehouseUIPanel.Instance.uiPanel.activeSelf)
-            WarehouseUIPanel.Instance.Show(node.id);
+            WarehouseUIPanel.Instance.ShowWarehouse(node.id, true);
         else
             WarehouseUIPanel.Instance.Hide();
     }
@@ -417,12 +427,12 @@ public class ExploreNodeEntityMgr : MonoSingleton<ExploreNodeEntityMgr>
     private void HandleProductionNode(ExploreNodeData node, ExploreNodeConfig config)
     {
         node.SetCompleted();
-        if (!BuildingMgr.HasBuildingData(node.id))
+        if (!ProductionPlatformMgr.HasProductionPlatformData(node.id))
         {
-            BuildingMgr.AddBuildingData(new ProductionBuildingData("20004", node.id, config.recipeIdGroup.ToList()));
+            ProductionPlatformMgr.CreateProductionPlatformData(node.id, config.name, config.recipeIdGroup.ToList());
         }
         if (!ProductionPlatformUIPanel.Instance.uiPanel.activeSelf)
-            ProductionPlatformUIPanel.Instance.Show(node.id);
+            ProductionPlatformUIPanel.Instance.ShowProductionPlatform(node.id, true);
         else
             ProductionPlatformUIPanel.Instance.Hide();
     }
@@ -438,12 +448,19 @@ public class ExploreNodeEntityMgr : MonoSingleton<ExploreNodeEntityMgr>
 
     public void Clear()
     {
-        foreach (var node in ExploreNodeMgr.GetExploreMapData(ExploreNodeMgr.currentMapId).nodes.Values)
+        HideAllUIPanels();
+        playerUnit.OnNodeChanged -= HandleNodeChanged;
+        foreach (var node in ExploreNodeMgr.GetExploreMapData(currentMapId).nodes.Values)
         {
             node.OnNodeReplaced -= HandleNodeReplaced;
             node.OnNodeCompleted -= HandleNodeCompleted;
         }
         nodeRoot.DestroyAllChildren();
+    }
+
+    protected override void OnDestroy()
+    {
+        Clear();
     }
 
 }

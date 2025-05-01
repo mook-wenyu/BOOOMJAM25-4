@@ -162,6 +162,14 @@ public class ProductSlot : MonoBehaviour,
         itemIcon.gameObject.SetActive(false);
     }
 
+    void OnDisable()
+    {
+        // 确保取消所有事件订阅
+        UnsubscribeEvents();
+
+        GlobalUIMgr.Instance.Hide<SimpleTipsUI>();
+    }
+
     void OnDestroy()
     {
         // 确保取消所有事件订阅
