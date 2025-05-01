@@ -62,7 +62,7 @@
   },
   "hPGrowValue": {
     "$type": "GeneralParametersConfig, Assembly-CSharp",
-    "par": 2.0,
+    "par": 1.0,
     "id": "hPGrowValue"
   },
   "hPGrowTime": {

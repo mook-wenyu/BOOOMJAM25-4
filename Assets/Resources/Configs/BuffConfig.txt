@@ -4,40 +4,99 @@
     "$type": "BuffConfig, Assembly-CSharp",
     "name": "昏昏欲睡",
     "desc": "活力增长速度降低50%",
-    "defaultTime": 48,
+    "defaultTime": 48.0,
     "path": "0",
+    "note": null,
     "id": "50001"
   },
   "50002": {
     "$type": "BuffConfig, Assembly-CSharp",
     "name": "骨折",
-    "desc": "移动速度降低50%",
-    "defaultTime": 0,
+    "desc": "探索消耗增加100%",
+    "defaultTime": 48.0,
     "path": "0",
+    "note": "包括时间和活力，事件给，时间到了消失",
     "id": "50002"
   },
   "50003": {
     "$type": "BuffConfig, Assembly-CSharp",
     "name": "精神饱满",
-    "desc": "移动速度加快50%",
-    "defaultTime": 6,
+    "desc": "活力增长速度提高100%",
+    "defaultTime": 6.0,
     "path": "0",
+    "note": "喝咖啡就有",
     "id": "50003"
   },
   "50004": {
     "$type": "BuffConfig, Assembly-CSharp",
     "name": "睡神",
     "desc": "睡觉时失去的饱食度降低30%",
-    "defaultTime": 0,
+    "defaultTime": 0.0,
     "path": "0",
+    "note": null,
     "id": "50004"
   },
   "50005": {
     "$type": "BuffConfig, Assembly-CSharp",
     "name": "麻麻的爱",
     "desc": "起床时精神恢复5点",
-    "defaultTime": 0,
+    "defaultTime": 0.0,
     "path": "0",
+    "note": "穿上饰品就有",
     "id": "50005"
+  },
+  "50006": {
+    "$type": "BuffConfig, Assembly-CSharp",
+    "name": "流血",
+    "desc": "每小时失去2点生命值",
+    "defaultTime": 48.0,
+    "path": "0",
+    "note": "事件给，时间到了消失",
+    "id": "50006"
+  },
+  "50007": {
+    "$type": "BuffConfig, Assembly-CSharp",
+    "name": "恐慌",
+    "desc": "精神低于50：活力增长速度降低50%",
+    "defaultTime": 0.0,
+    "path": "0",
+    "note": "精神低于50点时持续生效",
+    "id": "50007"
+  },
+  "50008": {
+    "$type": "BuffConfig, Assembly-CSharp",
+    "name": "绝望",
+    "desc": "精神低于20：无法以任何方式获得活力",
+    "defaultTime": 0.0,
+    "path": "0",
+    "note": "精神低于20点时持续生效，恐慌和绝望不会共存",
+    "id": "50008"
+  },
+  "50009": {
+    "$type": "BuffConfig, Assembly-CSharp",
+    "name": "辐射增生",
+    "desc": "每小时失去1点饱食度",
+    "defaultTime": 0.0,
+    "path": "0",
+    "note": "第20天时直接获得",
+    "id": "50009"
+  },
+  "50010": {
+    "$type": "BuffConfig, Assembly-CSharp",
+    "name": "辐射病",
+    "desc": "每小时失去3点饱食度，1点生命值",
+    "defaultTime": 0.0,
+    "path": "0",
+    "note": "第40天时直接获得",
+    "id": "50010"
+  },
+  "50011": {
+    "$type": "BuffConfig, Assembly-CSharp",
+    "name": "脑震荡",
+    "desc": "每小时随机失去0~3点活力",
+    "defaultTime": 48.0,
+    "path": "0",
+    "note": "事件获得，时间到了消失",
+    "id": "50011"
   }
 }

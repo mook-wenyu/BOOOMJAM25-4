@@ -529,5 +529,80 @@
     "time": 0.5,
     "energyCost": 5.0,
     "id": "2100005"
+  },
+  "2200001": {
+    "$type": "RecipesConfig, Assembly-CSharp",
+    "productName": "翻垃圾",
+    "productID": [
+      "10004",
+      "10014",
+      "10017",
+      "10009"
+    ],
+    "productAmount": [
+      3,
+      5,
+      2,
+      1
+    ],
+    "ramdomAdjust": [
+      1
+    ],
+    "productTypeNum": 2,
+    "materialIDGroup": [
+      "0"
+    ],
+    "materialAmountGroup": [
+      0
+    ],
+    "time": 2.0,
+    "energyCost": 20.0,
+    "id": "2200001"
+  },
+  "2200002": {
+    "$type": "RecipesConfig, Assembly-CSharp",
+    "productName": "一瓶油",
+    "productID": [
+      "10016"
+    ],
+    "productAmount": [
+      1
+    ],
+    "ramdomAdjust": [
+      0
+    ],
+    "productTypeNum": 1,
+    "materialIDGroup": [
+      "10014"
+    ],
+    "materialAmountGroup": [
+      1
+    ],
+    "time": 0.1,
+    "energyCost": 2.0,
+    "id": "2200002"
+  },
+  "2200003": {
+    "$type": "RecipesConfig, Assembly-CSharp",
+    "productName": "冰",
+    "productID": [
+      "10018"
+    ],
+    "productAmount": [
+      5
+    ],
+    "ramdomAdjust": [
+      0
+    ],
+    "productTypeNum": 1,
+    "materialIDGroup": [
+      "10015"
+    ],
+    "materialAmountGroup": [
+      1
+    ],
+    "time": 2.0,
+    "energyCost": 2.0,
+    "id": "2200003"
   }
 }

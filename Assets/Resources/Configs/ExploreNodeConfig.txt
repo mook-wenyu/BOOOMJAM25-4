@@ -25,9 +25,9 @@
   },
   "71001": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": "起点",
-    "desc": "无",
-    "type": 0,
+    "name": "传送点",
+    "desc": "你可以从任意位置来到此位置。",
+    "type": 1,
     "ownMap": "1",
     "isOnMap": true,
     "mapLocation": [
@@ -2551,9 +2551,9 @@
   },
   "72001": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": "起点",
-    "desc": "无",
-    "type": 0,
+    "name": "传送点",
+    "desc": "你可以从任意位置来到此位置。",
+    "type": 1,
     "ownMap": "2",
     "isOnMap": true,
     "mapLocation": [
@@ -2565,7 +2565,7 @@
       "72003"
     ],
     "unlocksMidNodes": [
-      "0"
+      "72003"
     ],
     "unlocksPostNodes": null,
     "nodeAfterComplete": null,
@@ -2581,7 +2581,7 @@
   },
   "72002": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": "无",
+    "name": "空",
     "desc": "无",
     "type": 0,
     "ownMap": "2",
@@ -2612,7 +2612,7 @@
   },
   "72003": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": "无",
+    "name": "空",
     "desc": "无",
     "type": 0,
     "ownMap": "2",
@@ -2645,9 +2645,9 @@
   },
   "72004": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": "无",
-    "desc": "无",
-    "type": 0,
+    "name": "工地",
+    "desc": "你找到一个工地，放着一些建筑材料。",
+    "type": 2,
     "ownMap": "2",
     "isOnMap": true,
     "mapLocation": [
@@ -2663,8 +2663,14 @@
     ],
     "unlocksPostNodes": null,
     "nodeAfterComplete": null,
-    "rewardIdGroup": null,
-    "rewardAmountGroup": null,
+    "rewardIdGroup": [
+      "10004",
+      "10002"
+    ],
+    "rewardAmountGroup": [
+      6,
+      6
+    ],
     "requiredMaterialIdGroup": null,
     "requiredMaterialAmountGroup": null,
     "submitTime": 0.0,
@@ -2675,9 +2681,9 @@
   },
   "72005": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": "无",
-    "desc": "无",
-    "type": 0,
+    "name": "垃圾回收站",
+    "desc": "或许可以翻找出一些有用的东西。",
+    "type": 4,
     "ownMap": "2",
     "isOnMap": true,
     "mapLocation": [
@@ -2696,14 +2702,16 @@
     "requiredMaterialIdGroup": null,
     "requiredMaterialAmountGroup": null,
     "submitTime": 0.0,
-    "recipeIdGroup": null,
+    "recipeIdGroup": [
+      "2200001"
+    ],
     "storyId": null,
     "path": null,
     "id": "72005"
   },
   "72006": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": "无",
+    "name": "空",
     "desc": "无",
     "type": 0,
     "ownMap": "2",
@@ -2734,7 +2742,7 @@
   },
   "72007": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": "无",
+    "name": "空",
     "desc": "无",
     "type": 0,
     "ownMap": "2",
@@ -2749,7 +2757,8 @@
       "72008"
     ],
     "unlocksMidNodes": [
-      "72017"
+      "72017",
+      "72008"
     ],
     "unlocksPostNodes": null,
     "nodeAfterComplete": null,
@@ -2765,7 +2774,7 @@
   },
   "72008": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": "无",
+    "name": "空",
     "desc": "无",
     "type": 0,
     "ownMap": "2",
@@ -2782,7 +2791,8 @@
     ],
     "unlocksMidNodes": [
       "72007",
-      "72012"
+      "72012",
+      "72002"
     ],
     "unlocksPostNodes": null,
     "nodeAfterComplete": null,
@@ -2798,7 +2808,7 @@
   },
   "72009": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": "无",
+    "name": "空",
     "desc": "无",
     "type": 0,
     "ownMap": "2",
@@ -2811,7 +2821,8 @@
     "neighborNodes": [
       "72003",
       "72010",
-      "72018"
+      "72018",
+      "72063"
     ],
     "unlocksMidNodes": [
       "72018",
@@ -2831,25 +2842,22 @@
   },
   "72010": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": "无",
+    "name": "空",
     "desc": "无",
     "type": 0,
     "ownMap": "2",
     "isOnMap": true,
     "mapLocation": [
       22,
-      7
+      6
     ],
     "isStartPoint": false,
     "neighborNodes": [
       "72009",
-      "72019",
       "72011"
     ],
     "unlocksMidNodes": [
-      "72011",
-      "72019",
-      "72009"
+      "72011"
     ],
     "unlocksPostNodes": null,
     "nodeAfterComplete": null,
@@ -2865,7 +2873,7 @@
   },
   "72011": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": "无",
+    "name": "空",
     "desc": "无",
     "type": 0,
     "ownMap": "2",
@@ -2896,9 +2904,9 @@
   },
   "72012": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": "无",
-    "desc": "无",
-    "type": 0,
+    "name": "废铁",
+    "desc": "你找到一些尖锐的废铁。",
+    "type": 2,
     "ownMap": "2",
     "isOnMap": true,
     "mapLocation": [
@@ -2912,8 +2920,12 @@
     "unlocksMidNodes": null,
     "unlocksPostNodes": null,
     "nodeAfterComplete": null,
-    "rewardIdGroup": null,
-    "rewardAmountGroup": null,
+    "rewardIdGroup": [
+      "10004"
+    ],
+    "rewardAmountGroup": [
+      8
+    ],
     "requiredMaterialIdGroup": null,
     "requiredMaterialAmountGroup": null,
     "submitTime": 0.0,
@@ -2924,9 +2936,9 @@
   },
   "72013": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": "无",
-    "desc": "无",
-    "type": 0,
+    "name": "一具尸体",
+    "desc": "你找到一个背着背包的尸体。",
+    "type": 2,
     "ownMap": "2",
     "isOnMap": true,
     "mapLocation": [
@@ -2939,12 +2951,17 @@
       "72014"
     ],
     "unlocksMidNodes": [
-      "72021"
+      "72021",
+      "72014"
     ],
     "unlocksPostNodes": null,
     "nodeAfterComplete": null,
-    "rewardIdGroup": null,
-    "rewardAmountGroup": null,
+    "rewardIdGroup": [
+      "10031"
+    ],
+    "rewardAmountGroup": [
+      2
+    ],
     "requiredMaterialIdGroup": null,
     "requiredMaterialAmountGroup": null,
     "submitTime": 0.0,
@@ -2955,7 +2972,7 @@
   },
   "72014": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": "无",
+    "name": "空",
     "desc": "无",
     "type": 0,
     "ownMap": "2",
@@ -2970,8 +2987,7 @@
       "72015"
     ],
     "unlocksMidNodes": [
-      "72013",
-      "72015"
+      "72013"
     ],
     "unlocksPostNodes": null,
     "nodeAfterComplete": null,
@@ -2987,7 +3003,7 @@
   },
   "72015": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": "无",
+    "name": "空",
     "desc": "无",
     "type": 0,
     "ownMap": "2",
@@ -3005,7 +3021,8 @@
     ],
     "unlocksMidNodes": [
       "72014",
-      "72022"
+      "72022",
+      "72006"
     ],
     "unlocksPostNodes": null,
     "nodeAfterComplete": null,
@@ -3021,9 +3038,9 @@
   },
   "72016": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": "无",
-    "desc": "无",
-    "type": 0,
+    "name": "传送点",
+    "desc": "你可以从任意位置来到此位置。",
+    "type": 1,
     "ownMap": "2",
     "isOnMap": true,
     "mapLocation": [
@@ -3052,9 +3069,9 @@
   },
   "72017": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": "无",
-    "desc": "无",
-    "type": 0,
+    "name": "废墟",
+    "desc": "坍塌的废墟拦住了你的去路。",
+    "type": 3,
     "ownMap": "2",
     "isOnMap": true,
     "mapLocation": [
@@ -3074,9 +3091,13 @@
     "nodeAfterComplete": "72000",
     "rewardIdGroup": null,
     "rewardAmountGroup": null,
-    "requiredMaterialIdGroup": null,
-    "requiredMaterialAmountGroup": null,
-    "submitTime": 0.0,
+    "requiredMaterialIdGroup": [
+      "10023"
+    ],
+    "requiredMaterialAmountGroup": [
+      1
+    ],
+    "submitTime": 5.0,
     "recipeIdGroup": null,
     "storyId": null,
     "path": null,
@@ -3084,9 +3105,9 @@
   },
   "72018": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": "无",
-    "desc": "无",
-    "type": 0,
+    "name": "？？？",
+    "desc": "前方不远处有一家废弃的超市。",
+    "type": 5,
     "ownMap": "2",
     "isOnMap": true,
     "mapLocation": [
@@ -3112,15 +3133,15 @@
     "requiredMaterialAmountGroup": null,
     "submitTime": 0.0,
     "recipeIdGroup": null,
-    "storyId": null,
+    "storyId": "Robber",
     "path": null,
     "id": "72018"
   },
   "72019": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": "无",
-    "desc": "无",
-    "type": 0,
+    "name": "超市",
+    "desc": "看起来强盗把这里当成了据点。",
+    "type": 2,
     "ownMap": "2",
     "isOnMap": true,
     "mapLocation": [
@@ -3130,18 +3151,25 @@
     "isStartPoint": false,
     "neighborNodes": [
       "72018",
-      "72010",
-      "72026"
+      "72026",
+      "72063"
     ],
     "unlocksMidNodes": [
       "72018",
-      "72010",
       "72026"
     ],
     "unlocksPostNodes": null,
     "nodeAfterComplete": null,
-    "rewardIdGroup": null,
-    "rewardAmountGroup": null,
+    "rewardIdGroup": [
+      "10040",
+      "10041",
+      "10042"
+    ],
+    "rewardAmountGroup": [
+      3,
+      3,
+      3
+    ],
     "requiredMaterialIdGroup": null,
     "requiredMaterialAmountGroup": null,
     "submitTime": 0.0,
@@ -3152,20 +3180,23 @@
   },
   "72020": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": "无",
+    "name": "空",
     "desc": "无",
     "type": 0,
     "ownMap": "2",
     "isOnMap": true,
     "mapLocation": [
       25,
-      11
+      9
     ],
     "isStartPoint": false,
     "neighborNodes": [
-      "72017"
+      "72017",
+      "72055"
     ],
-    "unlocksMidNodes": null,
+    "unlocksMidNodes": [
+      "72055"
+    ],
     "unlocksPostNodes": null,
     "nodeAfterComplete": null,
     "rewardIdGroup": null,
@@ -3180,7 +3211,7 @@
   },
   "72021": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": "无",
+    "name": "空",
     "desc": "无",
     "type": 0,
     "ownMap": "2",
@@ -3212,7 +3243,7 @@
   },
   "72022": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": "无",
+    "name": "空",
     "desc": "无",
     "type": 0,
     "ownMap": "2",
@@ -3243,7 +3274,7 @@
   },
   "72023": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": "无",
+    "name": "空",
     "desc": "无",
     "type": 0,
     "ownMap": "2",
@@ -3275,7 +3306,7 @@
   },
   "72024": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": "无",
+    "name": "空",
     "desc": "无",
     "type": 0,
     "ownMap": "2",
@@ -3307,7 +3338,7 @@
   },
   "72025": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": "无",
+    "name": "空",
     "desc": "无",
     "type": 0,
     "ownMap": "2",
@@ -3340,9 +3371,9 @@
   },
   "72026": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": "无",
-    "desc": "无",
-    "type": 0,
+    "name": "废墟",
+    "desc": "坍塌的废墟拦住了你的去路。",
+    "type": 3,
     "ownMap": "2",
     "isOnMap": true,
     "mapLocation": [
@@ -3355,15 +3386,21 @@
       "72027"
     ],
     "unlocksMidNodes": [
-      "72027"
+      "0"
     ],
-    "unlocksPostNodes": null,
-    "nodeAfterComplete": null,
+    "unlocksPostNodes": [
+      "70027"
+    ],
+    "nodeAfterComplete": "72000",
     "rewardIdGroup": null,
     "rewardAmountGroup": null,
-    "requiredMaterialIdGroup": null,
-    "requiredMaterialAmountGroup": null,
-    "submitTime": 0.0,
+    "requiredMaterialIdGroup": [
+      "10023"
+    ],
+    "requiredMaterialAmountGroup": [
+      1
+    ],
+    "submitTime": 2.0,
     "recipeIdGroup": null,
     "storyId": null,
     "path": null,
@@ -3371,9 +3408,9 @@
   },
   "72027": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": "无",
-    "desc": "无",
-    "type": 0,
+    "name": "传送点",
+    "desc": "你可以从任意位置来到此位置。",
+    "type": 1,
     "ownMap": "2",
     "isOnMap": true,
     "mapLocation": [
@@ -3406,7 +3443,7 @@
   },
   "72028": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": "无",
+    "name": "空",
     "desc": "无",
     "type": 0,
     "ownMap": "2",
@@ -3418,11 +3455,9 @@
     "isStartPoint": false,
     "neighborNodes": [
       "72027",
-      "72031",
       "72029"
     ],
     "unlocksMidNodes": [
-      "72031",
       "72029"
     ],
     "unlocksPostNodes": null,
@@ -3439,9 +3474,9 @@
   },
   "72029": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": "无",
-    "desc": "无",
-    "type": 0,
+    "name": "阴森别墅",
+    "desc": "你的眼前是一栋别墅，但看起来十分阴森。",
+    "type": 5,
     "ownMap": "2",
     "isOnMap": true,
     "mapLocation": [
@@ -3461,15 +3496,15 @@
     "requiredMaterialAmountGroup": null,
     "submitTime": 0.0,
     "recipeIdGroup": null,
-    "storyId": null,
+    "storyId": "Dead_Body_In_House",
     "path": null,
     "id": "72029"
   },
   "72030": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": "无",
-    "desc": "无",
-    "type": 0,
+    "name": "进入建筑",
+    "desc": "你推开了铁门，现在是进入建筑的时候了。",
+    "type": 5,
     "ownMap": "2",
     "isOnMap": true,
     "mapLocation": [
@@ -3478,9 +3513,14 @@
     ],
     "isStartPoint": false,
     "neighborNodes": [
-      "72033"
+      "72033",
+      "72062",
+      "72064"
     ],
-    "unlocksMidNodes": null,
+    "unlocksMidNodes": [
+      "72062",
+      "70064"
+    ],
     "unlocksPostNodes": null,
     "nodeAfterComplete": null,
     "rewardIdGroup": null,
@@ -3489,15 +3529,15 @@
     "requiredMaterialAmountGroup": null,
     "submitTime": 0.0,
     "recipeIdGroup": null,
-    "storyId": null,
+    "storyId": "Gods_Name",
     "path": null,
     "id": "72030"
   },
   "72031": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": "无",
-    "desc": "无",
-    "type": 0,
+    "name": "普通别墅",
+    "desc": "你的眼前是一栋别墅，看起来很普通。",
+    "type": 2,
     "ownMap": "2",
     "isOnMap": true,
     "mapLocation": [
@@ -3506,13 +3546,21 @@
     ],
     "isStartPoint": false,
     "neighborNodes": [
-      "72028"
+      "72038"
     ],
     "unlocksMidNodes": null,
     "unlocksPostNodes": null,
     "nodeAfterComplete": null,
-    "rewardIdGroup": null,
-    "rewardAmountGroup": null,
+    "rewardIdGroup": [
+      "10014",
+      "10044",
+      "10054"
+    ],
+    "rewardAmountGroup": [
+      10,
+      10,
+      2
+    ],
     "requiredMaterialIdGroup": null,
     "requiredMaterialAmountGroup": null,
     "submitTime": 0.0,
@@ -3523,7 +3571,7 @@
   },
   "72032": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": "无",
+    "name": "空",
     "desc": "无",
     "type": 0,
     "ownMap": "2",
@@ -3555,9 +3603,9 @@
   },
   "72033": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": "无",
-    "desc": "无",
-    "type": 0,
+    "name": "厚重的铁门",
+    "desc": "进入建筑的路被铁门挡住了。门上的锁链似乎可以剪开。",
+    "type": 3,
     "ownMap": "2",
     "isOnMap": true,
     "mapLocation": [
@@ -3574,13 +3622,19 @@
       "72032",
       "72034"
     ],
-    "unlocksPostNodes": null,
+    "unlocksPostNodes": [
+      "70030"
+    ],
     "nodeAfterComplete": null,
     "rewardIdGroup": null,
     "rewardAmountGroup": null,
-    "requiredMaterialIdGroup": null,
-    "requiredMaterialAmountGroup": null,
-    "submitTime": 0.0,
+    "requiredMaterialIdGroup": [
+      "10024"
+    ],
+    "requiredMaterialAmountGroup": [
+      1
+    ],
+    "submitTime": 1.0,
     "recipeIdGroup": null,
     "storyId": null,
     "path": null,
@@ -3588,7 +3642,7 @@
   },
   "72034": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": "无",
+    "name": "空",
     "desc": "无",
     "type": 0,
     "ownMap": "2",
@@ -3624,7 +3678,7 @@
   },
   "72035": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": "无",
+    "name": "空",
     "desc": "无",
     "type": 0,
     "ownMap": "2",
@@ -3635,9 +3689,14 @@
     ],
     "isStartPoint": false,
     "neighborNodes": [
-      "72034"
+      "72034",
+      "72059",
+      "72060"
     ],
-    "unlocksMidNodes": null,
+    "unlocksMidNodes": [
+      "72059",
+      "72060"
+    ],
     "unlocksPostNodes": null,
     "nodeAfterComplete": null,
     "rewardIdGroup": null,
@@ -3652,9 +3711,9 @@
   },
   "72036": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": "无",
-    "desc": "无",
-    "type": 0,
+    "name": "？？？",
+    "desc": "前方出现了一个人影……",
+    "type": 5,
     "ownMap": "2",
     "isOnMap": true,
     "mapLocation": [
@@ -3668,8 +3727,6 @@
       "72039"
     ],
     "unlocksMidNodes": [
-      "72037",
-      "72039",
       "72042"
     ],
     "unlocksPostNodes": null,
@@ -3680,15 +3737,15 @@
     "requiredMaterialAmountGroup": null,
     "submitTime": 0.0,
     "recipeIdGroup": null,
-    "storyId": null,
+    "storyId": "Meet_Drust",
     "path": null,
     "id": "72036"
   },
   "72037": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": "无",
-    "desc": "无",
-    "type": 0,
+    "name": "德鲁斯特的物资",
+    "desc": "德鲁斯特给了你一些物资。",
+    "type": 2,
     "ownMap": "2",
     "isOnMap": true,
     "mapLocation": [
@@ -3704,8 +3761,14 @@
     ],
     "unlocksPostNodes": null,
     "nodeAfterComplete": null,
-    "rewardIdGroup": null,
-    "rewardAmountGroup": null,
+    "rewardIdGroup": [
+      "10032",
+      "10033"
+    ],
+    "rewardAmountGroup": [
+      5,
+      5
+    ],
     "requiredMaterialIdGroup": null,
     "requiredMaterialAmountGroup": null,
     "submitTime": 0.0,
@@ -3716,21 +3779,22 @@
   },
   "72038": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": "无",
+    "name": "空",
     "desc": "无",
     "type": 0,
     "ownMap": "2",
     "isOnMap": true,
     "mapLocation": [
       25,
-      16
+      17
     ],
     "isStartPoint": false,
     "neighborNodes": [
-      "72027"
+      "72027",
+      "72031"
     ],
     "unlocksMidNodes": [
-      "0"
+      "72031"
     ],
     "unlocksPostNodes": null,
     "nodeAfterComplete": null,
@@ -3746,9 +3810,9 @@
   },
   "72039": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": "无",
-    "desc": "无",
-    "type": 0,
+    "name": "桥洞之下",
+    "desc": "你来到了德鲁斯特夫人所居住的桥洞。",
+    "type": 5,
     "ownMap": "2",
     "isOnMap": true,
     "mapLocation": [
@@ -3770,15 +3834,15 @@
     "requiredMaterialAmountGroup": null,
     "submitTime": 0.0,
     "recipeIdGroup": null,
-    "storyId": null,
+    "storyId": "Drusts_House",
     "path": null,
     "id": "72039"
   },
   "72040": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": "无",
+    "name": "一具尸体",
     "desc": "无",
-    "type": 0,
+    "type": 5,
     "ownMap": "2",
     "isOnMap": true,
     "mapLocation": [
@@ -3788,11 +3852,9 @@
     "isStartPoint": false,
     "neighborNodes": [
       "72034",
-      "72043",
-      "72041"
+      "72043"
     ],
     "unlocksMidNodes": [
-      "72041",
       "72043"
     ],
     "unlocksPostNodes": null,
@@ -3803,24 +3865,23 @@
     "requiredMaterialAmountGroup": null,
     "submitTime": 0.0,
     "recipeIdGroup": null,
-    "storyId": null,
+    "storyId": "Monks_Dead_Body",
     "path": null,
     "id": "72040"
   },
   "72041": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": "无",
+    "name": null,
     "desc": "无",
     "type": 0,
     "ownMap": "2",
-    "isOnMap": true,
+    "isOnMap": false,
     "mapLocation": [
-      10,
-      19
+      0
     ],
     "isStartPoint": false,
     "neighborNodes": [
-      "72040"
+      "72043"
     ],
     "unlocksMidNodes": [
       "0"
@@ -3839,9 +3900,9 @@
   },
   "72042": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": "无",
-    "desc": "无",
-    "type": 0,
+    "name": "断桥",
+    "desc": "过河的桥断了，你无法继续前进。",
+    "type": 3,
     "ownMap": "2",
     "isOnMap": true,
     "mapLocation": [
@@ -3862,9 +3923,13 @@
     "nodeAfterComplete": "72000",
     "rewardIdGroup": null,
     "rewardAmountGroup": null,
-    "requiredMaterialIdGroup": null,
-    "requiredMaterialAmountGroup": null,
-    "submitTime": 0.0,
+    "requiredMaterialIdGroup": [
+      "10011"
+    ],
+    "requiredMaterialAmountGroup": [
+      5
+    ],
+    "submitTime": 3.0,
     "recipeIdGroup": null,
     "storyId": null,
     "path": null,
@@ -3872,9 +3937,9 @@
   },
   "72043": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": "无",
-    "desc": "无",
-    "type": 0,
+    "name": "高僧之遗",
+    "desc": "僧侣留下的遗物。",
+    "type": 2,
     "ownMap": "2",
     "isOnMap": true,
     "mapLocation": [
@@ -3890,8 +3955,18 @@
     ],
     "unlocksPostNodes": null,
     "nodeAfterComplete": null,
-    "rewardIdGroup": null,
-    "rewardAmountGroup": null,
+    "rewardIdGroup": [
+      "11007",
+      "10030",
+      "10040",
+      "10041"
+    ],
+    "rewardAmountGroup": [
+      1,
+      2,
+      4,
+      4
+    ],
     "requiredMaterialIdGroup": null,
     "requiredMaterialAmountGroup": null,
     "submitTime": 0.0,
@@ -3902,9 +3977,9 @@
   },
   "72044": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": "无",
-    "desc": "无",
-    "type": 0,
+    "name": "传送点",
+    "desc": "你可以从任意位置来到此位置。",
+    "type": 1,
     "ownMap": "2",
     "isOnMap": true,
     "mapLocation": [
@@ -3933,7 +4008,7 @@
   },
   "72045": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": "无",
+    "name": "空",
     "desc": "无",
     "type": 0,
     "ownMap": "2",
@@ -3964,7 +4039,7 @@
   },
   "72046": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": "无",
+    "name": "空",
     "desc": "无",
     "type": 0,
     "ownMap": "2",
@@ -3997,7 +4072,7 @@
   },
   "72047": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": "无",
+    "name": "空",
     "desc": "无",
     "type": 0,
     "ownMap": "2",
@@ -4032,7 +4107,7 @@
   },
   "72048": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": "无",
+    "name": "空",
     "desc": "无",
     "type": 0,
     "ownMap": "2",
@@ -4065,7 +4140,7 @@
   },
   "72049": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": "无",
+    "name": "空",
     "desc": "无",
     "type": 0,
     "ownMap": "2",
@@ -4096,7 +4171,7 @@
   },
   "72050": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": "无",
+    "name": "空",
     "desc": "无",
     "type": 0,
     "ownMap": "2",
@@ -4124,9 +4199,9 @@
   },
   "72051": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": "无",
-    "desc": "无",
-    "type": 0,
+    "name": "零件盒",
+    "desc": "你找到一个小巧精致的零件盒。",
+    "type": 2,
     "ownMap": "2",
     "isOnMap": true,
     "mapLocation": [
@@ -4140,8 +4215,16 @@
     "unlocksMidNodes": null,
     "unlocksPostNodes": null,
     "nodeAfterComplete": null,
-    "rewardIdGroup": null,
-    "rewardAmountGroup": null,
+    "rewardIdGroup": [
+      "11008",
+      "10009",
+      "10012"
+    ],
+    "rewardAmountGroup": [
+      1,
+      5,
+      5
+    ],
     "requiredMaterialIdGroup": null,
     "requiredMaterialAmountGroup": null,
     "submitTime": 0.0,
@@ -4152,7 +4235,7 @@
   },
   "72052": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": "无",
+    "name": "空",
     "desc": "无",
     "type": 0,
     "ownMap": "2",
@@ -4180,7 +4263,7 @@
   },
   "72053": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": "无",
+    "name": "空",
     "desc": "无",
     "type": 0,
     "ownMap": "2",
@@ -4208,7 +4291,7 @@
   },
   "72054": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": "无",
+    "name": "空",
     "desc": "无",
     "type": 0,
     "ownMap": "2",
@@ -4236,16 +4319,26 @@
   },
   "72055": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": "无",
-    "desc": "无",
-    "type": 0,
+    "name": "华丽别墅",
+    "desc": "你的眼前是一栋别墅，看起来十分华丽。",
+    "type": 5,
     "ownMap": "2",
-    "isOnMap": false,
-    "mapLocation": null,
+    "isOnMap": true,
+    "mapLocation": [
+      28,
+      9
+    ],
     "isStartPoint": false,
-    "neighborNodes": null,
-    "unlocksMidNodes": null,
-    "unlocksPostNodes": null,
+    "neighborNodes": [
+      "72020",
+      "72057"
+    ],
+    "unlocksMidNodes": [
+      "0"
+    ],
+    "unlocksPostNodes": [
+      "72057"
+    ],
     "nodeAfterComplete": null,
     "rewardIdGroup": null,
     "rewardAmountGroup": null,
@@ -4259,19 +4352,32 @@
   },
   "72056": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": "无",
-    "desc": "无",
-    "type": 0,
+    "name": "厨房",
+    "desc": "豪华的厨房，可能有些剩余的食物。",
+    "type": 2,
     "ownMap": "2",
-    "isOnMap": false,
-    "mapLocation": null,
+    "isOnMap": true,
+    "mapLocation": [
+      30,
+      11
+    ],
     "isStartPoint": false,
-    "neighborNodes": null,
+    "neighborNodes": [
+      "72057"
+    ],
     "unlocksMidNodes": null,
     "unlocksPostNodes": null,
     "nodeAfterComplete": null,
-    "rewardIdGroup": null,
-    "rewardAmountGroup": null,
+    "rewardIdGroup": [
+      "10041",
+      "10042",
+      "10019"
+    ],
+    "rewardAmountGroup": [
+      3,
+      3,
+      20
+    ],
     "requiredMaterialIdGroup": null,
     "requiredMaterialAmountGroup": null,
     "submitTime": 0.0,
@@ -4282,19 +4388,35 @@
   },
   "72057": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": "无",
-    "desc": "无",
-    "type": 0,
+    "name": "卧室",
+    "desc": "豪华的卧室，充满电子设备。",
+    "type": 2,
     "ownMap": "2",
-    "isOnMap": false,
-    "mapLocation": null,
+    "isOnMap": true,
+    "mapLocation": [
+      30,
+      9
+    ],
     "isStartPoint": false,
-    "neighborNodes": null,
-    "unlocksMidNodes": null,
+    "neighborNodes": [
+      "72055",
+      "72056",
+      "72058"
+    ],
+    "unlocksMidNodes": [
+      "72056",
+      "72058"
+    ],
     "unlocksPostNodes": null,
     "nodeAfterComplete": null,
-    "rewardIdGroup": null,
-    "rewardAmountGroup": null,
+    "rewardIdGroup": [
+      "10009",
+      "10008"
+    ],
+    "rewardAmountGroup": [
+      2,
+      2
+    ],
     "requiredMaterialIdGroup": null,
     "requiredMaterialAmountGroup": null,
     "submitTime": 0.0,
@@ -4305,14 +4427,19 @@
   },
   "72058": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": "无",
-    "desc": "无",
-    "type": 0,
+    "name": "地下储藏室",
+    "desc": "竟然有大量的油储存在这里，但你需要一些东西装走。",
+    "type": 4,
     "ownMap": "2",
-    "isOnMap": false,
-    "mapLocation": null,
+    "isOnMap": true,
+    "mapLocation": [
+      30,
+      7
+    ],
     "isStartPoint": false,
-    "neighborNodes": null,
+    "neighborNodes": [
+      "72057"
+    ],
     "unlocksMidNodes": null,
     "unlocksPostNodes": null,
     "nodeAfterComplete": null,
@@ -4321,26 +4448,39 @@
     "requiredMaterialIdGroup": null,
     "requiredMaterialAmountGroup": null,
     "submitTime": 0.0,
-    "recipeIdGroup": null,
+    "recipeIdGroup": [
+      "2200002"
+    ],
     "storyId": null,
     "path": null,
     "id": "72058"
   },
   "72059": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": "无",
-    "desc": "无",
-    "type": 0,
+    "name": "咖啡店",
+    "desc": "废弃的咖啡店。",
+    "type": 2,
     "ownMap": "2",
-    "isOnMap": false,
-    "mapLocation": null,
+    "isOnMap": true,
+    "mapLocation": [
+      10,
+      14
+    ],
     "isStartPoint": false,
-    "neighborNodes": null,
+    "neighborNodes": [
+      "72035"
+    ],
     "unlocksMidNodes": null,
     "unlocksPostNodes": null,
     "nodeAfterComplete": null,
-    "rewardIdGroup": null,
-    "rewardAmountGroup": null,
+    "rewardIdGroup": [
+      "10044",
+      "10014"
+    ],
+    "rewardAmountGroup": [
+      20,
+      20
+    ],
     "requiredMaterialIdGroup": null,
     "requiredMaterialAmountGroup": null,
     "submitTime": 0.0,
@@ -4348,6 +4488,323 @@
     "storyId": null,
     "path": null,
     "id": "72059"
+  },
+  "72060": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "空",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": true,
+    "mapLocation": [
+      12,
+      17
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "72035",
+      "72061"
+    ],
+    "unlocksMidNodes": [
+      "72061"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72060"
+  },
+  "72061": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "制冰机",
+    "desc": "我超，冰！",
+    "type": 4,
+    "ownMap": "2",
+    "isOnMap": true,
+    "mapLocation": [
+      12,
+      20
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "72060"
+    ],
+    "unlocksMidNodes": null,
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": [
+      "2200003"
+    ],
+    "storyId": null,
+    "path": null,
+    "id": "72061"
+  },
+  "72062": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "文件盒",
+    "desc": "一个看起来十分重要的文件盒。",
+    "type": 2,
+    "ownMap": "2",
+    "isOnMap": true,
+    "mapLocation": [
+      4,
+      12
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "72030"
+    ],
+    "unlocksMidNodes": null,
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": [
+      "11005",
+      "10009"
+    ],
+    "rewardAmountGroup": [
+      1,
+      5
+    ],
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72062"
+  },
+  "72063": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "空",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": true,
+    "mapLocation": [
+      21,
+      8
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "72009",
+      "72019"
+    ],
+    "unlocksMidNodes": [
+      "72019"
+    ],
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72063"
+  },
+  "72064": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "火葬",
+    "desc": "来自火焰的超度。",
+    "type": 3,
+    "ownMap": "2",
+    "isOnMap": true,
+    "mapLocation": [
+      5,
+      14
+    ],
+    "isStartPoint": false,
+    "neighborNodes": [
+      "72030"
+    ],
+    "unlocksMidNodes": null,
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": "72070",
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": [
+      "10030"
+    ],
+    "requiredMaterialAmountGroup": [
+      1
+    ],
+    "submitTime": 0.1,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72064"
+  },
+  "72065": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "连接超市",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": false,
+    "mapLocation": null,
+    "isStartPoint": false,
+    "neighborNodes": null,
+    "unlocksMidNodes": null,
+    "unlocksPostNodes": [
+      "72063"
+    ],
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72065"
+  },
+  "72066": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "答应找人",
+    "desc": "无",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": false,
+    "mapLocation": null,
+    "isStartPoint": false,
+    "neighborNodes": null,
+    "unlocksMidNodes": null,
+    "unlocksPostNodes": [
+      "72037",
+      "72039"
+    ],
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72066"
+  },
+  "72067": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "桥洞之下",
+    "desc": "你来到了德鲁斯特夫人所居住的桥洞。",
+    "type": 5,
+    "ownMap": "2",
+    "isOnMap": false,
+    "mapLocation": null,
+    "isStartPoint": false,
+    "neighborNodes": null,
+    "unlocksMidNodes": null,
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": "Drusts_Daughter",
+    "path": null,
+    "id": "72067"
+  },
+  "72068": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "德鲁斯特的遗产",
+    "desc": "德鲁斯特夫人剩下的东西。",
+    "type": 2,
+    "ownMap": "2",
+    "isOnMap": false,
+    "mapLocation": null,
+    "isStartPoint": false,
+    "neighborNodes": null,
+    "unlocksMidNodes": null,
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": [
+      "10009",
+      "10031",
+      "10042"
+    ],
+    "rewardAmountGroup": [
+      3,
+      5,
+      5
+    ],
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72068"
+  },
+  "72069": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "德鲁斯特的赠予",
+    "desc": "德鲁斯特夫人送给你很多东西。",
+    "type": 2,
+    "ownMap": "2",
+    "isOnMap": false,
+    "mapLocation": null,
+    "isStartPoint": false,
+    "neighborNodes": null,
+    "unlocksMidNodes": null,
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": [
+      "10009",
+      "10031",
+      "10042"
+    ],
+    "rewardAmountGroup": [
+      3,
+      5,
+      5
+    ],
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72069"
+  },
+  "72070": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "火葬",
+    "desc": "来自火焰的超度。",
+    "type": 5,
+    "ownMap": "2",
+    "isOnMap": false,
+    "mapLocation": null,
+    "isStartPoint": false,
+    "neighborNodes": null,
+    "unlocksMidNodes": null,
+    "unlocksPostNodes": null,
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": "All_In_Fire",
+    "path": null,
+    "id": "72070"
   },
   "73000": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
