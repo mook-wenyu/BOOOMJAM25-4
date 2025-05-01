@@ -31,7 +31,7 @@ public class ItemTipsUI : TipsUIBase
         itemNameText.text = itemData.name;
         itemDescText.text = itemData.desc;
 
-        itemCountText.text = itemInfo.GetCount().ToString();
+        itemCountText.text = $"数量: {itemInfo.GetCount().ToString()}";
 
         // itemIconImage.sprite = itemInfo.icon;
 
