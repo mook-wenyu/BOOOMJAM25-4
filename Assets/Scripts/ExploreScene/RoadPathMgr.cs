@@ -59,7 +59,9 @@ public class RoadPathMgr : MonoSingleton<RoadPathMgr>
 #endif
             return path;
         }
-
+#if UNITY_EDITOR
+        Debug.Log($"创建路径: {startNodeId} -> {endNodeId}");
+#endif
         path.Add(new Vector2(startNode.mapLocation[0], startNode.mapLocation[1]));
         path.Add(new Vector2(endNode.mapLocation[0], endNode.mapLocation[1]));
 

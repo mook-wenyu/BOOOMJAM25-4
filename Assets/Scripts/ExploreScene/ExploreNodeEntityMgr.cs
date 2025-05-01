@@ -135,7 +135,7 @@ public class ExploreNodeEntityMgr : MonoSingleton<ExploreNodeEntityMgr>
         var nodes = ExploreNodeMgr.GetExploreMapData(ExploreNodeMgr.currentMapId).nodes.Values;
         foreach (var node in nodes)
         {
-            var config = node.GetConfig();
+            var config = node.GetOriginalConfig();
             if (!config.isOnMap)
                 continue;
 
@@ -189,6 +189,9 @@ public class ExploreNodeEntityMgr : MonoSingleton<ExploreNodeEntityMgr>
     private void UnlockNode(string nodeId)
     {
         if (string.IsNullOrEmpty(nodeId) || nodeId == "0") return;
+#if UNITY_EDITOR
+        Debug.Log($"解锁节点: {nodeId}");
+#endif
         nodeRoot.Find(nodeId).gameObject.SetActive(true);
     }
 

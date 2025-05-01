@@ -82,6 +82,15 @@ public class ExploreNodeData
     }
 
     /// <summary>
+    /// 获取原始配置
+    /// </summary>
+    /// <returns></returns>
+    public ExploreNodeConfig GetOriginalConfig()
+    {
+        return ExploreNodeMgr.GetExploreNodeConfig(id);
+    }
+
+    /// <summary>
     /// 获取节点配置
     /// </summary>
     public ExploreNodeConfig GetConfig()

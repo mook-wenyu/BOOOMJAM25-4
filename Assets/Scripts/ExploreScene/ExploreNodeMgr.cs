@@ -85,8 +85,16 @@ public static class ExploreNodeMgr
     }
 
     [ScriptFunc("complete_node")]
-    public static void CompleteExploreNode(string mapId, string nodeId)
+    public static void CompleteExploreNode(string mapId = "", string nodeId = "")
     {
+        if (string.IsNullOrEmpty(mapId))
+        {
+            mapId = currentMapId;
+        }
+        if (string.IsNullOrEmpty(nodeId))
+        {
+            nodeId = CharacterMgr.Player().currentMapNodeIds[mapId];
+        }
         GetExploreMapData(mapId).nodes[nodeId].SetCompleted();
     }
 

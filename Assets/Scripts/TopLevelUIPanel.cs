@@ -22,7 +22,7 @@ public class TopLevelUIPanel : MonoSingleton<TopLevelUIPanel>
     public GameObject buffPrefab;
 
     public Slider health, hunger, energy, spirit;
-    // public TextMeshProUGUI healthText, hungerText, energyText, spiritText;
+    public TextMeshProUGUI healthText, hungerText, energyText, spiritText;
 
     public Button goOut, comeBack;
 
@@ -115,6 +115,11 @@ public class TopLevelUIPanel : MonoSingleton<TopLevelUIPanel>
         energy.value = player.energy;
         spirit.value = player.spirit;
 
+        healthText.text = $"{player.health} / {player.healthMax}";
+        hungerText.text = $"{player.hunger} / {player.hungerMax}";
+        energyText.text = $"{player.energy} / {player.energyMax}";
+        spiritText.text = $"{player.spirit} / {player.spiritMax}";
+
         foreach (var buff in player.activeBuffs)
         {
             HandleBuffAdded(player, buff);
@@ -124,7 +129,7 @@ public class TopLevelUIPanel : MonoSingleton<TopLevelUIPanel>
     private void HandleHpChanged(CharacterData character, float hp)
     {
         health.value = hp;
-        //healthText.text = $"{hp} / {player.healthMax}";
+        healthText.text = $"{hp} / {player.healthMax}";
         if (hp <= 0)
         {
             GameMgr.PauseTime();
@@ -135,43 +140,43 @@ public class TopLevelUIPanel : MonoSingleton<TopLevelUIPanel>
     private void HandleHpMaxChanged(CharacterData character, float hpMax)
     {
         health.maxValue = hpMax;
-        //healthText.text = $"{player.health} / {hpMax}";
+        healthText.text = $"{player.health} / {hpMax}";
     }
 
     private void HandleHungerChanged(CharacterData character, float hunger)
     {
         this.hunger.value = hunger;
-        //hungerText.text = $"{hunger} / {player.hungerMax}";
+        hungerText.text = $"{hunger} / {player.hungerMax}";
     }
 
     private void HandleHungerMaxChanged(CharacterData character, float hungerMax)
     {
         this.hunger.maxValue = hungerMax;
-        //hungerText.text = $"{player.hunger} / {hungerMax}";
+        hungerText.text = $"{player.hunger} / {hungerMax}";
     }
 
     private void HandleEnergyChanged(CharacterData character, float energy)
     {
         this.energy.value = energy;
-        //energyText.text = $"{energy} / {player.energyMax}";
+        energyText.text = $"{energy} / {player.energyMax}";
     }
 
     private void HandleEnergyMaxChanged(CharacterData character, float energyMax)
     {
         this.energy.maxValue = energyMax;
-        //energyText.text = $"{player.energy} / {energyMax}";
+        energyText.text = $"{player.energy} / {energyMax}";
     }
 
     private void HandleSpiritChanged(CharacterData character, float spirit)
     {
         this.spirit.value = spirit;
-        //spiritText.text = $"{spirit} / {player.spiritMax}";
+        spiritText.text = $"{spirit} / {player.spiritMax}";
     }
 
     private void HandleSpiritMaxChanged(CharacterData character, float spiritMax)
     {
         this.spirit.maxValue = spiritMax;
-        //spiritText.text = $"{player.spirit} / {spiritMax}";
+        spiritText.text = $"{player.spirit} / {spiritMax}";
     }
 
     private void HandleBuffAdded(CharacterData character, ActiveBuff buff)

@@ -154,7 +154,11 @@ public class CharacterData
     /// </summary>
     public void SetHealth(float newHealth)
     {
-        health = newHealth;
+        health = Math.Min(newHealth, healthMax);
+        if (health <= 0)
+        {
+            health = 0;
+        }
         OnHpChanged?.Invoke(this, health);
         if (health <= 0)
         {
@@ -184,7 +188,11 @@ public class CharacterData
     /// </summary>
     public void SetHunger(float newHunger)
     {
-        hunger = newHunger;
+        hunger = Math.Min(newHunger, hungerMax);
+        if (hunger <= 0)
+        {
+            hunger = 0;
+        }
         OnHungerChanged?.Invoke(this, hunger);
     }
     public void SetHungerMax(float newHungerMax)
@@ -206,7 +214,11 @@ public class CharacterData
     /// </summary>
     public void SetEnergy(float newEnergy)
     {
-        energy = newEnergy;
+        energy = Math.Min(newEnergy, energyMax);
+        if (energy <= 0)
+        {
+            energy = 0;
+        }
         OnEnergyChanged?.Invoke(this, energy);
     }
     public void SetEnergyMax(float newEnergyMax)
@@ -228,7 +240,11 @@ public class CharacterData
     /// </summary>
     public void SetSpirit(float newSpirit)
     {
-        spirit = newSpirit;
+        spirit = Math.Min(newSpirit, spiritMax);
+        if (spirit <= 0)
+        {
+            spirit = 0;
+        }
         OnSpiritChanged?.Invoke(this, spirit);
     }
     public void SetSpiritMax(float newSpiritMax)
