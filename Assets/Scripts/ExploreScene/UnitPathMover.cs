@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class UnitPathMover : MonoBehaviour
@@ -57,11 +58,22 @@ public class UnitPathMover : MonoBehaviour
             {
                 transform.position = _targetPos;
                 IsMoving = false;
-                PreviousNodeIds.Add(CurrentNodeId);
-                if (PreviousNodeIds.Count > 10)
+
+                // 如果是返回上一个节点，则不记录历史
+                if (PreviousNodeIds.Count > 0 && PreviousNodeIds.Last() == _targetNode.id)
                 {
-                    PreviousNodeIds.RemoveAt(0);
+                    PreviousNodeIds.RemoveAt(PreviousNodeIds.Count - 1);
                 }
+                else
+                {
+                    // 只有前进到新节点时才记录历史
+                    PreviousNodeIds.Add(CurrentNodeId);
+                    if (PreviousNodeIds.Count > 10)
+                    {
+                        PreviousNodeIds.RemoveAt(0);
+                    }
+                }
+
                 CurrentNodeId = _targetNode.id;
                 _characterData.currentMapNodeIds[_characterData.currentMapId] = CurrentNodeId;
                 OnNodeChanged?.Invoke(CurrentNodeId);

@@ -82,4 +82,23 @@ public static class CharacterMgr
     {
         Player().DecreaseSpirit((float)amount);
     }
+
+    /// <summary>
+    /// 添加Buff到玩家身上
+    /// </summary>
+    [ScriptFunc("add_buff")]
+    public static void AddBuff(string buffDataId)
+    {
+        Player().AddBuff(buffDataId);
+    }
+
+    /// <summary>
+    /// 移除玩家身上的Buff
+    /// </summary>
+    [ScriptFunc("remove_buff")]
+    public static void RemoveBuff(string buffDataId)
+    {
+        Player().RemoveBuff(buffDataId);
+    }
+
 }

@@ -88,4 +88,10 @@ public static class ExploreNodeMgr
         GetExploreMapData(mapId).nodes[nodeId].SetUnCompleted();
     }
 
+    [ScriptFunc("back_node")]
+    public static void BackNode()
+    {
+        ExploreNodeEntityMgr.Instance.MovePlayerPreviousNode();
+    }
+
 }

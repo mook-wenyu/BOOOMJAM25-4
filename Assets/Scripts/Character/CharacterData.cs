@@ -253,6 +253,9 @@ public class CharacterData
         status = newStatus;
     }
 
+    /// <summary>
+    /// 获取角色的移动速度
+    /// </summary>
     public float GetMoveSpeed()
     {
         // 获取角色的移动速度

@@ -17,6 +17,7 @@ public class TopLevelUIPanel : MonoSingleton<TopLevelUIPanel>
     public Button sayBtn;
     public TMP_InputField itemIdInput;
     public Button itemAddBtn;
+    public Button backNode;
 
     public Slider health, hunger, energy, spirit;
     // public TextMeshProUGUI healthText, hungerText, energyText, spiritText;
@@ -56,6 +57,11 @@ public class TopLevelUIPanel : MonoSingleton<TopLevelUIPanel>
         sayBtn.onClick.AddListener(() =>
         {
             DialogueUIPanel.Instance.StartDialogue(sayIdInput.text.Trim());
+        });
+
+        backNode.onClick.AddListener(() =>
+        {
+            ExploreNodeMgr.BackNode();
         });
     }
 

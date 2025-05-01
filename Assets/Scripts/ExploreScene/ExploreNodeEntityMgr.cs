@@ -287,27 +287,7 @@ public class ExploreNodeEntityMgr : MonoSingleton<ExploreNodeEntityMgr>
             return;
         }
 
-        // 检查需要消耗的时间 0.5小时
-        int consumeTime = GameTime.HourToMinute(Utils.GetGeneralParametersConfig("nodeTimeCost").par);
-        if (!GameMgr.currentSaveData.gameTime.IsTimeBefore(new GameTime(GameMgr.currentSaveData.gameTime.day + 1, 0, 0), consumeTime))
-        {
-            GlobalUIMgr.Instance.ShowMessage("太晚了，先回家吧！");
-            return; // 时间不足，
-        }
-        float energyCost = (float)Utils.GetGeneralParametersConfig("nodeEnergyCost").par;
-        // 检查需要消耗的体力
-        if (CharacterMgr.Player().energy < energyCost)
-        {
-            GlobalUIMgr.Instance.ShowMessage("体力不足，无法前进！");
-            return; // 体力不足，
-        }
-
-        HideAllUIPanels();
-
         MovePlayerToNode(targetNode);
-
-        _ = GameMgr.currentSaveData.gameTime.AddMinutes(consumeTime);
-        CharacterMgr.Player().DecreaseEnergy(energyCost);
 
         Debug.Log($"点击节点: {targetNode.id}");
     }
@@ -331,9 +311,43 @@ public class ExploreNodeEntityMgr : MonoSingleton<ExploreNodeEntityMgr>
     }
 
     // 移动玩家到目标节点
-    private void MovePlayerToNode(ExploreNodeData targetNode)
+    private bool MovePlayerToNode(ExploreNodeData targetNode)
     {
+        HideAllUIPanels();
+
+        // 检查需要消耗的时间 0.5小时
+        int consumeTime = GameTime.HourToMinute(Utils.GetGeneralParametersConfig("nodeTimeCost").par);
+        if (!GameMgr.currentSaveData.gameTime.IsTimeBefore(new GameTime(GameMgr.currentSaveData.gameTime.day + 1, 0, 0), consumeTime))
+        {
+            GlobalUIMgr.Instance.ShowMessage("太晚了，先回家吧！");
+            return false;
+        }
+        float energyCost = (float)Utils.GetGeneralParametersConfig("nodeEnergyCost").par;
+        // 检查需要消耗的体力
+        if (CharacterMgr.Player().energy < energyCost)
+        {
+            GlobalUIMgr.Instance.ShowMessage("体力不足，无法前进！");
+            return false;
+        }
+
         playerUnit.MoveToNode(targetNode.id);
+
+        _ = GameMgr.currentSaveData.gameTime.AddMinutes(consumeTime);
+        CharacterMgr.Player().DecreaseEnergy(energyCost);
+
+        return true;
+    }
+
+    // 移动玩家到上一个节点
+    public void MovePlayerPreviousNode()
+    {
+        if (playerUnit.PreviousNodeIds.Count > 0)
+        {
+            if (!MovePlayerToNode(ExploreNodeMgr.GetExploreNodeData(playerUnit.PreviousNodeIds.Last())))
+            {
+                Debug.Log("无法返回上一个节点");
+            }
+        }
     }
 
     // 隐藏所有UI面板
