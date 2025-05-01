@@ -385,5 +385,37 @@
     "energyCost": 20.0,
     "path": "Building\\20014",
     "id": "20014"
+  },
+  "20015": {
+    "$type": "BuildingConfig, Assembly-CSharp",
+    "name": "床",
+    "desc": "无",
+    "type": 0,
+    "grid": 3,
+    "materialIDGroup": null,
+    "materialAmountGroup": null,
+    "time": 0.0,
+    "capacity": null,
+    "recipes": null,
+    "light": 0,
+    "energyCost": 0.0,
+    "path": "Building\\20015",
+    "id": "20015"
+  },
+  "20016": {
+    "$type": "BuildingConfig, Assembly-CSharp",
+    "name": "设计台",
+    "desc": "无",
+    "type": 0,
+    "grid": 3,
+    "materialIDGroup": null,
+    "materialAmountGroup": null,
+    "time": 0.0,
+    "capacity": null,
+    "recipes": null,
+    "light": 0,
+    "energyCost": 0.0,
+    "path": "Building\\20016",
+    "id": "20016"
   }
 }

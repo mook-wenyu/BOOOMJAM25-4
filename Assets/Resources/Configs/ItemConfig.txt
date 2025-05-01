@@ -12,12 +12,8 @@
     "energyAdjust": 0,
     "spiritAdjust": 0,
     "equipmentParts": 0,
-    "getBuff": [
-      "0"
-    ],
-    "removeBuff": [
-      "0"
-    ],
+    "getBuff": null,
+    "removeBuff": null,
     "path": "Icon\\Item\\10001",
     "id": "10001"
   },
@@ -33,12 +29,8 @@
     "energyAdjust": 0,
     "spiritAdjust": 0,
     "equipmentParts": 0,
-    "getBuff": [
-      "0"
-    ],
-    "removeBuff": [
-      "0"
-    ],
+    "getBuff": null,
+    "removeBuff": null,
     "path": "Icon\\Item\\10002",
     "id": "10002"
   },
@@ -54,12 +46,8 @@
     "energyAdjust": 0,
     "spiritAdjust": 0,
     "equipmentParts": 0,
-    "getBuff": [
-      "0"
-    ],
-    "removeBuff": [
-      "0"
-    ],
+    "getBuff": null,
+    "removeBuff": null,
     "path": "Icon\\Item\\10003",
     "id": "10003"
   },
@@ -75,12 +63,8 @@
     "energyAdjust": 0,
     "spiritAdjust": 0,
     "equipmentParts": 0,
-    "getBuff": [
-      "0"
-    ],
-    "removeBuff": [
-      "0"
-    ],
+    "getBuff": null,
+    "removeBuff": null,
     "path": "Icon\\Item\\10004",
     "id": "10004"
   },
@@ -96,12 +80,8 @@
     "energyAdjust": 0,
     "spiritAdjust": 0,
     "equipmentParts": 0,
-    "getBuff": [
-      "0"
-    ],
-    "removeBuff": [
-      "0"
-    ],
+    "getBuff": null,
+    "removeBuff": null,
     "path": "Icon\\Item\\10005",
     "id": "10005"
   },
@@ -117,12 +97,8 @@
     "energyAdjust": 0,
     "spiritAdjust": 0,
     "equipmentParts": 0,
-    "getBuff": [
-      "0"
-    ],
-    "removeBuff": [
-      "0"
-    ],
+    "getBuff": null,
+    "removeBuff": null,
     "path": "Icon\\Item\\10006",
     "id": "10006"
   },
@@ -138,12 +114,8 @@
     "energyAdjust": 0,
     "spiritAdjust": 0,
     "equipmentParts": 0,
-    "getBuff": [
-      "0"
-    ],
-    "removeBuff": [
-      "0"
-    ],
+    "getBuff": null,
+    "removeBuff": null,
     "path": "Icon\\Item\\10007",
     "id": "10007"
   },
@@ -159,12 +131,8 @@
     "energyAdjust": 0,
     "spiritAdjust": 0,
     "equipmentParts": 0,
-    "getBuff": [
-      "0"
-    ],
-    "removeBuff": [
-      "0"
-    ],
+    "getBuff": null,
+    "removeBuff": null,
     "path": "Icon\\Item\\10008",
     "id": "10008"
   },
@@ -180,12 +148,8 @@
     "energyAdjust": 0,
     "spiritAdjust": 0,
     "equipmentParts": 0,
-    "getBuff": [
-      "0"
-    ],
-    "removeBuff": [
-      "0"
-    ],
+    "getBuff": null,
+    "removeBuff": null,
     "path": "Icon\\Item\\10009",
     "id": "10009"
   },
@@ -201,12 +165,8 @@
     "energyAdjust": 0,
     "spiritAdjust": 0,
     "equipmentParts": 0,
-    "getBuff": [
-      "0"
-    ],
-    "removeBuff": [
-      "0"
-    ],
+    "getBuff": null,
+    "removeBuff": null,
     "path": "Icon\\Item\\10010",
     "id": "10010"
   },
@@ -222,12 +182,8 @@
     "energyAdjust": 0,
     "spiritAdjust": 0,
     "equipmentParts": 0,
-    "getBuff": [
-      "0"
-    ],
-    "removeBuff": [
-      "0"
-    ],
+    "getBuff": null,
+    "removeBuff": null,
     "path": "Icon\\Item\\10011",
     "id": "10011"
   },
@@ -243,12 +199,8 @@
     "energyAdjust": 0,
     "spiritAdjust": 0,
     "equipmentParts": 0,
-    "getBuff": [
-      "0"
-    ],
-    "removeBuff": [
-      "0"
-    ],
+    "getBuff": null,
+    "removeBuff": null,
     "path": "Icon\\Item\\10012",
     "id": "10012"
   },
@@ -264,12 +216,8 @@
     "energyAdjust": 0,
     "spiritAdjust": 0,
     "equipmentParts": 0,
-    "getBuff": [
-      "0"
-    ],
-    "removeBuff": [
-      "0"
-    ],
+    "getBuff": null,
+    "removeBuff": null,
     "path": "Icon\\Item\\10013",
     "id": "10013"
   },
@@ -285,12 +233,8 @@
     "energyAdjust": 0,
     "spiritAdjust": 0,
     "equipmentParts": 0,
-    "getBuff": [
-      "0"
-    ],
-    "removeBuff": [
-      "0"
-    ],
+    "getBuff": null,
+    "removeBuff": null,
     "path": "Icon\\Item\\10014",
     "id": "10014"
   },
@@ -306,12 +250,8 @@
     "energyAdjust": 0,
     "spiritAdjust": 0,
     "equipmentParts": 0,
-    "getBuff": [
-      "0"
-    ],
-    "removeBuff": [
-      "0"
-    ],
+    "getBuff": null,
+    "removeBuff": null,
     "path": "Icon\\Item\\10015",
     "id": "10015"
   },
@@ -327,12 +267,8 @@
     "energyAdjust": 0,
     "spiritAdjust": 0,
     "equipmentParts": 0,
-    "getBuff": [
-      "0"
-    ],
-    "removeBuff": [
-      "0"
-    ],
+    "getBuff": null,
+    "removeBuff": null,
     "path": "Icon\\Item\\10016",
     "id": "10016"
   },
@@ -348,12 +284,8 @@
     "energyAdjust": 0,
     "spiritAdjust": 0,
     "equipmentParts": 0,
-    "getBuff": [
-      "0"
-    ],
-    "removeBuff": [
-      "0"
-    ],
+    "getBuff": null,
+    "removeBuff": null,
     "path": "Icon\\Item\\10017",
     "id": "10017"
   },
@@ -369,12 +301,8 @@
     "energyAdjust": 0,
     "spiritAdjust": 0,
     "equipmentParts": 0,
-    "getBuff": [
-      "0"
-    ],
-    "removeBuff": [
-      "0"
-    ],
+    "getBuff": null,
+    "removeBuff": null,
     "path": "Icon\\Item\\10018",
     "id": "10018"
   },
@@ -390,12 +318,8 @@
     "energyAdjust": 0,
     "spiritAdjust": 0,
     "equipmentParts": 0,
-    "getBuff": [
-      "0"
-    ],
-    "removeBuff": [
-      "0"
-    ],
+    "getBuff": null,
+    "removeBuff": null,
     "path": "Icon\\Item\\10019",
     "id": "10019"
   },
@@ -411,12 +335,8 @@
     "energyAdjust": 0,
     "spiritAdjust": 0,
     "equipmentParts": 1,
-    "getBuff": [
-      "0"
-    ],
-    "removeBuff": [
-      "0"
-    ],
+    "getBuff": null,
+    "removeBuff": null,
     "path": "Icon\\Item\\10020",
     "id": "10020"
   },
@@ -432,12 +352,8 @@
     "energyAdjust": 0,
     "spiritAdjust": 0,
     "equipmentParts": 1,
-    "getBuff": [
-      "0"
-    ],
-    "removeBuff": [
-      "0"
-    ],
+    "getBuff": null,
+    "removeBuff": null,
     "path": "Icon\\Item\\10021",
     "id": "10021"
   },
@@ -453,12 +369,8 @@
     "energyAdjust": 0,
     "spiritAdjust": 0,
     "equipmentParts": 1,
-    "getBuff": [
-      "0"
-    ],
-    "removeBuff": [
-      "0"
-    ],
+    "getBuff": null,
+    "removeBuff": null,
     "path": "Icon\\Item\\10022",
     "id": "10022"
   },
@@ -474,12 +386,8 @@
     "energyAdjust": 0,
     "spiritAdjust": 0,
     "equipmentParts": 1,
-    "getBuff": [
-      "0"
-    ],
-    "removeBuff": [
-      "0"
-    ],
+    "getBuff": null,
+    "removeBuff": null,
     "path": "Icon\\Item\\10023",
     "id": "10023"
   },
@@ -495,12 +403,8 @@
     "energyAdjust": 0,
     "spiritAdjust": 0,
     "equipmentParts": 1,
-    "getBuff": [
-      "0"
-    ],
-    "removeBuff": [
-      "0"
-    ],
+    "getBuff": null,
+    "removeBuff": null,
     "path": "Icon\\Item\\10024",
     "id": "10024"
   },
@@ -516,12 +420,8 @@
     "energyAdjust": 0,
     "spiritAdjust": 0,
     "equipmentParts": 2,
-    "getBuff": [
-      "0"
-    ],
-    "removeBuff": [
-      "0"
-    ],
+    "getBuff": null,
+    "removeBuff": null,
     "path": "Icon\\Item\\10025",
     "id": "10025"
   },
@@ -537,12 +437,8 @@
     "energyAdjust": 0,
     "spiritAdjust": 0,
     "equipmentParts": 2,
-    "getBuff": [
-      "0"
-    ],
-    "removeBuff": [
-      "0"
-    ],
+    "getBuff": null,
+    "removeBuff": null,
     "path": "Icon\\Item\\10026",
     "id": "10026"
   },
@@ -558,12 +454,8 @@
     "energyAdjust": 0,
     "spiritAdjust": 0,
     "equipmentParts": 2,
-    "getBuff": [
-      "0"
-    ],
-    "removeBuff": [
-      "0"
-    ],
+    "getBuff": null,
+    "removeBuff": null,
     "path": "Icon\\Item\\10027",
     "id": "10027"
   },
@@ -579,12 +471,8 @@
     "energyAdjust": 0,
     "spiritAdjust": 0,
     "equipmentParts": 3,
-    "getBuff": [
-      "0"
-    ],
-    "removeBuff": [
-      "0"
-    ],
+    "getBuff": null,
+    "removeBuff": null,
     "path": "Icon\\Item\\10028",
     "id": "10028"
   },
@@ -600,12 +488,8 @@
     "energyAdjust": 0,
     "spiritAdjust": 0,
     "equipmentParts": 3,
-    "getBuff": [
-      "0"
-    ],
-    "removeBuff": [
-      "0"
-    ],
+    "getBuff": null,
+    "removeBuff": null,
     "path": "Icon\\Item\\10029",
     "id": "10029"
   },
@@ -621,12 +505,8 @@
     "energyAdjust": 0,
     "spiritAdjust": 0,
     "equipmentParts": 3,
-    "getBuff": [
-      "0"
-    ],
-    "removeBuff": [
-      "0"
-    ],
+    "getBuff": null,
+    "removeBuff": null,
     "path": "Icon\\Item\\10030",
     "id": "10030"
   },
@@ -642,12 +522,8 @@
     "energyAdjust": 0,
     "spiritAdjust": 0,
     "equipmentParts": 0,
-    "getBuff": [
-      "0"
-    ],
-    "removeBuff": [
-      "0"
-    ],
+    "getBuff": null,
+    "removeBuff": null,
     "path": "Icon\\Item\\10031",
     "id": "10031"
   },
@@ -656,19 +532,15 @@
     "name": "野菜",
     "desc": "就野菜",
     "type": 1,
-    "stacking": 5,
-    "durability": 24.0,
+    "stacking": 2,
+    "durability": 72.0,
     "healthAdjust": 0,
     "hungerAdjust": 10,
     "energyAdjust": 0,
     "spiritAdjust": 0,
     "equipmentParts": 0,
-    "getBuff": [
-      "0"
-    ],
-    "removeBuff": [
-      "0"
-    ],
+    "getBuff": null,
+    "removeBuff": null,
     "path": "Icon\\Item\\10032",
     "id": "10032"
   },
@@ -677,19 +549,15 @@
     "name": "浆果",
     "desc": "就浆果",
     "type": 1,
-    "stacking": 5,
-    "durability": 24.0,
+    "stacking": 2,
+    "durability": 48.0,
     "healthAdjust": 0,
-    "hungerAdjust": 20,
+    "hungerAdjust": 10,
     "energyAdjust": 0,
     "spiritAdjust": 0,
     "equipmentParts": 0,
-    "getBuff": [
-      "0"
-    ],
-    "removeBuff": [
-      "0"
-    ],
+    "getBuff": null,
+    "removeBuff": null,
     "path": "Icon\\Item\\10033",
     "id": "10033"
   },
@@ -698,19 +566,15 @@
     "name": "碎肉",
     "desc": "能看出来是肉",
     "type": 1,
-    "stacking": 5,
-    "durability": 24.0,
-    "healthAdjust": 0,
+    "stacking": 3,
+    "durability": 48.0,
+    "healthAdjust": -5,
     "hungerAdjust": 30,
     "energyAdjust": 0,
-    "spiritAdjust": 0,
+    "spiritAdjust": -10,
     "equipmentParts": 0,
-    "getBuff": [
-      "0"
-    ],
-    "removeBuff": [
-      "0"
-    ],
+    "getBuff": null,
+    "removeBuff": null,
     "path": "Icon\\Item\\10034",
     "id": "10034"
   },
@@ -726,12 +590,8 @@
     "energyAdjust": 5,
     "spiritAdjust": 5,
     "equipmentParts": 0,
-    "getBuff": [
-      "0"
-    ],
-    "removeBuff": [
-      "0"
-    ],
+    "getBuff": null,
+    "removeBuff": null,
     "path": "Icon\\Item\\10035",
     "id": "10035"
   },
@@ -747,12 +607,8 @@
     "energyAdjust": 5,
     "spiritAdjust": 5,
     "equipmentParts": 0,
-    "getBuff": [
-      "0"
-    ],
-    "removeBuff": [
-      "0"
-    ],
+    "getBuff": null,
+    "removeBuff": null,
     "path": "Icon\\Item\\10036",
     "id": "10036"
   },
@@ -768,13 +624,417 @@
     "energyAdjust": 5,
     "spiritAdjust": 5,
     "equipmentParts": 0,
-    "getBuff": [
-      "0"
-    ],
-    "removeBuff": [
-      "0"
-    ],
+    "getBuff": null,
+    "removeBuff": null,
     "path": "Icon\\Item\\10037",
     "id": "10037"
+  },
+  "10038": {
+    "$type": "ItemConfig, Assembly-CSharp",
+    "name": "蘑菇",
+    "desc": "暂时还没有",
+    "type": 1,
+    "stacking": 2,
+    "durability": 5.0,
+    "healthAdjust": 0,
+    "hungerAdjust": 0,
+    "energyAdjust": 0,
+    "spiritAdjust": 0,
+    "equipmentParts": 0,
+    "getBuff": null,
+    "removeBuff": null,
+    "path": "Icon\\Item\\10038",
+    "id": "10038"
+  },
+  "10039": {
+    "$type": "ItemConfig, Assembly-CSharp",
+    "name": "鱼",
+    "desc": "暂时还没有",
+    "type": 1,
+    "stacking": 1,
+    "durability": 5.0,
+    "healthAdjust": 0,
+    "hungerAdjust": 0,
+    "energyAdjust": 0,
+    "spiritAdjust": 0,
+    "equipmentParts": 0,
+    "getBuff": null,
+    "removeBuff": null,
+    "path": "Icon\\Item\\10039",
+    "id": "10039"
+  },
+  "10040": {
+    "$type": "ItemConfig, Assembly-CSharp",
+    "name": "酸黄瓜罐头",
+    "desc": "暂时还没有",
+    "type": 1,
+    "stacking": 5,
+    "durability": 0.0,
+    "healthAdjust": 0,
+    "hungerAdjust": 0,
+    "energyAdjust": 0,
+    "spiritAdjust": 0,
+    "equipmentParts": 0,
+    "getBuff": null,
+    "removeBuff": null,
+    "path": "Icon\\Item\\10040",
+    "id": "10040"
+  },
+  "10041": {
+    "$type": "ItemConfig, Assembly-CSharp",
+    "name": "午餐肉罐头",
+    "desc": "暂时还没有",
+    "type": 1,
+    "stacking": 5,
+    "durability": 0.0,
+    "healthAdjust": 0,
+    "hungerAdjust": 0,
+    "energyAdjust": 0,
+    "spiritAdjust": 0,
+    "equipmentParts": 0,
+    "getBuff": null,
+    "removeBuff": null,
+    "path": "Icon\\Item\\10041",
+    "id": "10041"
+  },
+  "10042": {
+    "$type": "ItemConfig, Assembly-CSharp",
+    "name": "鲮鱼罐头",
+    "desc": "暂时还没有",
+    "type": 1,
+    "stacking": 5,
+    "durability": 0.0,
+    "healthAdjust": 0,
+    "hungerAdjust": 0,
+    "energyAdjust": 0,
+    "spiritAdjust": 0,
+    "equipmentParts": 0,
+    "getBuff": null,
+    "removeBuff": null,
+    "path": "Icon\\Item\\10042",
+    "id": "10042"
+  },
+  "10043": {
+    "$type": "ItemConfig, Assembly-CSharp",
+    "name": "法棍",
+    "desc": "暂时还没有",
+    "type": 1,
+    "stacking": 5,
+    "durability": 0.0,
+    "healthAdjust": 0,
+    "hungerAdjust": 0,
+    "energyAdjust": 0,
+    "spiritAdjust": 0,
+    "equipmentParts": 0,
+    "getBuff": null,
+    "removeBuff": null,
+    "path": "Icon\\Item\\10043",
+    "id": "10043"
+  },
+  "10044": {
+    "$type": "ItemConfig, Assembly-CSharp",
+    "name": "咖啡豆",
+    "desc": "暂时还没有",
+    "type": 0,
+    "stacking": 5,
+    "durability": 5.0,
+    "healthAdjust": 0,
+    "hungerAdjust": 0,
+    "energyAdjust": 0,
+    "spiritAdjust": 0,
+    "equipmentParts": 0,
+    "getBuff": null,
+    "removeBuff": null,
+    "path": "Icon\\Item\\10044",
+    "id": "10044"
+  },
+  "10045": {
+    "$type": "ItemConfig, Assembly-CSharp",
+    "name": "烤蘑菇",
+    "desc": "暂时还没有",
+    "type": 1,
+    "stacking": 5,
+    "durability": 5.0,
+    "healthAdjust": 0,
+    "hungerAdjust": 0,
+    "energyAdjust": 0,
+    "spiritAdjust": 0,
+    "equipmentParts": 0,
+    "getBuff": null,
+    "removeBuff": null,
+    "path": "Icon\\Item\\10045",
+    "id": "10045"
+  },
+  "10046": {
+    "$type": "ItemConfig, Assembly-CSharp",
+    "name": "烤鱼",
+    "desc": "暂时还没有",
+    "type": 1,
+    "stacking": 5,
+    "durability": 5.0,
+    "healthAdjust": 0,
+    "hungerAdjust": 0,
+    "energyAdjust": 0,
+    "spiritAdjust": 0,
+    "equipmentParts": 0,
+    "getBuff": null,
+    "removeBuff": null,
+    "path": "Icon\\Item\\10046",
+    "id": "10046"
+  },
+  "10047": {
+    "$type": "ItemConfig, Assembly-CSharp",
+    "name": "炖糊糊",
+    "desc": "暂时还没有",
+    "type": 1,
+    "stacking": 5,
+    "durability": 5.0,
+    "healthAdjust": 0,
+    "hungerAdjust": 0,
+    "energyAdjust": 0,
+    "spiritAdjust": 0,
+    "equipmentParts": 0,
+    "getBuff": null,
+    "removeBuff": null,
+    "path": "Icon\\Item\\10047",
+    "id": "10047"
+  },
+  "10048": {
+    "$type": "ItemConfig, Assembly-CSharp",
+    "name": "烂肉汤",
+    "desc": "暂时还没有",
+    "type": 1,
+    "stacking": 5,
+    "durability": 5.0,
+    "healthAdjust": 0,
+    "hungerAdjust": 0,
+    "energyAdjust": 0,
+    "spiritAdjust": 0,
+    "equipmentParts": 0,
+    "getBuff": null,
+    "removeBuff": null,
+    "path": "Icon\\Item\\10048",
+    "id": "10048"
+  },
+  "10049": {
+    "$type": "ItemConfig, Assembly-CSharp",
+    "name": "菇妈鱼丝",
+    "desc": "暂时还没有",
+    "type": 1,
+    "stacking": 5,
+    "durability": 5.0,
+    "healthAdjust": 0,
+    "hungerAdjust": 0,
+    "energyAdjust": 0,
+    "spiritAdjust": 0,
+    "equipmentParts": 0,
+    "getBuff": null,
+    "removeBuff": null,
+    "path": "Icon\\Item\\10049",
+    "id": "10049"
+  },
+  "10050": {
+    "$type": "ItemConfig, Assembly-CSharp",
+    "name": "野味大拼盘",
+    "desc": "暂时还没有",
+    "type": 1,
+    "stacking": 5,
+    "durability": 5.0,
+    "healthAdjust": 0,
+    "hungerAdjust": 0,
+    "energyAdjust": 0,
+    "spiritAdjust": 0,
+    "equipmentParts": 0,
+    "getBuff": null,
+    "removeBuff": null,
+    "path": "Icon\\Item\\10050",
+    "id": "10050"
+  },
+  "10051": {
+    "$type": "ItemConfig, Assembly-CSharp",
+    "name": "潮汕草果",
+    "desc": "暂时还没有",
+    "type": 1,
+    "stacking": 5,
+    "durability": 5.0,
+    "healthAdjust": 0,
+    "hungerAdjust": 0,
+    "energyAdjust": 0,
+    "spiritAdjust": 0,
+    "equipmentParts": 0,
+    "getBuff": null,
+    "removeBuff": null,
+    "path": "Icon\\Item\\10051",
+    "id": "10051"
+  },
+  "10052": {
+    "$type": "ItemConfig, Assembly-CSharp",
+    "name": "佛跳墙",
+    "desc": "暂时还没有",
+    "type": 1,
+    "stacking": 5,
+    "durability": 5.0,
+    "healthAdjust": 0,
+    "hungerAdjust": 0,
+    "energyAdjust": 0,
+    "spiritAdjust": 0,
+    "equipmentParts": 0,
+    "getBuff": null,
+    "removeBuff": null,
+    "path": "Icon\\Item\\10052",
+    "id": "10052"
+  },
+  "10053": {
+    "$type": "ItemConfig, Assembly-CSharp",
+    "name": "肉丸",
+    "desc": "暂时还没有",
+    "type": 1,
+    "stacking": 5,
+    "durability": 5.0,
+    "healthAdjust": 0,
+    "hungerAdjust": 0,
+    "energyAdjust": 0,
+    "spiritAdjust": 0,
+    "equipmentParts": 0,
+    "getBuff": null,
+    "removeBuff": null,
+    "path": "Icon\\Item\\10053",
+    "id": "10053"
+  },
+  "10054": {
+    "$type": "ItemConfig, Assembly-CSharp",
+    "name": "三明治",
+    "desc": "暂时还没有",
+    "type": 1,
+    "stacking": 5,
+    "durability": 5.0,
+    "healthAdjust": 0,
+    "hungerAdjust": 0,
+    "energyAdjust": 0,
+    "spiritAdjust": 0,
+    "equipmentParts": 0,
+    "getBuff": null,
+    "removeBuff": null,
+    "path": "Icon\\Item\\10054",
+    "id": "10054"
+  },
+  "10055": {
+    "$type": "ItemConfig, Assembly-CSharp",
+    "name": "仰望星空",
+    "desc": "暂时还没有",
+    "type": 1,
+    "stacking": 5,
+    "durability": 5.0,
+    "healthAdjust": 0,
+    "hungerAdjust": 0,
+    "energyAdjust": 0,
+    "spiritAdjust": 0,
+    "equipmentParts": 0,
+    "getBuff": null,
+    "removeBuff": null,
+    "path": "Icon\\Item\\10055",
+    "id": "10055"
+  },
+  "10056": {
+    "$type": "ItemConfig, Assembly-CSharp",
+    "name": "咖啡",
+    "desc": "暂时还没有",
+    "type": 1,
+    "stacking": 5,
+    "durability": 5.0,
+    "healthAdjust": 0,
+    "hungerAdjust": 0,
+    "energyAdjust": 0,
+    "spiritAdjust": 0,
+    "equipmentParts": 0,
+    "getBuff": null,
+    "removeBuff": null,
+    "path": "Icon\\Item\\10056",
+    "id": "10056"
+  },
+  "11001": {
+    "$type": "ItemConfig, Assembly-CSharp",
+    "name": "信徒的钥匙",
+    "desc": "暂时还没有",
+    "type": 0,
+    "stacking": 1,
+    "durability": 0.0,
+    "healthAdjust": 0,
+    "hungerAdjust": 0,
+    "energyAdjust": 0,
+    "spiritAdjust": 0,
+    "equipmentParts": 0,
+    "getBuff": null,
+    "removeBuff": null,
+    "path": "Icon\\Item\\11001",
+    "id": "11001"
+  },
+  "11002": {
+    "$type": "ItemConfig, Assembly-CSharp",
+    "name": "神秘的钥匙",
+    "desc": "暂时还没有",
+    "type": 0,
+    "stacking": 1,
+    "durability": 0.0,
+    "healthAdjust": 0,
+    "hungerAdjust": 0,
+    "energyAdjust": 0,
+    "spiritAdjust": 0,
+    "equipmentParts": 0,
+    "getBuff": null,
+    "removeBuff": null,
+    "path": "Icon\\Item\\11002",
+    "id": "11002"
+  },
+  "11003": {
+    "$type": "ItemConfig, Assembly-CSharp",
+    "name": "金戒指",
+    "desc": "暂时还没有",
+    "type": 2,
+    "stacking": 1,
+    "durability": 0.0,
+    "healthAdjust": 0,
+    "hungerAdjust": 0,
+    "energyAdjust": 0,
+    "spiritAdjust": 0,
+    "equipmentParts": 3,
+    "getBuff": null,
+    "removeBuff": null,
+    "path": "Icon\\Item\\11003",
+    "id": "11003"
+  },
+  "11004": {
+    "$type": "ItemConfig, Assembly-CSharp",
+    "name": "点火线圈",
+    "desc": "暂时还没有",
+    "type": 0,
+    "stacking": 1,
+    "durability": 0.0,
+    "healthAdjust": 0,
+    "hungerAdjust": 0,
+    "energyAdjust": 0,
+    "spiritAdjust": 0,
+    "equipmentParts": 0,
+    "getBuff": null,
+    "removeBuff": null,
+    "path": "Icon\\Item\\11004",
+    "id": "11004"
+  },
+  "11005": {
+    "$type": "ItemConfig, Assembly-CSharp",
+    "name": "神的名字",
+    "desc": "暂时还没有",
+    "type": 0,
+    "stacking": 1,
+    "durability": 0.0,
+    "healthAdjust": 0,
+    "hungerAdjust": 0,
+    "energyAdjust": 0,
+    "spiritAdjust": 0,
+    "equipmentParts": 0,
+    "getBuff": null,
+    "removeBuff": null,
+    "path": "Icon\\Item\\11005",
+    "id": "11005"
   }
 }

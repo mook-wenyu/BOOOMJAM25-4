@@ -168,7 +168,15 @@ public class EditorUtils
                 if (string.IsNullOrEmpty(value))
                 {
                     Debug.LogWarning($"空值出现在第 {i + 1} 行，第 {j + 1} 列（字段名：{propertyInfos[j].Name}）");
+                    value = "0";
                     //break;
+                }
+
+                if (propertyInfos[j].Type == "bool") // 假设 isOnMap 是布尔类型字段
+                {
+                    // 将字符串 "0" 和 "1" 转换为相应的布尔值
+                    if(value != "TRUE" && value != "FALSE")
+                    value = value == "0" ? "FALSE" : "TRUE";
                 }
 
                 if (propertyInfos[j].Type.Contains("[]"))

@@ -85,6 +85,11 @@
     "par": 50.0,
     "id": "energyGrowInSleep"
   },
+  "hungerLostInSleep": {
+    "$type": "GeneralParametersConfig, Assembly-CSharp",
+    "par": 24.0,
+    "id": "hungerLostInSleep"
+  },
   "aHourInRealTime": {
     "$type": "GeneralParametersConfig, Assembly-CSharp",
     "par": 20.0,

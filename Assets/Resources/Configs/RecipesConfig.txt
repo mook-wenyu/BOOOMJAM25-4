@@ -410,5 +410,124 @@
     "time": 0.1,
     "energyCost": 5.0,
     "id": "2001103"
+  },
+  "2100001": {
+    "$type": "RecipesConfig, Assembly-CSharp",
+    "productName": "一瓶水",
+    "productID": [
+      "10015"
+    ],
+    "productAmount": [
+      1
+    ],
+    "ramdomAdjust": [
+      0
+    ],
+    "productTypeNum": 1,
+    "materialIDGroup": [
+      "10014"
+    ],
+    "materialAmountGroup": [
+      1
+    ],
+    "time": 0.1,
+    "energyCost": 2.0,
+    "id": "2100001"
+  },
+  "2100002": {
+    "$type": "RecipesConfig, Assembly-CSharp",
+    "productName": "伐木",
+    "productID": [
+      "10001",
+      "10003"
+    ],
+    "productAmount": [
+      5,
+      2
+    ],
+    "ramdomAdjust": [
+      1
+    ],
+    "productTypeNum": 2,
+    "materialIDGroup": [
+      "0"
+    ],
+    "materialAmountGroup": [
+      0
+    ],
+    "time": 1.0,
+    "energyCost": 20.0,
+    "id": "2100002"
+  },
+  "2100003": {
+    "$type": "RecipesConfig, Assembly-CSharp",
+    "productName": "耐火砖",
+    "productID": [
+      "10007"
+    ],
+    "productAmount": [
+      1
+    ],
+    "ramdomAdjust": [
+      0
+    ],
+    "productTypeNum": 1,
+    "materialIDGroup": [
+      "10002",
+      "10006"
+    ],
+    "materialAmountGroup": [
+      5,
+      1
+    ],
+    "time": 1.0,
+    "energyCost": 1.0,
+    "id": "2100003"
+  },
+  "2100004": {
+    "$type": "RecipesConfig, Assembly-CSharp",
+    "productName": "采石",
+    "productID": [
+      "10002"
+    ],
+    "productAmount": [
+      4
+    ],
+    "ramdomAdjust": [
+      1
+    ],
+    "productTypeNum": 1,
+    "materialIDGroup": [
+      "0"
+    ],
+    "materialAmountGroup": [
+      0
+    ],
+    "time": 1.5,
+    "energyCost": 25.0,
+    "id": "2100004"
+  },
+  "2100005": {
+    "$type": "RecipesConfig, Assembly-CSharp",
+    "productName": "钓鱼",
+    "productID": [
+      "10039"
+    ],
+    "productAmount": [
+      0
+    ],
+    "ramdomAdjust": [
+      1
+    ],
+    "productTypeNum": 1,
+    "materialIDGroup": [
+      "10032"
+    ],
+    "materialAmountGroup": [
+      1
+    ],
+    "time": 0.5,
+    "energyCost": 5.0,
+    "id": "2100005"
   }
 }
