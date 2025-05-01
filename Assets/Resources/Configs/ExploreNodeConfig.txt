@@ -1598,7 +1598,7 @@
       "0"
     ],
     "unlocksPostNodes": [
-      "71043"
+      "0"
     ],
     "nodeAfterComplete": null,
     "rewardIdGroup": null,
@@ -2525,6 +2525,35 @@
     "storyId": "The_Name_Of_God",
     "path": null,
     "id": "71075"
+  },
+  "71076": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "？？？",
+    "desc": "是这边吗？",
+    "type": 0,
+    "ownMap": "1",
+    "isOnMap": false,
+    "mapLocation": null,
+    "isStartPoint": false,
+    "neighborNodes": null,
+    "unlocksMidNodes": null,
+    "unlocksPostNodes": [
+      "71043"
+    ],
+    "nodeAfterComplete": null,
+    "rewardIdGroup": [
+      "0"
+    ],
+    "rewardAmountGroup": [
+      0
+    ],
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "71076"
   },
   "72000": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
@@ -4337,7 +4366,7 @@
       "0"
     ],
     "unlocksPostNodes": [
-      "72057"
+      "0"
     ],
     "nodeAfterComplete": null,
     "rewardIdGroup": null,
@@ -4805,6 +4834,31 @@
     "storyId": "All_In_Fire",
     "path": null,
     "id": "72070"
+  },
+  "72071": {
+    "$type": "ExploreNodeConfig, Assembly-CSharp",
+    "name": "华丽别墅",
+    "desc": "你的眼前是一栋别墅，看起来十分华丽。",
+    "type": 0,
+    "ownMap": "2",
+    "isOnMap": false,
+    "mapLocation": null,
+    "isStartPoint": false,
+    "neighborNodes": null,
+    "unlocksMidNodes": null,
+    "unlocksPostNodes": [
+      "72057"
+    ],
+    "nodeAfterComplete": null,
+    "rewardIdGroup": null,
+    "rewardAmountGroup": null,
+    "requiredMaterialIdGroup": null,
+    "requiredMaterialAmountGroup": null,
+    "submitTime": 0.0,
+    "recipeIdGroup": null,
+    "storyId": null,
+    "path": null,
+    "id": "72071"
   },
   "73000": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",

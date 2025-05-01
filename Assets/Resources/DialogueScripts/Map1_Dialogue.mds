@@ -233,7 +233,7 @@ call replace_node("1","71040","70071")
 
 :好像不是这边。
 :你扑了个空。
-call replace_node("1","71045","70000")
+call replace_node("1","71045","71076")
 
 ===
 
