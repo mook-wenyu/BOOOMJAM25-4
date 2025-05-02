@@ -98,5 +98,14 @@
     "path": "0",
     "note": "事件获得，时间到了消失",
     "id": "50011"
+  },
+  "50012": {
+    "$type": "BuffConfig, Assembly-CSharp",
+    "name": "魔戒",
+    "desc": "不再失去饱食度",
+    "defaultTime": 0.0,
+    "path": "0",
+    "note": "戴上魔戒就有",
+    "id": "50012"
   }
 }
