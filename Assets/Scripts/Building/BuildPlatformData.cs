@@ -49,6 +49,8 @@ public class BuildPlatformData
         // 设置角色状态为建造中
         CharacterMgr.Player().SetStatus(CharacterStatus.Build);
         CharacterEntityMgr.Instance.GetPlayer().GetAnimator().SetBool("IsBuild", true);
+        
+        // TODO: 建筑类型参考
         switch ((BuildingType)buildingConfig.type)
         {
             case BuildingType.Warehouse:

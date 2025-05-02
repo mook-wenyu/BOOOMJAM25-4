@@ -158,6 +158,10 @@ public class StartScene : MonoBehaviour
 
         BuildingMgr.AddBuildingData(new BuildBuildingData(string.Empty, "design_platform"));
         BuildingMgr.AddBuildingData(new BuildBuildingData(string.Empty, "bed"));
+
+        // TODO: 添加建筑示例
+        BuildingMgr.AddBuildingData(new WarehouseBuildingData("20003", "warehouse1", WarehouseType.Box, 9));
+
     }
 
 }
