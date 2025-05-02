@@ -30,7 +30,7 @@
       "10006"
     ],
     "productAmount": [
-      3
+      2
     ],
     "ramdomAdjust": [
       0
@@ -65,7 +65,7 @@
     "materialAmountGroup": [
       1
     ],
-    "time": 0.1,
+    "time": 0.5,
     "energyCost": 5.0,
     "id": "2000103"
   },
@@ -88,7 +88,7 @@
     "materialAmountGroup": [
       1
     ],
-    "time": 0.1,
+    "time": 0.5,
     "energyCost": 5.0,
     "id": "2000104"
   },
@@ -111,9 +111,55 @@
     "materialAmountGroup": [
       1
     ],
-    "time": 0.1,
+    "time": 0.5,
     "energyCost": 5.0,
     "id": "2000105"
+  },
+  "2000106": {
+    "$type": "RecipesConfig, Assembly-CSharp",
+    "productName": "烤蘑菇",
+    "productID": [
+      "10045"
+    ],
+    "productAmount": [
+      1
+    ],
+    "ramdomAdjust": [
+      0
+    ],
+    "productTypeNum": 1,
+    "materialIDGroup": [
+      "10038"
+    ],
+    "materialAmountGroup": [
+      1
+    ],
+    "time": 0.5,
+    "energyCost": 5.0,
+    "id": "2000106"
+  },
+  "2000107": {
+    "$type": "RecipesConfig, Assembly-CSharp",
+    "productName": "烤鱼",
+    "productID": [
+      "10046"
+    ],
+    "productAmount": [
+      1
+    ],
+    "ramdomAdjust": [
+      0
+    ],
+    "productTypeNum": 1,
+    "materialIDGroup": [
+      "10039"
+    ],
+    "materialAmountGroup": [
+      1
+    ],
+    "time": 0.5,
+    "energyCost": 5.0,
+    "id": "2000107"
   },
   "2000201": {
     "$type": "RecipesConfig, Assembly-CSharp",
@@ -192,6 +238,133 @@
     "energyCost": 5.0,
     "id": "2000203"
   },
+  "2000401": {
+    "$type": "RecipesConfig, Assembly-CSharp",
+    "productName": "炖糊糊",
+    "productID": [
+      "10047"
+    ],
+    "productAmount": [
+      1
+    ],
+    "ramdomAdjust": [
+      0
+    ],
+    "productTypeNum": 1,
+    "materialIDGroup": [
+      "10032",
+      "10015"
+    ],
+    "materialAmountGroup": [
+      3,
+      1
+    ],
+    "time": 0.5,
+    "energyCost": 5.0,
+    "id": "2000401"
+  },
+  "2000402": {
+    "$type": "RecipesConfig, Assembly-CSharp",
+    "productName": "烂肉汤",
+    "productID": [
+      "10048"
+    ],
+    "productAmount": [
+      1
+    ],
+    "ramdomAdjust": [
+      0
+    ],
+    "productTypeNum": 1,
+    "materialIDGroup": [
+      "10034",
+      "10015"
+    ],
+    "materialAmountGroup": [
+      3,
+      1
+    ],
+    "time": 0.5,
+    "energyCost": 5.0,
+    "id": "2000402"
+  },
+  "2000403": {
+    "$type": "RecipesConfig, Assembly-CSharp",
+    "productName": "菇妈鱼丝",
+    "productID": [
+      "10049"
+    ],
+    "productAmount": [
+      1
+    ],
+    "ramdomAdjust": [
+      0
+    ],
+    "productTypeNum": 1,
+    "materialIDGroup": [
+      "10038",
+      "10039"
+    ],
+    "materialAmountGroup": [
+      1,
+      1
+    ],
+    "time": 0.5,
+    "energyCost": 5.0,
+    "id": "2000403"
+  },
+  "2000404": {
+    "$type": "RecipesConfig, Assembly-CSharp",
+    "productName": "野味大拼盘",
+    "productID": [
+      "10050"
+    ],
+    "productAmount": [
+      1
+    ],
+    "ramdomAdjust": [
+      0
+    ],
+    "productTypeNum": 1,
+    "materialIDGroup": [
+      "10038",
+      "10032",
+      "10034"
+    ],
+    "materialAmountGroup": [
+      2,
+      2,
+      1
+    ],
+    "time": 0.5,
+    "energyCost": 5.0,
+    "id": "2000404"
+  },
+  "2000405": {
+    "$type": "RecipesConfig, Assembly-CSharp",
+    "productName": "潮汕草果",
+    "productID": [
+      "10051"
+    ],
+    "productAmount": [
+      1
+    ],
+    "ramdomAdjust": [
+      0
+    ],
+    "productTypeNum": 1,
+    "materialIDGroup": [
+      "10032",
+      "10033"
+    ],
+    "materialAmountGroup": [
+      1,
+      1
+    ],
+    "time": 0.5,
+    "energyCost": 5.0,
+    "id": "2000405"
+  },
   "2000601": {
     "$type": "RecipesConfig, Assembly-CSharp",
     "productName": "铁锭",
@@ -206,10 +379,12 @@
     ],
     "productTypeNum": 1,
     "materialIDGroup": [
-      "10004"
+      "10004",
+      "10006"
     ],
     "materialAmountGroup": [
-      1
+      2,
+      2
     ],
     "time": 0.1,
     "energyCost": 5.0,
@@ -266,6 +441,141 @@
     "time": 0.1,
     "energyCost": 5.0,
     "id": "2000702"
+  },
+  "2000801": {
+    "$type": "RecipesConfig, Assembly-CSharp",
+    "productName": "佛跳墙",
+    "productID": [
+      "10052"
+    ],
+    "productAmount": [
+      1
+    ],
+    "ramdomAdjust": [
+      0
+    ],
+    "productTypeNum": 1,
+    "materialIDGroup": [
+      "10041",
+      "10042",
+      "10039",
+      "10016"
+    ],
+    "materialAmountGroup": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "time": 0.5,
+    "energyCost": 5.0,
+    "id": "2000801"
+  },
+  "2000802": {
+    "$type": "RecipesConfig, Assembly-CSharp",
+    "productName": "肉丸",
+    "productID": [
+      "10053"
+    ],
+    "productAmount": [
+      1
+    ],
+    "ramdomAdjust": [
+      0
+    ],
+    "productTypeNum": 1,
+    "materialIDGroup": [
+      "10041",
+      "10016",
+      "10019"
+    ],
+    "materialAmountGroup": [
+      1,
+      1,
+      2
+    ],
+    "time": 0.5,
+    "energyCost": 5.0,
+    "id": "2000802"
+  },
+  "2000803": {
+    "$type": "RecipesConfig, Assembly-CSharp",
+    "productName": "三明治",
+    "productID": [
+      "10054"
+    ],
+    "productAmount": [
+      1
+    ],
+    "ramdomAdjust": [
+      0
+    ],
+    "productTypeNum": 1,
+    "materialIDGroup": [
+      "10041",
+      "10040",
+      "10043"
+    ],
+    "materialAmountGroup": [
+      1,
+      1,
+      1
+    ],
+    "time": 0.5,
+    "energyCost": 5.0,
+    "id": "2000803"
+  },
+  "2000804": {
+    "$type": "RecipesConfig, Assembly-CSharp",
+    "productName": "仰望星空",
+    "productID": [
+      "10055"
+    ],
+    "productAmount": [
+      1
+    ],
+    "ramdomAdjust": [
+      0
+    ],
+    "productTypeNum": 1,
+    "materialIDGroup": [
+      "10043",
+      "10039",
+      "10016"
+    ],
+    "materialAmountGroup": [
+      1,
+      1,
+      1
+    ],
+    "time": 0.5,
+    "energyCost": 5.0,
+    "id": "2000804"
+  },
+  "2000805": {
+    "$type": "RecipesConfig, Assembly-CSharp",
+    "productName": "咖啡",
+    "productID": [
+      "10056"
+    ],
+    "productAmount": [
+      1
+    ],
+    "ramdomAdjust": [
+      0
+    ],
+    "productTypeNum": 1,
+    "materialIDGroup": [
+      "10044",
+      "10015"
+    ],
+    "materialAmountGroup": [
+      1,
+      1
+    ],
+    "time": 0.1,
+    "energyCost": 2.0,
+    "id": "2000805"
   },
   "2000901": {
     "$type": "RecipesConfig, Assembly-CSharp",
@@ -382,7 +692,7 @@
       "10008"
     ],
     "materialAmountGroup": [
-      3
+      2
     ],
     "time": 0.1,
     "energyCost": 5.0,
@@ -477,7 +787,7 @@
       "10006"
     ],
     "materialAmountGroup": [
-      5,
+      3,
       1
     ],
     "time": 1.0,
@@ -536,14 +846,14 @@
     "productID": [
       "10004",
       "10014",
-      "10017",
-      "10009"
+      "10003",
+      "10001"
     ],
     "productAmount": [
       3,
       5,
-      2,
-      1
+      3,
+      3
     ],
     "ramdomAdjust": [
       1

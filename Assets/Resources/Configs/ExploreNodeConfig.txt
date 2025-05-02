@@ -187,8 +187,8 @@
       "10001"
     ],
     "rewardAmountGroup": [
-      6,
-      10
+      9,
+      15
     ],
     "requiredMaterialIdGroup": null,
     "requiredMaterialAmountGroup": null,
@@ -337,7 +337,7 @@
     "$type": "ExploreNodeConfig, Assembly-CSharp",
     "name": "倒下的大树",
     "desc": "倒下的大树在被斧头砍过之后，留下了很多木头。",
-    "type": 3,
+    "type": 2,
     "ownMap": "1",
     "isOnMap": true,
     "mapLocation": [
@@ -360,8 +360,8 @@
       "10003"
     ],
     "rewardAmountGroup": [
-      10,
-      10
+      15,
+      15
     ],
     "requiredMaterialIdGroup": null,
     "requiredMaterialAmountGroup": null,
@@ -373,8 +373,8 @@
   },
   "71011": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": "碎石",
-    "desc": "看起来可以当做材料的石头。",
+    "name": "浆果丛",
+    "desc": "你发现了一个浆果丛，获取可以找到一些吃的。",
     "type": 2,
     "ownMap": "1",
     "isOnMap": true,
@@ -397,10 +397,12 @@
     ],
     "nodeAfterComplete": null,
     "rewardIdGroup": [
-      "10002"
+      "10032",
+      "10033"
     ],
     "rewardAmountGroup": [
-      8
+      12,
+      12
     ],
     "requiredMaterialIdGroup": null,
     "requiredMaterialAmountGroup": null,
@@ -536,7 +538,7 @@
       "10001"
     ],
     "rewardAmountGroup": [
-      10
+      25
     ],
     "requiredMaterialIdGroup": null,
     "requiredMaterialAmountGroup": null,
@@ -608,8 +610,8 @@
       "10033"
     ],
     "rewardAmountGroup": [
-      8,
-      8
+      12,
+      12
     ],
     "requiredMaterialIdGroup": null,
     "requiredMaterialAmountGroup": null,
@@ -898,7 +900,7 @@
       5,
       5,
       5,
-      5,
+      10,
       1
     ],
     "requiredMaterialIdGroup": null,
@@ -972,8 +974,8 @@
       "10008"
     ],
     "requiredMaterialAmountGroup": [
-      10,
-      10,
+      5,
+      5,
       1
     ],
     "submitTime": 3.0,
@@ -1226,7 +1228,7 @@
       "10002"
     ],
     "requiredMaterialAmountGroup": [
-      5
+      10
     ],
     "submitTime": 4.0,
     "recipeIdGroup": null,
@@ -1566,8 +1568,8 @@
       "11001"
     ],
     "rewardAmountGroup": [
-      5,
-      5,
+      6,
+      6,
       1,
       1
     ],
@@ -1837,9 +1839,9 @@
   },
   "71054": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": "空",
-    "desc": "无",
-    "type": 0,
+    "name": "灌木丛",
+    "desc": "找到了一些石头和草。",
+    "type": 2,
     "ownMap": "1",
     "isOnMap": true,
     "mapLocation": [
@@ -1857,10 +1859,12 @@
     "unlocksPostNodes": null,
     "nodeAfterComplete": null,
     "rewardIdGroup": [
-      "0"
+      "10002",
+      "10003"
     ],
     "rewardAmountGroup": [
-      0
+      6,
+      6
     ],
     "requiredMaterialIdGroup": null,
     "requiredMaterialAmountGroup": null,
@@ -1991,13 +1995,13 @@
     "nodeAfterComplete": null,
     "rewardIdGroup": [
       "10043",
-      "10055",
-      "10043"
+      "10043",
+      "10055"
     ],
     "rewardAmountGroup": [
       4,
-      1,
-      4
+      4,
+      1
     ],
     "requiredMaterialIdGroup": null,
     "requiredMaterialAmountGroup": null,
@@ -2029,7 +2033,7 @@
       "10034"
     ],
     "rewardAmountGroup": [
-      5
+      9
     ],
     "requiredMaterialIdGroup": null,
     "requiredMaterialAmountGroup": null,
@@ -2222,7 +2226,7 @@
       "10034"
     ],
     "rewardAmountGroup": [
-      9
+      15
     ],
     "requiredMaterialIdGroup": null,
     "requiredMaterialAmountGroup": null,
@@ -2423,11 +2427,13 @@
     "nodeAfterComplete": null,
     "rewardIdGroup": [
       "10040",
-      "10041"
+      "10041",
+      "10042"
     ],
     "rewardAmountGroup": [
-      5,
-      5
+      4,
+      4,
+      2
     ],
     "requiredMaterialIdGroup": null,
     "requiredMaterialAmountGroup": null,
@@ -2697,8 +2703,8 @@
       "10002"
     ],
     "rewardAmountGroup": [
-      6,
-      6
+      10,
+      10
     ],
     "requiredMaterialIdGroup": null,
     "requiredMaterialAmountGroup": null,
@@ -2953,7 +2959,7 @@
       "10004"
     ],
     "rewardAmountGroup": [
-      8
+      10
     ],
     "requiredMaterialIdGroup": null,
     "requiredMaterialAmountGroup": null,
@@ -2989,7 +2995,7 @@
       "10031"
     ],
     "rewardAmountGroup": [
-      2
+      4
     ],
     "requiredMaterialIdGroup": null,
     "requiredMaterialAmountGroup": null,
@@ -3195,9 +3201,9 @@
       "10042"
     ],
     "rewardAmountGroup": [
-      3,
-      3,
-      3
+      4,
+      4,
+      4
     ],
     "requiredMaterialIdGroup": null,
     "requiredMaterialAmountGroup": null,
@@ -3795,8 +3801,8 @@
       "10033"
     ],
     "rewardAmountGroup": [
-      5,
-      5
+      6,
+      6
     ],
     "requiredMaterialIdGroup": null,
     "requiredMaterialAmountGroup": null,
@@ -5100,7 +5106,7 @@
     "unlocksPostNodes": null,
     "nodeAfterComplete": null,
     "rewardIdGroup": [
-      "10015"
+      "10014"
     ],
     "rewardAmountGroup": [
       10

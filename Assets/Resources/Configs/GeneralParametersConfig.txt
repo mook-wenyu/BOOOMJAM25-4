@@ -7,7 +7,7 @@
   },
   "mostHunger": {
     "$type": "GeneralParametersConfig, Assembly-CSharp",
-    "par": 100.0,
+    "par": 150.0,
     "id": "mostHunger"
   },
   "mostEnergy": {

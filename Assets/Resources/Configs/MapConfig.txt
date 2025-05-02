@@ -5,23 +5,23 @@
     "name": "郊外森林",
     "desc": "试一下字数六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十",
     "timeCost": 2.0,
-    "energyCost": 30.0,
+    "energyCost": 20.0,
     "id": "1"
   },
   "2": {
     "$type": "MapConfig, Assembly-CSharp",
     "name": "居民区",
     "desc": "无",
-    "timeCost": 4.0,
-    "energyCost": 40.0,
+    "timeCost": 3.0,
+    "energyCost": 30.0,
     "id": "2"
   },
   "3": {
     "$type": "MapConfig, Assembly-CSharp",
     "name": "市中心",
     "desc": "无",
-    "timeCost": 5.0,
-    "energyCost": 60.0,
+    "timeCost": 4.0,
+    "energyCost": 40.0,
     "id": "3"
   }
 }
