@@ -406,7 +406,7 @@ public class ExploreNodeEntityMgr : MonoSingleton<ExploreNodeEntityMgr>
         node.SetCompleted();
         if (!InventoryMgr.HasInventoryData(node.id))
         {
-            InventoryMgr.CreateWarehouseData(node.id, node.GetConfig().name, WarehouseType.Box, 9);
+            InventoryMgr.CreateWarehouseData(node.id, node.GetConfig().name, WarehouseType.Box, 16);
             // 添加奖励物品
             var warehouseData = InventoryMgr.GetWarehouseData(node.id);
             var config = node.GetConfig();
