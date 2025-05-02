@@ -19,6 +19,7 @@ public class BuildingEntity : MonoBehaviour
 
     private bool _isEnabled = false;
     private Collider2D _collider;
+    private SimpleTipsUI _tipsUI;
 
     void Awake()
     {
@@ -122,6 +123,14 @@ public class BuildingEntity : MonoBehaviour
         {
             _collider = collision;
             _isEnabled = true;
+            if (_instanceId == "design_platform" || _instanceId == "bed" || BuildingMgr.GetBuildingData(_instanceId).GetBuildingType() != BuildingType.Light)
+            {
+                UpdateTips("按 F 键进行交互");
+            }
+            if (_instanceId == "bed")
+            {
+                UpdateTips("按 F 键入睡");
+            }
         }
     }
 
@@ -140,7 +149,42 @@ public class BuildingEntity : MonoBehaviour
         {
             _collider = null;
             _isEnabled = false;
+            GlobalUIMgr.Instance.Hide<SimpleTipsUI>();
         }
+    }
+
+    /// <summary>
+    /// 更新并显示物品提示
+    /// </summary>
+    public void UpdateTips(string content)
+    {
+        _tipsUI = GlobalUIMgr.Instance.Show<SimpleTipsUI>(GlobalUILayer.TooltipLayer);
+        _tipsUI.SetContent(content);
+        UpdateTipsPosition();
+    }
+
+    void LateUpdate()
+    {
+        // 如果提示UI存在且启用，则每帧更新位置
+        if (_isEnabled && _tipsUI != null)
+        {
+            UpdateTipsPosition();
+        }
+    }
+
+    private void UpdateTipsPosition()
+    {
+        Vector2 worldPos = transform.position;
+        // 调整世界坐标到建筑物顶部中心
+        worldPos.x -= _boxCollider.bounds.extents.x / 2;
+        worldPos.y += _boxCollider.bounds.size.y;
+        Vector2 screenPos = Camera.main.WorldToScreenPoint(worldPos);
+        // 将世界空间的尺寸转换为屏幕空间的尺寸
+        Vector2 screenSize = new Vector2(
+            _boxCollider.bounds.size.x / Screen.width * Camera.main.pixelWidth,
+            _boxCollider.bounds.size.y / Screen.height * Camera.main.pixelHeight);
+
+        _tipsUI.UpdatePosition(screenPos, screenSize);
     }
 
 }

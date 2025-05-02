@@ -10,6 +10,8 @@ public class BuildPlatformUIPanel : MonoSingleton<BuildPlatformUIPanel>
 
     public TextMeshProUGUI titleName;
 
+    public Button closeBtn;
+
     public ScrollRect itemContainer;
     public GameObject itemPrefab;
 
@@ -25,6 +27,7 @@ public class BuildPlatformUIPanel : MonoSingleton<BuildPlatformUIPanel>
     void Awake()
     {
         titleName.text = "设计台";
+        closeBtn.onClick.AddListener(Hide);
         itemContainer.content.DestroyAllChildren();
         Hide();
     }
@@ -105,6 +108,7 @@ public class BuildPlatformUIPanel : MonoSingleton<BuildPlatformUIPanel>
 
         }
 
+        GlobalUIMgr.Instance.Hide<SimpleTipsUI>();
         // 显示UI
         uiPanel.SetActive(true);
         uiPanel.transform.SetAsLastSibling();

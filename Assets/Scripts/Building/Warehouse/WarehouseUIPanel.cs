@@ -10,6 +10,8 @@ public class WarehouseUIPanel : MonoSingleton<WarehouseUIPanel>
 
     public TextMeshProUGUI titleName;
 
+    public Button closeBtn;
+
     public ScrollRect itemSlotContainer;
     public GameObject itemSlotPrefab;
 
@@ -22,6 +24,7 @@ public class WarehouseUIPanel : MonoSingleton<WarehouseUIPanel>
 
     void Awake()
     {
+        closeBtn.onClick.AddListener(Hide);
         // 清除所有物品槽
         itemSlotContainer.content.DestroyAllChildren();
         _activeSlots = new List<ItemSlot>();
@@ -286,6 +289,7 @@ public class WarehouseUIPanel : MonoSingleton<WarehouseUIPanel>
             this._warehouseData.OnInventoryChanged += UpdateUI;
         }
 
+        GlobalUIMgr.Instance.Hide<SimpleTipsUI>();
         // 显示仓库UI
         uiPanel.SetActive(true);
         uiPanel.transform.SetAsLastSibling();

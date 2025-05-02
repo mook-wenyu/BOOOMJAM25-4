@@ -134,6 +134,7 @@ public class ExploreMapUIPanel : MonoSingleton<ExploreMapUIPanel>
     {
         GameMgr.PauseTime();
         CharacterMgr.Player().SetStatus(CharacterStatus.Busy);
+        GlobalUIMgr.Instance.Hide<SimpleTipsUI>();
         uiPanel.SetActive(true);
         uiPanel.transform.SetAsLastSibling();
 

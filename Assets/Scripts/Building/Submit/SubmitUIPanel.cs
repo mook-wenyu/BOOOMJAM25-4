@@ -11,6 +11,8 @@ public class SubmitUIPanel : MonoSingleton<SubmitUIPanel>
 
     public TextMeshProUGUI titleName;
 
+    public Button closeBtn;
+
     public TextMeshProUGUI desc, time;
     public Transform requiredContainer;
     public GameObject requiredItemPrefab;
@@ -21,6 +23,7 @@ public class SubmitUIPanel : MonoSingleton<SubmitUIPanel>
     void Awake()
     {
         titleName.text = "提交";
+        closeBtn.onClick.AddListener(Hide);
         Hide();
     }
 

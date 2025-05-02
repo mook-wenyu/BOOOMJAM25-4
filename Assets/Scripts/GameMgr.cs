@@ -158,6 +158,7 @@ public static class GameMgr
     public static async UniTask PlayerSleep()
     {
         PauseTime();
+        GlobalUIMgr.Instance.Hide<SimpleTipsUI>();
         CharacterMgr.Player().SetStatus(CharacterStatus.Sleep);
         WorldMgr.Instance.blackScreen.SetActive(true);
         await UniTask.Delay(TimeSpan.FromSeconds(1.5f));

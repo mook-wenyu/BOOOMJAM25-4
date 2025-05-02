@@ -10,6 +10,8 @@ public class ProductionPlatformUIPanel : MonoSingleton<ProductionPlatformUIPanel
 
     public TextMeshProUGUI titleName;
 
+    public Button closeBtn;
+
     public ScrollRect itemContainer;
     public GameObject itemPrefab;
 
@@ -31,6 +33,7 @@ public class ProductionPlatformUIPanel : MonoSingleton<ProductionPlatformUIPanel
 
     void Awake()
     {
+        closeBtn.onClick.AddListener(Hide);
         // 清除所有物品槽
         itemContainer.content.DestroyAllChildren();
         productSlotContainer.content.DestroyAllChildren();
@@ -225,6 +228,7 @@ public class ProductionPlatformUIPanel : MonoSingleton<ProductionPlatformUIPanel
 
         this._productionPlatformData = this._productionBuildingData.GetProductionPlatformData();
 
+        GlobalUIMgr.Instance.Hide<SimpleTipsUI>();
         // 显示仓库UI
         uiPanel.SetActive(true);
         uiPanel.transform.SetAsLastSibling();
