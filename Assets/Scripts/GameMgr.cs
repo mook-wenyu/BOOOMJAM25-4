@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using MookDialogueScript;
 using UnityEngine;
 
 public static class GameMgr
@@ -162,6 +163,15 @@ public static class GameMgr
         await UniTask.Delay(TimeSpan.FromSeconds(1.5f));
         _ = currentSaveData.gameTime.ConsumeTimeToHour(7);
     }
+
+    [ScriptFunc("end_game")]
+    public static void End_Game()
+    {
+        PauseTime();
+        CharacterMgr.Player().SetStatus(CharacterStatus.Busy);
+        WorldMgr.Instance.endGameScreen.SetActive(true);
+    }
+
 
     // 时间变化事件处理
     private static async UniTask HandleTimeChanged(GameTime gameTime)
