@@ -58,4 +58,9 @@ public class SaveData
     /// 探索地图数据
     /// </summary>
     public Dictionary<string, ExploreMapData> exploreMaps = new();
+
+    /// <summary>
+    /// 进入过的探索节点
+    /// </summary>
+    public Dictionary<string, HashSet<string>> enteredNodes = new();
 }

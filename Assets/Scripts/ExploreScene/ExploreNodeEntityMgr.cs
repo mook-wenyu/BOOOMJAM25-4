@@ -81,6 +81,7 @@ public class ExploreNodeEntityMgr : MonoSingleton<ExploreNodeEntityMgr>
         // 检查是否点击了UI元素
         if (EventSystem.current.IsPointerOverGameObject())
         {
+            _isDragging = false;
             return; // 如果点击了UI，直接返回不处理拖动
         }
 
@@ -147,6 +148,10 @@ public class ExploreNodeEntityMgr : MonoSingleton<ExploreNodeEntityMgr>
             ExploreNodeEntity nodeEntity = nodeObj.GetComponent<ExploreNodeEntity>();
             nodeEntity.Setup(node);
             nodeEntity.OnClick += HandleNodeClicked;
+            if (config.isStartPoint || (GameMgr.currentSaveData.enteredNodes.ContainsKey(ExploreNodeMgr.currentMapId) && GameMgr.currentSaveData.enteredNodes[ExploreNodeMgr.currentMapId].Contains(node.id)))
+            {
+                nodeEntity.SetEntered();
+            }
 
             nodeEntity.gameObject.SetActive(false);
         }
@@ -208,6 +213,8 @@ public class ExploreNodeEntityMgr : MonoSingleton<ExploreNodeEntityMgr>
     {
         var targetNode = ExploreNodeMgr.GetExploreNodeData(nodeId);
         var targetConfig = targetNode.GetConfig();
+
+        nodeRoot.Find(nodeId).GetComponent<ExploreNodeEntity>().SetEntered();
 
         // 默认解锁
         if (targetConfig.unlocksMidNodes != null && targetConfig.unlocksMidNodes.Length > 0)

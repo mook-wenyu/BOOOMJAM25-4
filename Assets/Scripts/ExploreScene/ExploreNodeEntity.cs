@@ -16,6 +16,8 @@ public class ExploreNodeEntity : MonoBehaviour,
     private SpriteRenderer _iconRenderer;
 
     // 定义不同状态的颜色
+    private Color _defaultColor;   // 默认状态颜色
+    private Color _enteredColor;  // 进入状态颜色
     private Color _normalColor;    // 正常状态颜色 
     private Color _highlightColor; // 高亮状态颜色
     private Color _pressedColor;   // 按下状态颜色
@@ -34,16 +36,19 @@ public class ExploreNodeEntity : MonoBehaviour,
         _iconRenderer = transform.Find("Icon").GetComponent<SpriteRenderer>();
 
         // 初始化各种状态的颜色
-        _normalColor = _spriteRenderer.color;
-        _highlightColor = new Color(_normalColor.r * 1.2f, _normalColor.g * 1.2f, _normalColor.b * 1.2f, _normalColor.a);
-        _pressedColor = new Color(_normalColor.r * 0.8f, _normalColor.g * 0.8f, _normalColor.b * 0.8f, _normalColor.a);
-        _disabledColor = new Color(_normalColor.r * 0.5f, _normalColor.g * 0.5f, _normalColor.b * 0.5f, _normalColor.a * 0.5f);
+        _defaultColor = Color.green;
+        _enteredColor = _spriteRenderer.color;
+        _normalColor = _defaultColor;
+        _highlightColor = new Color(_spriteRenderer.color.r * 1.2f, _spriteRenderer.color.g * 1.2f, _spriteRenderer.color.b * 1.2f, _spriteRenderer.color.a);
+        _pressedColor = new Color(_spriteRenderer.color.r * 0.8f, _spriteRenderer.color.g * 0.8f, _spriteRenderer.color.b * 0.8f, _spriteRenderer.color.a);
+        _disabledColor = new Color(_spriteRenderer.color.r * 0.5f, _spriteRenderer.color.g * 0.5f, _spriteRenderer.color.b * 0.5f, _spriteRenderer.color.a * 0.5f);
     }
 
     public void Setup(ExploreNodeData node)
     {
         this._node = node;
         var config = node.GetConfig();
+        _spriteRenderer.color = _normalColor;
         if (config.type == (int)ExploreNodeType.Empty)
         {
             _iconRenderer.gameObject.SetActive(false);
@@ -87,6 +92,20 @@ public class ExploreNodeEntity : MonoBehaviour,
     {
         _isInteractable = interactable;
         _spriteRenderer.color = _isInteractable ? _normalColor : _disabledColor;
+    }
+
+    public void SetEntered()
+    {
+        _normalColor = _enteredColor;
+        _spriteRenderer.color = _normalColor;
+        if (!GameMgr.currentSaveData.enteredNodes.ContainsKey(ExploreNodeMgr.currentMapId))
+        {
+            GameMgr.currentSaveData.enteredNodes.Add(ExploreNodeMgr.currentMapId, new HashSet<string>());
+        }
+        if (!GameMgr.currentSaveData.enteredNodes[ExploreNodeMgr.currentMapId].Contains(_node.id))
+        {
+            GameMgr.currentSaveData.enteredNodes[ExploreNodeMgr.currentMapId].Add(_node.id);
+        }
     }
 
     /// <summary>
