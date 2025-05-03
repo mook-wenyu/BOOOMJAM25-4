@@ -96,7 +96,7 @@ public class BuildingEntity : MonoBehaviour
                     return;
                 }
 
-                _buildingData ??= BuildingMgr.GetBuildingData(_instanceId);
+                _buildingData = BuildingMgr.GetBuildingData(_instanceId);
                 if (_buildingData == null)
                 {
                     GlobalUIMgr.Instance.ShowMessage("正在建造中...");   // 显示提示信息
@@ -149,7 +149,7 @@ public class BuildingEntity : MonoBehaviour
                 return;
             }
 
-            _buildingData ??= BuildingMgr.GetBuildingData(_instanceId);
+            _buildingData = BuildingMgr.GetBuildingData(_instanceId);
             if (_buildingData != null && _buildingData.GetBuildingType() != BuildingType.Light)
             {
                 UpdateTips("按 F 键进行交互");

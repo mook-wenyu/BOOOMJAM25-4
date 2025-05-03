@@ -302,6 +302,7 @@ public static class GameMgr
             // 更新平台中的所有建筑
             foreach (var building in platform.buildingProgress)
             {
+                RoomBuildingSystem.Instance.buildingTimeContainer.Find(building.instanceId).GetComponent<SimpleTipsUI>().SetContent($"剩余时间: {building.remainingTime}");
                 building.ReduceTime();
 
                 if (building.IsComplete())
@@ -319,6 +320,7 @@ public static class GameMgr
             foreach (var building in completedBuildings)
             {
                 platform.buildingProgress.Remove(building);
+                RoomBuildingSystem.Instance.buildingTimeContainer.Find(building.instanceId).GetComponent<SimpleTipsUI>().SetContent("已完成");
             }
         }
     }

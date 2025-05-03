@@ -102,7 +102,6 @@ MonoBehaviour:
   _instanceId: 
   _buildingId: 
   _lightingRange: 0
-  _isObstacle: 0
 --- !u!61 &4459840455022218334
 BoxCollider2D:
   m_ObjectHideFlags: 0

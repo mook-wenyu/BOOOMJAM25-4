@@ -247,15 +247,32 @@ public class InventoryUIPanel : MonoBehaviour
             _selectedSlot = slot;
             slot.SetSelected(true);
 
-            // TODO: 在这里添加右键菜单或其他操作
-            // 例如：使用物品、丢弃物品等
-            /*GlobalUIMgr.Instance.ShowItemActionPopup(item, "使用", (count) =>
+            if (WarehouseUIPanel.Instance.uiPanel.activeSelf)
             {
-                Debug.Log($"使用物品: {item.instanceId} -> {item.itemId} -> {item.GetItemData().name} x {count}");
+                // 如果是装备，则卸下装备
+                if (item.GetItemType() == ItemType.Equipment)
+                {
+                    if (item.isEquipped)
+                    {
+                        // 卸下装备
+                        InventoryMgr.GetPlayerInventoryData().UnequipItem(CharacterMgr.Player(), item.instanceId);
+                    }
+                }
 
-                // 使用物品
-                InventoryMgr.GetPlayerInventoryData().RemoveItem(item.itemId, count);
-            });*/
+                // 尝试将背包物品添加到仓库中，如果仓库已满，则提示用户仓库已满
+                int count = WarehouseUIPanel.Instance.GetWarehouseData().CalculateCanAddItem(item.itemId, item.GetCount());
+                if (count > 0)
+                {
+                    WarehouseUIPanel.Instance.GetWarehouseData().AddItem(item.itemId, count); // 添加物品到仓库中
+                    InventoryMgr.GetPlayerInventoryData().RemoveItemCountByInstanceId(item.instanceId, count); // 背包中移除物品实例
+                }
+                else
+                {
+                    GlobalUIMgr.Instance.ShowMessage("仓库已满");
+                }
+
+                return;
+            }
 
             InventoryMgr.GetPlayerInventoryData().UseItem(CharacterMgr.Player(), item.instanceId);
         }

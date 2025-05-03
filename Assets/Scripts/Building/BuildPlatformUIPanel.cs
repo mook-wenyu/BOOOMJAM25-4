@@ -70,7 +70,7 @@ public class BuildPlatformUIPanel : MonoSingleton<BuildPlatformUIPanel>
                     var requiredItem = Instantiate(requiredItemPrefab, requiredContainer).GetComponent<RequiredItemSlot>();
                     requiredItem.Setup(building.materialIDGroup[i].ToString(), building.materialAmountGroup[i]);
                 }
-                itemTime.text = building.time.ToString() + "小时";
+                itemTime.text = $"建造时间：{building.time}小时";
 
                 startBuildBtn.interactable = true;
                 startBuildBtn.onClick.RemoveAllListeners();
