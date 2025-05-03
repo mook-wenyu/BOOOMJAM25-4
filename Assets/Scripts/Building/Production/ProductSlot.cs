@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -13,6 +14,8 @@ public class ProductSlot : MonoBehaviour,
 {
     [SerializeField] private Image background;
     [SerializeField] private Image itemIcon;
+    [SerializeField] private GameObject timeBox;
+    [SerializeField] private TextMeshProUGUI timeText;
 
     private RectTransform _rectTransform;  // 添加缓存的RectTransform
 
@@ -88,6 +91,8 @@ public class ProductSlot : MonoBehaviour,
     private void UpdateRemainingTime()
     {
         // 在这里更新剩余时间的显示
+        timeText.text = CurrentItem.remainingTime.ToString();
+        timeBox.SetActive(CurrentItem.remainingTime > 0);
     }
 
     /// <summary>
@@ -160,6 +165,7 @@ public class ProductSlot : MonoBehaviour,
         // 重置UI显示
         itemIcon.sprite = null;
         itemIcon.gameObject.SetActive(false);
+        timeBox.SetActive(false);
     }
 
     void OnDisable()

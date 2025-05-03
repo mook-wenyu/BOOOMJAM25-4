@@ -7,6 +7,10 @@ public class RoomBuildingSystem : MonoSingleton<RoomBuildingSystem>
     public Transform buildingContainer;
     public GameObject buildingPrefab;
 
+    // 正在生产中的建筑的UI容器
+    public Transform buildingTimeContainer;
+    public GameObject buildingTimePrefab;
+
     private GameObject currentBuilding;
     private RoomFloor targetFloor;
     private float buildingWidth;
@@ -17,6 +21,9 @@ public class RoomBuildingSystem : MonoSingleton<RoomBuildingSystem>
     private string buildingId;
 
     private bool startReady = false;    // 是否可以开始放置
+
+    // 存储所有正在生产中的建筑的UI引用
+    private Dictionary<string, GameObject> buildingTimeUIs = new Dictionary<string, GameObject>();
 
     void Awake()
     {
@@ -59,6 +66,12 @@ public class RoomBuildingSystem : MonoSingleton<RoomBuildingSystem>
                 building.GetComponent<BuildingEntity>().Setup(slot.buildingId, slot.buildingInstanceId);
             }
         }
+
+        // 找到并存储现有的正在生产中的建筑的UI引用
+        foreach (Transform child in buildingTimeContainer)
+        {
+            buildingTimeUIs[child.name] = child.gameObject;
+        }
     }
 
     void Update()
@@ -77,6 +90,9 @@ public class RoomBuildingSystem : MonoSingleton<RoomBuildingSystem>
                 CancelPlacing();
             }
         }
+        
+        // 更新所有正在生产中的建筑的UI位置
+        UpdateBuildingTimePositions();
     }
 
     private void LateUpdate()
@@ -207,6 +223,18 @@ public class RoomBuildingSystem : MonoSingleton<RoomBuildingSystem>
             currentBuilding.GetComponent<Collider2D>().enabled = true;
             currentBuilding.GetComponent<SpriteRenderer>().color = Color.white;
 
+            // 创建并初始化UI
+            var buildingTime = Instantiate(buildingTimePrefab, buildingTimeContainer);
+            buildingTime.name = buildingInstanceId;
+            
+            // 存储UI引用
+            buildingTimeUIs[buildingInstanceId] = buildingTime;
+            
+            // 初始化位置
+            Vector2 worldPos = new Vector2(snappedX + buildingWidth / 2, targetFloor.yPosition + 0.5f);
+            Vector2 screenPos = Camera.main.WorldToScreenPoint(worldPos);
+            buildingTime.GetComponent<RectTransform>().position = screenPos;
+
             currentBuilding = null;
             targetFloor = null;
 
@@ -326,6 +354,42 @@ public class RoomBuildingSystem : MonoSingleton<RoomBuildingSystem>
                         new Vector3(x, floor.yPosition + 0.1f, 0)
                     );
                 }
+            }
+        }
+    }
+
+    /// <summary>
+    /// 根据世界位置更新所有正在生产中的建筑的UI位置
+    /// </summary>
+    void UpdateBuildingTimePositions()
+    {
+        foreach (var kvp in buildingTimeUIs)
+        {
+            string instanceId = kvp.Key;
+            GameObject timeUI = kvp.Value;
+            
+            // 找到匹配的建筑槽位
+            BuildingSlot slot = null;
+            RoomFloor floor = null;
+            
+            foreach (var f in GameMgr.currentSaveData.floors.Values)
+            {
+                if (f.placedBuildings.TryGetValue(instanceId, out slot))
+                {
+                    floor = f;
+                    break;
+                }
+            }
+            
+            if (slot != null && floor != null)
+            {
+                // 计算世界位置
+                float buildingCenter = slot.startX + (slot.endX - slot.startX) / 2;
+                Vector2 worldPos = new Vector2(buildingCenter - buildingWidth / 2, floor.yPosition + 0.5f);
+                
+                // 转换为屏幕位置
+                Vector2 screenPos = Camera.main.WorldToScreenPoint(worldPos);
+                timeUI.GetComponent<RectTransform>().position = screenPos;
             }
         }
     }

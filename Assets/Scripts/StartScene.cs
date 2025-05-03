@@ -165,6 +165,7 @@ public class StartScene : MonoBehaviour
         InventoryMgr.GetPlayerInventoryData().AddItem("10001", 5);
         InventoryMgr.GetPlayerInventoryData().AddItem("10002", 5);
         InventoryMgr.GetPlayerInventoryData().AddItem("10003", 5);
+        InventoryMgr.GetPlayerInventoryData().AddItem("10004", 5);
 
         BuildingMgr.AddBuildingData(new BuildBuildingData(string.Empty, "design_platform"));
         BuildingMgr.AddBuildingData(new BuildBuildingData(string.Empty, "bed"));

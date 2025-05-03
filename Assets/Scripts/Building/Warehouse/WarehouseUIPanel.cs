@@ -250,7 +250,7 @@ public class WarehouseUIPanel : MonoSingleton<WarehouseUIPanel>
             _selectedSlot = slot;
             slot.SetSelected(true);
 
-            // 如果是装备，则卸下装备，否则将物品添加到背包中
+            // 如果是装备，则卸下装备
             if (item.GetItemType() == ItemType.Equipment)
             {
                 if (item.isEquipped)
@@ -272,6 +272,11 @@ public class WarehouseUIPanel : MonoSingleton<WarehouseUIPanel>
                 GlobalUIMgr.Instance.ShowMessage("背包已满");
             }
         }
+    }
+
+    public WarehouseData GetWarehouseData()
+    {
+        return _warehouseData;
     }
 
     public void Show(string buildingInstanceId)

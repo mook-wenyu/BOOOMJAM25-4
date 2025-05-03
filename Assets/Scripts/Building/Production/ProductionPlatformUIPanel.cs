@@ -86,7 +86,7 @@ public class ProductionPlatformUIPanel : MonoSingleton<ProductionPlatformUIPanel
                     var requiredItem = Instantiate(requiredItemPrefab, requiredContainer).GetComponent<RequiredItemSlot>();
                     requiredItem.Setup(recipeConfig.materialIDGroup[i].ToString(), recipeConfig.materialAmountGroup[i]);
                 }
-                itemTime.text = recipeConfig.time.ToString() + "小时";
+                itemTime.text = $"生产时间：{recipeConfig.time}小时";
 
                 startProductionBtn.interactable = true;
                 startProductionBtn.onClick.RemoveAllListeners();

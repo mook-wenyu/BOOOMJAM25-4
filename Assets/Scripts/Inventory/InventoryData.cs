@@ -134,12 +134,17 @@ public class InventoryData : BaseInventoryData
         if (item.GetCount() <= 0)
         {
             items.Remove(instanceId);
+
+            // 找到并移除对应的插槽索引
+            var slotIndex = itemOrder.FirstOrDefault(x => x.Value == instanceId).Key;
+            itemOrder.Remove(slotIndex);
+
             RaiseInventoryChanged();
         }
 
         return success;
     }
-    
+
     /// <summary>
     /// 使用可消耗物品
     /// </summary>
@@ -165,7 +170,7 @@ public class InventoryData : BaseInventoryData
 
         return true;
     }
-    
+
     /// <summary>
     /// 应用可消耗物品效果
     /// </summary>
