@@ -7,12 +7,17 @@ public class SaveData
     /// <summary>
     /// 当前时间
     /// </summary>
-    public GameTime gameTime = new(1, 7, 0);
+    public GameTime gameTime = new(1, 8, 0);
 
     /// <summary>
     /// 玩家ID
     /// </summary>
     public string playerId = "player";
+
+    /// <summary>
+    /// 标识
+    /// </summary>
+    public HashSet<string> flags = new();
 
     /// <summary>
     /// 角色数据
@@ -58,6 +63,11 @@ public class SaveData
     /// 探索地图数据
     /// </summary>
     public Dictionary<string, ExploreMapData> exploreMaps = new();
+
+    /// <summary>
+    /// 进入过的探索地图
+    /// </summary>
+    public HashSet<string> enteredMaps = new();
 
     /// <summary>
     /// 进入过的探索节点

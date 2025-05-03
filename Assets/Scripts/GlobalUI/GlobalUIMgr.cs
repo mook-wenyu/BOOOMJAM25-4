@@ -123,6 +123,15 @@ public class GlobalUIMgr : MonoSingleton<GlobalUIMgr>
             else _loadingMask.Hide();
         }
     }
+
+    public bool IsShowLoadingMask()
+    {
+        if (_loadingMask)
+        {
+            return _loadingMask.gameObject.activeSelf;
+        }
+        return false;
+    }
     #endregion
 
     #region 消息系统

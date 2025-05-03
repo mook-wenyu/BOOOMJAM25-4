@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class ExploreArea : MonoBehaviour
@@ -8,6 +9,7 @@ public class ExploreArea : MonoBehaviour
     private Collider2D _collider;
     private BoxCollider2D _boxCollider;
     private SimpleTipsUI _tipsUI;
+    private Sprite _iconF = null;
 
     void Awake()
     {
@@ -36,7 +38,8 @@ public class ExploreArea : MonoBehaviour
         {
             _collider = collision;
             _isEnabled = true;
-            UpdateTips("按 F 键外出探索");
+            TopLevelUIPanel.Instance.goOut.gameObject.SetActive(true);
+            UpdateTips();
             Debug.Log($"进入{name}");
         }
     }
@@ -47,6 +50,7 @@ public class ExploreArea : MonoBehaviour
         {
             _collider = null;
             _isEnabled = false;
+            TopLevelUIPanel.Instance.goOut.gameObject.SetActive(false);
             GlobalUIMgr.Instance.Hide<SimpleTipsUI>();
             Debug.Log($"离开{name}");
         }
@@ -55,10 +59,14 @@ public class ExploreArea : MonoBehaviour
     /// <summary>
     /// 更新并显示物品提示
     /// </summary>
-    public void UpdateTips(string content)
+    public void UpdateTips()
     {
         _tipsUI = GlobalUIMgr.Instance.Show<SimpleTipsUI>(GlobalUILayer.TooltipLayer);
-        _tipsUI.SetContent(content);
+        if (_iconF == null)
+        {
+            _iconF = Resources.Load<Sprite>(Path.Combine("Icon", "UI", "keyboard_f"));
+        }
+        _tipsUI.SetIcon(_iconF);
         UpdateTipsPosition();
     }
 
@@ -76,6 +84,7 @@ public class ExploreArea : MonoBehaviour
         Vector2 worldPos = _boxCollider.offset;
         // 调整世界坐标到建筑物顶部中心
         worldPos.x -= _boxCollider.bounds.extents.x / 2;
+        worldPos.y += _boxCollider.bounds.size.y - 2f;
         Vector2 screenPos = Camera.main.WorldToScreenPoint(worldPos);
         // 将世界空间的尺寸转换为屏幕空间的尺寸
         Vector2 screenSize = new Vector2(

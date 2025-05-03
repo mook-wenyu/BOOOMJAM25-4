@@ -55,6 +55,8 @@ public class ExploreMapUIPanel : MonoSingleton<ExploreMapUIPanel>
 
                 ExploreNodeMgr.currentMapId = "1";
 
+                goOut.interactable = true;
+
                 break;
 
             case "ZhuZhaiQu":
@@ -66,6 +68,15 @@ public class ExploreMapUIPanel : MonoSingleton<ExploreMapUIPanel>
 
                 ExploreNodeMgr.currentMapId = "2";
 
+                if (GameMgr.currentSaveData.enteredMaps.Contains("1"))
+                {
+                    goOut.interactable = true;
+                }
+                else
+                {
+                    goOut.interactable = false;
+                }
+
                 break;
 
             case "ShiZhongXin":
@@ -76,6 +87,15 @@ public class ExploreMapUIPanel : MonoSingleton<ExploreMapUIPanel>
                 infoTime.text = $"时间: {config.timeCost}小时";
 
                 ExploreNodeMgr.currentMapId = "3";
+
+                if (GameMgr.currentSaveData.enteredMaps.Contains("2"))
+                {
+                    goOut.interactable = true;
+                }
+                else
+                {
+                    goOut.interactable = false;
+                }
 
                 break;
         }
@@ -122,6 +142,11 @@ public class ExploreMapUIPanel : MonoSingleton<ExploreMapUIPanel>
         TopLevelUIPanel.Instance.goOut.gameObject.SetActive(false);
         TopLevelUIPanel.Instance.comeBack.gameObject.SetActive(true);
 
+        if (!GameMgr.currentSaveData.enteredMaps.Contains(ExploreNodeMgr.currentMapId))
+        {
+            GameMgr.currentSaveData.enteredMaps.Add(ExploreNodeMgr.currentMapId);
+        }
+
         SceneMgr.Instance.LoadScene("ExploreScene", LoadSceneMode.Additive);
     }
 
@@ -142,6 +167,11 @@ public class ExploreMapUIPanel : MonoSingleton<ExploreMapUIPanel>
         uiPanel.transform.SetAsLastSibling();
 
         SelectedMap(GetSelectedToggle().name);
+
+        if (!GameMgr.currentSaveData.flags.Contains("tutorial_explore_map"))
+        {
+            TutorialUIPanel.Instance.ShowReadyExplore();
+        }
     }
 
     public void Hide()

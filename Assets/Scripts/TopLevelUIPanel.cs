@@ -53,6 +53,7 @@ public class TopLevelUIPanel : MonoSingleton<TopLevelUIPanel>
 
         goOut.onClick.AddListener(OnGoOutBtnClicked);
         comeBack.onClick.AddListener(OnComeBackBtnClicked);
+        goOut.gameObject.SetActive(false);
         comeBack.gameObject.SetActive(false);
 
         settingBtn.onClick.AddListener(() =>
@@ -89,8 +90,6 @@ public class TopLevelUIPanel : MonoSingleton<TopLevelUIPanel>
     void Start()
     {
         _ = HandleTimeChanged(GameMgr.currentSaveData.gameTime);
-
-        GameMgr.StartTime();
     }
 
     private void HandleGameTimePaused()
@@ -213,7 +212,7 @@ public class TopLevelUIPanel : MonoSingleton<TopLevelUIPanel>
         AudioMgr.Instance.PlaySound("点击");
         GlobalUIMgr.Instance.ShowLoadingMask(true);
         comeBack.gameObject.SetActive(false);
-        goOut.gameObject.SetActive(true);
+        // goOut.gameObject.SetActive(true);
         SceneMgr.Instance.UnloadScene("ExploreScene");
         ExploreNodeMgr.currentMapId = string.Empty;
         CharacterMgr.Player().currentMapId = string.Empty;

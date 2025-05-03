@@ -140,7 +140,7 @@ public class StartScene : MonoBehaviour
     private void NewSaveData()
     {
         GameMgr.currentSaveData = new SaveData();
-        GameMgr.currentSaveData.gameTime = new GameTime(1, 7, 0);
+        GameMgr.currentSaveData.gameTime = new GameTime(1, 8, 0);
 
         foreach (var map in ExploreNodeMgr.tempExploreMaps)
         {
@@ -162,16 +162,27 @@ public class StartScene : MonoBehaviour
         GameMgr.currentSaveData.characters.Add(characterData.id, characterData);
         GameMgr.currentSaveData.playerId = characterData.id;
 
-        InventoryMgr.GetPlayerInventoryData().AddItem("10001", 5);
-        InventoryMgr.GetPlayerInventoryData().AddItem("10002", 5);
-        InventoryMgr.GetPlayerInventoryData().AddItem("10003", 5);
-        InventoryMgr.GetPlayerInventoryData().AddItem("10004", 5);
-
         BuildingMgr.AddBuildingData(new BuildBuildingData(string.Empty, "design_platform"));
         BuildingMgr.AddBuildingData(new BuildBuildingData(string.Empty, "bed"));
 
-        // TODO: 添加建筑示例
-        BuildingMgr.AddBuildingData(new WarehouseBuildingData("20003", "warehouse1", WarehouseType.Box, 9));
+        BuildingMgr.AddBuildingData(new BuildBuildingData("20005", "lighting_1_1") { lightingData = new LightingData() });
+        BuildingMgr.AddBuildingData(new BuildBuildingData("20005", "lighting_1_2") { lightingData = new LightingData() });
+        BuildingMgr.AddBuildingData(new BuildBuildingData("20005", "lighting_2_1") { lightingData = new LightingData() });
+        BuildingMgr.AddBuildingData(new BuildBuildingData("20005", "lighting_2_2") { lightingData = new LightingData() });
+        BuildingMgr.AddBuildingData(new BuildBuildingData("20005", "lighting_3_1") { lightingData = new LightingData() });
+        BuildingMgr.AddBuildingData(new BuildBuildingData("20005", "lighting_3_2") { lightingData = new LightingData() });
+
+        BuildingMgr.AddBuildingData(new WarehouseBuildingData("20003", "warehouse_1_3", WarehouseType.Box, 9));
+        var warehouseData_1_3 = BuildingMgr.GetBuildingData<WarehouseBuildingData>("warehouse_1_3").GetWarehouseData();
+        warehouseData_1_3.AddItem("10031", 5);
+        BuildingMgr.AddBuildingData(new WarehouseBuildingData("20003", "warehouse_2_1", WarehouseType.Box, 9));
+        var warehouseData_2_1 = BuildingMgr.GetBuildingData<WarehouseBuildingData>("warehouse_2_1").GetWarehouseData();
+        warehouseData_2_1.AddItem("10001", 10);
+        warehouseData_2_1.AddItem("10002", 10);
+        warehouseData_2_1.AddItem("10003", 10);
+        BuildingMgr.AddBuildingData(new WarehouseBuildingData("20003", "warehouse_3_3", WarehouseType.Box, 9));
+        var warehouseData_3_3 = BuildingMgr.GetBuildingData<WarehouseBuildingData>("warehouse_3_3").GetWarehouseData();
+        warehouseData_3_3.AddItem("10028", 1);
 
     }
 

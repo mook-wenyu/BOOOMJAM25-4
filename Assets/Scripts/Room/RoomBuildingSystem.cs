@@ -23,7 +23,7 @@ public class RoomBuildingSystem : MonoSingleton<RoomBuildingSystem>
     private bool startReady = false;    // 是否可以开始放置
 
     // 存储所有正在生产中的建筑的UI引用
-    private Dictionary<string, GameObject> buildingTimeUIs = new Dictionary<string, GameObject>();
+    public Dictionary<string, GameObject> buildingTimeUIs = new Dictionary<string, GameObject>();
 
     void Awake()
     {
@@ -38,15 +38,25 @@ public class RoomBuildingSystem : MonoSingleton<RoomBuildingSystem>
         // 加入预设建筑
         foreach (Transform building in buildingContainer)
         {
-            var floor = FindNearestFloor(building.transform.position.y);
+            // 获取建筑的位置
+            float xPos = building.transform.position.x;
+            float yPos = building.transform.position.y;
+
+            // 根据位置找到对应的房间楼层
+            var floor = FindRoomFloorByPosition(xPos, yPos);
             if (floor == null) continue;
 
             var be = building.GetComponent<BuildingEntity>();
+            var boxCollider = building.GetComponent<BoxCollider2D>();
+            float buildingWidth = boxCollider.size.x;
+
+            // 计算左边缘位置
+            float leftEdge = xPos - buildingWidth / 2;
 
             var slot = new BuildingSlot
             {
-                startX = building.transform.position.x,
-                endX = building.transform.position.x + building.GetComponent<BoxCollider2D>().size.x,
+                startX = leftEdge,
+                endX = leftEdge + buildingWidth,
                 floorId = floor.id,
                 building = building.gameObject,
                 buildingInstanceId = be.GetId(),
@@ -62,7 +72,9 @@ public class RoomBuildingSystem : MonoSingleton<RoomBuildingSystem>
             foreach (var slot in floor.placedBuildings.Values)
             {
                 var building = Instantiate(buildingPrefab, buildingContainer);
-                building.transform.position = new Vector2(slot.startX, floor.yPosition);
+                // 设置位置时，将左边缘转换为中心点位置
+                float centerX = slot.startX + (slot.endX - slot.startX) / 2;
+                building.transform.position = new Vector2(centerX, floor.yPosition);
                 building.GetComponent<BuildingEntity>().Setup(slot.buildingId, slot.buildingInstanceId);
             }
         }
@@ -90,7 +102,7 @@ public class RoomBuildingSystem : MonoSingleton<RoomBuildingSystem>
                 CancelPlacing();
             }
         }
-        
+
         // 更新所有正在生产中的建筑的UI位置
         UpdateBuildingTimePositions();
     }
@@ -180,8 +192,8 @@ public class RoomBuildingSystem : MonoSingleton<RoomBuildingSystem>
         // 3. 约束在房间范围内
         snappedX = Mathf.Clamp(
             snappedX,
-            targetFloor.minX,
-            targetFloor.maxX - buildingWidth
+            targetFloor.minX + buildingWidth / 2,
+            targetFloor.maxX - buildingWidth / 2
         );
 
         // 更新预览位置
@@ -205,11 +217,12 @@ public class RoomBuildingSystem : MonoSingleton<RoomBuildingSystem>
             AudioMgr.Instance.PlaySound("建造");
             startReady = false;
 
-            // 正式放置建筑物
+            // 正式放置建筑物，计算左边缘位置
+            float leftEdge = snappedX - buildingWidth / 2;
             var newSlot = new BuildingSlot
             {
-                startX = snappedX,
-                endX = snappedX + buildingWidth,
+                startX = leftEdge,
+                endX = leftEdge + buildingWidth,
                 building = currentBuilding,
                 buildingInstanceId = buildingInstanceId,
                 buildingId = buildingId,
@@ -226,10 +239,10 @@ public class RoomBuildingSystem : MonoSingleton<RoomBuildingSystem>
             // 创建并初始化UI
             var buildingTime = Instantiate(buildingTimePrefab, buildingTimeContainer);
             buildingTime.name = buildingInstanceId;
-            
+
             // 存储UI引用
             buildingTimeUIs[buildingInstanceId] = buildingTime;
-            
+
             // 初始化位置
             Vector2 worldPos = new Vector2(snappedX + buildingWidth / 2, targetFloor.yPosition + 0.5f);
             Vector2 screenPos = Camera.main.WorldToScreenPoint(worldPos);
@@ -291,8 +304,12 @@ public class RoomBuildingSystem : MonoSingleton<RoomBuildingSystem>
     /// </summary>
     bool IsPositionValid(RoomFloor floor, float xPos, float width)
     {
+        // 计算建筑的左右边缘
+        float leftEdge = xPos - width / 2;
+        float rightEdge = xPos + width / 2;
+
         // 检查房间边界
-        if (xPos < floor.minX || (xPos + width) > floor.maxX)
+        if (leftEdge < floor.minX || rightEdge > floor.maxX)
         {
             return false;
         }
@@ -300,7 +317,7 @@ public class RoomBuildingSystem : MonoSingleton<RoomBuildingSystem>
         // 检查与其他建筑物的重叠
         foreach (var slot in floor.placedBuildings.Values)
         {
-            if (xPos < slot.endX && (xPos + width) > slot.startX)
+            if (leftEdge < slot.endX && rightEdge > slot.startX)
             {
                 return false;
             }
@@ -367,11 +384,11 @@ public class RoomBuildingSystem : MonoSingleton<RoomBuildingSystem>
         {
             string instanceId = kvp.Key;
             GameObject timeUI = kvp.Value;
-            
+
             // 找到匹配的建筑槽位
             BuildingSlot slot = null;
             RoomFloor floor = null;
-            
+
             foreach (var f in GameMgr.currentSaveData.floors.Values)
             {
                 if (f.placedBuildings.TryGetValue(instanceId, out slot))
@@ -380,17 +397,57 @@ public class RoomBuildingSystem : MonoSingleton<RoomBuildingSystem>
                     break;
                 }
             }
-            
+
             if (slot != null && floor != null)
             {
-                // 计算世界位置
+                // 计算世界位置（使用建筑中心点）
                 float buildingCenter = slot.startX + (slot.endX - slot.startX) / 2;
-                Vector2 worldPos = new Vector2(buildingCenter - buildingWidth / 2, floor.yPosition + 0.5f);
-                
+                Vector2 worldPos = new Vector2(buildingCenter, floor.yPosition + 0.5f);
+
                 // 转换为屏幕位置
                 Vector2 screenPos = Camera.main.WorldToScreenPoint(worldPos);
                 timeUI.GetComponent<RectTransform>().position = screenPos;
             }
         }
+    }
+
+    /// <summary>
+    /// 根据X坐标找到对应的房间楼层
+    /// </summary>
+    RoomFloor FindRoomFloorByPosition(float xPos, float yPos)
+    {
+        RoomFloor targetFloor = null;
+        float minDistance = float.MaxValue;
+
+        foreach (var floor in floors)
+        {
+            // 检查水平位置是否在房间范围内
+            if (xPos >= floor.minX && xPos <= floor.maxX)
+            {
+                // 在房间范围内，计算与楼层的垂直距离
+                float dist = Mathf.Abs(yPos - floor.yPosition);
+                if (dist < minDistance)
+                {
+                    minDistance = dist;
+                    targetFloor = floor;
+                }
+            }
+        }
+
+        // 如果没有找到合适的楼层，使用最近的楼层
+        if (targetFloor == null)
+        {
+            foreach (var floor in floors)
+            {
+                float dist = Mathf.Abs(yPos - floor.yPosition);
+                if (dist < minDistance)
+                {
+                    minDistance = dist;
+                    targetFloor = floor;
+                }
+            }
+        }
+
+        return targetFloor;
     }
 }

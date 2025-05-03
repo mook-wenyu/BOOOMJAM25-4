@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -20,6 +21,7 @@ public class BuildingEntity : MonoBehaviour
     private bool _isEnabled = false;
     private Collider2D _collider;
     private SimpleTipsUI _tipsUI;
+    private Sprite _iconF = null;
 
     void Awake()
     {
@@ -44,8 +46,10 @@ public class BuildingEntity : MonoBehaviour
                 _boxCollider.size = _spriteRenderer.sprite.bounds.size;
                 _boxCollider.offset = _spriteRenderer.sprite.bounds.center;
             }
+
             _light2D.enabled = config.light > 0;
-            _light2D.transform.position = new Vector3(_light2D.transform.position.x, _spriteRenderer.sprite.bounds.size.y / 2, _light2D.transform.position.z);
+            _light2D.transform.position = transform.position;
+            _light2D.transform.position += Vector3.up * 3.2f;
             _light2D.pointLightInnerRadius = config.light * 2;
             _light2D.pointLightOuterRadius = config.light * 4;
         }
@@ -140,19 +144,19 @@ public class BuildingEntity : MonoBehaviour
 
             if (_instanceId == "design_platform")
             {
-                UpdateTips("按 F 键进行交互");
+                UpdateTips();
                 return;
             }
             if (_instanceId == "bed")
             {
-                UpdateTips("按 F 键入睡");
+                UpdateTips();
                 return;
             }
 
             _buildingData = BuildingMgr.GetBuildingData(_instanceId);
             if (_buildingData != null && _buildingData.GetBuildingType() != BuildingType.Light)
             {
-                UpdateTips("按 F 键进行交互");
+                UpdateTips();
             }
         }
     }
@@ -164,7 +168,7 @@ public class BuildingEntity : MonoBehaviour
             _collider = collision;
             _isEnabled = true;
 
-            if (WorldMgr.Instance.uiRoot.GetChild(WorldMgr.Instance.uiRoot.childCount - 1).gameObject.activeSelf)
+            if (WorldMgr.Instance.uiRoot.GetChild(WorldMgr.Instance.uiRoot.childCount - 1).gameObject.activeSelf || CharacterMgr.Player().status == CharacterStatus.Sleep || CharacterMgr.Player().status == CharacterStatus.Busy)
             {
                 ClearTips();
                 return;
@@ -177,19 +181,19 @@ public class BuildingEntity : MonoBehaviour
 
             if (_instanceId == "design_platform")
             {
-                UpdateTips("按 F 键进行交互");
+                UpdateTips();
                 return;
             }
 
             if (_instanceId == "bed")
             {
-                UpdateTips("按 F 键入睡");
+                UpdateTips();
                 return;
             }
 
             if (_buildingData != null && _buildingData.GetBuildingType() != BuildingType.Light)
             {
-                UpdateTips("按 F 键进行交互");
+                UpdateTips();
             }
         }
     }
@@ -216,10 +220,14 @@ public class BuildingEntity : MonoBehaviour
     /// <summary>
     /// 更新并显示物品提示
     /// </summary>
-    public void UpdateTips(string content)
+    public void UpdateTips()
     {
         _tipsUI = GlobalUIMgr.Instance.Show<SimpleTipsUI>(GlobalUILayer.TooltipLayer);
-        _tipsUI.SetContent(content);
+        if (_iconF == null)
+        {
+            _iconF = Resources.Load<Sprite>(Path.Combine("Icon", "UI", "keyboard_f"));
+        }
+        _tipsUI.SetIcon(_iconF);
         UpdateTipsPosition();
     }
 
@@ -236,8 +244,8 @@ public class BuildingEntity : MonoBehaviour
     {
         Vector2 worldPos = transform.position;
         // 调整世界坐标到建筑物顶部中心
-        worldPos.x -= _boxCollider.bounds.extents.x / 2;
-        worldPos.y += _boxCollider.bounds.size.y;
+        worldPos.x -= _boxCollider.bounds.extents.x / 4;
+        worldPos.y += _boxCollider.bounds.size.y + 0.5f;
         Vector2 screenPos = Camera.main.WorldToScreenPoint(worldPos);
         // 将世界空间的尺寸转换为屏幕空间的尺寸
         Vector2 screenSize = new Vector2(

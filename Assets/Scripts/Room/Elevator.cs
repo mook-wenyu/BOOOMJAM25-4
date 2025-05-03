@@ -1,3 +1,4 @@
+using System.IO;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -8,6 +9,17 @@ public class Elevator : MonoBehaviour
 
     private bool _isEnabled = false;
     private Collider2D _collider;
+    private BoxCollider2D _boxCollider;
+
+    private SimpleTipsUI _tipsUI;
+    private Sprite _iconW = null;
+    private Sprite _iconS = null;
+
+    void Awake()
+    {
+        _boxCollider = GetComponent<BoxCollider2D>();
+        _boxCollider.isTrigger = true;
+    }
 
     void Update()
     {
@@ -38,6 +50,15 @@ public class Elevator : MonoBehaviour
         }
     }
 
+    void LateUpdate()
+    {
+        // 如果提示UI存在且启用，则每帧更新位置
+        if (_isEnabled && _tipsUI != null)
+        {
+            UpdateTipsPosition();
+        }
+    }
+
     private async UniTask EnabledCollider(BoxCollider2D colliders)
     {
         await UniTask.Delay(200);
@@ -51,6 +72,7 @@ public class Elevator : MonoBehaviour
         {
             _collider = collision;
             _isEnabled = true;
+            UpdateTips();
         }
     }
 
@@ -60,7 +82,49 @@ public class Elevator : MonoBehaviour
         {
             _collider = null;
             _isEnabled = false;
+            GlobalUIMgr.Instance.Hide<SimpleTipsUI>();
         }
+    }
+
+    /// <summary>
+    /// 更新并显示物品提示
+    /// </summary>
+    public void UpdateTips()
+    {
+        _tipsUI = GlobalUIMgr.Instance.Show<SimpleTipsUI>(GlobalUILayer.TooltipLayer);
+        if (_iconW == null)
+        {
+            _iconW = Resources.Load<Sprite>(Path.Combine("Icon", "UI", "keyboard_w"));
+            _iconS = Resources.Load<Sprite>(Path.Combine("Icon", "UI", "keyboard_s"));
+        }
+        if (upCollider && downCollider)
+        {
+            _tipsUI.SetIcon(_iconW, _iconS);
+        }
+        else if (upCollider)
+        {
+            _tipsUI.SetIcon(_iconW);
+        }
+        else if (downCollider)
+        {
+            _tipsUI.SetIcon(_iconS);
+        }
+        UpdateTipsPosition();
+    }
+
+    private void UpdateTipsPosition()
+    {
+        Vector2 worldPos = transform.position;
+        // 调整世界坐标到建筑物顶部中心
+        worldPos.x -= _boxCollider.bounds.extents.x / 4;
+        worldPos.y += _boxCollider.bounds.size.y - _boxCollider.offset.y / 1.2f;
+        Vector2 screenPos = Camera.main.WorldToScreenPoint(worldPos);
+        // 将世界空间的尺寸转换为屏幕空间的尺寸
+        Vector2 screenSize = new Vector2(
+            _boxCollider.bounds.size.x / Screen.width * Camera.main.pixelWidth,
+            _boxCollider.bounds.size.y / Screen.height * Camera.main.pixelHeight);
+
+        _tipsUI.UpdatePosition(screenPos, screenSize);
     }
 
 }

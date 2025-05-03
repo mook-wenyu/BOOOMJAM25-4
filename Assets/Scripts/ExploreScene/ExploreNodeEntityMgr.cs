@@ -48,6 +48,11 @@ public class ExploreNodeEntityMgr : MonoSingleton<ExploreNodeEntityMgr>
         playerUnit.OnNodeChanged += HandleNodeChanged;
 
         CenterCameraOnUnit(true);
+
+        if (!GameMgr.currentSaveData.flags.Contains("tutorial_explore"))
+        {
+            TutorialUIPanel.Instance.EnterExplore();
+        }
     }
 
     // Update is called once per frame
@@ -250,6 +255,8 @@ public class ExploreNodeEntityMgr : MonoSingleton<ExploreNodeEntityMgr>
                 ActivePath(node.id, unlockNodeId);
             }
         }
+
+        HandleNodeInteraction(node, node.GetConfig());
 
         Debug.Log($"节点替换: {node.id} -> {node.changedId}");
     }

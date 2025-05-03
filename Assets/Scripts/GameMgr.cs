@@ -89,6 +89,11 @@ public static class GameMgr
         UpdateTimeChangedAsync().Forget();
     }
 
+    public static void SetPause()
+    {
+        _isTimePaused = true;
+    }
+
     /// <summary>
     /// 暂停时间
     /// </summary>
@@ -162,7 +167,13 @@ public static class GameMgr
         CharacterMgr.Player().SetStatus(CharacterStatus.Sleep);
         WorldMgr.Instance.blackScreen.SetActive(true);
         await UniTask.Delay(TimeSpan.FromSeconds(1.5f));
-        _ = currentSaveData.gameTime.ConsumeTimeToHour(7);
+        _ = currentSaveData.gameTime.ConsumeTimeToHour(8);
+    }
+
+    [ScriptFunc("start_tutorial")]
+    public static void Start_Tutorial()
+    {
+        TutorialUIPanel.Instance.ShowMain();
     }
 
     [ScriptFunc("end_game")]
@@ -207,8 +218,8 @@ public static class GameMgr
     // 整点事件处理
     private static async UniTask HandleHourChanged(GameTime gameTime)
     {
-        // 当前是上午7点，开启全局光源
-        if (currentSaveData.gameTime.IsSpecificFullHour(7))
+        // 当前是上午8点，开启全局光源
+        if (currentSaveData.gameTime.IsSpecificFullHour(8))
         {
             // 起床
             if (CharacterMgr.Player().status == CharacterStatus.Sleep)
@@ -320,7 +331,9 @@ public static class GameMgr
             foreach (var building in completedBuildings)
             {
                 platform.buildingProgress.Remove(building);
-                RoomBuildingSystem.Instance.buildingTimeContainer.Find(building.instanceId).GetComponent<SimpleTipsUI>().SetContent("已完成");
+                GameObject.Destroy(RoomBuildingSystem.Instance.buildingTimeContainer.Find(building.instanceId).gameObject);
+                RoomBuildingSystem.Instance.buildingTimeUIs.Remove(building.instanceId);
+                // RoomBuildingSystem.Instance.buildingTimeContainer.Find(building.instanceId).GetComponent<SimpleTipsUI>().SetContent("已完成");
             }
         }
     }
