@@ -12,4 +12,5 @@ public class BuildingConfig : BaseConfig
     public int light;
     public double energyCost;
     public string path;
+    public string iconPath;
 }

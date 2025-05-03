@@ -3,7 +3,7 @@
   "20001": {
     "$type": "BuildingConfig, Assembly-CSharp",
     "name": "火堆",
-    "desc": "用石头和木头堆成的火堆",
+    "desc": "用石头和木头堆成的火堆，可以用来烤制食物",
     "type": 1,
     "grid": 2,
     "materialIDGroup": [
@@ -37,7 +37,7 @@
   "20002": {
     "$type": "BuildingConfig, Assembly-CSharp",
     "name": "工具台",
-    "desc": "用木板和锋利铁片简单搭成的制作台",
+    "desc": "可以制造大量手持工具的制作台",
     "type": 1,
     "grid": 3,
     "materialIDGroup": [
@@ -67,7 +67,7 @@
   "20003": {
     "$type": "BuildingConfig, Assembly-CSharp",
     "name": "木箱",
-    "desc": "就木箱",
+    "desc": "木头做成的箱子，东西放在这里面至少能感到心安",
     "type": 0,
     "grid": 1,
     "materialIDGroup": [
@@ -92,7 +92,7 @@
   "20004": {
     "$type": "BuildingConfig, Assembly-CSharp",
     "name": "简易炉灶",
-    "desc": "用石头简单搭起来的加热食物的地方",
+    "desc": "初级烹饪工具，可以烹饪一些简单的小菜",
     "type": 1,
     "grid": 2,
     "materialIDGroup": [
@@ -122,7 +122,7 @@
   "20005": {
     "$type": "BuildingConfig, Assembly-CSharp",
     "name": "烛台",
-    "desc": "手搓的小蜡烛，有小范围照明能力",
+    "desc": "手搓的小蜡烛，有小范围照明能力（不过照明系统没来得及做嘻嘻）",
     "type": 2,
     "grid": 1,
     "materialIDGroup": [
@@ -176,7 +176,7 @@
   "20007": {
     "$type": "BuildingConfig, Assembly-CSharp",
     "name": "铁砧",
-    "desc": "能够利用铁锭进行锻造的铁砧",
+    "desc": "能够利用铁锭锻造出高级工具",
     "type": 1,
     "grid": 3,
     "materialIDGroup": [
@@ -205,7 +205,7 @@
   "20008": {
     "$type": "BuildingConfig, Assembly-CSharp",
     "name": "炖煮锅",
-    "desc": "有明显锅具形状的，能够进行长时间炖煮的器具",
+    "desc": "能够进行长时间炖煮的器具，可以烹饪高级料理",
     "type": 1,
     "grid": 2,
     "materialIDGroup": [
@@ -235,7 +235,7 @@
   "20009": {
     "$type": "BuildingConfig, Assembly-CSharp",
     "name": "缝纫机",
-    "desc": "就缝纫机",
+    "desc": "可以缝制一些衣物",
     "type": 1,
     "grid": 2,
     "materialIDGroup": [
@@ -265,7 +265,7 @@
   "20010": {
     "$type": "BuildingConfig, Assembly-CSharp",
     "name": "油灯",
-    "desc": "用一瓶油和烛芯做成的简单油灯，有中等照明范围",
+    "desc": "用一瓶油和烛芯做成的简单油灯，有中等照明范围（不过照明系统没来得及做嘻嘻）",
     "type": 2,
     "grid": 1,
     "materialIDGroup": [
@@ -291,7 +291,7 @@
   "20011": {
     "$type": "BuildingConfig, Assembly-CSharp",
     "name": "加工台",
-    "desc": "利用电能进行切割/拼接的更高等级的工具台，能看到电路和大型工具的元素",
+    "desc": "利用电能进行切割/拼接的高级工具台，能制作高级材料",
     "type": 1,
     "grid": 3,
     "materialIDGroup": [
@@ -321,7 +321,7 @@
   "20012": {
     "$type": "BuildingConfig, Assembly-CSharp",
     "name": "冰箱",
-    "desc": "小型冰箱",
+    "desc": "小型冰箱，能够延长食物的保质期",
     "type": 0,
     "grid": 1,
     "materialIDGroup": [
@@ -348,7 +348,7 @@
   "20013": {
     "$type": "BuildingConfig, Assembly-CSharp",
     "name": "坚固木箱",
-    "desc": "比木箱更坚固更大的箱子（能看到钉子之类的）",
+    "desc": "比木箱更大更坚固的箱子",
     "type": 0,
     "grid": 1,
     "materialIDGroup": [
@@ -373,7 +373,7 @@
   "20014": {
     "$type": "BuildingConfig, Assembly-CSharp",
     "name": "电灯",
-    "desc": "用电的照明设备，有最大的照明范围",
+    "desc": "用电的照明设备，有最大的照明范围（不过照明系统没来得及做嘻嘻）",
     "type": 2,
     "grid": 1,
     "materialIDGroup": [
