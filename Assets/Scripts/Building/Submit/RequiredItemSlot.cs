@@ -64,10 +64,12 @@ public class RequiredItemSlot : MonoBehaviour,
 
         var tipsUI = GlobalUIMgr.Instance.Show<SimpleTipsUI>(GlobalUILayer.TooltipLayer);
 
-        tipsUI.SetContent(item.name);
+        tipsUI.SetContent($"{item.name}\r\n\r\n{item.desc}");
 
+        var sizeDelta = _rectTransform.sizeDelta;
+        sizeDelta.x /= 2;
         // 直接使用RectTransform的position，因为UI元素的position已经是屏幕空间的坐标
-        tipsUI.UpdatePosition(_rectTransform.position, _rectTransform.sizeDelta);
+        tipsUI.UpdatePosition(_rectTransform.position, sizeDelta);
     }
 
     public void OnPointerEnter(PointerEventData eventData)

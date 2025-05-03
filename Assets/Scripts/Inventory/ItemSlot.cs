@@ -232,8 +232,10 @@ IEndDragHandler,
         var itemTipsUI = GlobalUIMgr.Instance.Show<ItemTipsUI>(GlobalUILayer.TooltipLayer);
         itemTipsUI.SetItemInfo(item);
 
+        var sizeDelta = _rectTransform.sizeDelta;
+        sizeDelta.x /= 2;
         // 直接使用RectTransform的position，因为UI元素的position已经是屏幕空间的坐标
-        itemTipsUI.UpdatePosition(_rectTransform.position, _rectTransform.sizeDelta);
+        itemTipsUI.UpdatePosition(_rectTransform.position, sizeDelta);
     }
 
     public void OnBeginDrag(PointerEventData eventData)

@@ -23,6 +23,7 @@ public class TopLevelUIPanel : MonoSingleton<TopLevelUIPanel>
     public Transform buffContainer;
     public GameObject buffPrefab;
 
+    public GameObject healthGO, hungerGO, energyGO, spiritGO;
     public Slider health, hunger, energy, spirit;
     public TextMeshProUGUI healthText, hungerText, energyText, spiritText;
 
@@ -85,6 +86,11 @@ public class TopLevelUIPanel : MonoSingleton<TopLevelUIPanel>
             player.energy = player.energyMax;
             player.spirit = player.spiritMax;
         });
+
+        healthGO.GetComponent<CharacterStatusUI>().Setup($"{ConfigManager.Instance.GetConfig<LanguageConfig>("hp").title}\n{ConfigManager.Instance.GetConfig<LanguageConfig>("hp").desc}");
+        hungerGO.GetComponent<CharacterStatusUI>().Setup($"{ConfigManager.Instance.GetConfig<LanguageConfig>("hunger").title}\n{ConfigManager.Instance.GetConfig<LanguageConfig>("hunger").desc}");
+        energyGO.GetComponent<CharacterStatusUI>().Setup($"{ConfigManager.Instance.GetConfig<LanguageConfig>("energy").title}\n{ConfigManager.Instance.GetConfig<LanguageConfig>("energy").desc}");
+        spiritGO.GetComponent<CharacterStatusUI>().Setup($"{ConfigManager.Instance.GetConfig<LanguageConfig>("spirit").title}\n{ConfigManager.Instance.GetConfig<LanguageConfig>("spirit").desc}");
     }
 
     void Start()

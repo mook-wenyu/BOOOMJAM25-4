@@ -37,15 +37,16 @@ public abstract class TipsUIBase : GlobalUIBase
             out Vector2 localPoint
         );
 
-        Vector2 objectSize = new(size.x / 2 + 8, size.y / 2);
-
         // 获取提示框的尺寸
         Vector2 tipsSize = _rectTransform.sizeDelta;
 
         // 设置锚点为左上角
         _rectTransform.pivot = new Vector2(0, 1);
 
-        // 计算最终位置，默认显示在鼠标右侧偏下
+        // 计算对象尺寸
+        Vector2 objectSize = new(size.x + 8, size.y / 2);
+
+        // 计算最终位置，默认显示在对象右侧偏下
         Vector2 position = localPoint + new Vector2(objectSize.x, objectSize.y);
 
         // 确保提示框不会超出屏幕右侧
@@ -55,7 +56,7 @@ public abstract class TipsUIBase : GlobalUIBase
         }
 
         // 确保提示框不会超出屏幕底部
-        if (objectPosition.y - tipsSize.y + objectSize.y < 0)
+        if (objectPosition.y - tipsSize.y + objectSize.y < Screen.height / 2)
         {
             position.y = localPoint.y + tipsSize.y - objectSize.y;
         }
