@@ -92,7 +92,7 @@
   },
   "energyGrowValueInDay": {
     "$type": "GeneralParametersConfig, Assembly-CSharp",
-    "par": 1.0,
+    "par": 2.0,
     "id": "energyGrowValueInDay"
   },
   "energyGrowTimeInDay": {
@@ -112,7 +112,7 @@
   },
   "aHourInRealTime": {
     "$type": "GeneralParametersConfig, Assembly-CSharp",
-    "par": 20.0,
+    "par": 15.0,
     "id": "aHourInRealTime"
   }
 }

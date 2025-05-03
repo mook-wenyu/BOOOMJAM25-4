@@ -1,0 +1,27 @@
+{
+  "$type": "System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[BaseConfig, Assembly-CSharp]], mscorlib",
+  "hp": {
+    "$type": "LanguageConfig, Assembly-CSharp",
+    "title": "生命",
+    "desc": "降低到0时游戏失败，在饱食度高于80时缓慢增长",
+    "id": "hp"
+  },
+  "hunger": {
+    "$type": "LanguageConfig, Assembly-CSharp",
+    "title": "饱食度",
+    "desc": "随时间流逝持续降低，睡眠时大幅降低，降低到0时持续扣减生命值与精神值",
+    "id": "hunger"
+  },
+  "energy": {
+    "$type": "LanguageConfig, Assembly-CSharp",
+    "title": "活力",
+    "desc": "用于探索与制造道具，在饱食度高于50%时慢速增长，睡眠时大幅增长",
+    "id": "energy"
+  },
+  "spirit": {
+    "$type": "LanguageConfig, Assembly-CSharp",
+    "title": "精神",
+    "desc": "遭遇冲击性事件时降低，精神过低可能会发生不好的事……",
+    "id": "spirit"
+  }
+}
