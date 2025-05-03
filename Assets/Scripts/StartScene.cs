@@ -10,6 +10,8 @@ using UnityEngine.UI;
 
 public class StartScene : MonoBehaviour
 {
+
+
     public Button continueGameBtn;
     public Button playGameBtn;
     public Button exitGameBtn;
@@ -42,18 +44,21 @@ public class StartScene : MonoBehaviour
 
     private void OnContinueGameBtnClick()
     {
+        AudioMgr.Instance.PlaySound("点击");
         _isLoadSaveData = true;
         LoadSceneAsync().Forget();
     }
 
     private void OnPlayGameBtnClick()
     {
+        AudioMgr.Instance.PlaySound("点击");
         _isLoadSaveData = false;
         LoadSceneAsync().Forget();
     }
 
     private void OnExitGameBtnClick()
     {
+        AudioMgr.Instance.PlaySound("点击");
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
@@ -155,6 +160,11 @@ public class StartScene : MonoBehaviour
         characterData.spirit = characterData.spiritMax;
 
         GameMgr.currentSaveData.characters.Add(characterData.id, characterData);
+        GameMgr.currentSaveData.playerId = characterData.id;
+
+        InventoryMgr.GetPlayerInventoryData().AddItem("10001", 5);
+        InventoryMgr.GetPlayerInventoryData().AddItem("10002", 5);
+        InventoryMgr.GetPlayerInventoryData().AddItem("10003", 5);
 
         BuildingMgr.AddBuildingData(new BuildBuildingData(string.Empty, "design_platform"));
         BuildingMgr.AddBuildingData(new BuildBuildingData(string.Empty, "bed"));

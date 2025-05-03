@@ -253,6 +253,8 @@ public class DialogueUIPanel : MonoSingleton<DialogueUIPanel>
             go.GetComponent<Button>().onClick.RemoveAllListeners();
             go.GetComponent<Button>().onClick.AddListener(() =>
             {
+                AudioMgr.Instance.PlaySound("点击");
+                // 选择选项后，清除所有选项
                 ClearActiveChoices();
                 _ = DialogueMgr.RunMgrs.SelectChoice(choiceIndex);
             });

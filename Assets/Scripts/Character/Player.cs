@@ -9,6 +9,9 @@ public class Player : MonoBehaviour
     private Animator _animator;
     private Rigidbody2D _rigidbody2D;
 
+    private float footstepDelay = 4.545f; // 脚步声间隔
+    private float _nextFootstepTime;
+
     private void Awake()
     {
         _animator = GetComponent<Animator>();
@@ -56,6 +59,13 @@ public class Player : MonoBehaviour
         {
             _characterData.SetStatus(CharacterStatus.Move);
 
+            // 脚步声
+            if (Time.time > _nextFootstepTime)
+            {
+                AudioMgr.Instance.PlayFootstep();
+                _nextFootstepTime = Time.time + footstepDelay;
+            }
+
             // 设置方向（true=左，false=右）
             _characterData.direction = moveInput < 0;
 
@@ -71,9 +81,15 @@ public class Player : MonoBehaviour
                 moveInput * _characterData.GetMoveSpeed(),
                 _rigidbody2D.velocity.y
             );
+
         }
         else // 无输入时
         {
+            if (_characterData.status == CharacterStatus.Move)
+            {
+                AudioMgr.Instance.StopFootstepSound();
+                _nextFootstepTime = 0;
+            }
             _characterData.SetStatus(CharacterStatus.Idle);
             _rigidbody2D.velocity = new Vector2(0, _rigidbody2D.velocity.y); // 立刻停止
         }

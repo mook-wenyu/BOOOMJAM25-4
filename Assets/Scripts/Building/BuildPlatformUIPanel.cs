@@ -27,7 +27,7 @@ public class BuildPlatformUIPanel : MonoSingleton<BuildPlatformUIPanel>
     void Awake()
     {
         titleName.text = "设计台";
-        closeBtn.onClick.AddListener(Hide);
+        closeBtn.onClick.AddListener(() => { AudioMgr.Instance.PlaySound("点击关闭"); Hide(); });
         itemContainer.content.DestroyAllChildren();
         Hide();
     }
@@ -76,6 +76,7 @@ public class BuildPlatformUIPanel : MonoSingleton<BuildPlatformUIPanel>
                 startBuildBtn.onClick.RemoveAllListeners();
                 startBuildBtn.onClick.AddListener(() =>
                 {
+                    AudioMgr.Instance.PlaySound("点击");
                     var playerInventory = InventoryMgr.GetPlayerInventoryData();
                     bool hasEnoughMaterials = true;
                     // 检查材料是否足够

@@ -309,9 +309,6 @@ public static class GameMgr
                     completedBuildings.Add(building);
                     // 将建筑添加到建筑列表中
                     currentSaveData.buildings.Add(building.instanceId, building);
-                    // 停止建造动画
-                    CharacterMgr.Player().SetStatus(CharacterStatus.Idle);
-                    CharacterEntityMgr.Instance.GetPlayer().GetAnimator().SetBool("IsBuild", false);
 #if UNITY_EDITOR
                     Debug.Log($"建筑完成: {building.buildingId} - {building.instanceId} - {building.GetBuildingConfig().name}");
 #endif

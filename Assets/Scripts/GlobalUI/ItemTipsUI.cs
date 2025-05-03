@@ -36,6 +36,8 @@ public class ItemTipsUI : TipsUIBase
         // itemIconImage.sprite = itemInfo.icon;
 
         // 更新布局
+        LayoutRebuilder.ForceRebuildLayoutImmediate(itemDescText.rectTransform);
+
         LayoutRebuilder.ForceRebuildLayoutImmediate(_rectTransform);
     }
 

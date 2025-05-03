@@ -24,7 +24,7 @@ public class WarehouseUIPanel : MonoSingleton<WarehouseUIPanel>
 
     void Awake()
     {
-        closeBtn.onClick.AddListener(Hide);
+        closeBtn.onClick.AddListener(() => { AudioMgr.Instance.PlaySound("点击关闭"); Hide(); });
         // 清除所有物品槽
         itemSlotContainer.content.DestroyAllChildren();
         _activeSlots = new List<ItemSlot>();

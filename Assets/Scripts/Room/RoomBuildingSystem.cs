@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class RoomBuildingSystem : MonoSingleton<RoomBuildingSystem>
 {
-    public GameObject player;
     public List<RoomFloor> floors = new();
     public Transform buildingContainer;
     public GameObject buildingPrefab;
@@ -16,6 +15,8 @@ public class RoomBuildingSystem : MonoSingleton<RoomBuildingSystem>
 
     private string buildingInstanceId;
     private string buildingId;
+
+    private bool startReady = false;    // 是否可以开始放置
 
     void Awake()
     {
@@ -62,24 +63,27 @@ public class RoomBuildingSystem : MonoSingleton<RoomBuildingSystem>
 
     void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.B))
-        //{
-        //    StartPlacingBuilding();
-        //}
-
         if (currentBuilding != null)
         {
             UpdateBuildingPosition();
 
-            if (Input.GetKeyUp(KeyCode.F))
+            if (Input.GetMouseButtonUp(0) && startReady)
             {
                 TryPlaceBuilding();
             }
 
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetMouseButtonUp(1) || Input.GetKeyDown(KeyCode.Escape))
             {
                 CancelPlacing();
             }
+        }
+    }
+
+    private void LateUpdate()
+    {
+        if (currentBuilding != null)
+        {
+            startReady = true;
         }
     }
 
@@ -105,6 +109,11 @@ public class RoomBuildingSystem : MonoSingleton<RoomBuildingSystem>
 
         // 初始禁用碰撞体
         currentBuilding.GetComponent<Collider2D>().enabled = false;
+
+        // 设置角色状态
+        CharacterMgr.Player().SetStatus(CharacterStatus.Busy);
+        // 禁用相机跟随
+        WorldMgr.Instance.virtualCamera.Follow = null;
     }
 
     /// <summary>
@@ -112,11 +121,9 @@ public class RoomBuildingSystem : MonoSingleton<RoomBuildingSystem>
     /// </summary>
     void UpdateBuildingPosition()
     {
-        Vector2 mousePos = player != null
-            ? (Vector2)player.transform.position
-            : Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        // 1. 根据角色位置找到对应房间的楼层
+        // 1. 根据位置找到对应房间的楼层
         targetFloor = null;
         float minDistance = float.MaxValue;
 
@@ -179,6 +186,9 @@ public class RoomBuildingSystem : MonoSingleton<RoomBuildingSystem>
 
         if (IsPositionValid(targetFloor, snappedX, buildingWidth))
         {
+            AudioMgr.Instance.PlaySound("建造");
+            startReady = false;
+
             // 正式放置建筑物
             var newSlot = new BuildingSlot
             {
@@ -202,6 +212,10 @@ public class RoomBuildingSystem : MonoSingleton<RoomBuildingSystem>
 
             BuildingMgr.GetBuildingData<BuildBuildingData>(currentBuildingInstanceId)
                 .GetBuildPlatformData().StartBuild(buildingId, buildingInstanceId);
+
+            // 恢复相机跟随
+            WorldMgr.Instance.virtualCamera.Follow = WorldMgr.Instance.followTarget;
+            CharacterMgr.Player().SetStatus(CharacterStatus.Idle);
         }
         else
         {
@@ -217,6 +231,11 @@ public class RoomBuildingSystem : MonoSingleton<RoomBuildingSystem>
         Destroy(currentBuilding);
         currentBuilding = null;
         targetFloor = null;
+        startReady = false;
+
+        // 恢复相机跟随
+        WorldMgr.Instance.virtualCamera.Follow = WorldMgr.Instance.followTarget;
+        CharacterMgr.Player().SetStatus(CharacterStatus.Idle);
     }
 
     /// <summary>

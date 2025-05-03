@@ -7,7 +7,7 @@ public class AudioMgr : MonoSingleton<AudioMgr>
     [Header("音频设置")]
     public AudioSource musicSource; // 背景音乐播放器
     public AudioSource soundSource; // 音效播放器
-    
+
     [Header("音量设置")]
     [Range(0, 1)]
     public float musicVolume = 1f; // 音乐音量
@@ -86,6 +86,20 @@ public class AudioMgr : MonoSingleton<AudioMgr>
             sounds[name] = Resources.Load<AudioClip>("Audios/" + name);
             PlaySound(sounds[name]);
         }
+    }
+
+    public void PlayFootstep()
+    {
+        if (CharacterMgr.Player().status == CharacterStatus.Move)
+        {
+            PlaySound("脚步");
+        }
+    }
+
+    public void StopFootstepSound()
+    {
+        if (soundSource != null)
+            soundSource.Stop();
     }
 
     /// <summary>

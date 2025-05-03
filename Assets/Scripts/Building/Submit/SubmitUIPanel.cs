@@ -23,7 +23,7 @@ public class SubmitUIPanel : MonoSingleton<SubmitUIPanel>
     void Awake()
     {
         titleName.text = "提交";
-        closeBtn.onClick.AddListener(Hide);
+        closeBtn.onClick.AddListener(() => { AudioMgr.Instance.PlaySound("点击关闭"); Hide(); });
         Hide();
     }
 
@@ -52,6 +52,7 @@ public class SubmitUIPanel : MonoSingleton<SubmitUIPanel>
         startBtn.onClick.RemoveAllListeners();
         startBtn.onClick.AddListener(() =>
         {
+            AudioMgr.Instance.PlaySound("点击");
             // 检查材料是否足够
             for (int i = 0; i < requiredMaterialIdGroup.Length; i++)
             {

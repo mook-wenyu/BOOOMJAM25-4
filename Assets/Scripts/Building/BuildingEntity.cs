@@ -84,16 +84,24 @@ public class BuildingEntity : MonoBehaviour
                         return;
                     }
                     BuildPlatformUIPanel.Instance.Show(_instanceId);
+
+                    ClearTips();
                     return;
                 }
 
                 if (_instanceId == "bed")
                 {
                     GameMgr.PlayerSleep().Forget();
+                    ClearTips();
                     return;
                 }
 
                 _buildingData ??= BuildingMgr.GetBuildingData(_instanceId);
+                if (_buildingData == null)
+                {
+                    GlobalUIMgr.Instance.ShowMessage("正在建造中...");   // 显示提示信息
+                    return;
+                }
                 switch (_buildingData.GetBuildingType())
                 {
                     case BuildingType.Warehouse:
@@ -113,6 +121,7 @@ public class BuildingEntity : MonoBehaviour
                         ProductionPlatformUIPanel.Instance.Show(_instanceId);
                         break;
                 }
+                ClearTips();
             }
         }
     }
@@ -123,13 +132,27 @@ public class BuildingEntity : MonoBehaviour
         {
             _collider = collision;
             _isEnabled = true;
-            if (_instanceId == "design_platform" || _instanceId == "bed" || BuildingMgr.GetBuildingData(_instanceId).GetBuildingType() != BuildingType.Light)
+
+            if (_tipsUI != null)
+            {
+                return;
+            }
+
+            if (_instanceId == "design_platform")
             {
                 UpdateTips("按 F 键进行交互");
+                return;
             }
             if (_instanceId == "bed")
             {
                 UpdateTips("按 F 键入睡");
+                return;
+            }
+
+            _buildingData ??= BuildingMgr.GetBuildingData(_instanceId);
+            if (_buildingData != null && _buildingData.GetBuildingType() != BuildingType.Light)
+            {
+                UpdateTips("按 F 键进行交互");
             }
         }
     }
@@ -140,6 +163,34 @@ public class BuildingEntity : MonoBehaviour
         {
             _collider = collision;
             _isEnabled = true;
+
+            if (WorldMgr.Instance.uiRoot.GetChild(WorldMgr.Instance.uiRoot.childCount - 1).gameObject.activeSelf)
+            {
+                ClearTips();
+                return;
+            }
+
+            if (_tipsUI != null && _tipsUI.gameObject.activeSelf)
+            {
+                return;
+            }
+
+            if (_instanceId == "design_platform")
+            {
+                UpdateTips("按 F 键进行交互");
+                return;
+            }
+
+            if (_instanceId == "bed")
+            {
+                UpdateTips("按 F 键入睡");
+                return;
+            }
+
+            if (_buildingData != null && _buildingData.GetBuildingType() != BuildingType.Light)
+            {
+                UpdateTips("按 F 键进行交互");
+            }
         }
     }
 
@@ -149,7 +200,16 @@ public class BuildingEntity : MonoBehaviour
         {
             _collider = null;
             _isEnabled = false;
+            ClearTips();
+        }
+    }
+
+    public void ClearTips()
+    {
+        if (_tipsUI != null)
+        {
             GlobalUIMgr.Instance.Hide<SimpleTipsUI>();
+            _tipsUI = null;
         }
     }
 

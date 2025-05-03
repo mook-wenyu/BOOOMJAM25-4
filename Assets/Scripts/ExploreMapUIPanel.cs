@@ -42,6 +42,7 @@ public class ExploreMapUIPanel : MonoSingleton<ExploreMapUIPanel>
 
     public void SelectedMap(string toggleName)
     {
+        AudioMgr.Instance.PlaySound("点击");
         Debug.Log(toggleName + " 被选中");
         switch (toggleName)
         {
@@ -92,6 +93,7 @@ public class ExploreMapUIPanel : MonoSingleton<ExploreMapUIPanel>
 
     public void OnGoOutBtnClicked()
     {
+        AudioMgr.Instance.PlaySound("点击");
         var config = ExploreNodeMgr.GetMapConfig(ExploreNodeMgr.currentMapId);
         if (config == null)
         {
@@ -125,6 +127,7 @@ public class ExploreMapUIPanel : MonoSingleton<ExploreMapUIPanel>
 
     public void OnCloseBtnClicked()
     {
+        AudioMgr.Instance.PlaySound("点击关闭");
         CharacterMgr.Player().SetStatus(CharacterStatus.Idle);
         GameMgr.ResumeTime();
         Hide();

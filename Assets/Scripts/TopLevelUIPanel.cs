@@ -12,6 +12,8 @@ public class TopLevelUIPanel : MonoSingleton<TopLevelUIPanel>
     public TextMeshProUGUI dataText;
     public TextMeshProUGUI timeText;
 
+    public Button settingBtn;
+
     public Button saveBtn;
     public TMP_InputField sayIdInput;
     public Button sayBtn;
@@ -53,6 +55,11 @@ public class TopLevelUIPanel : MonoSingleton<TopLevelUIPanel>
         comeBack.onClick.AddListener(OnComeBackBtnClicked);
         comeBack.gameObject.SetActive(false);
 
+        settingBtn.onClick.AddListener(() =>
+        {
+            AudioMgr.Instance.PlaySound("点击");
+            SettingUIPanel.Instance.Show();
+        });
 
         saveBtn.onClick.AddListener(() => _ = GameMgr.SaveGameData());
 
@@ -197,11 +204,13 @@ public class TopLevelUIPanel : MonoSingleton<TopLevelUIPanel>
 
     public void OnGoOutBtnClicked()
     {
+        AudioMgr.Instance.PlaySound("点击");
         ExploreMapUIPanel.Instance.Show();
     }
 
     public void OnComeBackBtnClicked()
     {
+        AudioMgr.Instance.PlaySound("点击");
         GlobalUIMgr.Instance.ShowLoadingMask(true);
         comeBack.gameObject.SetActive(false);
         goOut.gameObject.SetActive(true);

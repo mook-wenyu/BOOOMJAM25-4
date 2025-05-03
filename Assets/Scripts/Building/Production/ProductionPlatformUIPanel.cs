@@ -33,7 +33,7 @@ public class ProductionPlatformUIPanel : MonoSingleton<ProductionPlatformUIPanel
 
     void Awake()
     {
-        closeBtn.onClick.AddListener(Hide);
+        closeBtn.onClick.AddListener(() => { AudioMgr.Instance.PlaySound("点击关闭"); Hide(); });
         // 清除所有物品槽
         itemContainer.content.DestroyAllChildren();
         productSlotContainer.content.DestroyAllChildren();
@@ -92,6 +92,7 @@ public class ProductionPlatformUIPanel : MonoSingleton<ProductionPlatformUIPanel
                 startProductionBtn.onClick.RemoveAllListeners();
                 startProductionBtn.onClick.AddListener(() =>
                 {
+                    AudioMgr.Instance.PlaySound("点击");
                     if (recipeConfig == null)
                     {
                         Debug.Log("配方不存在");
