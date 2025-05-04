@@ -112,7 +112,7 @@
   },
   "aHourInRealTime": {
     "$type": "GeneralParametersConfig, Assembly-CSharp",
-    "par": 15.0,
+    "par": 25.0,
     "id": "aHourInRealTime"
   }
 }
