@@ -32,6 +32,7 @@
     "light": 1,
     "energyCost": 10.0,
     "path": "Building\\20001",
+    "iconPath": "Icon\\Building\\20001",
     "id": "20001"
   },
   "20002": {
@@ -62,6 +63,7 @@
     "light": 0,
     "energyCost": 30.0,
     "path": "Building\\20002",
+    "iconPath": "Icon\\Building\\20002",
     "id": "20002"
   },
   "20003": {
@@ -87,6 +89,7 @@
     "light": 0,
     "energyCost": 5.0,
     "path": "Building\\20003",
+    "iconPath": "Icon\\Building\\20003",
     "id": "20003"
   },
   "20004": {
@@ -117,12 +120,13 @@
     "light": 0,
     "energyCost": 10.0,
     "path": "Building\\20004",
+    "iconPath": "Icon\\Building\\20004",
     "id": "20004"
   },
   "20005": {
     "$type": "BuildingConfig, Assembly-CSharp",
     "name": "烛台",
-    "desc": "手搓的小蜡烛，有小范围照明能力（不过照明系统没来得及做嘻嘻）",
+    "desc": "手搓的小蜡烛，有小范围照明能力",
     "type": 2,
     "grid": 1,
     "materialIDGroup": [
@@ -143,6 +147,7 @@
     "light": 3,
     "energyCost": 5.0,
     "path": "Building\\20005",
+    "iconPath": "Icon\\Building\\20005",
     "id": "20005"
   },
   "20006": {
@@ -171,6 +176,7 @@
     "light": 0,
     "energyCost": 25.0,
     "path": "Building\\20006",
+    "iconPath": "Icon\\Building\\20006",
     "id": "20006"
   },
   "20007": {
@@ -200,6 +206,7 @@
     "light": 0,
     "energyCost": 25.0,
     "path": "Building\\20007",
+    "iconPath": "Icon\\Building\\20007",
     "id": "20007"
   },
   "20008": {
@@ -230,6 +237,7 @@
     "light": 0,
     "energyCost": 10.0,
     "path": "Building\\20008",
+    "iconPath": "Icon\\Building\\20008",
     "id": "20008"
   },
   "20009": {
@@ -260,12 +268,13 @@
     "light": 0,
     "energyCost": 10.0,
     "path": "Building\\20009",
+    "iconPath": "Icon\\Building\\20009",
     "id": "20009"
   },
   "20010": {
     "$type": "BuildingConfig, Assembly-CSharp",
     "name": "油灯",
-    "desc": "用一瓶油和烛芯做成的简单油灯，有中等照明范围（不过照明系统没来得及做嘻嘻）",
+    "desc": "用一瓶油和烛芯做成的简单油灯，有中等照明范围",
     "type": 2,
     "grid": 1,
     "materialIDGroup": [
@@ -286,6 +295,7 @@
     "light": 5,
     "energyCost": 5.0,
     "path": "Building\\20010",
+    "iconPath": "Icon\\Building\\20010",
     "id": "20010"
   },
   "20011": {
@@ -316,6 +326,7 @@
     "light": 0,
     "energyCost": 40.0,
     "path": "Building\\20011",
+    "iconPath": "Icon\\Building\\20011",
     "id": "20011"
   },
   "20012": {
@@ -343,6 +354,7 @@
     "light": 0,
     "energyCost": 10.0,
     "path": "Building\\20012",
+    "iconPath": "Icon\\Building\\20012",
     "id": "20012"
   },
   "20013": {
@@ -368,12 +380,13 @@
     "light": 0,
     "energyCost": 10.0,
     "path": "Building\\20013",
+    "iconPath": "Icon\\Building\\20013",
     "id": "20013"
   },
   "20014": {
     "$type": "BuildingConfig, Assembly-CSharp",
     "name": "电灯",
-    "desc": "用电的照明设备，有最大的照明范围（不过照明系统没来得及做嘻嘻）",
+    "desc": "用电的照明设备，有最大的照明范围",
     "type": 2,
     "grid": 1,
     "materialIDGroup": [
@@ -394,6 +407,7 @@
     "light": 8,
     "energyCost": 10.0,
     "path": "Building\\20014",
+    "iconPath": "Icon\\Building\\20014",
     "id": "20014"
   },
   "20015": {
@@ -410,6 +424,7 @@
     "light": 0,
     "energyCost": 0.0,
     "path": "Building\\20015",
+    "iconPath": "Icon\\Building\\20015",
     "id": "20015"
   },
   "20016": {
@@ -426,6 +441,7 @@
     "light": 0,
     "energyCost": 0.0,
     "path": "Building\\20016",
+    "iconPath": "Icon\\Building\\20016",
     "id": "20016"
   }
 }
