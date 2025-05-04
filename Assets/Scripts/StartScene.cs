@@ -154,33 +154,33 @@ public class StartScene : MonoBehaviour
         characterData.hungerMax = (int)Utils.GetGeneralParametersConfig("mostHunger").par;
         characterData.energyMax = (int)Utils.GetGeneralParametersConfig("mostEnergy").par;
         characterData.spiritMax = (int)Utils.GetGeneralParametersConfig("mostSpirit").par;
-        characterData.health = characterData.healthMax;
-        characterData.hunger = characterData.hungerMax;
-        characterData.energy = characterData.energyMax;
-        characterData.spirit = characterData.spiritMax;
+        characterData.health = (int)Utils.GetGeneralParametersConfig("startHP").par;
+        characterData.hunger = (int)Utils.GetGeneralParametersConfig("startHunger").par;
+        characterData.energy = (int)Utils.GetGeneralParametersConfig("startEnergy").par;
+        characterData.spirit = (int)Utils.GetGeneralParametersConfig("startSpirit").par;
 
         GameMgr.currentSaveData.characters.Add(characterData.id, characterData);
         GameMgr.currentSaveData.playerId = characterData.id;
 
-        BuildingMgr.AddBuildingData(new BuildBuildingData(string.Empty, "design_platform"));
-        BuildingMgr.AddBuildingData(new BuildBuildingData(string.Empty, "bed"));
+        BuildingMgr.AddBuildingData(new BuildBuildingData(string.Empty, "design_platform") { remainingTime = 0 });
+        BuildingMgr.AddBuildingData(new BuildBuildingData(string.Empty, "bed") { remainingTime = 0 });
 
-        BuildingMgr.AddBuildingData(new BuildBuildingData("20005", "lighting_1_1") { lightingData = new LightingData() });
-        BuildingMgr.AddBuildingData(new BuildBuildingData("20005", "lighting_1_2") { lightingData = new LightingData() });
-        BuildingMgr.AddBuildingData(new BuildBuildingData("20005", "lighting_2_1") { lightingData = new LightingData() });
-        BuildingMgr.AddBuildingData(new BuildBuildingData("20005", "lighting_2_2") { lightingData = new LightingData() });
-        BuildingMgr.AddBuildingData(new BuildBuildingData("20005", "lighting_3_1") { lightingData = new LightingData() });
-        BuildingMgr.AddBuildingData(new BuildBuildingData("20005", "lighting_3_2") { lightingData = new LightingData() });
+        BuildingMgr.AddBuildingData(new BuildBuildingData("20005", "lighting_1_1") { remainingTime = 0, lightingData = new LightingData() });
+        BuildingMgr.AddBuildingData(new BuildBuildingData("20005", "lighting_1_2") { remainingTime = 0, lightingData = new LightingData() });
+        BuildingMgr.AddBuildingData(new BuildBuildingData("20005", "lighting_2_1") { remainingTime = 0, lightingData = new LightingData() });
+        BuildingMgr.AddBuildingData(new BuildBuildingData("20005", "lighting_2_2") { remainingTime = 0, lightingData = new LightingData() });
+        BuildingMgr.AddBuildingData(new BuildBuildingData("20005", "lighting_3_1") { remainingTime = 0, lightingData = new LightingData() });
+        BuildingMgr.AddBuildingData(new BuildBuildingData("20005", "lighting_3_2") { remainingTime = 0, lightingData = new LightingData() });
 
-        BuildingMgr.AddBuildingData(new WarehouseBuildingData("20003", "warehouse_1_3", WarehouseType.Box, 9));
+        BuildingMgr.AddBuildingData(new WarehouseBuildingData("20003", "warehouse_1_3", WarehouseType.Box, 9) { remainingTime = 0 });
         var warehouseData_1_3 = BuildingMgr.GetBuildingData<WarehouseBuildingData>("warehouse_1_3").GetWarehouseData();
         warehouseData_1_3.AddItem("10031", 5);
-        BuildingMgr.AddBuildingData(new WarehouseBuildingData("20003", "warehouse_2_1", WarehouseType.Box, 9));
+        BuildingMgr.AddBuildingData(new WarehouseBuildingData("20003", "warehouse_2_1", WarehouseType.Box, 9) { remainingTime = 0 });
         var warehouseData_2_1 = BuildingMgr.GetBuildingData<WarehouseBuildingData>("warehouse_2_1").GetWarehouseData();
         warehouseData_2_1.AddItem("10001", 10);
         warehouseData_2_1.AddItem("10002", 10);
         warehouseData_2_1.AddItem("10003", 10);
-        BuildingMgr.AddBuildingData(new WarehouseBuildingData("20003", "warehouse_3_3", WarehouseType.Box, 9));
+        BuildingMgr.AddBuildingData(new WarehouseBuildingData("20003", "warehouse_3_3", WarehouseType.Box, 9) { remainingTime = 0 });
         var warehouseData_3_3 = BuildingMgr.GetBuildingData<WarehouseBuildingData>("warehouse_3_3").GetWarehouseData();
         warehouseData_3_3.AddItem("10028", 1);
 

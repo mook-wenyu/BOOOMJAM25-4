@@ -206,6 +206,11 @@ public class CharacterData
     }
     public void DecreaseHunger(float amount)
     {
+        if (activeBuffs.Any(b => b.buffDataId == "50012"))
+        {
+            // 不再失去饱食度
+            return;
+        }
         SetHunger(hunger - amount);
     }
 
@@ -228,7 +233,28 @@ public class CharacterData
     }
     public void IncreaseEnergy(float amount)
     {
-        SetEnergy(energy + amount);
+        if (activeBuffs.Any(b => b.buffDataId == "50008"))
+        {
+            // 精神低于20：无法以任何方式获得活力
+            return;
+        }
+        float modifier = 1;
+        if (activeBuffs.Any(b => b.buffDataId == "50001"))
+        {
+            // 昏昏欲睡：活力增长速度降低50%
+            modifier = 0.5f;
+        }
+        if (activeBuffs.Any(b => b.buffDataId == "50007"))
+        {
+            // 精神低于50：活力增长速度降低50%
+            modifier = 0.5f;
+        }
+        if (activeBuffs.Any(b => b.buffDataId == "50003"))
+        {
+            // 精神饱满：活力增长速度提高100%
+            modifier = 2;
+        }
+        SetEnergy(energy + amount * modifier);
     }
     public void DecreaseEnergy(float amount)
     {

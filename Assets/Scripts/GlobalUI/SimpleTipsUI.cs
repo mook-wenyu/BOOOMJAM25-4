@@ -8,7 +8,7 @@ public class SimpleTipsUI : TipsUIBase
     public GameObject iconContainer;
     public Image icon;
     public Image icon2;
-    
+
     public TextMeshProUGUI contentText;
     public float showDelay = 0.1f; // 显示延迟时间
 
@@ -17,11 +17,11 @@ public class SimpleTipsUI : TipsUIBase
 
     public void SetIcon(Sprite sprite, Sprite sprite2 = null, bool hideText = true)
     {
+        contentText.gameObject.SetActive(!hideText);
         icon.sprite = sprite;
         icon.gameObject.SetActive(true);
         icon2.sprite = sprite2;
         icon2.gameObject.SetActive(sprite2 != null);
-        contentText.gameObject.SetActive(!hideText);
 
         GetComponent<Image>().SetAlpha(0);
 
@@ -35,10 +35,10 @@ public class SimpleTipsUI : TipsUIBase
     /// <param name="content">提示内容</param>
     public void SetContent(string content, bool hideIcon = true)
     {
-        contentText.text = content;
-        contentText.gameObject.SetActive(true);
         icon.gameObject.SetActive(!hideIcon);
         icon2.gameObject.SetActive(false);
+        contentText.text = content;
+        contentText.gameObject.SetActive(true);
 
         GetComponent<Image>().SetAlpha(1);
 

@@ -18,6 +18,8 @@ public class BuildingEntity : MonoBehaviour
 
     private BuildingData _buildingData;   // 建筑数据
 
+    public bool IsComplete { get; private set; } = false;
+
     private bool _isEnabled = false;
     private Collider2D _collider;
     private SimpleTipsUI _tipsUI;
@@ -37,6 +39,9 @@ public class BuildingEntity : MonoBehaviour
         _instanceId = instanceId;
         _buildingId = buildingId;
 
+        IsComplete = BuildingMgr.HasBuildingData(instanceId);
+        Debug.Log($"Setup: {instanceId} - {IsComplete}");
+
         var config = BuildingMgr.GetBuildingConfig(buildingId);
         if (config != null)
         {
@@ -47,11 +52,28 @@ public class BuildingEntity : MonoBehaviour
                 _boxCollider.offset = _spriteRenderer.sprite.bounds.center;
             }
 
-            _light2D.enabled = config.light > 0;
+            _lightingRange = config.light;
             _light2D.transform.position = transform.position;
             _light2D.transform.position += Vector3.up * 3.2f;
-            _light2D.pointLightInnerRadius = config.light * 2;
-            _light2D.pointLightOuterRadius = config.light * 4;
+            if (IsComplete && config.light > 0)
+            {
+                _light2D.enabled = true;
+                _light2D.pointLightInnerRadius = config.light * 2;
+                _light2D.pointLightOuterRadius = config.light * 4;
+            }
+            else
+            {
+                _light2D.enabled = false;
+            }
+        }
+
+        if (IsComplete)
+        {
+            Complete();
+        }
+        else
+        {
+            UnComplete();
         }
     }
 
@@ -67,10 +89,27 @@ public class BuildingEntity : MonoBehaviour
 
     public void SetLightingRange(int value)
     {
-        _lightingRange = value;
-        _light2D.enabled = _lightingRange > 0;
-        _light2D.pointLightInnerRadius = _lightingRange * 2;
-        _light2D.pointLightOuterRadius = _lightingRange * 4;
+        _light2D.enabled = value > 0;
+        _light2D.pointLightInnerRadius = value * 2;
+        _light2D.pointLightOuterRadius = value * 4;
+    }
+
+    public void UnComplete()
+    {
+        IsComplete = false;
+        _spriteRenderer.color = Color.gray;
+        Debug.Log($"UnComplete: {_instanceId} - {_spriteRenderer.color}");
+    }
+
+    public void Complete()
+    {
+        IsComplete = true;
+        _spriteRenderer.color = Color.white;
+
+        if (_lightingRange > 0)
+        {
+            SetLightingRange(_lightingRange);
+        }
     }
 
     void Update()

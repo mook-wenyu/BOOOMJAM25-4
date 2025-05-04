@@ -22,6 +22,10 @@ public class RoomBuildingSystem : MonoSingleton<RoomBuildingSystem>
 
     private bool startReady = false;    // 是否可以开始放置
 
+    private Color validColor = new Color(0.5f, 1f, 0.5f, 1f);
+    private Color invalidColor = new Color(1f, 0.5f, 0.5f, 1f);
+    private Color buildingColor = new Color(0.5f, 0.5f, 0.5f, 1f);
+
     // 存储所有正在生产中的建筑的UI引用
     public Dictionary<string, GameObject> buildingTimeUIs = new Dictionary<string, GameObject>();
 
@@ -53,6 +57,9 @@ public class RoomBuildingSystem : MonoSingleton<RoomBuildingSystem>
             // 计算左边缘位置
             float leftEdge = xPos - buildingWidth / 2;
 
+            building.name = be.GetId();
+
+            // 创建建筑槽位
             var slot = new BuildingSlot
             {
                 startX = leftEdge,
@@ -72,6 +79,7 @@ public class RoomBuildingSystem : MonoSingleton<RoomBuildingSystem>
             foreach (var slot in floor.placedBuildings.Values)
             {
                 var building = Instantiate(buildingPrefab, buildingContainer);
+                building.name = slot.buildingInstanceId;
                 // 设置位置时，将左边缘转换为中心点位置
                 float centerX = slot.startX + (slot.endX - slot.startX) / 2;
                 building.transform.position = new Vector2(centerX, floor.yPosition);
@@ -130,6 +138,7 @@ public class RoomBuildingSystem : MonoSingleton<RoomBuildingSystem>
         this.buildingId = buildingId;
 
         currentBuilding = Instantiate(buildingPrefab, buildingContainer);
+        currentBuilding.name = buildingInstanceId;
         var entity = currentBuilding.GetComponent<BuildingEntity>();
         entity.Setup(buildingId, buildingInstanceId);
 
@@ -202,7 +211,7 @@ public class RoomBuildingSystem : MonoSingleton<RoomBuildingSystem>
         // 4. 更新预览颜色
         bool isValid = IsPositionValid(targetFloor, snappedX, buildingWidth);
         currentBuilding.GetComponent<SpriteRenderer>().color =
-            isValid ? Color.green : Color.red;
+            isValid ? validColor : invalidColor;
     }
 
     /// <summary>
@@ -234,7 +243,7 @@ public class RoomBuildingSystem : MonoSingleton<RoomBuildingSystem>
 
             // 启用碰撞体
             currentBuilding.GetComponent<Collider2D>().enabled = true;
-            currentBuilding.GetComponent<SpriteRenderer>().color = Color.white;
+            currentBuilding.GetComponent<SpriteRenderer>().color = buildingColor;
 
             // 创建并初始化UI
             var buildingTime = Instantiate(buildingTimePrefab, buildingTimeContainer);

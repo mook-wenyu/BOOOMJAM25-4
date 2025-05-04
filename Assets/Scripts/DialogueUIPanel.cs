@@ -145,6 +145,8 @@ public class DialogueUIPanel : MonoSingleton<DialogueUIPanel>
                         {
                             speakerRight.transform.localScale = new Vector3(1, 1, 1);
                         }
+                        speakerLeft.color = Color.gray;
+                        speakerRight.color = Color.white;
                         speakerRight.gameObject.SetActive(true);
                     }, null);
                 }
@@ -165,6 +167,8 @@ public class DialogueUIPanel : MonoSingleton<DialogueUIPanel>
                 {
                     speakerLeft.sprite = Resources.Load<Sprite>("Character/Pictures/player_left");
                     speakerLeft.transform.localScale = new Vector3(-1, 1, 1);
+                    speakerLeft.color = Color.white;
+                    speakerRight.color = Color.gray;
                     speakerLeft.gameObject.SetActive(true);
                 }, null);
             }
@@ -188,6 +192,8 @@ public class DialogueUIPanel : MonoSingleton<DialogueUIPanel>
                     {
                         speakerRight.transform.localScale = new Vector3(1, 1, 1);
                     }
+                    speakerLeft.color = Color.gray;
+                    speakerRight.color = Color.white;
                     speakerRight.gameObject.SetActive(true);
                 }, null);
             }
@@ -196,6 +202,8 @@ public class DialogueUIPanel : MonoSingleton<DialogueUIPanel>
         {
             dialogueSpeaker.text = string.Empty;
             dialogueSpeakerBG.SetActive(false);
+            speakerLeft.color = Color.gray;
+            speakerRight.color = Color.gray;
         }
 
         // 对话内容

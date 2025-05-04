@@ -117,9 +117,11 @@ public class ExploreNodeEntity : MonoBehaviour,
 
         var tipsUI = GlobalUIMgr.Instance.Show<SimpleTipsUI>(GlobalUILayer.TooltipLayer);
 
-        tipsUI.SetContent(itemData.GetConfig().name);
+        var config = itemData.GetConfig();
+        tipsUI.SetContent($"{config.name}\r\n\r\n{config.desc}");
 
         Vector3 uiPos = Camera.main.WorldToScreenPoint(transform.position);
+        uiPos.x += 40;
         uiPos.y += 100;
         tipsUI.UpdatePosition(uiPos, Vector2.zero);
     }

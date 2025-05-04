@@ -153,9 +153,9 @@ public class GlobalUIMgr : MonoSingleton<GlobalUIMgr>
 
             msg = Instantiate(prefab, GetLayer(GlobalUILayer.MessageLayer)).GetComponent<Message>();
             var rectTransform = msg.GetComponent<RectTransform>();
-            rectTransform.anchorMin = new Vector2(1, 1);
-            rectTransform.anchorMax = new Vector2(1, 1);
-            rectTransform.pivot = new Vector2(1, 1);
+            rectTransform.anchorMin = new Vector2(0.5f, 1);
+            rectTransform.anchorMax = new Vector2(0.5f, 1);
+            rectTransform.pivot = new Vector2(0.5f, 1);
             rectTransform.anchoredPosition = new Vector2(-24, -24);
         }
 

@@ -146,6 +146,7 @@ public class TopLevelUIPanel : MonoSingleton<TopLevelUIPanel>
         {
             GameMgr.PauseTime();
             GlobalUIMgr.Instance.ShowMessage("您已死亡！");
+            GameMgr.End_Game();
         }
     }
 

@@ -34,6 +34,8 @@ public static class GameMgr
     /// </summary>
     private static bool _isTimePaused;
 
+    private static int _timeDelta;
+
     /// <summary>
     /// 初始化
     /// </summary>
@@ -43,6 +45,7 @@ public static class GameMgr
         {
             // TODO: 生成默认配置文件
         }
+        _timeDelta = (int)((Utils.GetGeneralParametersConfig("aHourInRealTime").par / 60f) * 1000);
 
         currentSaveData = new SaveData();
     }
@@ -143,7 +146,7 @@ public static class GameMgr
                 {
                     await currentSaveData.gameTime.AddMinutes(1);
                 }
-                await UniTask.Delay(334, cancellationToken: _timeUpdateCts.Token);
+                await UniTask.Delay(_timeDelta, cancellationToken: _timeUpdateCts.Token);
             }
         }
         catch (OperationCanceledException)
@@ -226,6 +229,11 @@ public static class GameMgr
             {
                 // 睡觉起床
                 CharacterMgr.Player().IncreaseEnergy((float)Utils.GetGeneralParametersConfig("energyGrowInSleep").par);
+                if (CharacterMgr.Player().activeBuffs.Any(b => b.buffDataId == "50005"))
+                {
+                    // 麻麻的爱：精神恢复5点
+                    CharacterMgr.Player().IncreaseSpirit(5);
+                }
             }
             WorldMgr.Instance.globalLight.intensity = 1f;
             WorldMgr.Instance.blackScreen.SetActive(false);
@@ -276,8 +284,29 @@ public static class GameMgr
             // 更新属性
             if (character.hunger > 0)
             {
-                // 饱食度大于0，减少饱食度
-                character.DecreaseHunger((float)Utils.GetGeneralParametersConfig("hungerLostValue").par);
+                if (character.activeBuffs.Any(b => b.buffDataId == "50004"))
+                {
+                    // 睡神：饱食度减少30%
+                    character.DecreaseHunger((float)Utils.GetGeneralParametersConfig("hungerLostValue").par * 0.7f);
+                }
+                else
+                {
+                    // 饱食度大于0，减少饱食度
+                    character.DecreaseHunger((float)Utils.GetGeneralParametersConfig("hungerLostValue").par);
+                }
+
+                if (character.activeBuffs.Any(b => b.buffDataId == "50009"))
+                {
+                    // 辐射增生：饱食度减少1点
+                    character.DecreaseHunger(1);
+                }
+                if (character.activeBuffs.Any(b => b.buffDataId == "50010"))
+                {
+                    // 辐射病：饱食度减少3点，生命值减少1点
+                    character.DecreaseHunger(3);
+                    character.DecreaseHealth(1);
+                }
+
             }
             else
             {
@@ -292,10 +321,21 @@ public static class GameMgr
                 character.IncreaseHealth((float)Utils.GetGeneralParametersConfig("hPGrowValue").par);
             }
 
-            if (currentSaveData.gameTime.hour >= 7 && currentSaveData.gameTime.hour <= 18)
+            if (currentSaveData.gameTime.hour == 0 || (currentSaveData.gameTime.hour >= 8 && currentSaveData.gameTime.hour <= 23))
             {
                 // 白天，增加体力
-                character.IncreaseEnergy(2);
+                character.IncreaseEnergy((float)Utils.GetGeneralParametersConfig("energyGrowValueInDay").par * 2f);
+            }
+
+            if (character.activeBuffs.Any(b => b.buffDataId == "50006"))
+            {
+                // 流血：每小时失去2点生命值
+                character.DecreaseHealth(2);
+            }
+            if (character.activeBuffs.Any(b => b.buffDataId == "50011"))
+            {
+                // 脑震荡：每小时随机失去0~3点活力
+                character.DecreaseEnergy(UnityEngine.Random.Range(0, 4));
             }
         }
     }
@@ -313,7 +353,15 @@ public static class GameMgr
             // 更新平台中的所有建筑
             foreach (var building in platform.buildingProgress)
             {
-                RoomBuildingSystem.Instance.buildingTimeContainer.Find(building.instanceId).GetComponent<SimpleTipsUI>().SetContent($"剩余时间: {building.remainingTime}");
+                var timeObj = RoomBuildingSystem.Instance.buildingTimeContainer.Find(building.instanceId);
+                if (timeObj == null)
+                {
+                    timeObj = GameObject.Instantiate(RoomBuildingSystem.Instance.buildingTimePrefab, RoomBuildingSystem.Instance.buildingTimeContainer).transform;
+                    timeObj.name = building.instanceId;
+                    RoomBuildingSystem.Instance.buildingTimeUIs[building.instanceId] = timeObj.gameObject;
+                }
+                // 更新建筑时间
+                timeObj.GetComponent<SimpleTipsUI>().SetContent($"剩余时间: {building.remainingTime}");
                 building.ReduceTime();
 
                 if (building.IsComplete())
@@ -333,7 +381,7 @@ public static class GameMgr
                 platform.buildingProgress.Remove(building);
                 GameObject.Destroy(RoomBuildingSystem.Instance.buildingTimeContainer.Find(building.instanceId).gameObject);
                 RoomBuildingSystem.Instance.buildingTimeUIs.Remove(building.instanceId);
-                // RoomBuildingSystem.Instance.buildingTimeContainer.Find(building.instanceId).GetComponent<SimpleTipsUI>().SetContent("已完成");
+                RoomBuildingSystem.Instance.buildingContainer.Find(building.instanceId).GetComponent<BuildingEntity>().Complete();
             }
         }
     }
