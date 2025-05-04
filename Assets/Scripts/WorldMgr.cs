@@ -115,6 +115,7 @@ public class WorldMgr : MonoSingleton<WorldMgr>
 
     public void OnEndGameBtnClicked()
     {
+        AudioMgr.Instance.PlaySound("点击");
         SceneManager.LoadScene("StartScene");
     }
 }

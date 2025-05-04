@@ -117,5 +117,10 @@ public class ActiveBuff
         return _buffData != null && _buffData.defaultTime > 0 && remainingTime <= 0;
     }
 
+    public BuffConfig GetConfig()
+    {
+        _buffData ??= BuffMgr.GetBuffData(buffDataId);
+        return _buffData;
+    }
 
 }

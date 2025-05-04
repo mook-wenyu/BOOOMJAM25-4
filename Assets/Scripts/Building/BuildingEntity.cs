@@ -40,7 +40,6 @@ public class BuildingEntity : MonoBehaviour
         _buildingId = buildingId;
 
         IsComplete = BuildingMgr.HasBuildingData(instanceId);
-        Debug.Log($"Setup: {instanceId} - {IsComplete}");
 
         var config = BuildingMgr.GetBuildingConfig(buildingId);
         if (config != null)
