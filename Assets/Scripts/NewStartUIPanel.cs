@@ -32,7 +32,6 @@ public class NewStartUIPanel : MonoBehaviour
         }
         else
         {
-
             GameMgr.StartTime();
         }
     }

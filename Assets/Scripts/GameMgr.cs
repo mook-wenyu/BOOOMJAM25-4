@@ -118,7 +118,7 @@ public static class GameMgr
     /// <summary>
     /// 取消时间更新
     /// </summary>
-    private static void StopTime()
+    public static void StopTime()
     {
         if (_timeUpdateCts == null) return;
 
@@ -221,6 +221,10 @@ public static class GameMgr
     // 整点事件处理
     private static async UniTask HandleHourChanged(GameTime gameTime)
     {
+#if UNITY_EDITOR
+        Debug.Log($"整点事件处理 - {gameTime.hour}");
+#endif
+
         // 当前是上午8点，开启全局光源
         if (currentSaveData.gameTime.IsSpecificFullHour(8))
         {

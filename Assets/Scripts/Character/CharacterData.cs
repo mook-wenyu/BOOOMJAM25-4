@@ -154,6 +154,10 @@ public class CharacterData
     /// </summary>
     public void SetHealth(float newHealth)
     {
+        if (status == CharacterStatus.Dead)
+        {
+            return;
+        }
         health = Math.Min(newHealth, healthMax);
         if (health <= 0)
         {

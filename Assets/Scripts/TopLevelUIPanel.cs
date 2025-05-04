@@ -142,7 +142,7 @@ public class TopLevelUIPanel : MonoSingleton<TopLevelUIPanel>
     {
         health.value = hp;
         healthText.text = $"{hp} / {player.healthMax}";
-        if (hp <= 0)
+        if (character.health <= 0)
         {
             GameMgr.PauseTime();
             GlobalUIMgr.Instance.ShowMessage("您已死亡！");
@@ -233,6 +233,19 @@ public class TopLevelUIPanel : MonoSingleton<TopLevelUIPanel>
         GameMgr.OnGameTimePaused -= HandleGameTimePaused;
         GameMgr.OnGameTimeResumed -= HandleGameTimeResumed;
         GameMgr.currentSaveData.gameTime.OnTimeChanged -= HandleTimeChanged;
+
+        player.OnHpChanged -= HandleHpChanged;
+        player.OnHpMaxChanged -= HandleHpMaxChanged;
+        player.OnHungerChanged -= HandleHungerChanged;
+        player.OnHungerMaxChanged -= HandleHungerMaxChanged;
+        player.OnEnergyChanged -= HandleEnergyChanged;
+        player.OnEnergyMaxChanged -= HandleEnergyMaxChanged;
+        player.OnSpiritChanged -= HandleSpiritChanged;
+        player.OnSpiritMaxChanged -= HandleSpiritMaxChanged;
+        player.OnBuffAdded -= HandleBuffAdded;
+        player.OnBuffRemoved -= HandleBuffRemoved;
+
+        GameMgr.StopTime();
 
         base.OnDestroy();
     }

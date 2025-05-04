@@ -35,6 +35,11 @@ public class WorldMgr : MonoSingleton<WorldMgr>
             confiner2D = virtualCamera.GetComponent<CinemachineConfiner2D>();
         }
 
+        if (uiRoot == null)
+        {
+            uiRoot = GameObject.Find("UIPanelRoot").transform;
+        }
+
         blackScreen.SetActive(false);
 
         endGameBtn.onClick.AddListener(OnEndGameBtnClicked);
@@ -46,7 +51,10 @@ public class WorldMgr : MonoSingleton<WorldMgr>
     // Start is called before the first frame update
     void Start()
     {
-
+        if (uiRoot == null)
+        {
+            uiRoot = GameObject.Find("UIPanelRoot").transform;
+        }
     }
 
     // Update is called once per frame
@@ -118,4 +126,6 @@ public class WorldMgr : MonoSingleton<WorldMgr>
         AudioMgr.Instance.PlaySound("点击");
         SceneManager.LoadScene("StartScene");
     }
+
+
 }
