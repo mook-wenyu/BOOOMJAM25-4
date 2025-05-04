@@ -33,9 +33,9 @@ public class BuildPlatformItem : MonoBehaviour,
 
         if (this.CurrentItemConfig != null)
         {
-            if (!string.IsNullOrEmpty(CurrentItemConfig.path) && CurrentItemConfig.path != "0")
+            if (!string.IsNullOrEmpty(CurrentItemConfig.iconPath) && CurrentItemConfig.iconPath != "0")
             {
-                itemIcon.sprite = Resources.Load<Sprite>(CurrentItemConfig.path);
+                itemIcon.sprite = Resources.Load<Sprite>(CurrentItemConfig.iconPath);
             }
             else
             {
