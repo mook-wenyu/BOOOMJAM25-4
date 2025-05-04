@@ -147,10 +147,7 @@ public class RoomBuildingSystem : MonoSingleton<RoomBuildingSystem>
         // 初始禁用碰撞体
         currentBuilding.GetComponent<Collider2D>().enabled = false;
 
-        // 设置角色状态
-        CharacterMgr.Player().SetStatus(CharacterStatus.Busy);
-        // 禁用相机跟随
-        WorldMgr.Instance.virtualCamera.Follow = null;
+        WorldMgr.Instance.StopCameraFollowing();
     }
 
     /// <summary>
@@ -264,8 +261,7 @@ public class RoomBuildingSystem : MonoSingleton<RoomBuildingSystem>
                 .GetBuildPlatformData().StartBuild(buildingId, buildingInstanceId);
 
             // 恢复相机跟随
-            WorldMgr.Instance.virtualCamera.Follow = WorldMgr.Instance.followTarget;
-            CharacterMgr.Player().SetStatus(CharacterStatus.Idle);
+            WorldMgr.Instance.RestoreCameraFollowing();
         }
         else
         {
@@ -284,8 +280,7 @@ public class RoomBuildingSystem : MonoSingleton<RoomBuildingSystem>
         startReady = false;
 
         // 恢复相机跟随
-        WorldMgr.Instance.virtualCamera.Follow = WorldMgr.Instance.followTarget;
-        CharacterMgr.Player().SetStatus(CharacterStatus.Idle);
+        WorldMgr.Instance.RestoreCameraFollowing();
     }
 
     /// <summary>

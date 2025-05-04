@@ -110,7 +110,8 @@ public class WorldMgr : MonoSingleton<WorldMgr>
     {
         CharacterMgr.Player().SetStatus(CharacterStatus.Busy);
         virtualCamera.Follow = null;
-        virtualCamera.m_Lens.OrthographicSize = 30;
+        virtualCamera.m_Lens.OrthographicSize = 25;
+        virtualCamera.transform.position = new Vector3(0, -6, virtualCamera.transform.position.z);
     }
 
     /// <summary>
