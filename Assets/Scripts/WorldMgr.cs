@@ -110,6 +110,7 @@ public class WorldMgr : MonoSingleton<WorldMgr>
     {
         CharacterMgr.Player().SetStatus(CharacterStatus.Busy);
         virtualCamera.Follow = null;
+        virtualCamera.m_Lens.OrthographicSize = 30;
     }
 
     /// <summary>
@@ -119,6 +120,7 @@ public class WorldMgr : MonoSingleton<WorldMgr>
     {
         virtualCamera.Follow = followTarget;
         CharacterMgr.Player().SetStatus(CharacterStatus.Idle);
+        virtualCamera.m_Lens.OrthographicSize = 8;
     }
 
     public void OnEndGameBtnClicked()

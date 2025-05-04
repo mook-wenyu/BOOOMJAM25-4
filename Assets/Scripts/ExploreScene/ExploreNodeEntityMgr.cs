@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Cinemachine;
+using Cysharp.Threading.Tasks;
 using PrimeTween;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -169,13 +170,33 @@ public class ExploreNodeEntityMgr : MonoSingleton<ExploreNodeEntityMgr>
         {
             if (node.isCompleted)
             {
+                var nodeOriginalConfig = node.GetOriginalConfig();
                 var nodeConfig = node.GetConfig();
                 // 显示节点
                 nodeRoot.Find(node.id).gameObject.SetActive(true);
+
+                if (nodeOriginalConfig.unlocksMidNodes != null && nodeOriginalConfig.unlocksMidNodes.Length > 0)
+                {
+                    foreach (var nodeId in nodeOriginalConfig.unlocksMidNodes)
+                    {
+                        UnlockNode(nodeId);
+                        ActivePath(node.id, nodeId);
+                    }
+                }
+
                 // 默认解锁
                 if (nodeConfig.unlocksMidNodes != null && nodeConfig.unlocksMidNodes.Length > 0)
                 {
                     foreach (var nodeId in nodeConfig.unlocksMidNodes)
+                    {
+                        UnlockNode(nodeId);
+                        ActivePath(node.id, nodeId);
+                    }
+                }
+
+                if (nodeOriginalConfig.unlocksPostNodes != null && nodeOriginalConfig.unlocksPostNodes.Length > 0)
+                {
+                    foreach (var nodeId in nodeOriginalConfig.unlocksPostNodes)
                     {
                         UnlockNode(nodeId);
                         ActivePath(node.id, nodeId);
@@ -334,6 +355,7 @@ public class ExploreNodeEntityMgr : MonoSingleton<ExploreNodeEntityMgr>
     private bool MovePlayerToNode(ExploreNodeData targetNode)
     {
         HideAllUIPanels();
+        var player = CharacterMgr.Player();
 
         // 检查需要消耗的时间 0.5小时
         int consumeTime = GameTime.HourToMinute(Utils.GetGeneralParametersConfig("nodeTimeCost").par);
@@ -343,8 +365,13 @@ public class ExploreNodeEntityMgr : MonoSingleton<ExploreNodeEntityMgr>
             return false;
         }
         float energyCost = (float)Utils.GetGeneralParametersConfig("nodeEnergyCost").par;
+        if (player.activeBuffs.Any(b => b.buffDataId == "50002"))
+        {
+            // 骨折：探索消耗增加100%
+            energyCost *= 2;
+        }
         // 检查需要消耗的体力
-        if (CharacterMgr.Player().energy < energyCost)
+        if (player.energy < energyCost)
         {
             GlobalUIMgr.Instance.ShowMessage("体力不足，无法前进！");
             return false;
@@ -352,8 +379,8 @@ public class ExploreNodeEntityMgr : MonoSingleton<ExploreNodeEntityMgr>
 
         playerUnit.MoveToNode(targetNode.id);
 
-        _ = GameMgr.currentSaveData.gameTime.AddMinutes(consumeTime);
-        CharacterMgr.Player().DecreaseEnergy(energyCost);
+        GameMgr.currentSaveData.gameTime.AddMinutes(consumeTime).Forget();
+        player.DecreaseEnergy((float)(Utils.GetGeneralParametersConfig("nodeEnergyCost").par - 1) + energyCost);
 
         return true;
     }

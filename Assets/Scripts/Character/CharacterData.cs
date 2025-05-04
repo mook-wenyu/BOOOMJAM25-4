@@ -68,31 +68,41 @@ public class CharacterData
     /// <summary>
     /// 生命值
     /// </summary>
-    public float health = 100;
-    public float healthMax = 100;
+    public float health;
+    public float healthMax;
 
     /// <summary>
     /// 饱食度
     /// </summary>
-    public float hunger = 100;
-    public float hungerMax = 100;
+    public float hunger;
+    public float hungerMax;
 
     /// <summary>
     /// 活力
     /// </summary>
-    public float energy = 100;
-    public float energyMax = 100;
+    public float energy;
+    public float Energy
+    {
+        get => energy;
+        set
+        {
+            energy = value;
+            OnEnergyChanged?.Invoke(this);
+        }
+
+    }
+    public float energyMax;
 
     /// <summary>
     /// 精神
     /// </summary>
-    public float spirit = 100;
-    public float spiritMax = 100;
+    public float spirit;
+    public float spiritMax;
 
     /// <summary>
     /// 移动速度
     /// </summary>
-    public float moveSpeed = 10;
+    public float moveSpeed = 10f;
 
     /// <summary>
     /// 背包数据
@@ -118,26 +128,26 @@ public class CharacterData
     /// <summary>
     /// 生命值变化事件
     /// </summary>
-    public event Action<CharacterData, float> OnHpChanged;
-    public event Action<CharacterData, float> OnHpMaxChanged;
+    public event Action<CharacterData> OnHpChanged;
+    public event Action<CharacterData> OnHpMaxChanged;
 
     /// <summary>
     /// 饱食度变化事件
     /// </summary>
-    public event Action<CharacterData, float> OnHungerChanged;
-    public event Action<CharacterData, float> OnHungerMaxChanged;
+    public event Action<CharacterData> OnHungerChanged;
+    public event Action<CharacterData> OnHungerMaxChanged;
 
     /// <summary>
     /// 体力变化事件
     /// </summary>
-    public event Action<CharacterData, float> OnEnergyChanged;
-    public event Action<CharacterData, float> OnEnergyMaxChanged;
+    public event Action<CharacterData> OnEnergyChanged;
+    public event Action<CharacterData> OnEnergyMaxChanged;
 
     /// <summary>
     /// 精神变化事件
     /// </summary>
-    public event Action<CharacterData, float> OnSpiritChanged;
-    public event Action<CharacterData, float> OnSpiritMaxChanged;
+    public event Action<CharacterData> OnSpiritChanged;
+    public event Action<CharacterData> OnSpiritMaxChanged;
 
     public CharacterData()
     {
@@ -154,17 +164,17 @@ public class CharacterData
     /// </summary>
     public void SetHealth(float newHealth)
     {
-        if (status == CharacterStatus.Dead)
+        if (this.status == CharacterStatus.Dead)
         {
             return;
         }
-        health = Math.Min(newHealth, healthMax);
-        if (health <= 0)
+        this.health = Math.Min(newHealth, this.healthMax);
+        if (this.health <= 0)
         {
-            health = 0;
+            this.health = 0;
         }
-        OnHpChanged?.Invoke(this, health);
-        if (health <= 0)
+        OnHpChanged?.Invoke(this);
+        if (this.health <= 0)
         {
             SetStatus(CharacterStatus.Dead);
             Debug.Log($"角色已死亡，角色ID：{id}，角色名称：{fullName}");
@@ -175,16 +185,16 @@ public class CharacterData
     /// </summary>
     public void SetHealthMax(float newHealthMax)
     {
-        healthMax = newHealthMax;
-        OnHpMaxChanged?.Invoke(this, healthMax);
+        this.healthMax = newHealthMax;
+        OnHpMaxChanged?.Invoke(this);
     }
     public void IncreaseHealth(float amount)
     {
-        SetHealth(health + amount);
+        SetHealth(this.health + amount);
     }
     public void DecreaseHealth(float amount)
     {
-        SetHealth(health - amount);
+        SetHealth(this.health - amount);
     }
 
     /// <summary>
@@ -192,21 +202,21 @@ public class CharacterData
     /// </summary>
     public void SetHunger(float newHunger)
     {
-        hunger = Math.Min(newHunger, hungerMax);
-        if (hunger <= 0)
+        this.hunger = Math.Min(newHunger, this.hungerMax);
+        if (this.hunger <= 0)
         {
-            hunger = 0;
+            this.hunger = 0;
         }
-        OnHungerChanged?.Invoke(this, hunger);
+        OnHungerChanged?.Invoke(this);
     }
     public void SetHungerMax(float newHungerMax)
     {
-        hungerMax = newHungerMax;
-        OnHungerMaxChanged?.Invoke(this, hungerMax);
+        this.hungerMax = newHungerMax;
+        OnHungerMaxChanged?.Invoke(this);
     }
     public void IncreaseHunger(float amount)
     {
-        SetHunger(hunger + amount);
+        SetHunger(this.hunger + amount);
     }
     public void DecreaseHunger(float amount)
     {
@@ -215,7 +225,7 @@ public class CharacterData
             // 不再失去饱食度
             return;
         }
-        SetHunger(hunger - amount);
+        SetHunger(this.hunger - amount);
     }
 
     /// <summary>
@@ -223,17 +233,17 @@ public class CharacterData
     /// </summary>
     public void SetEnergy(float newEnergy)
     {
-        energy = Math.Min(newEnergy, energyMax);
-        if (energy <= 0)
+        this.energy = Math.Min(newEnergy, this.energyMax);
+        if (this.energy <= 0)
         {
-            energy = 0;
+            this.energy = 0;
         }
-        OnEnergyChanged?.Invoke(this, energy);
+        OnEnergyChanged?.Invoke(this);
     }
     public void SetEnergyMax(float newEnergyMax)
     {
-        energyMax = newEnergyMax;
-        OnEnergyMaxChanged?.Invoke(this, energyMax);
+        this.energyMax = newEnergyMax;
+        OnEnergyMaxChanged?.Invoke(this);
     }
     public void IncreaseEnergy(float amount)
     {
@@ -258,11 +268,12 @@ public class CharacterData
             // 精神饱满：活力增长速度提高100%
             modifier = 2;
         }
-        SetEnergy(energy + amount * modifier);
+        amount *= modifier;
+        SetEnergy(this.energy + amount);
     }
     public void DecreaseEnergy(float amount)
     {
-        SetEnergy(energy - amount);
+        SetEnergy(this.energy - amount);
     }
 
     /// <summary>
@@ -270,25 +281,25 @@ public class CharacterData
     /// </summary>
     public void SetSpirit(float newSpirit)
     {
-        spirit = Math.Min(newSpirit, spiritMax);
-        if (spirit <= 0)
+        this.spirit = Math.Min(newSpirit, this.spiritMax);
+        if (this.spirit <= 0)
         {
-            spirit = 0;
+            this.spirit = 0;
         }
-        OnSpiritChanged?.Invoke(this, spirit);
+        OnSpiritChanged?.Invoke(this);
     }
     public void SetSpiritMax(float newSpiritMax)
     {
-        spiritMax = newSpiritMax;
-        OnSpiritMaxChanged?.Invoke(this, spiritMax);
+        this.spiritMax = newSpiritMax;
+        OnSpiritMaxChanged?.Invoke(this);
     }
     public void IncreaseSpirit(float amount)
     {
-        SetSpirit(spirit + amount);
+        SetSpirit(this.spirit + amount);
     }
     public void DecreaseSpirit(float amount)
     {
-        SetSpirit(spirit - amount);
+        SetSpirit(this.spirit - amount);
     }
 
     /// <summary>
@@ -296,7 +307,7 @@ public class CharacterData
     /// </summary>
     public void SetStatus(CharacterStatus newStatus)
     {
-        status = newStatus;
+        this.status = newStatus;
     }
 
     /// <summary>
