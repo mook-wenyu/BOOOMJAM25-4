@@ -20,6 +20,8 @@ public class TopLevelUIPanel : MonoSingleton<TopLevelUIPanel>
     public TMP_InputField itemIdInput;
     public Button itemAddBtn, backNode, fullAll;
 
+    public GameObject mainOptions;
+
     public Transform buffContainer;
     public GameObject buffPrefab;
 

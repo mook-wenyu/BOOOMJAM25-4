@@ -321,6 +321,7 @@ MonoBehaviour:
   itemAddBtn: {fileID: 1291972332}
   backNode: {fileID: 411783221}
   fullAll: {fileID: 2129455387}
+  mainOptions: {fileID: 1195132558}
   buffContainer: {fileID: 1144583837}
   buffPrefab: {fileID: 171008286964606845, guid: 19dc26c221e87704886da9669fd75d4f, type: 3}
   healthGO: {fileID: 1592537215}

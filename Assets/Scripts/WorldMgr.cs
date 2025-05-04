@@ -110,8 +110,9 @@ public class WorldMgr : MonoSingleton<WorldMgr>
     {
         CharacterMgr.Player().SetStatus(CharacterStatus.Busy);
         virtualCamera.Follow = null;
-        virtualCamera.m_Lens.OrthographicSize = 25;
+        virtualCamera.m_Lens.OrthographicSize = 19;
         virtualCamera.transform.position = new Vector3(0, -6, virtualCamera.transform.position.z);
+        TopLevelUIPanel.Instance.mainOptions.SetActive(false);
     }
 
     /// <summary>
@@ -122,6 +123,7 @@ public class WorldMgr : MonoSingleton<WorldMgr>
         virtualCamera.Follow = followTarget;
         CharacterMgr.Player().SetStatus(CharacterStatus.Idle);
         virtualCamera.m_Lens.OrthographicSize = 8;
+        TopLevelUIPanel.Instance.mainOptions.SetActive(true);
     }
 
     public void OnEndGameBtnClicked()
