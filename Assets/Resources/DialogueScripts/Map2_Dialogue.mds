@@ -94,9 +94,9 @@ call replace_node("2","72039","72067")
               :强盗拼命挣扎，却因为力气不敌你，渐渐感到窒息。你不敢松懈，依旧死死抓住棍棒，直到面前的人栽倒在地。
               :你疲惫而痛苦，喘着粗气，心中五味杂陈。你发现自己的小腿断了，身上也布满了淤青。
               :生命值-30，活力-30，精神-10，获得「骨折」
-              call reduce_player_hp(-30)
-              call reduce_player_energy(-30)
-              call reduce_player_spirit(-10)
+              call reduce_player_hp(30)
+              call reduce_player_energy(30)
+              call reduce_player_spirit(10)
               call add_buff("50002")
               call replace_node("2","72018","72000")
           endif
@@ -118,7 +118,7 @@ call replace_node("2","72039","72067")
 :你的脑海中猛然闪过一个可怕的念头————大人杀死了被辐射的孩童，然后结束了自己的生命。
 :你心中的恶心感随之涌现，仿佛被这冷酷无情的现实撕扯。你胃部翻滚，呕吐了一地。
 :精神-30
-call reduce_player_spirit(-30)
+call reduce_player_spirit(30)
 call replace_node("2","72029","72000")
 
 ===
@@ -135,7 +135,7 @@ call replace_node("2","72029","72000")
 :你心中一震，紧迫的气氛让你几乎窒息，压抑与绝望朝你汹涌而来。
 :你疯也似的向回跑，却发现来到了一个陌生的房间。
 :精神-30
-call reduce_player_spirit(-30)
+call reduce_player_spirit(30)
 call replace_node("2","72030","72000")
 
 ===
@@ -157,7 +157,7 @@ call replace_node("2","72040","72000")
 :不知为何，你感到幸福。你真诚的希望这些虔诚的僧侣，能够获得安息。
 :精神+50
 call reduce_player_spirit(50)
-call replace_node("2","72070","72000")
+call replace_node("2","72064","72000")
 call replace_node("2","72062","72000")
 
 ===
@@ -183,7 +183,7 @@ call replace_node("2","72062","72000")
             :你试图松开一个绳结，怎料一用力，竟将插销震得飞了出去。
             :你拔腿就跑，但依然没能逃出手雷的爆炸范围。
             :生命值-50，获得「脑震荡」
-            call reduce_player_hp(-50)
+            call reduce_player_hp(50)
             call add_buff("50011")
             call replace_node("2","72055","72071")
         endif

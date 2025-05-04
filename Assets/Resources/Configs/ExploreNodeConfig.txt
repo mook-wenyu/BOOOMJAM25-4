@@ -3904,35 +3904,6 @@
     "path": null,
     "id": "72040"
   },
-  "72041": {
-    "$type": "ExploreNodeConfig, Assembly-CSharp",
-    "name": null,
-    "desc": "无",
-    "type": 0,
-    "ownMap": "2",
-    "isOnMap": false,
-    "mapLocation": [
-      0
-    ],
-    "isStartPoint": false,
-    "neighborNodes": [
-      "0"
-    ],
-    "unlocksMidNodes": [
-      "0"
-    ],
-    "unlocksPostNodes": null,
-    "nodeAfterComplete": null,
-    "rewardIdGroup": null,
-    "rewardAmountGroup": null,
-    "requiredMaterialIdGroup": null,
-    "requiredMaterialAmountGroup": null,
-    "submitTime": 0.0,
-    "recipeIdGroup": null,
-    "storyId": null,
-    "path": null,
-    "id": "72041"
-  },
   "72042": {
     "$type": "ExploreNodeConfig, Assembly-CSharp",
     "name": "断桥",

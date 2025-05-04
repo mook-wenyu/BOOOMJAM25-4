@@ -72,7 +72,7 @@ call replace_node("1","71009","71047")
 瑞迪亚: 行吧。你自己一个人小心。
 :瑞迪亚的背影消失在了森林之中。
 
-call replace_node("1","71048","70000")
+call replace_node("1","71009","70000")
 ===
 
 
@@ -126,7 +126,7 @@ call replace_node("1","71045","70000")
 :一阵强风吹过，将纸张吹得飘了起来。加缪也循着纸张越跑越远……
 我: 真是个诡异的家伙……
 
-call replace_node("1","71051","70000")
+call replace_node("1","71043","70000")
 ===
 
 
@@ -149,7 +149,7 @@ call replace_node("1","71046","71052")
         call replace_node("1","71013","71064")
     -> 不管它
         :你决定无视母狼，往别处去了。
-        call replace_node("1","71013","71000")
+        call replace_node("1","71013","70000")
 
 ===
 
@@ -169,9 +169,9 @@ call replace_node("1","71046","71052")
         :这还没完，你抓住母狼的后腿，将她提了起来。接着旋转起了身子，一边旋转一边向森林移动。最后，你将母狼的头用力地甩在了树干上，力度之大连树上的榛果都被抖落一地。
         :结束了。母狼的尸体躺在你的脚边。四周安静了下来，你发现刚才还在哀嚎的小狼不知何时也咽了气。
         :生命值-30，活力-20，精神-20，获得「流血」
-        call reduce_player_hp(-30)
-        call reduce_player_energy(-20)
-        call reduce_player_spirit(-20)
+        call reduce_player_hp(30)
+        call reduce_player_energy(20)
+        call reduce_player_spirit(20)
         call add_buff("50006")
         call replace_node("1","71053","71065")
     -> 离开
@@ -190,7 +190,7 @@ call replace_node("1","71046","71052")
     -> 送她上路
         :你决定结束她的痛苦。
         :你举起身旁的石头，把她的头砸了个稀巴烂。你感到一种莫名的快感。
-        call reduce_player_spirit(20)
+        call reduce_player_spirit(-20)
         call replace_node("1","71038","71067")
     -> 给她一些食物
         :虽然食物紧缺，但你还是决定给她一些食物救急。
@@ -217,7 +217,7 @@ call replace_node("1","71046","71052")
 
 :老妇人吃下浆果，又休息了一阵，总算是恢复了一些精神。
 :老妇人向你表达了感谢，并邀请你到她的营地坐一坐。
-call replace_node("1","71070","70000")
+call replace_node("1","71038","70000")
 
 ===
 
@@ -268,7 +268,7 @@ call replace_node("1","71045","71076")
 :这些尸体由于受到严重的辐射，甚至在死亡后都未能安宁。焦黑的肌肤上布满气泡，卷曲的头发仍然散发着残留的焦味，和腐臭味交织在一起，令人窒息。
 :刺眼的化工原料在尸体旁泄露而出，混合着黑褐色的脓血，使得这一切显得愈发可怖。辛辣的绝望钻进你的鼻腔，眼睛和耳朵里，侵蚀着你的理智，仿佛想要将你淹没在这无尽的痛苦之中。
 :精神-60
-call reduce_player_spirit(-60)
+call reduce_player_spirit(60)
 call replace_node("1","71060","70000")
 
 ===
@@ -296,7 +296,7 @@ call replace_node("1","71060","70000")
         加缪: 八十九亿九千九百九十九万九千九百九十九……
         加缪: 九十亿。
         :精神-50
-        call reduce_player_spirit(-50)
+        call reduce_player_spirit(50)
         call replace_node("1","71057","70000")
 
 ===
@@ -318,6 +318,6 @@ call replace_node("1","71060","70000")
 :说罢，加缪再次冲进房屋，跑进最里面的房间并锁上了门。
 :你看不懂她的动作，但你隐约有些不祥的预感。
 :你花了一些时间把门撞开，却发现加缪已经上吊自杀了。
-call replace_node("1","71075","70000")
+call replace_node("1","71057","70000")
 
 ===
