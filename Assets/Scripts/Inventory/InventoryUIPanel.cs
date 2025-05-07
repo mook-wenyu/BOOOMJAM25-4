@@ -36,7 +36,25 @@ public class InventoryUIPanel : MonoBehaviour
     {
         int currentCount = _activeSlots.Count;
         int targetCount = InventoryMgr.GetPlayerInventoryData().capacity;
-
+        /*
+        // 如果目标数量小于当前数量，需要移除多余的物品槽
+        if (targetCount < currentCount)
+        {
+            for (int i = currentCount - 1; i >= targetCount; i--)
+            {
+                var slot = _activeSlots[i];
+                // 取消订阅事件
+                slot.OnSlotClicked -= OnItemSlotClicked;
+                slot.OnSlotRightClicked -= OnItemSlotRightClicked;
+                slot.OnSwapItems -= HandleItemSwap;
+                slot.OnCrossContainerSwap -= HandleCrossContainerSwap;
+                // 销毁游戏对象
+                Destroy(slot.gameObject);
+                // 从列表中移除
+                _activeSlots.RemoveAt(i);
+            }
+        }
+        */
         // 创建新的物品槽
         for (int i = currentCount; i < targetCount; i++)
         {
