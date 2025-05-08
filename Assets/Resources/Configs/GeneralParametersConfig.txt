@@ -42,7 +42,7 @@
   },
   "hungerLostValue": {
     "$type": "GeneralParametersConfig, Assembly-CSharp",
-    "par": 4.0,
+    "par": 3.0,
     "id": "hungerLostValue"
   },
   "hungerLostTime": {
@@ -52,22 +52,22 @@
   },
   "nodeEnergyCost": {
     "$type": "GeneralParametersConfig, Assembly-CSharp",
-    "par": 5.0,
+    "par": 3.0,
     "id": "nodeEnergyCost"
   },
   "nodeTimeCost": {
     "$type": "GeneralParametersConfig, Assembly-CSharp",
-    "par": 1.0,
+    "par": 0.5,
     "id": "nodeTimeCost"
   },
   "zeroHungerLostHPValue": {
     "$type": "GeneralParametersConfig, Assembly-CSharp",
-    "par": 10.0,
+    "par": 3.0,
     "id": "zeroHungerLostHPValue"
   },
   "zeroHungerLostSpiritValue": {
     "$type": "GeneralParametersConfig, Assembly-CSharp",
-    "par": 10.0,
+    "par": 3.0,
     "id": "zeroHungerLostSpiritValue"
   },
   "zeroHungerLostTime": {
@@ -107,12 +107,12 @@
   },
   "hungerLostInSleep": {
     "$type": "GeneralParametersConfig, Assembly-CSharp",
-    "par": 32.0,
+    "par": 24.0,
     "id": "hungerLostInSleep"
   },
   "aHourInRealTime": {
     "$type": "GeneralParametersConfig, Assembly-CSharp",
-    "par": 25.0,
+    "par": 30.0,
     "id": "aHourInRealTime"
   }
 }
