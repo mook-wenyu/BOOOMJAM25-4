@@ -146,6 +146,21 @@ public static class InventoryMgr
         return itemData.stacking > 1;
     }
 
+    public static string EquipmentPartToString(EquipmentType equipType)
+    {
+        switch (equipType)
+        {
+            case EquipmentType.Handheld:
+                return "手持";
+            case EquipmentType.Clothes:
+                return "衣服";
+            case EquipmentType.Accessory:
+                return "饰品";
+            default:
+                return "无";
+        }
+    }
+
 
     /// <summary>
     /// 检查玩家背包中是否存在指定物品

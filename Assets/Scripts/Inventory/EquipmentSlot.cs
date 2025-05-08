@@ -36,6 +36,8 @@ IEndDragHandler,
     private void Awake()
     {
         _rectTransform = GetComponent<RectTransform>();
+        // 清空槽位
+        Clear();
     }
 
 
@@ -61,6 +63,7 @@ IEndDragHandler,
                 itemIcon.sprite = Resources.Load<Sprite>(Path.Combine("Icon", "icon_item_unknown"));
             }
 
+            Debug.Log($"装备槽位: {itemData.name}");
             // 确保图标可见
             itemIcon.gameObject.SetActive(true);
 

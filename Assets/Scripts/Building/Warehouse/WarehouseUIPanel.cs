@@ -113,6 +113,10 @@ public class WarehouseUIPanel : MonoSingleton<WarehouseUIPanel>
             var item = _warehouseData.GetItemAtSlot(i);
             var slot = _activeSlots[i];
 
+            // 确保每个槽位都有正确的InventoryId和SlotIndex
+            slot.InventoryId = _warehouseData.inventoryId;
+            slot.SlotIndex = i;
+
             if (item != null)
             {
                 slot.Setup(item);
@@ -316,8 +320,6 @@ public class WarehouseUIPanel : MonoSingleton<WarehouseUIPanel>
         // 显示仓库UI
         uiPanel.SetActive(true);
         uiPanel.transform.SetAsLastSibling();
-        // 创建物品槽
-        CreateItemSlots();
         // 初始显示
         UpdateUI();
     }
@@ -335,8 +337,6 @@ public class WarehouseUIPanel : MonoSingleton<WarehouseUIPanel>
         // 显示仓库UI
         uiPanel.SetActive(true);
         uiPanel.transform.SetAsLastSibling();
-        // 创建物品槽
-        CreateItemSlots();
         // 初始显示
         UpdateUI();
     }

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
 using System.Collections;
+using System.Text;
 
 public class ItemTipsUI : TipsUIBase
 {
@@ -29,7 +30,23 @@ public class ItemTipsUI : TipsUIBase
 
         // 设置基础信息
         itemNameText.text = itemData.name;
-        itemDescText.text = itemData.desc;
+        StringBuilder sb = new();
+
+        if (itemData.type == (int)ItemType.Equipment)
+        {
+            sb.AppendLine($"装备类型: {InventoryMgr.EquipmentPartToString((EquipmentType)itemData.equipmentParts)}");
+            sb.AppendLine("可穿戴");
+            sb.AppendLine();
+        }
+
+        sb.AppendLine(itemData.desc);
+        itemDescText.text = sb.ToString();
+
+        //if (itemData.durability > 0)
+        //{
+        //    sb.AppendLine($"耐久度: {itemInfo.GetDurability()} / {itemData.durability}");
+        //    sb.AppendLine();
+        //}
 
         itemCountText.text = $"数量: {itemInfo.GetCount().ToString()}";
 

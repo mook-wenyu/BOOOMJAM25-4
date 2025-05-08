@@ -75,7 +75,7 @@ IEndDragHandler,
             // 确保图标可见
             itemIcon.gameObject.SetActive(true);
 
-            // 设置耐久度条（如果是装备）
+            // 设置耐久度条
             UpdateDurabilityBar();
 
             // 订阅物品事件
@@ -124,7 +124,7 @@ IEndDragHandler,
         if (CurrentItem == null || durabilityBar == null || durabilityFill == null) return;
 
         var itemData = CurrentItem.GetItemData();
-        if (itemData == null || itemData.type != (int)ItemType.Equipment || itemData.durability <= 0)
+        if (itemData == null || itemData.durability <= 0)
         {
             durabilityBar.SetActive(false);
             return;
@@ -295,6 +295,24 @@ IEndDragHandler,
         {
             // 检查是否拖到了另一个ItemSlot上
             var targetSlot = result.gameObject.GetComponent<ItemSlot>();
+
+            if (targetSlot == this)
+            {
+                isInValidArea = true;
+            }
+
+            // 检查是否在背包或仓库面板内
+            if (result.gameObject.tag is "InventoryUI")
+            {
+                isInValidArea = true;
+            }
+
+            // 检查是否在装备面板内
+            if (result.gameObject.name == "EquipmentBG")
+            {
+                isInEquipment = true;
+            }
+
             if (targetSlot != null && targetSlot != this)
             {
                 // 检查是否是跨容器操作
@@ -310,20 +328,6 @@ IEndDragHandler,
                 }
                 isInValidArea = true;
                 handled = true;
-                break;
-            }
-
-            // 检查是否在背包或仓库面板内
-            if (result.gameObject.name is "InventoryBG" or "WarehouseBG")
-            {
-                isInValidArea = true;
-                break;
-            }
-
-            // 检查是否在装备面板内
-            if (result.gameObject.name == "EquipmentBG")
-            {
-                isInEquipment = true;
                 break;
             }
         }
@@ -349,7 +353,7 @@ IEndDragHandler,
                     }
                 }
             );*/
-            int count = 1;
+            int count = CurrentItem.GetCount();
             string itemName = CurrentItem.GetItemData().name;
             bool result = InventoryMgr.GetInventoryData(InventoryId).RemoveItemCountByInstanceId(CurrentItem.instanceId, count);
             if (result)
