@@ -157,6 +157,8 @@ public class TopLevelUIPanel : MonoSingleton<TopLevelUIPanel>
     {
         hungerSlider.value = character.hunger;
         hungerText.text = $"{character.hunger} / {character.hungerMax}";
+
+        CharacterEntityMgr.Instance.GetPlayer().SetIconState(character.hunger <= 10); // 饥饿图标显示条件
     }
 
     private void HandleHungerMaxChanged(CharacterData character)

@@ -9,6 +9,8 @@ public class Player : MonoBehaviour
     private Animator _animator;
     private Rigidbody2D _rigidbody2D;
 
+    private SpriteRenderer _iconState;
+
     private float footstepDelay = 4.545f; // 脚步声间隔
     private float _nextFootstepTime;
 
@@ -17,6 +19,7 @@ public class Player : MonoBehaviour
         _animator = GetComponent<Animator>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _characterData = CharacterMgr.Player();
+        _iconState = transform.Find("Icon_State").GetComponent<SpriteRenderer>();
 
         if (_characterData.pos == null)
         {
@@ -37,6 +40,10 @@ public class Player : MonoBehaviour
 
         _characterData.status = CharacterStatus.Idle;
         _animator.SetBool("IsMove", false);
+
+        // 设置饥饿图标
+        _iconState.sprite = Resources.Load<Sprite>("UI/icon_hunger");
+        _iconState.gameObject.SetActive(false);
     }
 
     void FixedUpdate()
@@ -115,6 +122,15 @@ public class Player : MonoBehaviour
     public CharacterData GetCharacterData()
     {
         return _characterData;
+    }
+
+    public void SetIconState(bool isActive)
+    {
+        if (_iconState.gameObject.activeSelf == isActive)
+        {
+            return;
+        }
+        _iconState.gameObject.SetActive(isActive);
     }
 
 }

@@ -167,10 +167,14 @@ public static class GameMgr
     {
         PauseTime();
         GlobalUIMgr.Instance.Hide<SimpleTipsUI>();
-        CharacterMgr.Player().SetStatus(CharacterStatus.Sleep);
         WorldMgr.Instance.blackScreen.SetActive(true);
-        await UniTask.Delay(TimeSpan.FromSeconds(1.5f));
-        _ = currentSaveData.gameTime.ConsumeTimeToHour(8);
+        if (CharacterMgr.Player().hunger > 10)
+        {
+            await SaveGameData();
+        }
+        CharacterMgr.Player().SetStatus(CharacterStatus.Sleep);
+        await UniTask.Delay(TimeSpan.FromSeconds(1f));
+        currentSaveData.gameTime.ConsumeTimeToHour(8).Forget();
     }
 
     [ScriptFunc("start_tutorial")]
@@ -250,7 +254,7 @@ public static class GameMgr
             WorldMgr.Instance.globalLight.intensity = 0.1f;
         }
 
-        // 当前是下午1点，暂停时间，黑屏，强制进入睡眠状态
+        // 当前是凌晨1点，暂停时间，黑屏，强制进入睡眠状态
         if (currentSaveData.gameTime.IsSpecificFullHour(1))
         {
             if (CharacterMgr.Player().status != CharacterStatus.Sleep)
