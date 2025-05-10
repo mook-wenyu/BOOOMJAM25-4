@@ -69,9 +69,14 @@ public static class GameMgr
     /// </summary>
     public static async UniTask SaveGameData(string saveName = "auto_save")
     {
+#if UNITY_WEBGL
+        GlobalUIMgr.Instance.ShowMessage("WEBGL 无法保存存档！", MessageType.Warning);
+        await UniTask.Yield();
+#else
         currentSaveData.dialogueStorage = DialogueMgr.RunMgrs.GetCurrentStorage();
         string path = Utils.GetSavePath(saveName);
         await IOHelper.SaveDataAsync(path, currentSaveData);
+#endif
 
 #if UNITY_EDITOR
         Debug.Log($"保存游戏数据 - {saveName}");
